@@ -1,0 +1,14 @@
+<div class="wrap" style="padding-bottom:0"><div class="notice">
+  <svg class="ic no" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19"/></svg>
+  <div><b>{{ section.settings.heading }}</b> {{ section.settings.text }}</div>
+</div></div>
+{% schema %}
+{
+  "name": "Notice",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Bold opening", "default": "No one-off custom orders." },
+    { "type": "richtext", "id": "text", "label": "Text", "default": "<p>Murphy does not engrave single custom items at the shop, and does not take meetings for one item. Custom designs and logos are for larger orders of twelve pieces or more. Local pickup is available on large custom orders only, arranged after the order is approved.</p>" }
+  ],
+  "presets": [{ "name": "Notice" }]
+}
+{% endschema %}

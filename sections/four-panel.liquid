@@ -1,0 +1,35 @@
+<div class="quad">
+  {%- for block in section.blocks -%}
+    <a class="qp" href="{{ block.settings.url | default: '#' }}" {{ block.shopify_attributes }}>
+      {%- if block.settings.clip != blank -%}
+        <video src="{{ block.settings.clip }}" {% if block.settings.image %}poster="{{ block.settings.image | image_url: width: 1200 }}"{% endif %} muted loop playsinline></video>
+      {%- elsif block.settings.image -%}
+        <img src="{{ block.settings.image | image_url: width: 1200 }}" alt="" loading="lazy">
+      {%- endif -%}
+      <div class="qt">
+        <span class="lab"><i></i>{{ block.settings.eyebrow }}</span>
+        <h2 class="h2">{{ block.settings.heading }}</h2>
+        <p class="copy">{{ block.settings.text }}</p>
+        <span class="ul">{{ block.settings.cta }}</span>
+      </div>
+    </a>
+  {%- endfor -%}
+</div>
+{% schema %}
+{
+  "name": "Four panel banner",
+  "max_blocks": 4,
+  "blocks": [
+    { "type": "panel", "name": "Panel", "settings": [
+      { "type": "image_picker", "id": "image", "label": "Image" },
+      { "type": "text", "id": "clip", "label": "Video file URL", "info": "Optional. Paste from Content > Files" },
+      { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Twelve pieces or more" },
+      { "type": "text", "id": "heading", "label": "Heading", "default": "Custom and bulk" },
+      { "type": "textarea", "id": "text", "label": "Text", "default": "Logos and custom designs for businesses, nonprofits, teams and departments." },
+      { "type": "text", "id": "cta", "label": "Link label", "default": "Build an order" },
+      { "type": "url", "id": "url", "label": "Link" }
+    ]}
+  ],
+  "presets": [{ "name": "Four panel banner", "blocks": [{"type":"panel"},{"type":"panel"},{"type":"panel"},{"type":"panel"}] }]
+}
+{% endschema %}

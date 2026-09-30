@@ -1,0 +1,63 @@
+{%- assign cats = section.settings.categories | split: ',' -%}
+<div class="wfilter"><div class="wrap">
+  <div class="chips" id="workChips" role="group" aria-label="Filter the work">
+    <button class="chip on" type="button" data-cat="all" aria-pressed="true">All</button>
+    {%- for c in cats -%}{%- assign c = c | strip -%}
+      <button class="chip" type="button" data-cat="{{ c | handleize }}" aria-pressed="false">{{ c }}</button>
+    {%- endfor -%}
+  </div>
+</div></div>
+
+<div class="wrap" id="workGroups" style="padding-bottom:var(--gap)">
+  {%- for c in cats -%}
+    {%- assign c = c | strip -%}{%- assign slug = c | handleize -%}
+    {%- assign items = section.blocks | where: 'settings.category', c -%}
+    {%- if items.size > 0 -%}
+      <div class="wgroup-wrap" data-group="{{ slug }}">
+        <div class="ghead"><h2 class="h2">{{ c }}</h2><span class="lab">{{ items.size }} pieces</span></div>
+        <div class="wgroup">
+          {%- for block in items -%}
+            <button class="wk" type="button" {{ block.shopify_attributes }}
+              data-type="{% if block.settings.clip != blank %}video{% else %}image{% endif %}"
+              data-src="{% if block.settings.clip != blank %}{{ block.settings.clip }}{% else %}{{ block.settings.image | image_url: width: 1600 }}{% endif %}"
+              {% if block.settings.image %}data-poster="{{ block.settings.image | image_url: width: 900 }}"{% endif %}
+              data-label="{{ block.settings.title | escape }}" aria-label="Open {{ block.settings.title | escape }}">
+              {%- if block.settings.clip != blank -%}
+                <video src="{{ block.settings.clip }}" {% if block.settings.image %}poster="{{ block.settings.image | image_url: width: 600 }}"{% endif %} muted loop playsinline></video>
+              {%- elsif block.settings.image -%}
+                <img loading="lazy" src="{{ block.settings.image | image_url: width: 700 }}" alt="{{ block.settings.title | escape }}">
+              {%- endif -%}
+              <span class="lab">{{ block.settings.title }}</span>
+            </button>
+          {%- endfor -%}
+        </div>
+      </div>
+    {%- endif -%}
+  {%- endfor -%}
+</div>
+
+<dialog class="lb" id="lb">
+  <button class="xb" data-lb-close type="button" style="position:absolute;right:0;top:-40px;color:#fff">Close</button>
+  <div id="lbM"></div>
+  <div class="lb-f"><span id="lbC" class="lab"></span>
+    <span><button class="xb" data-lb-prev type="button">Prev</button> <button class="xb" data-lb-next type="button">Next</button></span>
+  </div>
+</dialog>
+
+{% schema %}
+{
+  "name": "Work gallery",
+  "settings": [
+    { "type": "text", "id": "categories", "label": "Categories, comma separated", "default": "Firearms, Lids and knives, Gifts and awards, One offs" }
+  ],
+  "blocks": [
+    { "type": "piece", "name": "Piece", "settings": [
+      { "type": "image_picker", "id": "image", "label": "Photo" },
+      { "type": "text", "id": "clip", "label": "Video file URL", "info": "Optional. Paste from Content > Files" },
+      { "type": "text", "id": "title", "label": "Caption", "default": "Engraved piece" },
+      { "type": "text", "id": "category", "label": "Category", "info": "Must match one of the categories above exactly", "default": "Firearms" }
+    ]}
+  ],
+  "presets": [{ "name": "Work gallery" }]
+}
+{% endschema %}

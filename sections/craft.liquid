@@ -1,0 +1,50 @@
+<div class="pl ovl" {% if section.settings.bg %}style="background-image:url({{ section.settings.bg | image_url: width: 2000 }})"{% else %}data-bg="pl-plain.jpg"{% endif %}>
+  <div class="wrap sec intro">
+    <div class="stack rv" style="max-width:560px">
+      <span class="lab"><i></i>{{ section.settings.eyebrow }}</span>
+      <h2 class="bl md">{{ section.settings.heading }}</h2>
+      <p class="copy" style="font-size:17px">{{ section.settings.text }}</p>
+      {%- if section.settings.cta != blank -%}
+        <div class="btns"><a class="btn" href="{{ section.settings.url }}">{{ section.settings.cta }}</a></div>
+      {%- endif -%}
+    </div>
+    <div class="rv glass">
+      <div class="lab" style="margin-bottom:14px">{{ section.settings.list_title }}</div>
+      <div class="mats">
+        {%- for block in section.blocks -%}
+          <a class="mat" href="{{ block.settings.url | default: '#' }}" {{ block.shopify_attributes }}>
+            <span class="stage">
+              {%- if block.settings.image -%}<img class="cut" src="{{ block.settings.image | image_url: width: 200 }}" alt="">{%- endif -%}
+            </span>
+            <span class="ink">{{ block.settings.name }}</span>
+            <span>{{ block.settings.text }}</span>
+          </a>
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Engraving finishes",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "One man, one laser, Omaha" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Part of the metal" },
+    { "type": "textarea", "id": "text", "label": "Text", "default": "Every item in this store is engraved by Murphy himself, on an industrial fiber laser. It does not just remove the coating. It cuts a deep, permanent engraving into the metal item, so the engraving is part of the metal." },
+    { "type": "text", "id": "cta", "label": "Button label", "default": "See how it is made" },
+    { "type": "url", "id": "url", "label": "Button link" },
+    { "type": "text", "id": "list_title", "label": "List title", "default": "Industrial grade, deep, permanent engraving" },
+    { "type": "image_picker", "id": "bg", "label": "Background photo" }
+  ],
+  "blocks": [
+    { "type": "finish", "name": "Finish", "settings": [
+      { "type": "image_picker", "id": "image", "label": "Thumbnail" },
+      { "type": "text", "id": "name", "label": "Finish", "default": "Anodized aluminum" },
+      { "type": "text", "id": "text", "label": "What the laser does", "default": "Engraved through the anodizing and down into bright, bare aluminum." },
+      { "type": "url", "id": "url", "label": "Link" }
+    ]}
+  ],
+  "presets": [{ "name": "Engraving finishes", "blocks": [{"type":"finish"},{"type":"finish"},{"type":"finish"},{"type":"finish"}] }]
+}
+{% endschema %}

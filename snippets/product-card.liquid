@@ -1,0 +1,23 @@
+{%- liquid
+  assign p = card_product
+  assign made_to_order = false
+  if p.tags contains 'made-to-order'
+    assign made_to_order = true
+  endif
+-%}
+<a class="card" href="{{ p.url }}">
+  <div class="stage">
+    {%- if made_to_order -%}<span class="lab flag"><i></i>Made to order</span>
+    {%- elsif p.tags contains 'ships-free' -%}<span class="lab flag"><i></i>Ships free</span>{%- endif -%}
+    {%- if p.featured_media -%}
+      <img class="ph" src="{{ p.featured_media | image_url: width: 900 }}" alt="{{ p.featured_media.alt | escape }}" loading="lazy" width="450" height="450">
+    {%- endif -%}
+  </div>
+  <div class="meta">
+    <div>
+      <div class="n">{{ p.title }}</div>
+      <div class="m">{{ p.metafields.custom.material | default: p.type }}</div>
+    </div>
+    <div class="p">{% if p.price_varies %}From {% endif %}{{ p.price | money_without_trailing_zeros }}</div>
+  </div>
+</a>
