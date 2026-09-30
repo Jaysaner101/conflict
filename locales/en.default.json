@@ -1,0 +1,5 @@
+{
+  "general": { "cart": "Cart", "menu": "Menu", "home": "Home", "search": "Search" },
+  "products": { "product": { "add_to_cart": "Add to cart", "sold_out": "Sold out", "quantity": "Quantity" } },
+  "cart": { "general": { "title": "Cart", "subtotal": "Subtotal", "checkout": "Checkout", "empty": "Your cart is empty" } }
+}

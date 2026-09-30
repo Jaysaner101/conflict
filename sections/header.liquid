@@ -1,0 +1,36 @@
+<header class="head" id="head"><div class="wrap head-in">
+  <a class="logo" href="{{ routes.root_url }}" aria-label="{{ shop.name }}, home">
+    {%- if section.settings.mark != blank -%}
+      <img src="{{ section.settings.mark | image_url: width: 120 }}" alt="" width="60" height="60">
+    {%- else -%}
+      <img src="{{ 'logo-spade.png' | asset_url }}" alt="" width="60" height="60">
+    {%- endif -%}
+    {%- if section.settings.wordmark != blank -%}
+      <img src="{{ section.settings.wordmark | image_url: width: 480 }}" alt="{{ shop.name }}">
+    {%- else -%}
+      <img src="{{ 'logo-word.png' | asset_url }}" alt="{{ shop.name }}">
+    {%- endif -%}
+  </a>
+  <nav class="nav" id="nav" aria-label="Main">
+    {%- for link in section.settings.menu.links -%}
+      <a href="{{ link.url }}"{% if link.active %} class="on" aria-current="page"{% endif %}>{{ link.title }}</a>
+    {%- endfor -%}
+  </nav>
+  <div class="head-r">
+    <a class="cartb" href="{{ routes.cart_url }}" aria-label="Cart">
+      <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14l-1 12H6zM9 8V7a3 3 0 0 1 6 0v1"/></svg>Cart<b id="cartCount">{{ cart.item_count }}</b>
+    </a>
+    <button class="menub" id="menuBtn" aria-label="Menu" aria-expanded="false"><span></span><span></span></button>
+  </div>
+</div></header>
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    { "type": "link_list", "id": "menu", "label": "Menu", "default": "main-menu" },
+    { "type": "image_picker", "id": "mark", "label": "Spade mark" },
+    { "type": "image_picker", "id": "wordmark", "label": "Wordmark" }
+  ]
+}
+{% endschema %}

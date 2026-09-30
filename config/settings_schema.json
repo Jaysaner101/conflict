@@ -1,0 +1,29 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Counter Culture Conflict",
+    "theme_version": "1.0.0",
+    "theme_author": "Counter Culture Inc Studios",
+    "theme_documentation_url": "https://ccincstudios.com",
+    "theme_support_url": "https://ccincstudios.com"
+  },
+  {
+    "name": "Colours",
+    "settings": [
+      { "type": "color", "id": "col_bg", "label": "Page background", "default": "#000000" },
+      { "type": "color", "id": "col_ink", "label": "Headings and strong text", "default": "#eceeef" },
+      { "type": "color", "id": "col_body", "label": "Body text", "default": "#9aa0a5" },
+      { "type": "color", "id": "col_hi", "label": "Accent (neon green)", "default": "#39FF14" },
+      { "type": "color", "id": "col_s1", "label": "Panel background", "default": "#0a0b0c" }
+    ]
+  },
+  {
+    "name": "Store facts",
+    "settings": [
+      { "type": "text", "id": "fact_ship_time", "label": "Shipping time", "default": "About 3 days" },
+      { "type": "text", "id": "fact_ship_us", "label": "US shipping", "default": "$8 flat, free over $60" },
+      { "type": "text", "id": "fact_name", "label": "Add a name", "default": "$5, about a week" },
+      { "type": "text", "id": "fact_ca", "label": "Canada", "default": "$15 flat" }
+    ]
+  }
+]
