@@ -33,7 +33,7 @@ function initSlider(){const hs=$('#hs');if(!hs||hs.dataset.on)return;hs.dataset.
     vs.forEach((v,k)=>{v.classList.toggle('on',k===i);if(k===i&&!still)v.play().catch(()=>{});else v.pause()});
     ts.forEach((t,k)=>{t.classList.toggle('on',k===i);t.setAttribute('aria-hidden',k!==i)});ths.forEach((t,k)=>t.classList.toggle('on',k===i));
     segs.forEach((s,k)=>{s.classList.remove('on','done');if(k<i)s.classList.add('done');if(k===i){void s.offsetWidth;s.classList.add('on')}});
-    bgs.forEach(b=>b.classList.remove('on'));const b=bgs[i%2];b.src=A(vs[i].dataset.p);b.classList.add('on');
+    bgs.forEach(b=>b.classList.remove('on'));const p=vs[i].dataset.p;if(p){const b=bgs[i%2];b.src=A(p);b.classList.add('on')}
     $('#hsCount').textContent='0'+(i+1)+' / 0'+vs.length;$('#hsMat').textContent=vs[i].dataset.mat;left=DUR;arm()};
   const arm=()=>{clearTimeout(timer);if(paused)return;t0=performance.now();timer=setTimeout(()=>show(i+1),left)};
   const setPause=p=>{if(p&&!paused){left=Math.max(600,left-(performance.now()-t0));clearTimeout(timer)}paused=p;hs.classList.toggle('paused',p);$('[data-pause]',hs).textContent=(p&&hs.dataset.user)?'Play':'Pause';if(!p)arm()};
@@ -47,18 +47,27 @@ function initSlider(){const hs=$('#hs');if(!hs||hs.dataset.on)return;hs.dataset.
   show(0)}
 
 function initSeen(){const s=$('#seen');if(!s||s.dataset.on)return;s.dataset.on=1;const v=$('video',s);
-  $('[data-play-inline]',s).onclick=()=>{s.classList.add('playing');v.play().catch(()=>{})};
-  $('[data-sp]',s).onclick=e=>{if(v.paused){v.play();e.target.textContent='Pause'}else{v.pause();e.target.textContent='Play'}};
-  $('[data-sm]',s).onclick=e=>{v.muted=!v.muted;e.target.textContent=v.muted?'Sound off':'Sound on'};
-  $('[data-sf]',s).onclick=()=>(v.requestFullscreen||v.webkitRequestFullscreen||(()=>{})).call(v);
-  const stop=()=>{v.pause();v.currentTime=0;s.classList.remove('playing')};$('[data-sx]',s).onclick=stop;v.onended=stop}
+  if(!v)return;  // the section renders its controls even with no clip set
+  const on=(sel,fn)=>{const el=$(sel,s);if(el)el.onclick=fn};
+  on('[data-play-inline]',()=>{s.classList.add('playing');v.play().catch(()=>{})});
+  on('[data-sp]',e=>{if(v.paused){v.play();e.target.textContent='Pause'}else{v.pause();e.target.textContent='Play'}});
+  on('[data-sm]',e=>{v.muted=!v.muted;e.target.textContent=v.muted?'Sound off':'Sound on'});
+  on('[data-sf]',()=>(v.requestFullscreen||v.webkitRequestFullscreen||(()=>{})).call(v));
+  const stop=()=>{v.pause();v.currentTime=0;s.classList.remove('playing')};on('[data-sx]',stop);v.onended=stop}
 
 function initPlayer(root){if(!root||root.dataset.on)return;root.dataset.on=1;const v=$('video',root),bar=$('.pl-seek i',root),tm=$('.pl-time',root),pp=$('[data-pp]',root),mu=$('[data-mute]',root);
   const f=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0'),toggle=()=>v.paused?v.play().catch(()=>{}):v.pause();
   $('.pl-big',root).onclick=toggle;pp.onclick=toggle;v.onclick=toggle;
   v.onplay=()=>{root.classList.add('playing');pp.textContent='Pause'};v.onpause=()=>{root.classList.remove('playing');pp.textContent='Play'};v.onended=()=>{v.currentTime=0};
-  v.ontimeupdate=v.onloadedmetadata=()=>{const d=v.duration||0;bar.style.width=(d?v.currentTime/d*100:0)+'%';tm.textContent=f(v.currentTime)+' / '+f(d)};
-  $('.pl-seek',root).onclick=e=>{const r=e.currentTarget.getBoundingClientRect();if(v.duration)v.currentTime=(e.clientX-r.left)/r.width*v.duration};
+  const seek=$('.pl-seek',root);
+  v.ontimeupdate=v.onloadedmetadata=()=>{const d=v.duration||0,pc=d?v.currentTime/d*100:0;bar.style.width=pc+'%';
+    if(seek)seek.setAttribute('aria-valuenow',Math.round(pc));tm.textContent=f(v.currentTime)+' / '+f(d)};
+  if(seek){seek.onclick=e=>{const r=e.currentTarget.getBoundingClientRect();if(v.duration)v.currentTime=(e.clientX-r.left)/r.width*v.duration};
+    // role="slider" has to be operable by keyboard, not just clickable.
+    seek.onkeydown=e=>{if(!v.duration)return;const step=e.key==='ArrowLeft'?-5:e.key==='ArrowRight'?5:0;
+      if(step){e.preventDefault();v.currentTime=Math.min(v.duration,Math.max(0,v.currentTime+step))}
+      else if(e.key==='Home'){e.preventDefault();v.currentTime=0}
+      else if(e.key===' '||e.key==='Enter'){e.preventDefault();toggle()}}}
   mu.onclick=()=>{v.muted=!v.muted;mu.textContent=v.muted?'Sound off':'Sound on'};
   $('[data-fs]',root).onclick=()=>{const el=root;(el.requestFullscreen||el.webkitRequestFullscreen||(()=>{})).call(el)}}
 
@@ -112,10 +121,19 @@ function initCfg(q={}){if(!$('#cv'))return;let it=+q.item||0,n=+q.qty||48;const 
    if($('#logoInv'))$('#logoInv').onclick=e=>{LT.inv=!LT.inv;e.target.setAttribute('aria-pressed',LT.inv);drawTool()};
    if($('#logoDl'))$('#logoDl').onclick=()=>cv.toBlob(b=>{const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='conflict-mockup.png';a.click()});
    if($('#logoFile'))$('#logoFile').onchange=e=>{const f=e.target.files[0];if(!f)return;setText('#uplName',f.name);const im=new Image();im.onload=()=>{LT.logo=im;wipeLogo()};im.src=URL.createObjectURL(f)};
-   if($('#cfgGo'))$('#cfgGo').onclick=()=>{$('#cfgForm').hidden=false;$('#cfgGo').hidden=true;$('#q1').focus()};
-   if($('#cfgForm'))$('#cfgForm').onsubmit=async e=>{e.preventDefault();const f=e.target,msg=$('#quoteMsg');msg.textContent='Sending...';const fd=new FormData(f);fd.set('summary',$('#cfgSum').textContent);
-     const lf=$('#logoFile').files[0];if(lf)fd.set('logo',lf,lf.name);const blob=await new Promise(r=>cv.toBlob(r,'image/png'));if(blob)fd.set('mockup',blob,'mockup.png');
-     const ok=await sendForm(fd,true);msg.textContent=ok?'Request sent with your mockup. Murphy replies within 2 business days.':'That did not send. Please try again, or email the shop directly.'}}
+   // Progressive enhancement: markup ships with the form open and the reveal
+   // button hidden, so it works without JS. With JS, collapse it behind the button.
+   const go=$('#cfgGo'),form=$('#cfgForm');
+   if(go&&form&&!form.querySelector('[data-posted]')){form.hidden=true;go.hidden=false;
+     go.onclick=()=>{form.hidden=false;go.hidden=true;const first=form.querySelector('input:not([type=hidden]),textarea');if(first)first.focus()}}
+   // Submit through Shopify's own {% form 'contact' %} POST. The quote summary
+   // rides along in a hidden field; Shopify's contact form cannot carry file
+   // uploads, so the mockup is downloaded rather than attached.
+   if($('#cfgForm'))$('#cfgForm').onsubmit=()=>{
+     const fld=$('#cfgOrderField'),sum=$('#cfgSum');
+     if(fld&&sum)fld.value=sum.textContent.replace(/\s+/g,' ').trim();
+     setText('#quoteMsg','Sending...');
+     return true}}
   up();drawTool()}
 
 /* ---------- mobile nav ---------- */
@@ -226,11 +244,16 @@ function initGallery() {
 
 /* ---------- boot ---------- */
 function boot() {
-  initNav(); initHead(); initReveal(); initVideo(); initNameOption(); initWorkFilter(); initVariants(); initGallery(); initSort();
-  if ($('#hs')) initSlider();
-  if ($('#seen')) initSeen();
-  if ($('#showPlayer')) initPlayer($('#showPlayer'));
-  if ($('#cv')) initCfg({});
+  // Each module is isolated: one section throwing must not take down the rest
+  // of the page (the nav, the cart count, the variant picker).
+  const run = (name, fn) => { try { fn(); } catch (err) { console.error('[theme] ' + name + ' failed:', err); } };
+  run('nav', initNav); run('head', initHead); run('reveal', initReveal); run('video', initVideo);
+  run('nameOption', initNameOption); run('workFilter', initWorkFilter); run('variants', initVariants);
+  run('gallery', initGallery); run('sort', initSort);
+  if ($('#hs')) run('slider', initSlider);
+  if ($('#seen')) run('seen', initSeen);
+  if ($('#showPlayer')) run('player', () => initPlayer($('#showPlayer')));
+  if ($('#cv')) run('configurator', () => initCfg({}));
   const lb = $('#lb');
   if (lb) {
     $$('.wk').forEach((b, i) => b.onclick = () => openLb(i));

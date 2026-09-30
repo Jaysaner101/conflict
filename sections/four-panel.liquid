@@ -8,7 +8,11 @@
         endunless
       endif
     -%}
-    <a class="qp" href="{{ block.settings.url | default: '#' }}" {{ block.shopify_attributes }}>
+    {%- if block.settings.url != blank -%}
+    <a class="qp" href="{{ block.settings.url }}" {{ block.shopify_attributes }}>
+    {%- else -%}
+    <div class="qp" {{ block.shopify_attributes }}>
+    {%- endif -%}
       {%- if clip != blank -%}
         <video src="{{ clip }}" {% if block.settings.image %}poster="{{ block.settings.image | image_url: width: 1200 }}"{% endif %} muted loop playsinline></video>
       {%- elsif block.settings.image -%}
@@ -20,7 +24,7 @@
         <p class="copy">{{ block.settings.text }}</p>
         <span class="ul">{{ block.settings.cta }}</span>
       </div>
-    </a>
+    {%- if block.settings.url != blank -%}</a>{%- else -%}</div>{%- endif -%}
   {%- endfor -%}
 </div>
 {% schema %}

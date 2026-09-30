@@ -9,7 +9,9 @@
   <meta name="theme-color" content="{{ settings.col_bg }}">
   <link rel="icon" href="{% if settings.favicon != blank %}{{ settings.favicon | image_url: width: 64 }}{% else %}{{ 'favicon.png' | asset_url }}{% endif %}">
   <link rel="apple-touch-icon" href="{{ 'apple-touch-icon.png' | asset_url }}">
-  <link rel="preload" href="{{ 'mona-sans.woff2' | asset_url }}" as="font" type="font/woff2" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sofia+Sans+Extra+Condensed:wght@400;700;800;900&display=swap">
   <link rel="stylesheet" href="{{ 'base.css' | asset_url }}">
   <style>
     :root{

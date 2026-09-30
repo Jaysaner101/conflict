@@ -52,6 +52,7 @@
             {%- endfor -%}
           {%- endunless -%}
 
+          <label class="visually-hidden" for="variantSelect">Choose an option</label>
           <select name="id" id="variantSelect" hidden>
             {%- for v in product.variants -%}
               <option value="{{ v.id }}" {% if v == product.selected_or_first_available_variant %}selected{% endif %} {% unless v.available %}disabled{% endunless %}>{{ v.title }} — {{ v.price | money }}</option>
@@ -65,6 +66,7 @@
                 <span>Add a name <b>+ $5</b></span>
               </label>
               <div id="nameWrap" hidden>
+                <label class="visually-hidden" for="nameIn">Name to engrave</label>
                 <input class="inp" id="nameIn" name="properties[Name to engrave]" maxlength="18" placeholder="Name, call sign or number">
                 <span class="note">Engraved to match the piece. Named items take about a week.</span>
               </div>

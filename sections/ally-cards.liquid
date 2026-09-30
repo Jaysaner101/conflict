@@ -1,6 +1,10 @@
 <div class="ally-cards" style="margin-top:2px">
   {%- for block in section.blocks -%}
-    <a class="acard" href="{{ block.settings.url | default: '#' }}" {% if block.settings.url != blank %}target="_blank" rel="noopener"{% endif %} {{ block.shopify_attributes }}>
+    {%- if block.settings.url != blank -%}
+    <a class="acard" href="{{ block.settings.url }}" target="_blank" rel="noopener" {{ block.shopify_attributes }}>
+    {%- else -%}
+    <div class="acard" {{ block.shopify_attributes }}>
+    {%- endif -%}
       {%- if block.settings.logo -%}<img src="{{ block.settings.logo | image_url: width: 500 }}" alt="{{ block.settings.name | escape }}">{%- endif -%}
       <div class="stack-s">
         <span class="lab"><i></i>{{ block.settings.eyebrow }}</span>
@@ -8,7 +12,7 @@
         <p class="copy">{{ block.settings.text }}</p>
         <span class="ul" style="justify-self:start">{{ block.settings.cta }}</span>
       </div>
-    </a>
+    {%- if block.settings.url != blank -%}</a>{%- else -%}</div>{%- endif -%}
   {%- endfor -%}
 </div>
 {% schema %}

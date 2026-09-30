@@ -1,18 +1,250 @@
 {
   "sections": {
-    "head": { "type": "page-header", "settings": { "eyebrow": "What has crossed the machine", "heading": "The work", "text": "<p>A record of what has crossed the machine: engraving for businesses, teams, departments, schools and individuals. Pick a category below, or read how a piece gets made.</p>" } },
-    "gallery": { "type": "work-gallery", "settings": { "categories": "Firearms, Lids and knives, Gifts and awards, One offs" } },
+    "head": {
+      "type": "page-header",
+      "settings": {
+        "eyebrow": "What has crossed the machine",
+        "heading": "The work",
+        "text": "<p>A record of what has crossed the machine: engraving for businesses, teams, departments, schools and individuals. Pick a category below, or read how a piece gets made.</p>"
+      }
+    },
+    "gallery": {
+      "type": "work-gallery",
+      "settings": {
+        "categories": "Firearms, Lids and knives, Gifts and awards, One offs"
+      },
+      "blocks": {
+        "w1": {
+          "type": "piece",
+          "settings": {
+            "image": "shopify://shop_images/work-flag-skull.jpg",
+            "title": "Flag and skull slide",
+            "category": "Firearms"
+          }
+        },
+        "w2": {
+          "type": "piece",
+          "settings": {
+            "image": "shopify://shop_images/work-scorpion.jpg",
+            "title": "Scorpion slide",
+            "category": "Firearms"
+          }
+        },
+        "w3": {
+          "type": "piece",
+          "settings": {
+            "image": "shopify://shop_images/work-shark.jpg",
+            "title": "Shark mouth slide",
+            "category": "Firearms"
+          }
+        },
+        "w4": {
+          "type": "piece",
+          "settings": {
+            "image": "shopify://shop_images/work-skull.jpg",
+            "title": "Skull slide",
+            "category": "Firearms"
+          }
+        },
+        "w5": {
+          "type": "piece",
+          "settings": {
+            "image": "shopify://shop_images/lid-copville.jpg",
+            "title": "Copville script lid",
+            "category": "Lids and knives"
+          }
+        },
+        "w6": {
+          "type": "piece",
+          "settings": {
+            "image": "shopify://shop_images/lid-aig.jpg",
+            "title": "A.I.G. truck lid",
+            "category": "Lids and knives"
+          }
+        },
+        "w7": {
+          "type": "piece",
+          "settings": {
+            "image": "shopify://shop_images/lid-antihero.jpg",
+            "title": "Antihero Squadron lid",
+            "category": "Lids and knives"
+          }
+        },
+        "w8": {
+          "type": "piece",
+          "settings": {
+            "image": "shopify://shop_images/lid-bear.jpg",
+            "title": "Bear in area lid",
+            "category": "Lids and knives"
+          }
+        },
+        "w9": {
+          "type": "piece",
+          "settings": {
+            "image": "shopify://shop_images/knife-name.jpg",
+            "title": "Name on a blade",
+            "category": "Lids and knives"
+          }
+        },
+        "w10": {
+          "type": "piece",
+          "settings": {
+            "image": "shopify://shop_images/knife-oilslick-copville.jpg",
+            "title": "Oil slick folder",
+            "category": "Lids and knives"
+          }
+        },
+        "w11": {
+          "type": "piece",
+          "settings": {
+            "image": "shopify://shop_images/work-saathoff.jpg",
+            "title": "Retirement plaque",
+            "category": "Gifts and awards"
+          }
+        },
+        "w12": {
+          "type": "piece",
+          "settings": {
+            "image": "shopify://shop_images/work-shield.jpg",
+            "title": "Department shield",
+            "category": "Gifts and awards"
+          }
+        },
+        "w13": {
+          "type": "piece",
+          "settings": {
+            "image": "shopify://shop_images/badge-opd.jpg",
+            "title": "Engraved crest",
+            "category": "Gifts and awards"
+          }
+        },
+        "w14": {
+          "type": "piece",
+          "settings": {
+            "image": "shopify://shop_images/tag-eagles.jpg",
+            "title": "Engraved tag",
+            "category": "Gifts and awards"
+          }
+        },
+        "w15": {
+          "type": "piece",
+          "settings": {
+            "image": "shopify://shop_images/work-arcade.jpg",
+            "title": "Arcade panel",
+            "category": "One offs"
+          }
+        },
+        "w16": {
+          "type": "piece",
+          "settings": {
+            "image": "shopify://shop_images/work-staytrue.jpg",
+            "title": "Stay true panel",
+            "category": "One offs"
+          }
+        },
+        "w17": {
+          "type": "piece",
+          "settings": {
+            "image": "shopify://shop_images/ammo-can-fire.jpg",
+            "title": "Fire service ammo can",
+            "category": "One offs"
+          }
+        },
+        "w18": {
+          "type": "piece",
+          "settings": {
+            "image": "shopify://shop_images/ammo-can-police.jpg",
+            "title": "Police ammo can",
+            "category": "One offs"
+          }
+        },
+        "w19": {
+          "type": "piece",
+          "settings": {
+            "image": "shopify://shop_images/bottle-central.jpg",
+            "title": "Engraved bottle",
+            "category": "One offs"
+          }
+        },
+        "w20": {
+          "type": "piece",
+          "settings": {
+            "image": "shopify://shop_images/disc-central.jpg",
+            "title": "Engraved disc",
+            "category": "One offs"
+          }
+        }
+      },
+      "block_order": [
+        "w1",
+        "w2",
+        "w3",
+        "w4",
+        "w5",
+        "w6",
+        "w7",
+        "w8",
+        "w9",
+        "w10",
+        "w11",
+        "w12",
+        "w13",
+        "w14",
+        "w15",
+        "w16",
+        "w17",
+        "w18",
+        "w19",
+        "w20"
+      ]
+    },
     "process": {
       "type": "steps",
       "blocks": {
-        "s1": { "type": "step", "settings": { "title": "The artwork", "text": "Your logo or one of his designs is cleaned up and sized to the item." } },
-        "s2": { "type": "step", "settings": { "title": "The setup", "text": "The item is squared on the bed and the red dot traces the outline before the laser fires." } },
-        "s3": { "type": "step", "settings": { "title": "The pass", "text": "The industrial fiber laser cuts a deep, permanent engraving into the metal." } },
-        "s4": { "type": "step", "settings": { "title": "The check", "text": "Cleaned, inspected and packed by the same hands." } }
+        "s1": {
+          "type": "step",
+          "settings": {
+            "title": "The artwork",
+            "text": "Your logo or one of his designs is cleaned up and sized to the item."
+          }
+        },
+        "s2": {
+          "type": "step",
+          "settings": {
+            "title": "The setup",
+            "text": "The item is squared on the bed and the red dot traces the outline before the laser fires."
+          }
+        },
+        "s3": {
+          "type": "step",
+          "settings": {
+            "title": "The pass",
+            "text": "The industrial fiber laser cuts a deep, permanent engraving into the metal."
+          }
+        },
+        "s4": {
+          "type": "step",
+          "settings": {
+            "title": "The check",
+            "text": "Cleaned, inspected and packed by the same hands."
+          }
+        }
       },
-      "block_order": ["s1", "s2", "s3", "s4"],
-      "settings": { "heading": "How a piece gets made", "note": "One pair of hands, start to finish" }
+      "block_order": [
+        "s1",
+        "s2",
+        "s3",
+        "s4"
+      ],
+      "settings": {
+        "heading": "How a piece gets made",
+        "note": "One pair of hands, start to finish"
+      }
     }
   },
-  "order": ["head", "gallery", "process"]
+  "order": [
+    "head",
+    "gallery",
+    "process"
+  ]
 }

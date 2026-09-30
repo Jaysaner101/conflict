@@ -2,21 +2,29 @@
 <div class="wfilter"><div class="wrap">
   <div class="chips" id="workChips" role="group" aria-label="Filter the work">
     <button class="chip on" type="button" data-cat="all" aria-pressed="true">All</button>
-    {%- for c in cats -%}{%- assign c = c | strip -%}
+    {%- for raw in cats -%}{%- assign c = raw | strip -%}
       <button class="chip" type="button" data-cat="{{ c | handleize }}" aria-pressed="false">{{ c }}</button>
     {%- endfor -%}
   </div>
 </div></div>
 
 <div class="wrap" id="workGroups" style="padding-bottom:var(--gap)">
-  {%- for c in cats -%}
-    {%- assign c = c | strip -%}{%- assign slug = c | handleize -%}
-    {%- assign items = section.blocks | where: 'settings.category', c -%}
-    {%- if items.size > 0 -%}
+  {%- for raw in cats -%}
+    {%- assign c = raw | strip -%}{%- assign slug = c | handleize -%}
+    {%- liquid
+      assign count = 0
+      for b in section.blocks
+        if b.settings.category == c
+          assign count = count | plus: 1
+        endif
+      endfor
+    -%}
+    {%- if count > 0 -%}
       <div class="wgroup-wrap" data-group="{{ slug }}">
-        <div class="ghead"><h2 class="h2">{{ c }}</h2><span class="lab">{{ items.size }} pieces</span></div>
+        <div class="ghead"><h2 class="h2">{{ c }}</h2><span class="lab">{{ count }} {% if count == 1 %}piece{% else %}pieces{% endif %}</span></div>
         <div class="wgroup">
-          {%- for block in items -%}
+          {%- for block in section.blocks -%}
+            {%- if block.settings.category == c -%}
             {%- liquid
               assign clip = block.settings.clip
               if clip != blank
@@ -37,6 +45,7 @@
               {%- endif -%}
               <span class="lab">{{ block.settings.title }}</span>
             </button>
+            {%- endif -%}
           {%- endfor -%}
         </div>
       </div>
@@ -45,10 +54,12 @@
 </div>
 
 <dialog class="lb" id="lb">
-  <button class="xb" data-lb-close type="button" style="position:absolute;right:0;top:-40px;color:#fff">Close</button>
-  <div id="lbM"></div>
-  <div class="lb-f"><span id="lbC" class="lab"></span>
-    <span><button class="xb" data-lb-prev type="button">Prev</button> <button class="xb" data-lb-next type="button">Next</button></span>
+  <div class="lb-in">
+    <div class="lb-m" id="lbM"></div>
+    <button class="lb-b lb-x" data-lb-close type="button">Close</button>
+    <button class="lb-b lb-p" data-lb-prev type="button">Prev</button>
+    <button class="lb-b lb-n" data-lb-next type="button">Next</button>
+    <span class="lb-c lab" id="lbC"></span>
   </div>
 </dialog>
 

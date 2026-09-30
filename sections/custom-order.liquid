@@ -36,14 +36,23 @@
         </div>
         <div class="cfg-s" style="border-bottom:0">
           <p class="note" id="cfgNote"></p>
-          <button class="btn solid full" id="cfgGo" type="button">Request this quote</button>
+          {%- comment -%}
+            The reveal button starts hidden and the form starts visible, so the
+            form still works with no JavaScript. initCfg flips the pair on load.
+          {%- endcomment -%}
+          <button class="btn solid full" id="cfgGo" type="button" hidden>Request this quote</button>
           {%- form 'contact', id: 'cfgForm', class: 'stack-s', novalidate: 'novalidate' -%}
+            {%- if form.posted_successfully? -%}<span data-posted hidden></span>{%- endif -%}
             <div class="note ink" id="cfgSum"></div>
             <input type="hidden" name="contact[order]" id="cfgOrderField">
-            <input class="inp" name="contact[name]" placeholder="Your name" required>
-            <input class="inp" name="contact[email]" type="email" placeholder="Email" required>
-            <input class="inp" name="contact[organisation]" placeholder="Business, team or department">
-            <textarea class="inp" name="contact[body]" placeholder="Deadline, placement notes, anything else" style="min-height:84px"></textarea>
+            <label class="visually-hidden" for="cfgName">Your name</label>
+            <input class="inp" id="cfgName" name="contact[name]" placeholder="Your name" autocomplete="name" required>
+            <label class="visually-hidden" for="cfgEmail">Email</label>
+            <input class="inp" id="cfgEmail" name="contact[email]" type="email" placeholder="Email" autocomplete="email" required>
+            <label class="visually-hidden" for="cfgOrg">Business, team or department</label>
+            <input class="inp" id="cfgOrg" name="contact[organisation]" placeholder="Business, team or department" autocomplete="organization">
+            <label class="visually-hidden" for="cfgBody">Deadline, placement notes, anything else</label>
+            <textarea class="inp" id="cfgBody" name="contact[body]" placeholder="Deadline, placement notes, anything else" style="min-height:84px"></textarea>
             <button class="btn solid full" type="submit">Send to Murphy</button>
             {%- if form.posted_successfully? -%}<span class="note" id="quoteMsg" role="status">Request sent. Murphy replies within 2 business days.</span>
             {%- else -%}<span class="note" id="quoteMsg" role="status"></span>{%- endif -%}

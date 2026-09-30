@@ -19,7 +19,9 @@
         {%- if section.settings.url2 != blank -%}<a class="btn" href="{{ section.settings.url2 }}" target="_blank" rel="noopener">{{ section.settings.cta2 }}</a>{%- endif -%}
       </div>
       <div class="social">
-        {%- for b in section.blocks -%}<a class="ib2" href="{{ b.settings.url }}" aria-label="{{ b.settings.name }}" target="_blank" rel="noopener">{{ b.settings.name | slice: 0, 2 }}</a>{%- endfor -%}
+        {%- for b in section.blocks -%}{%- if b.settings.url != blank -%}
+  <a class="ib2" href="{{ b.settings.url }}" aria-label="{{ b.settings.name }}" target="_blank" rel="noopener">{{ b.settings.name | slice: 0, 2 }}</a>
+{%- endif -%}{%- endfor -%}
       </div>
     </div>
     <div class="hs-frame" style="max-width:520px;justify-self:end;width:100%">

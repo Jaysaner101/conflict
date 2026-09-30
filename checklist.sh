@@ -43,7 +43,7 @@ echo
 if node lint.js >/tmp/lint.out 2>&1; then
   echo "  ok    all liquid files parse"
 else
-  echo "  FAIL  liquid parse errors:"; sed 's/^/        /' /tmp/lint.out; FAILED=1
+  echo "  FAIL  liquid parse errors:"; sed 's/^/        /' /tmp/lint.out; fail=1
 fi
 
 # Shopify silently replaces settings_schema.json with [] if it fails validation
@@ -70,7 +70,13 @@ PYEOF
 if [ -z "$SCHEMA_ERR" ]; then
   echo "  ok    settings_schema passes Shopify import limits"
 else
-  echo "  FAIL  settings_schema: $SCHEMA_ERR"; FAILED=1
+  echo "  FAIL  settings_schema: $SCHEMA_ERR"; fail=1
+fi
+
+if node doctor.js >/tmp/doctor.out 2>&1; then
+  echo "  ok    doctor: no faults ($(grep -c 'warning' /tmp/doctor.out >/dev/null && sed -n 's/.*, \([0-9]*\) warning.*/\1/p' /tmp/doctor.out | tail -1) warnings)"
+else
+  echo "  FAIL  doctor found faults:"; sed 's/^/        /' /tmp/doctor.out; fail=1
 fi
 
 [ "$fail" = "0" ] && echo "RESULT: complete" || echo "RESULT: INCOMPLETE"

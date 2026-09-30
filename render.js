@@ -140,6 +140,14 @@ function sectionCtx(name, cfg) {
   const schema = m ? JSON.parse(m[1]) : { settings: [], blocks: [] };
   const defs = {}; (schema.settings || []).forEach(s => { if ('default' in s) defs[s.id] = s.default; });
   const s = Object.assign({}, defs, (cfg && cfg.settings) || {});
+  // A `link_list` setting stores a menu handle, but Shopify resolves it to the
+  // menu object itself. Resolve it the same way here, or the harness renders
+  // every menu column identically and hides real wiring mistakes.
+  for (const def of (schema.settings || [])) {
+    if (def.type === 'link_list' && typeof s[def.id] === 'string') {
+      s[def.id] = base.linklists[s[def.id]] || { links: [] };
+    }
+  }
   let blocks = [];
   if (cfg && cfg.blocks) {
     const order = cfg.block_order || Object.keys(cfg.blocks);
@@ -155,8 +163,6 @@ function sectionCtx(name, cfg) {
       return { type: b.type, id: 'b' + i, shopify_attributes: '', settings: bd };
     });
   }
-  if (s.menu) s.menu = menu([['Home', '/'], ['Shop', '/collections/all'], ['Apparel', '/collections/apparel'], ['Custom and bulk', '/pages/custom-and-bulk'], ['The work', '/pages/the-work'], ['The show', '/pages/the-show'], ['Murphy', '/pages/murphy']]);
-  ['menu_1', 'menu_2', 'menu_3'].forEach(k => { if (s[k]) s[k] = menu([['Can lids', '#'], ['Knives', '#'], ['Tumblers', '#']]); });
   if (s.collection !== undefined) s.collection = base.collection;
   return { id: name, settings: s, blocks, blocks_size: blocks.length };
 }

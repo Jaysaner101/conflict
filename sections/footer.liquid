@@ -17,7 +17,9 @@
       {% endform %}
       <div class="social">
         {%- for b in section.blocks -%}
-          <a class="ib2" href="{{ b.settings.url }}" aria-label="{{ b.settings.name }}" target="_blank" rel="noopener">{{ b.settings.name | slice: 0, 2 }}</a>
+          {%- if b.settings.url != blank -%}
+            <a class="ib2" href="{{ b.settings.url }}" aria-label="{{ b.settings.name }}" target="_blank" rel="noopener">{{ b.settings.name | slice: 0, 2 }}</a>
+          {%- endif -%}
         {%- endfor -%}
       </div>
     </div>

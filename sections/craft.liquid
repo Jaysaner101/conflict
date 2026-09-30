@@ -1,4 +1,4 @@
-<div class="pl ovl" {% if section.settings.bg %}style="background-image:url({{ section.settings.bg | image_url: width: 2000 }})"{% else %}data-bg="pl-plain.jpg"{% endif %}>
+<div class="pl ovl" style="background-image:url({% if section.settings.bg %}{{ section.settings.bg | image_url: width: 2000 }}{% else %}{{ 'pl-plain.jpg' | asset_url }}{% endif %})">
   <div class="wrap sec intro">
     <div class="stack rv" style="max-width:560px">
       <span class="lab"><i></i>{{ section.settings.eyebrow }}</span>
@@ -12,13 +12,17 @@
       <div class="lab" style="margin-bottom:14px">{{ section.settings.list_title }}</div>
       <div class="mats">
         {%- for block in section.blocks -%}
-          <a class="mat" href="{{ block.settings.url | default: '#' }}" {{ block.shopify_attributes }}>
+          {%- if block.settings.url != blank -%}
+          <a class="mat" href="{{ block.settings.url }}" {{ block.shopify_attributes }}>
+          {%- else -%}
+          <div class="mat" {{ block.shopify_attributes }}>
+          {%- endif -%}
             <span class="stage">
               {%- if block.settings.image -%}<img class="cut" src="{{ block.settings.image | image_url: width: 200 }}" alt="">{%- endif -%}
             </span>
             <span class="ink">{{ block.settings.name }}</span>
             <span>{{ block.settings.text }}</span>
-          </a>
+          {%- if block.settings.url != blank -%}</a>{%- else -%}</div>{%- endif -%}
         {%- endfor -%}
       </div>
     </div>

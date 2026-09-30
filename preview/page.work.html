@@ -9,7 +9,9 @@
   <meta name="theme-color" content="#000000">
   <link rel="icon" href="/assets/favicon.png">
   <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
-  <link rel="preload" href="/assets/mona-sans.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sofia+Sans+Extra+Condensed:wght@400;700;800;900&display=swap">
   <link rel="stylesheet" href="/assets/base.css">
   <style>
     :root{
@@ -47,16 +49,130 @@
 
 <div class="wfilter"><div class="wrap">
   <div class="chips" id="workChips" role="group" aria-label="Filter the work">
-    <button class="chip on" type="button" data-cat="all" aria-pressed="true">All</button><button class="chip" type="button" data-cat="firearms" aria-pressed="false">Firearms</button><button class="chip" type="button" data-cat="lids-and-knives" aria-pressed="false"> Lids and knives</button><button class="chip" type="button" data-cat="gifts-and-awards" aria-pressed="false"> Gifts and awards</button><button class="chip" type="button" data-cat="one-offs" aria-pressed="false"> One offs</button></div>
+    <button class="chip on" type="button" data-cat="all" aria-pressed="true">All</button><button class="chip" type="button" data-cat="firearms" aria-pressed="false">Firearms</button><button class="chip" type="button" data-cat="lids-and-knives" aria-pressed="false">Lids and knives</button><button class="chip" type="button" data-cat="gifts-and-awards" aria-pressed="false">Gifts and awards</button><button class="chip" type="button" data-cat="one-offs" aria-pressed="false">One offs</button></div>
 </div></div>
 
-<div class="wrap" id="workGroups" style="padding-bottom:var(--gap)"></div>
+<div class="wrap" id="workGroups" style="padding-bottom:var(--gap)"><div class="wgroup-wrap" data-group="firearms">
+        <div class="ghead"><h2 class="h2">Firearms</h2><span class="lab">4 pieces</span></div>
+        <div class="wgroup"><button class="wk" type="button" 
+              data-type="image"
+              data-src="shopify://shop_images/work-flag-skull.jpg"
+              data-poster="shopify://shop_images/work-flag-skull.jpg"
+              data-label="Flag and skull slide" aria-label="Open Flag and skull slide"><img loading="lazy" src="shopify://shop_images/work-flag-skull.jpg" alt="Flag and skull slide"><span class="lab">Flag and skull slide</span>
+            </button><button class="wk" type="button" 
+              data-type="image"
+              data-src="shopify://shop_images/work-scorpion.jpg"
+              data-poster="shopify://shop_images/work-scorpion.jpg"
+              data-label="Scorpion slide" aria-label="Open Scorpion slide"><img loading="lazy" src="shopify://shop_images/work-scorpion.jpg" alt="Scorpion slide"><span class="lab">Scorpion slide</span>
+            </button><button class="wk" type="button" 
+              data-type="image"
+              data-src="shopify://shop_images/work-shark.jpg"
+              data-poster="shopify://shop_images/work-shark.jpg"
+              data-label="Shark mouth slide" aria-label="Open Shark mouth slide"><img loading="lazy" src="shopify://shop_images/work-shark.jpg" alt="Shark mouth slide"><span class="lab">Shark mouth slide</span>
+            </button><button class="wk" type="button" 
+              data-type="image"
+              data-src="shopify://shop_images/work-skull.jpg"
+              data-poster="shopify://shop_images/work-skull.jpg"
+              data-label="Skull slide" aria-label="Open Skull slide"><img loading="lazy" src="shopify://shop_images/work-skull.jpg" alt="Skull slide"><span class="lab">Skull slide</span>
+            </button></div>
+      </div><div class="wgroup-wrap" data-group="lids-and-knives">
+        <div class="ghead"><h2 class="h2">Lids and knives</h2><span class="lab">6 pieces</span></div>
+        <div class="wgroup"><button class="wk" type="button" 
+              data-type="image"
+              data-src="shopify://shop_images/lid-copville.jpg"
+              data-poster="shopify://shop_images/lid-copville.jpg"
+              data-label="Copville script lid" aria-label="Open Copville script lid"><img loading="lazy" src="shopify://shop_images/lid-copville.jpg" alt="Copville script lid"><span class="lab">Copville script lid</span>
+            </button><button class="wk" type="button" 
+              data-type="image"
+              data-src="shopify://shop_images/lid-aig.jpg"
+              data-poster="shopify://shop_images/lid-aig.jpg"
+              data-label="A.I.G. truck lid" aria-label="Open A.I.G. truck lid"><img loading="lazy" src="shopify://shop_images/lid-aig.jpg" alt="A.I.G. truck lid"><span class="lab">A.I.G. truck lid</span>
+            </button><button class="wk" type="button" 
+              data-type="image"
+              data-src="shopify://shop_images/lid-antihero.jpg"
+              data-poster="shopify://shop_images/lid-antihero.jpg"
+              data-label="Antihero Squadron lid" aria-label="Open Antihero Squadron lid"><img loading="lazy" src="shopify://shop_images/lid-antihero.jpg" alt="Antihero Squadron lid"><span class="lab">Antihero Squadron lid</span>
+            </button><button class="wk" type="button" 
+              data-type="image"
+              data-src="shopify://shop_images/lid-bear.jpg"
+              data-poster="shopify://shop_images/lid-bear.jpg"
+              data-label="Bear in area lid" aria-label="Open Bear in area lid"><img loading="lazy" src="shopify://shop_images/lid-bear.jpg" alt="Bear in area lid"><span class="lab">Bear in area lid</span>
+            </button><button class="wk" type="button" 
+              data-type="image"
+              data-src="shopify://shop_images/knife-name.jpg"
+              data-poster="shopify://shop_images/knife-name.jpg"
+              data-label="Name on a blade" aria-label="Open Name on a blade"><img loading="lazy" src="shopify://shop_images/knife-name.jpg" alt="Name on a blade"><span class="lab">Name on a blade</span>
+            </button><button class="wk" type="button" 
+              data-type="image"
+              data-src="shopify://shop_images/knife-oilslick-copville.jpg"
+              data-poster="shopify://shop_images/knife-oilslick-copville.jpg"
+              data-label="Oil slick folder" aria-label="Open Oil slick folder"><img loading="lazy" src="shopify://shop_images/knife-oilslick-copville.jpg" alt="Oil slick folder"><span class="lab">Oil slick folder</span>
+            </button></div>
+      </div><div class="wgroup-wrap" data-group="gifts-and-awards">
+        <div class="ghead"><h2 class="h2">Gifts and awards</h2><span class="lab">4 pieces</span></div>
+        <div class="wgroup"><button class="wk" type="button" 
+              data-type="image"
+              data-src="shopify://shop_images/work-saathoff.jpg"
+              data-poster="shopify://shop_images/work-saathoff.jpg"
+              data-label="Retirement plaque" aria-label="Open Retirement plaque"><img loading="lazy" src="shopify://shop_images/work-saathoff.jpg" alt="Retirement plaque"><span class="lab">Retirement plaque</span>
+            </button><button class="wk" type="button" 
+              data-type="image"
+              data-src="shopify://shop_images/work-shield.jpg"
+              data-poster="shopify://shop_images/work-shield.jpg"
+              data-label="Department shield" aria-label="Open Department shield"><img loading="lazy" src="shopify://shop_images/work-shield.jpg" alt="Department shield"><span class="lab">Department shield</span>
+            </button><button class="wk" type="button" 
+              data-type="image"
+              data-src="shopify://shop_images/badge-opd.jpg"
+              data-poster="shopify://shop_images/badge-opd.jpg"
+              data-label="Engraved crest" aria-label="Open Engraved crest"><img loading="lazy" src="shopify://shop_images/badge-opd.jpg" alt="Engraved crest"><span class="lab">Engraved crest</span>
+            </button><button class="wk" type="button" 
+              data-type="image"
+              data-src="shopify://shop_images/tag-eagles.jpg"
+              data-poster="shopify://shop_images/tag-eagles.jpg"
+              data-label="Engraved tag" aria-label="Open Engraved tag"><img loading="lazy" src="shopify://shop_images/tag-eagles.jpg" alt="Engraved tag"><span class="lab">Engraved tag</span>
+            </button></div>
+      </div><div class="wgroup-wrap" data-group="one-offs">
+        <div class="ghead"><h2 class="h2">One offs</h2><span class="lab">6 pieces</span></div>
+        <div class="wgroup"><button class="wk" type="button" 
+              data-type="image"
+              data-src="shopify://shop_images/work-arcade.jpg"
+              data-poster="shopify://shop_images/work-arcade.jpg"
+              data-label="Arcade panel" aria-label="Open Arcade panel"><img loading="lazy" src="shopify://shop_images/work-arcade.jpg" alt="Arcade panel"><span class="lab">Arcade panel</span>
+            </button><button class="wk" type="button" 
+              data-type="image"
+              data-src="shopify://shop_images/work-staytrue.jpg"
+              data-poster="shopify://shop_images/work-staytrue.jpg"
+              data-label="Stay true panel" aria-label="Open Stay true panel"><img loading="lazy" src="shopify://shop_images/work-staytrue.jpg" alt="Stay true panel"><span class="lab">Stay true panel</span>
+            </button><button class="wk" type="button" 
+              data-type="image"
+              data-src="shopify://shop_images/ammo-can-fire.jpg"
+              data-poster="shopify://shop_images/ammo-can-fire.jpg"
+              data-label="Fire service ammo can" aria-label="Open Fire service ammo can"><img loading="lazy" src="shopify://shop_images/ammo-can-fire.jpg" alt="Fire service ammo can"><span class="lab">Fire service ammo can</span>
+            </button><button class="wk" type="button" 
+              data-type="image"
+              data-src="shopify://shop_images/ammo-can-police.jpg"
+              data-poster="shopify://shop_images/ammo-can-police.jpg"
+              data-label="Police ammo can" aria-label="Open Police ammo can"><img loading="lazy" src="shopify://shop_images/ammo-can-police.jpg" alt="Police ammo can"><span class="lab">Police ammo can</span>
+            </button><button class="wk" type="button" 
+              data-type="image"
+              data-src="shopify://shop_images/bottle-central.jpg"
+              data-poster="shopify://shop_images/bottle-central.jpg"
+              data-label="Engraved bottle" aria-label="Open Engraved bottle"><img loading="lazy" src="shopify://shop_images/bottle-central.jpg" alt="Engraved bottle"><span class="lab">Engraved bottle</span>
+            </button><button class="wk" type="button" 
+              data-type="image"
+              data-src="shopify://shop_images/disc-central.jpg"
+              data-poster="shopify://shop_images/disc-central.jpg"
+              data-label="Engraved disc" aria-label="Open Engraved disc"><img loading="lazy" src="shopify://shop_images/disc-central.jpg" alt="Engraved disc"><span class="lab">Engraved disc</span>
+            </button></div>
+      </div></div>
 
 <dialog class="lb" id="lb">
-  <button class="xb" data-lb-close type="button" style="position:absolute;right:0;top:-40px;color:#fff">Close</button>
-  <div id="lbM"></div>
-  <div class="lb-f"><span id="lbC" class="lab"></span>
-    <span><button class="xb" data-lb-prev type="button">Prev</button> <button class="xb" data-lb-next type="button">Next</button></span>
+  <div class="lb-in">
+    <div class="lb-m" id="lbM"></div>
+    <button class="lb-b lb-x" data-lb-close type="button">Close</button>
+    <button class="lb-b lb-p" data-lb-prev type="button">Prev</button>
+    <button class="lb-b lb-n" data-lb-next type="button">Next</button>
+    <span class="lb-c lab" id="lbC"></span>
   </div>
 </dialog>
 
@@ -77,17 +193,17 @@
           <input type="email" name="contact[email]" placeholder="Email address" aria-label="Email address" required>
           <button type="submit">Subscribe</button>
         </div></form>
-      <div class="social"><a class="ib2" href="" aria-label="Instagram" target="_blank" rel="noopener">In</a><a class="ib2" href="" aria-label="Facebook" target="_blank" rel="noopener">Fa</a><a class="ib2" href="" aria-label="YouTube" target="_blank" rel="noopener">Yo</a></div>
+      <div class="social"></div>
     </div>
     <div class="fcols"><div>
           <span class="lab">Shop</span>
-          <ul><li><a href="#">Can lids</a></li><li><a href="#">Knives</a></li><li><a href="#">Tumblers</a></li></ul>
+          <ul><li><a href="/collections/can-lids">Can lids</a></li><li><a href="/collections/knives">Knives</a></li><li><a href="/collections/tumblers">Tumblers</a></li><li><a href="/collections/duty-gear">Duty gear</a></li><li><a href="/collections/apparel">Apparel</a></li></ul>
         </div><div>
           <span class="lab">Orders</span>
-          <ul><li><a href="#">Can lids</a></li><li><a href="#">Knives</a></li><li><a href="#">Tumblers</a></li></ul>
+          <ul><li><a href="/pages/custom-and-bulk">Custom and bulk</a></li><li><a href="/search">Search</a></li></ul>
         </div><div>
           <span class="lab">About</span>
-          <ul><li><a href="#">Can lids</a></li><li><a href="#">Knives</a></li><li><a href="#">Tumblers</a></li></ul>
+          <ul><li><a href="/pages/murphy">Murphy</a></li><li><a href="/pages/the-show">The show</a></li><li><a href="/pages/the-work">The work</a></li><li><a href="/pages/allies">Allies</a></li></ul>
         </div></div>
   </div>
   <div class="wrap foot-bot">
