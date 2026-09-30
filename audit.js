@@ -2,16 +2,18 @@
 // visible text length, and any child left at opacity 0. Catches empty bands
 // that are easy to miss when eyeballing a full-page screenshot.
 const { chromium } = require('playwright');
+const serve = require('./serve.js');
 const pages = process.argv.slice(2).length ? process.argv.slice(2)
   : ['index','collection','product','page.custom-and-bulk','page.work','page.show','page.murphy','page.allies','cart'];
 (async () => {
+  const srv = await serve('preview');
   const b = await chromium.launch();
   const ctx = await b.newContext({ viewport: { width: 1288, height: 725 } });
   const pg = await ctx.newPage();
   const bad = [];
   pg.on('pageerror', e => bad.push('JS ' + String(e).slice(0, 100)));
   for (const name of pages) {
-    const res = await pg.goto('http://localhost:8799/' + name + '.html', { waitUntil: 'networkidle' }).catch(e => null);
+    const res = await pg.goto(srv.base + '/' + name + '.html', { waitUntil: 'networkidle' }).catch(e => null);
     if (!res || !res.ok()) { bad.push(name + ': page did not load'); continue; }
     await pg.evaluate(async () => {
       document.documentElement.style.scrollBehavior = 'auto';
@@ -49,4 +51,5 @@ const pages = process.argv.slice(2).length ? process.argv.slice(2)
   }
   console.log('\n' + (bad.length ? 'PROBLEMS:\n' + bad.join('\n') : 'no empty bands, no hidden content, no script errors'));
   await b.close();
+  srv.close();
 })();
