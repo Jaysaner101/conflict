@@ -8,9 +8,10 @@
         "cta": "Shop apparel",
         "url": "/collections/apparel",
         "image": "shopify://shop_images/apparel-hero.jpg",
-        "text": "The first run. Printed to order on heavyweight blanks, with the spade on the chest and the Conflict globe across the back.",
+        "text": "The first run. Tees, caps and button ups, printed to order on heavyweight blanks. Each design is its own piece of the Conflict range.",
         "fact1": "Made to order",
-        "fact2": "Ships in about a week"
+        "fact2": "Ships in about a week",
+        "bg": "shopify://shop_images/pl-spade-c.jpg"
       }
     },
     "grid": {

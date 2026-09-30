@@ -2,7 +2,9 @@
   "sections": {
     "tool": {
       "type": "custom-order",
-      "settings": {}
+      "settings": {
+        "bg": "shopify://shop_images/pl-plain.jpg"
+      }
     },
     "notice": {
       "type": "notice",

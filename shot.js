@@ -4,12 +4,20 @@ const serve = require('./serve.js');
 (async () => {
   const srv = await serve('preview');
   const b = await chromium.launch();
-  const pages = ['index','collection','product','page.custom-and-bulk','page.work','page.show','page.murphy','page.allies','cart','page.contact','gift_card','page.apparel'];
+  const pages = ['index','collection','product','cart','page.apparel','page.show','page.work','page.murphy',
+    'page.allies','page.custom-and-bulk','page.contact','search','404','list-collections','blog','article',
+    'page','password','gift_card','customers/login','customers/register','customers/account',
+    'customers/addresses','customers/order','customers/reset_password','customers/activate_account'];
   const errs = [];
   for (const w of [[1288,725,'d'],[390,844,'m']]) {
     const ctx = await b.newContext({ viewport:{width:w[0],height:w[1]}, isMobile:w[0]<800, hasTouch:w[0]<800 });
     const pg = await ctx.newPage();
     pg.on('pageerror', e => errs.push(w[2]+' '+String(e).slice(0,90)));
+    // The sandbox cannot reach fonts.googleapis.com, so every page would stall
+    // waiting on it. Abort external requests; they are irrelevant to layout here.
+    // NOTE: this means the display webfont is NOT applied in local screenshots —
+    // headings fall back. The webfont can only be verified on the live store.
+    await pg.route('**', r => /^https?:\/\/(?!127\.0\.0\.1|localhost)/.test(r.request().url()) ? r.abort() : r.continue());
     for (const p of pages) {
       await pg.goto(srv.base + '/'+p+'.html', {waitUntil:'networkidle'}).catch(()=>{});
       // Scroll the page so IntersectionObserver fires: .rv sections are
@@ -28,7 +36,7 @@ const serve = require('./serve.js');
       await pg.waitForTimeout(700);
       const over = await pg.evaluate(()=>document.documentElement.scrollWidth>window.innerWidth+1).catch(()=>false);
       if (over) errs.push(w[2]+' overflow: '+p);
-      await pg.screenshot({path:`shots/${w[2]}_${p}.jpg`, type:'jpeg', quality:72, fullPage:true});
+      await pg.screenshot({path:`shots/${w[2]}_${p.replace('/','-')}.jpg`, type:'jpeg', quality:72, fullPage:true});
     }
     await ctx.close();
   }

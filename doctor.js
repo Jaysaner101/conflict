@@ -233,5 +233,41 @@ for (const f of glob('templates').filter(x => x.endsWith('.json'))) {
   }
 }
 
+
+/* 9e An image slot a template leaves empty. The design expects a picture and
+ *  gets nothing: the craft finish swatches rendered as black circles, the
+ *  network banners lost the logos James supplied, and two page heroes were
+ *  blank after he said never to leave a hero blank. 28 of these shipped. */
+for (const f of glob('templates').filter(x => x.endsWith('.json'))) {
+  let t; try { t = JSON.parse(read(f)); } catch { continue; }
+  for (const [key, sec] of Object.entries(t.sections || {})) {
+    const file = `sections/${sec.type}.liquid`;
+    if (!fs.existsSync(file)) continue;
+    const sch = schemaOf(file); if (!sch) continue;
+    for (const st of (sch.settings || []))
+      if (st.type === 'image_picker' && !(sec.settings || {})[st.id])
+        warn('empty-image-slot', f, `'${key}' (${sec.type}) leaves image setting '${st.id}' empty`);
+    for (const [bk, b] of Object.entries(sec.blocks || {})) {
+      const bs = (sch.blocks || []).find(x => x.type === b.type); if (!bs) continue;
+      for (const st of (bs.settings || []))
+        if (st.type === 'image_picker' && !(b.settings || {})[st.id])
+          warn('empty-image-slot', f, `'${key}/${bk}' (${b.type}) leaves image setting '${st.id}' empty`);
+    }
+  }
+}
+
+
+/* 9f Content the client ruled out by name. James was explicit that The Life
+ *  Raft must not appear on Murphy's site; it got pulled in with a batch of
+ *  network videos. Named exclusions are worth a hard check. */
+{
+  const banned = ['life raft', 'liferaft'];
+  for (const f of [...glob('templates'), ...glob('sections'), ...glob('config')].filter(x => /\.(json|liquid)$/.test(x))) {
+    const body = read(f).toLowerCase();
+    for (const b of banned)
+      if (body.includes(b)) fail('excluded-content', f, `mentions "${b}", which the client asked to keep off this site`);
+  }
+}
+
 module.exports = { problems, fail, warn, liquidFiles, read, glob, schemaOf };
 if (require.main === module) require('./doctor-part2.js');

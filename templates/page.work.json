@@ -5,7 +5,8 @@
       "settings": {
         "eyebrow": "What has crossed the machine",
         "heading": "The work",
-        "text": "<p>A record of what has crossed the machine: engraving for businesses, teams, departments, schools and individuals. Pick a category below, or read how a piece gets made.</p>"
+        "text": "<p>A record of what has crossed the machine: engraving for businesses, teams, departments, schools and individuals. Pick a category below, or read how a piece gets made.</p>",
+        "bg": "shopify://shop_images/pl-plain.jpg"
       }
     },
     "gallery": {

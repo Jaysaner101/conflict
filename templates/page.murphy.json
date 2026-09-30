@@ -36,7 +36,8 @@
         "caption": "Murphy, off shift",
         "cta": "Shop his work",
         "cta2": "Watch the show",
-        "url2": "https://www.youtube.com/watch?v=VQcuiECd4tk&list=PLXMvRz65T8SE"
+        "url2": "https://www.youtube.com/watch?v=VQcuiECd4tk&list=PLXMvRz65T8SE",
+        "poster": "shopify://shop_images/v-murph.jpg"
       }
     },
     "chapters": {
@@ -47,21 +48,24 @@
           "settings": {
             "heading": "The machine",
             "text": "An industrial fiber laser. It does not print on the surface, it cuts a deep engraving into the metal and it is permanent.",
-            "clip": "v-lid.mp4"
+            "clip": "v-lid.mp4",
+            "image": "shopify://shop_images/shop-laser.jpg"
           }
         },
         "c2": {
           "type": "chapter",
           "settings": {
             "heading": "The shop",
-            "text": "One machine, one workshop in Omaha. It began with engraving for the people around him and became a store."
+            "text": "One machine, one workshop in Omaha. It began with engraving for the people around him and became a store.",
+            "image": "shopify://shop_images/shop-laser-2.jpg"
           }
         },
         "c3": {
           "type": "chapter",
           "settings": {
             "heading": "On the mic",
-            "text": "Counter Culture Conflict, on the Counter Culture Inc network."
+            "text": "Counter Culture Conflict, on the Counter Culture Inc network.",
+            "image": "shopify://shop_images/hero-poster.jpg"
           }
         }
       },
@@ -130,19 +134,22 @@
         "m1": {
           "type": "item",
           "settings": {
-            "clip": "v-murph-range.mp4"
+            "clip": "v-murph-range.mp4",
+            "image": "shopify://shop_images/v-murph-range.jpg"
           }
         },
         "m2": {
           "type": "item",
           "settings": {
-            "clip": "v-plaque.mp4"
+            "clip": "v-plaque.mp4",
+            "image": "shopify://shop_images/v-plaque.jpg"
           }
         },
         "m3": {
           "type": "item",
           "settings": {
-            "clip": "v-murph2.mp4"
+            "clip": "v-murph2.mp4",
+            "image": "shopify://shop_images/v-murph2.jpg"
           }
         }
       },

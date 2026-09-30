@@ -73,7 +73,8 @@
       ],
       "settings": {
         "label": "Laser engraving  /  Omaha, Nebraska",
-        "bar": "Murphy's bench"
+        "bar": "Murphy's bench",
+        "plate": "shopify://shop_images/pl-hero.jpg"
       }
     },
     "craft": {
@@ -83,28 +84,32 @@
           "type": "finish",
           "settings": {
             "name": "Anodized aluminum",
-            "text": "Engraved through the anodizing and down into bright, bare aluminum."
+            "text": "Engraved through the anodizing and down into bright, bare aluminum.",
+            "image": "shopify://shop_images/c-lid-copville.webp"
           }
         },
         "f2": {
           "type": "finish",
           "settings": {
             "name": "Powder coat",
-            "text": "Cuts through the coating and deep into the stainless underneath."
+            "text": "Cuts through the coating and deep into the stainless underneath.",
+            "image": "shopify://shop_images/c-tumbler.webp"
           }
         },
         "f3": {
           "type": "finish",
           "settings": {
             "name": "Titanium finish",
-            "text": "Engraved through the colour layer into the steel beneath."
+            "text": "Engraved through the colour layer into the steel beneath.",
+            "image": "shopify://shop_images/c-folder.webp"
           }
         },
         "f4": {
           "type": "finish",
           "settings": {
             "name": "Painted steel",
-            "text": "Engraved through the paint and into the bare steel."
+            "text": "Engraved through the paint and into the bare steel.",
+            "image": "shopify://shop_images/c-ammo-can.webp"
           }
         }
       },
@@ -115,7 +120,8 @@
         "f4"
       ],
       "settings": {
-        "url": "/pages/custom-and-bulk"
+        "url": "/pages/custom-and-bulk",
+        "bg": "shopify://shop_images/pl-plain.jpg"
       }
     },
     "featured": {
@@ -172,7 +178,8 @@
         "text": "Murphy hosts Counter Culture Conflict on the Counter Culture Inc network. Global perspectives, unfiltered analysis.",
         "play_label": "Play the title sequence",
         "cta": "The show",
-        "url": "/pages/the-show"
+        "url": "/pages/the-show",
+        "image": "shopify://shop_images/hero-poster.jpg"
       }
     },
     "quad": {
@@ -185,7 +192,8 @@
             "heading": "Custom and bulk",
             "text": "Logos and custom designs for businesses, nonprofits, teams and departments.",
             "cta": "Build an order",
-            "url": "/pages/custom-and-bulk"
+            "url": "/pages/custom-and-bulk",
+            "image": "shopify://shop_images/work-saathoff.jpg"
           }
         },
         "p2": {
@@ -195,7 +203,8 @@
             "heading": "The work",
             "text": "Firearms, lids, knives, gifts and one offs, and how each piece gets made.",
             "cta": "See it",
-            "url": "/pages/the-work"
+            "url": "/pages/the-work",
+            "image": "shopify://shop_images/work-shield.jpg"
           }
         },
         "p3": {
@@ -206,7 +215,8 @@
             "text": "Laser engraver, Omaha. Host of Counter Culture Conflict.",
             "cta": "His story",
             "clip": "v-murph.mp4",
-            "url": "/pages/murphy"
+            "url": "/pages/murphy",
+            "image": "shopify://shop_images/v-murph.jpg"
           }
         },
         "p4": {
@@ -216,7 +226,8 @@
             "heading": "Badge rate, 10% off",
             "text": "On every order. Not on the job? Same laser, same turnaround, same care.",
             "cta": "Shop duty gear",
-            "url": "/collections/duty-gear"
+            "url": "/collections/duty-gear",
+            "image": "shopify://shop_images/cuffs.jpg"
           }
         }
       },
@@ -294,7 +305,8 @@
         "cta": "Shop apparel",
         "url": "/collections/apparel",
         "image": "shopify://shop_images/apparel-hero.jpg",
-        "text": "Tees, caps and button ups, printed to order."
+        "text": "Tees, caps and button ups, printed to order.",
+        "bg": "shopify://shop_images/pl-spade-c.jpg"
       }
     }
   },

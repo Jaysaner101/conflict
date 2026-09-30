@@ -192,10 +192,31 @@ function initVideo() {
 }
 
 /* ---------- product: the $5 name option ---------- */
+// Ticking "Add a name" has to add the £5 engraving line as well, or the page
+// promises a charge the cart never makes. Both lines carry the name, so the
+// pair reads correctly on the order.
+function submitWithAddon(form, box, input) {
+  const vid = box.dataset.addonVariant;
+  if (!box.checked || !vid) return true;          // let the form post normally
+  const name = (input && input.value || '').trim();
+  const fd = new FormData(form);
+  const main = { id: fd.get('id'), quantity: Number(fd.get('quantity') || 1), properties: {} };
+  if (name) main.properties['Name to engrave'] = name;
+  const addon = { id: vid, quantity: main.quantity, properties: name ? { 'Engraving for': name } : {} };
+  fetch('/cart/add.js', {
+    method: 'POST', headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ items: [main, addon] })
+  }).then(r => r.ok ? (window.location.href = '/cart')
+                    : form.submit());            // fall back to the native post
+  return false;
+}
+
 function initNameOption() {
   const box = $('#addName'), input = $('#nameIn'), out = $('#pPrice');
   if (!box) return;
   const base = parseFloat(box.dataset.base || '0'), add = parseFloat(box.dataset.add || '5');
+  const form = box.closest('form');
+  if (form) form.addEventListener('submit', e => { if (!submitWithAddon(form, box, input)) e.preventDefault(); });
   const upd = () => {
     if (out) out.textContent = money(base + (box.checked ? add : 0));
     if (input) input.disabled = !box.checked;

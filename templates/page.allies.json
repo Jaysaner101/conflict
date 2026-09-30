@@ -5,7 +5,8 @@
       "settings": {
         "eyebrow": "Who this shop runs with",
         "heading": "Allies",
-        "text": "<p>The shows, the brand and the studio around Murphy. If you like what he does, start here.</p>"
+        "text": "<p>The shows, the brand and the studio around Murphy. If you like what he does, start here.</p>",
+        "bg": "shopify://shop_images/pl-network.jpg"
       }
     },
     "cards": {

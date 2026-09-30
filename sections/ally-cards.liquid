@@ -10,7 +10,9 @@
         <span class="lab"><i></i>{{ block.settings.eyebrow }}</span>
         <h2 class="h2">{{ block.settings.name }}</h2>
         <p class="copy">{{ block.settings.text }}</p>
-        <span class="ul" style="justify-self:start">{{ block.settings.cta }}</span>
+        {%- if block.settings.url != blank and block.settings.cta != blank -%}
+          <span class="ul" style="justify-self:start">{{ block.settings.cta }}</span>
+        {%- endif -%}
       </div>
     {%- if block.settings.url != blank -%}</a>{%- else -%}</div>{%- endif -%}
   {%- endfor -%}

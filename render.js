@@ -12,7 +12,15 @@ eng.registerFilter('money', money);
 eng.registerFilter('money_without_trailing_zeros', money);
 eng.registerFilter('asset_url', n => '/assets/' + n);
 eng.registerFilter('file_url', n => '/media/' + n);
-eng.registerFilter('image_url', (v) => (typeof v === 'string' ? v : (v && v.src) || '/assets/lid-copville.jpg'));
+// Resolve a shopify://shop_images/NAME reference to the local copy in media/,
+// so an image the template wires up is actually visible in the preview rather
+// than silently rendering as a broken icon.
+const localImg = u => typeof u === 'string' && u.startsWith('shopify://')
+  ? '/media/' + u.split('/').pop() : u;
+eng.registerFilter('image_url', (v) => {
+  if (typeof v === 'string') return localImg(v);
+  return (v && localImg(v.src)) || '/media/lid-copville.jpg';
+});
 eng.registerFilter('handleize', s => String(s).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, ''));
 eng.registerFilter('handle', s => String(s).toLowerCase().replace(/[^a-z0-9]+/g, '-'));
 eng.registerFilter('at_most', (a, b) => Math.min(a, b));
@@ -46,25 +54,32 @@ eng.registerTag('form', {
 
 eng.registerTag('paginate', { parse(tt, remain) { this.tpls = []; let t; const body = []; while ((t = remain.shift())) { if (t.name === 'endpaginate') break; body.push(t); } this.tpls = this.liquid.parser.parseTokens(body); }, * render(ctx, em) { yield this.liquid.renderer.renderTemplates(this.tpls, ctx, em); } });
 
-const img = f => ({ src: '/assets/' + f, alt: '' });
-const prod = (h, t, cents, tags, im) => ({
-  id: h, handle: h, title: t, url: '/products/' + h, price: cents, price_varies: false, available: true,
-  tags: tags, type: 'Engraved', description: '<p>Placeholder description.</p>',
-  featured_media: img(im), media: [img(im)], images: [img(im)],
-  has_only_default_variant: true, variants: [{ id: 1, title: 'Default', price: cents, available: true }],
-  selected_or_first_available_variant: { id: 1, title: 'Default', price: cents, available: true },
-  options_with_values: [], collections: [{ handle: 'can-lids' }], metafields: { custom: { material: 'Anodized aluminum' } }
+const img = f => ({ src: '/media/' + f, alt: '', width: 1000, height: 1000, preview_image: { src: '/media/' + f } });
+// Products are built from catalog.json — the same approved catalogue that was
+// loaded into Shopify — so the harness shows the real shop rather than a mock
+// that repeats one material and one price on every card.
+const CAT = JSON.parse(fs.readFileSync('catalog.json', 'utf8'));
+const TYPE = { lids: 'Can lid', knives: 'Knife', drinkware: 'Tumbler', duty: 'Duty gear', apparel: 'Apparel' };
+const products = CAT.map(p => {
+  const variants = p.opt
+    ? p.opt.vals.map(([name, price], i) => ({ id: p.h + '-' + i, title: name, price: price * 100, available: true,
+        option1: name, options: [name], featured_media: img(p.ph[0]) }))
+    : [{ id: p.h, title: 'Default Title', price: p.p * 100, available: true, option1: 'Default Title', options: ['Default Title'] }];
+  return {
+    id: p.h, handle: p.h, title: p.n, url: '/products/' + p.h,
+    price: (p.opt ? Math.min(...p.opt.vals.map(v => v[1])) : p.p) * 100,
+    price_varies: !!p.opt, price_min: (p.opt ? Math.min(...p.opt.vals.map(v => v[1])) : p.p) * 100,
+    available: true, tags: [p.c].concat(p.tag ? [p.tag.toLowerCase().replace(/\s+/g, '-')] : []),
+    type: TYPE[p.c] || 'Engraved', description: '<p>' + p.d + '</p>', content: '<p>' + p.d + '</p>',
+    featured_media: img(p.ph[0]), media: p.ph.map(img), images: p.ph.map(img),
+    has_only_default_variant: !p.opt, variants,
+    selected_or_first_available_variant: variants[0],
+    options_with_values: p.opt ? [{ name: p.opt.label, values: p.opt.vals.map(v => v[0]) }] : [],
+    collections: [{ handle: p.c }],
+    metafields: { custom: { material: p.mat } }
+  };
 });
-const products = [
-  prod('copville-script-lid', 'Copville script can lid', 2800, ['lids'], 'lid-copville.jpg'),
-  prod('oil-slick-folder', 'Oil slick folder', 3800, ['knives'], 'c-folder.webp'),
-  prod('tumbler-30', '30 oz tumbler', 3400, ['drinkware'], 'c-tumbler.webp'),
-  prod('ammo-can', 'Engraved ammo can', 6800, ['duty'], 'c-ammo-can.webp'),
-  prod('bear-lid', 'Bear in area can lid', 2800, ['lids'], 'c-lid-bear.webp'),
-  prod('truck-lid', 'A.I.G. truck can lid', 2800, ['lids'], 'c-lid-aig.webp'),
-  prod('conflict-tee', 'Conflict tee', 3200, ['apparel'], 'tee-front.jpg'),
-  prod('conflict-cap', 'Conflict cap', 3000, ['apparel'], 'cap-mock.jpg'),
-];
+
 const menu = items => ({ links: items.map(([title, url]) => ({ title, url, active: false })) });
 const settings = JSON.parse(fs.readFileSync('config/settings_data.json')).current;
 
@@ -165,7 +180,18 @@ function sectionCtx(name, cfg) {
       return { type: b.type, id: 'b' + i, shopify_attributes: '', settings: bd };
     });
   }
-  if (s.collection !== undefined) s.collection = base.collection;
+  // Respect the collection a template actually configures, instead of showing
+  // the same products everywhere — that hid the apparel page listing can lids.
+  if (s.collection !== undefined) {
+    const handle = typeof s.collection === 'string' ? s.collection : null;
+    const list = handle && handle !== 'all'
+      ? products.filter(p => (p.collections || []).some(c => c.handle === handle)
+                          || (p.tags || []).includes(handle))
+      : products;
+    s.collection = Object.assign({}, base.collection, {
+      handle: handle || 'all', title: handle ? handle.replace(/-/g,' ') : 'The shop',
+      products: list, products_count: list.length });
+  }
   return { id: name, settings: s, blocks, blocks_size: blocks.length };
 }
 

@@ -10,6 +10,11 @@ const pages = process.argv.slice(2).length ? process.argv.slice(2)
   const b = await chromium.launch();
   const ctx = await b.newContext({ viewport: { width: 1288, height: 725 } });
   const pg = await ctx.newPage();
+  // The sandbox cannot reach fonts.googleapis.com, so pages stall on it.
+  // Abort external requests. The display webfont therefore does NOT apply in
+  // local runs — that can only be confirmed on the live store.
+  await pg.route('**', r => /^https?:\/\/(?!127\.0\.0\.1|localhost)/.test(r.request().url()) ? r.abort() : r.continue());
+
   const bad = [];
   pg.on('pageerror', e => bad.push('JS ' + String(e).slice(0, 100)));
   for (const name of pages) {

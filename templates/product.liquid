@@ -62,7 +62,10 @@
           {%- unless is_apparel -%}
             <div class="acc">
               <label class="acc-h">
-                <input type="checkbox" id="addName" data-base="{{ product.price | divided_by: 100.0 }}" data-add="5">
+                {%- assign addon = all_products['name-engraving'] -%}
+                <input type="checkbox" id="addName" data-base="{{ product.price | divided_by: 100.0 }}"
+                       data-add="{% if addon.first_available_variant %}{{ addon.price | divided_by: 100.0 }}{% else %}5{% endif %}"
+                       {% if addon.first_available_variant %}data-addon-variant="{{ addon.first_available_variant.id }}"{% endif %}>
                 <span>Add a name <b>+ $5</b></span>
               </label>
               <div id="nameWrap" hidden>

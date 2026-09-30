@@ -534,7 +534,7 @@ body::before{content:"";position:fixed;inset:0;z-index:90;pointer-events:none;op
 /* apparel hero */
 .ahero{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(24px,3vw,56px);align-items:center;padding-top:clamp(112px,9vw,140px);padding-bottom:clamp(36px,4vw,64px)}
 .ahero .shot{position:relative;overflow:hidden;box-shadow:0 0 0 1px rgba(255,255,255,.12),0 40px 120px rgba(0,0,0,.7)}
-.ahero .shot img{width:100%;display:block}
+.ahero .shot img{width:100%;height:auto;display:block}
 /* network banners */
 .nb{display:grid;grid-template-columns:minmax(200px,.55fr) minmax(0,1.45fr);gap:clamp(24px,4vw,72px);align-items:center;padding:clamp(28px,3.4vw,52px);border:1px solid var(--line2);background:radial-gradient(70% 120% at 0% 50%,var(--tint,rgba(255,255,255,.06)),rgba(0,0,0,0) 70%),#07080a}
 .nb+.nb{margin-top:14px}
@@ -847,3 +847,14 @@ header.pl>.wrap[style*="padding-top:clamp(108px"]{padding-top:clamp(100px,8vw,11
 
 /* Lock the page behind the open mobile menu. */
 body.nav-open{overflow:hidden}
+
+/* Images whose width is set by CSS but that also carry height attributes:
+   without height:auto the attribute pins the height and the picture stretches.
+   Scoped deliberately — a blanket rule broke the header logo. */
+.shot img,.lcard img,.rte img{height:auto}
+
+/* Text results (pages, articles) carry far more copy than a product card, so
+   two columns on a phone squeezes them into unreadable slivers. */
+@media (max-width:760px){
+  .grid > .lcard{grid-column:1 / -1}
+}

@@ -7,7 +7,9 @@
         "heading": "Counter Culture Conflict",
         "clip": "conflict-intro.mp4",
         "cta": "Watch every episode",
-        "url": "https://www.youtube.com/watch?v=VQcuiECd4tk&list=PLXMvRz65T8SE"
+        "url": "https://www.youtube.com/watch?v=VQcuiECd4tk&list=PLXMvRz65T8SE",
+        "poster": "shopify://shop_images/hero-poster.jpg",
+        "bg": "shopify://shop_images/pl-network.jpg"
       }
     },
     "about": {
@@ -73,7 +75,8 @@
             "cta": "Watch the network",
             "url": "https://www.youtube.com/@CounterCultureInc/streams",
             "cta2": "Subscribe",
-            "url2": "https://www.youtube.com/@CounterCultureInc?sub_confirmation=1"
+            "url2": "https://www.youtube.com/@CounterCultureInc?sub_confirmation=1",
+            "logo": "shopify://shop_images/lg-cc-text.webp"
           }
         },
         "b2": {
@@ -88,7 +91,8 @@
             "cta": "Watch live on YouTube",
             "url": "https://www.youtube.com/@theantiherobroadcast/streams",
             "cta2": "Subscribe",
-            "url2": "https://www.youtube.com/@theantiherobroadcast?sub_confirmation=1"
+            "url2": "https://www.youtube.com/@theantiherobroadcast?sub_confirmation=1",
+            "logo": "shopify://shop_images/lg-antihero.webp"
           }
         }
       },
@@ -248,7 +252,8 @@
         "cta": "Shop apparel",
         "url": "/collections/apparel",
         "image": "shopify://shop_images/apparel-hero.jpg",
-        "text": "Tees, caps and button ups from the show, printed to order."
+        "text": "Tees, caps and button ups from the show, printed to order.",
+        "bg": "shopify://shop_images/pl-spade-c.jpg"
       }
     },
     "network_latest": {
@@ -294,11 +299,11 @@
         "n4": {
           "type": "episode",
           "settings": {
-            "thumb": "shopify://shop_images/net-liferaft.jpg",
-            "title": "Loyalty! | The Life Raft",
-            "meta": "Streamed 2 days ago",
-            "dur": "1:11:49",
-            "url": "https://www.youtube.com/watch?v=SDuaHrNj-_8"
+            "thumb": "shopify://shop_images/net-coffee.jpg",
+            "title": "Who's Awake? It's Time For Coffee And Donuts",
+            "meta": "Streamed 3 days ago",
+            "dur": "50:39",
+            "url": "https://www.youtube.com/watch?v=tVVTYA1SfaI"
           }
         }
       },
