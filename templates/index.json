@@ -55,7 +55,7 @@
           "type": "slide",
           "settings": {
             "material": "Twelve pieces or twelve hundred",
-            "heading": "Your logo on every piece",
+            "heading": "Your logo, on every piece",
             "text": "Custom designs and logos are for larger orders: businesses, nonprofits, teams and departments. Preview it, price it, approve a proof.",
             "cta": "Build an order",
             "clip": "v-knife-fixed.mp4",
@@ -227,6 +227,75 @@
         "p4"
       ],
       "settings": {}
+    },
+    "episodes": {
+      "type": "episodes",
+      "settings": {
+        "eyebrow": "From the show",
+        "heading": "Latest episodes",
+        "shorts": false,
+        "cta": "The show",
+        "url": "/pages/the-show"
+      },
+      "blocks": {
+        "e1": {
+          "type": "episode",
+          "settings": {
+            "thumb": "shopify://shop_images/ep-chapman-full.jpg",
+            "title": "Full Interview | John Chapman | Rob Harrison",
+            "meta": "1 day ago",
+            "dur": "2:27:54",
+            "url": "https://www.youtube.com/watch?v=i48bqABVSyU"
+          }
+        },
+        "e2": {
+          "type": "episode",
+          "settings": {
+            "thumb": "shopify://shop_images/ep-chapman-wrap.jpg",
+            "title": "Wrapping Up The John Chapman Story With Rob Harrison",
+            "meta": "Streamed 6 days ago",
+            "dur": "1:44:46",
+            "url": "https://www.youtube.com/watch?v=GShhUWYLlvY"
+          }
+        },
+        "e3": {
+          "type": "episode",
+          "settings": {
+            "thumb": "shopify://shop_images/ep-shock-glove.jpg",
+            "title": "Shock Glove Updates Plus From Russia With Love",
+            "meta": "Streamed 13 days ago",
+            "dur": "1:02:23",
+            "url": "https://www.youtube.com/watch?v=VQcuiECd4tk"
+          }
+        },
+        "e4": {
+          "type": "episode",
+          "settings": {
+            "thumb": "shopify://shop_images/ep-media-corruption.jpg",
+            "title": "Corruption Of Media And Social Media Outlets",
+            "meta": "Streamed 2 weeks ago",
+            "dur": "1:01:14",
+            "url": "https://www.youtube.com/watch?v=wp9U-SQp0Gc"
+          }
+        }
+      },
+      "block_order": [
+        "e1",
+        "e2",
+        "e3",
+        "e4"
+      ]
+    },
+    "apparel": {
+      "type": "apparel-hero",
+      "settings": {
+        "eyebrow": "Tees, caps and button ups, made to order",
+        "heading": "Conflict apparel",
+        "cta": "Shop apparel",
+        "url": "/collections/apparel",
+        "image": "shopify://shop_images/apparel-hero.jpg",
+        "text": "Tees, caps and button ups, printed to order."
+      }
     }
   },
   "order": [
@@ -235,6 +304,8 @@
     "featured",
     "ways",
     "seen",
+    "episodes",
+    "apparel",
     "quad"
   ]
 }

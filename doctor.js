@@ -215,5 +215,23 @@ for (const f of glob('templates').filter(x => x.endsWith('.json'))) {
   }
 }
 
+
+/* 9d A section file that no template uses. apparel-hero and episodes were both
+ *  fully built and wired to nothing, so a whole page and the show's episode
+ *  list were simply absent from the site. */
+{
+  const used = new Set();
+  for (const f of glob('templates').filter(x => x.endsWith('.json'))) {
+    try { for (const sec of Object.values(JSON.parse(read(f)).sections || {})) used.add(sec.type); }
+    catch (e) { /* reported elsewhere */ }
+  }
+  for (const f of [...liquidFiles])
+    for (const m of read(f).matchAll(/\{%-?\s*section\s+'([^']+)'/g)) used.add(m[1]);
+  for (const f of glob('sections').filter(x => x.endsWith('.liquid'))) {
+    const name = path.basename(f, '.liquid');
+    if (!used.has(name)) warn('unused-section', f, `no template uses this section — it is built but renders nowhere`);
+  }
+}
+
 module.exports = { problems, fail, warn, liquidFiles, read, glob, schemaOf };
 if (require.main === module) require('./doctor-part2.js');

@@ -118,9 +118,9 @@ const base = {
   request: { locale: { iso_code: 'en' } },
   cart: { item_count: 0, items: [], total_price: 0 },
   linklists: {
-    'main-menu': menu([['Home','/'],['Shop','/collections/all'],['Apparel','/collections/apparel'],['Custom and bulk','/pages/custom-and-bulk'],['The work','/pages/the-work'],['The show','/pages/the-show'],['Murphy','/pages/murphy']]),
+    'main-menu': menu([['Home','/'],['Shop','/collections/all'],['Apparel','/pages/apparel'],['Custom and bulk','/pages/custom-and-bulk'],['The work','/pages/the-work'],['The show','/pages/the-show'],['Murphy','/pages/murphy']]),
     'footer': menu([['Custom and bulk','/pages/custom-and-bulk'],['Search','/search']]),
-    'footer-shop': menu([['Can lids','/collections/can-lids'],['Knives','/collections/knives'],['Tumblers','/collections/tumblers'],['Duty gear','/collections/duty-gear'],['Apparel','/collections/apparel']]),
+    'footer-shop': menu([['Can lids','/collections/can-lids'],['Knives','/collections/knives'],['Tumblers','/collections/tumblers'],['Duty gear','/collections/duty-gear'],['Apparel','/pages/apparel']]),
     'footer-about': menu([['Murphy','/pages/murphy'],['The show','/pages/the-show'],['The work','/pages/the-work'],['Allies','/pages/allies']]),
   }, canonical_url: '/', page_title: 'Counter Culture Conflict', page_description: '',
   content_for_header: '', collections: [], paginate: { pages: 1 }, form: { posted_successfully: false },
@@ -204,7 +204,7 @@ async function renderTemplate(name) {
        '404', 'search', 'page', 'blog', 'article', 'password', 'list-collections',
        'customers/account', 'customers/addresses', 'customers/login', 'customers/register',
        'customers/order', 'customers/reset_password', 'customers/activate_account',
-       'page.contact', 'gift_card'];
+       'page.contact', 'gift_card', 'page.apparel'];
   for (const t of targets) {
     try {
       const html = await renderTemplate(t);

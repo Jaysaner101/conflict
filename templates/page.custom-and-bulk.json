@@ -1,18 +1,106 @@
 {
   "sections": {
-    "tool": { "type": "custom-order", "settings": {} },
-    "notice": { "type": "notice", "settings": { "heading": "No one-off custom orders.", "text": "<p>Murphy does not engrave single custom items at the shop, and does not take meetings for one item. Custom designs and logos are for larger orders of twelve pieces or more. Local pickup is available on large custom orders only, arranged after the order is approved. For a single item, order from the online store and add a name for $5.</p>" } },
+    "tool": {
+      "type": "custom-order",
+      "settings": {}
+    },
+    "notice": {
+      "type": "notice",
+      "settings": {
+        "heading": "No one-off custom orders.",
+        "text": "<p>Murphy does not engrave single custom items at the shop, and does not take meetings for one item. Custom designs and logos are for larger orders of twelve pieces or more. Local pickup is available on large custom orders only, arranged after the order is approved. For a single item, order from the online store and add a name for $5.</p>"
+      }
+    },
     "steps": {
       "type": "steps",
       "blocks": {
-        "s1": { "type": "step", "settings": { "title": "Murphy checks the artwork", "text": "Vector is best: SVG, AI, EPS or PDF. A clean PNG also works." } },
-        "s2": { "type": "step", "settings": { "title": "You get a proof", "text": "An exact mockup and a firm price within 2 business days." } },
-        "s3": { "type": "step", "settings": { "title": "You approve it", "text": "Nothing is engraved until you sign off." } },
-        "s4": { "type": "step", "settings": { "title": "It ships", "text": "Most runs leave 7 to 10 business days after approval." } }
+        "s1": {
+          "type": "step",
+          "settings": {
+            "title": "Murphy checks the artwork",
+            "text": "Vector is best: SVG, AI, EPS or PDF. A clean PNG also works."
+          }
+        },
+        "s2": {
+          "type": "step",
+          "settings": {
+            "title": "You get a proof",
+            "text": "An exact mockup and a firm price within 2 business days."
+          }
+        },
+        "s3": {
+          "type": "step",
+          "settings": {
+            "title": "You approve it",
+            "text": "Nothing is engraved until you sign off."
+          }
+        },
+        "s4": {
+          "type": "step",
+          "settings": {
+            "title": "It ships",
+            "text": "Most runs leave 7 to 10 business days after approval."
+          }
+        }
       },
-      "block_order": ["s1", "s2", "s3", "s4"],
+      "block_order": [
+        "s1",
+        "s2",
+        "s3",
+        "s4"
+      ],
       "settings": {}
+    },
+    "clients": {
+      "type": "media-strip",
+      "settings": {
+        "eyebrow": "Teams, departments, firms, schools",
+        "heading": "Who he has done it for",
+        "cta": "See the work",
+        "url": "/pages/the-work"
+      },
+      "blocks": {
+        "m1": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/work-saathoff.jpg",
+            "alt": "Retirement plaque"
+          }
+        },
+        "m2": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/work-shield.jpg",
+            "alt": "Department shield"
+          }
+        },
+        "m3": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/badge-opd.jpg",
+            "alt": "Engraved crest"
+          }
+        },
+        "m4": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/tag-eagles.jpg",
+            "alt": "Engraved tag"
+          }
+        }
+      },
+      "block_order": [
+        "m1",
+        "m2",
+        "m3",
+        "m4"
+      ]
     }
   },
-  "order": ["tool", "notice", "steps"]
+  "order": [
+    "tool",
+    "notice",
+    "steps",
+    "clients"
+  ]
 }

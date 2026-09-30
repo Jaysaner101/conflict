@@ -1,26 +1,322 @@
 {
   "sections": {
-    "player": { "type": "show-player", "settings": { "eyebrow": "Murphy's show, on the Counter Culture Inc network", "heading": "Counter Culture Conflict", "clip": "conflict-intro.mp4", "cta": "Watch every episode", "url": "https://www.youtube.com/watch?v=VQcuiECd4tk&list=PLXMvRz65T8SE" } },
+    "player": {
+      "type": "show-player",
+      "settings": {
+        "eyebrow": "Murphy's show, on the Counter Culture Inc network",
+        "heading": "Counter Culture Conflict",
+        "clip": "conflict-intro.mp4",
+        "cta": "Watch every episode",
+        "url": "https://www.youtube.com/watch?v=VQcuiECd4tk&list=PLXMvRz65T8SE"
+      }
+    },
     "about": {
       "type": "about-split",
       "blocks": {
-        "f1": { "type": "fact", "settings": { "label": "Host", "value": "Murphy" } },
-        "f2": { "type": "fact", "settings": { "label": "Covers", "value": "World conflict, unrest, policing, politics" } },
-        "f3": { "type": "fact", "settings": { "label": "Streams", "value": "Live on the Counter Culture Inc channel" } },
-        "f4": { "type": "fact", "settings": { "label": "Replays", "value": "Every episode in the Conflict playlist" } }
+        "f1": {
+          "type": "fact",
+          "settings": {
+            "label": "Host",
+            "value": "Murphy"
+          }
+        },
+        "f2": {
+          "type": "fact",
+          "settings": {
+            "label": "Covers",
+            "value": "World conflict, unrest, policing, politics"
+          }
+        },
+        "f3": {
+          "type": "fact",
+          "settings": {
+            "label": "Streams",
+            "value": "Live Wednesdays, 8PM CST / 9PM EST"
+          }
+        },
+        "f4": {
+          "type": "fact",
+          "settings": {
+            "label": "Replays",
+            "value": "Every episode in the Conflict playlist"
+          }
+        }
       },
-      "block_order": ["f1", "f2", "f3", "f4"],
-      "settings": { "eyebrow": "About the show", "lede": "Counter Culture Conflict is Murphy's take on the fights shaping the world: wars, unrest, policing and the politics behind them.", "text": "<p>Each episode takes the stories the big outlets smooth over, plays the footage, and says plainly what he thinks is going on. Global perspectives, unfiltered analysis.</p>", "cta": "Watch the playlist", "url": "https://www.youtube.com/watch?v=VQcuiECd4tk&list=PLXMvRz65T8SE", "cta2": "Catch it live", "url2": "https://www.youtube.com/@CounterCultureInc/streams" }
+      "block_order": [
+        "f1",
+        "f2",
+        "f3",
+        "f4"
+      ],
+      "settings": {
+        "eyebrow": "About the show",
+        "lede": "Counter Culture Conflict is Murphy's take on the fights shaping the world: wars, unrest, policing and the politics behind them.",
+        "text": "<p>Each episode takes the stories the big outlets smooth over, plays the footage, and says plainly what he thinks is going on. Global perspectives, unfiltered analysis.</p>",
+        "cta": "Watch the playlist",
+        "url": "https://www.youtube.com/watch?v=VQcuiECd4tk&list=PLXMvRz65T8SE",
+        "cta2": "Catch it live",
+        "url2": "https://www.youtube.com/@CounterCultureInc/streams"
+      }
     },
     "network": {
       "type": "rich-banner",
       "blocks": {
-        "b1": { "type": "show", "settings": { "tint": "#dc281e", "name": "Counter Culture Inc", "tagline": "A direct dose of truth and entertainment, counter to the narrative you have been fed.", "text": "The independent network that produces Counter Culture Conflict and The Antihero Broadcast. No corporate owner and no script. Every show streams live on the network channel, and the replays stay up.", "fact1": "Live streams and replays", "fact2": "Home of Conflict and Antihero", "cta": "Watch the network", "url": "https://www.youtube.com/@CounterCultureInc/streams", "cta2": "Subscribe", "url2": "https://www.youtube.com/@CounterCultureInc?sub_confirmation=1" } },
-        "b2": { "type": "show", "settings": { "tint": "#96ff1e", "name": "The Antihero Broadcast", "tagline": "Aggressive. Raw. Hilarious. In-your-face news and entertainment.", "text": "The flagship show of the network: a live weekday broadcast that takes the day's news and argues it out on air, with the chat joining in.", "fact1": "Live Mon to Fri, 1PM EST", "fact2": "Orlando, Florida", "cta": "Watch live on YouTube", "url": "https://www.youtube.com/@theantiherobroadcast/streams", "cta2": "Subscribe", "url2": "https://www.youtube.com/@theantiherobroadcast?sub_confirmation=1" } }
+        "b1": {
+          "type": "show",
+          "settings": {
+            "tint": "#dc281e",
+            "name": "Counter Culture Inc",
+            "tagline": "A direct dose of truth and entertainment, counter to the narrative you have been fed.",
+            "text": "The independent network that produces Counter Culture Conflict and The Antihero Broadcast. No corporate owner and no script. Every show streams live on the network channel, and the replays stay up.",
+            "fact1": "Live streams and replays",
+            "fact2": "Home of Conflict and Antihero",
+            "cta": "Watch the network",
+            "url": "https://www.youtube.com/@CounterCultureInc/streams",
+            "cta2": "Subscribe",
+            "url2": "https://www.youtube.com/@CounterCultureInc?sub_confirmation=1"
+          }
+        },
+        "b2": {
+          "type": "show",
+          "settings": {
+            "tint": "#96ff1e",
+            "name": "The Antihero Broadcast",
+            "tagline": "Aggressive. Raw. Hilarious. In-your-face news and entertainment.",
+            "text": "The flagship show of the network: a live weekday broadcast that takes the day's news and argues it out on air, with the chat joining in.",
+            "fact1": "Live Mon to Fri, 1PM EST",
+            "fact2": "Orlando, Florida",
+            "cta": "Watch live on YouTube",
+            "url": "https://www.youtube.com/@theantiherobroadcast/streams",
+            "cta2": "Subscribe",
+            "url2": "https://www.youtube.com/@theantiherobroadcast?sub_confirmation=1"
+          }
+        }
       },
-      "block_order": ["b1", "b2"],
-      "settings": { "eyebrow": "Where Conflict lives", "heading": "The network", "text": "Conflict is one show on an independent network. Here is who is behind it and where to watch." }
+      "block_order": [
+        "b1",
+        "b2"
+      ],
+      "settings": {
+        "eyebrow": "Where Conflict lives",
+        "heading": "The network",
+        "text": "Conflict is one show on an independent network. Here is who is behind it and where to watch."
+      }
+    },
+    "episodes": {
+      "type": "episodes",
+      "settings": {
+        "eyebrow": "Full shows, straight from YouTube",
+        "heading": "Latest episodes",
+        "shorts": false,
+        "cta": "Full playlist",
+        "url": "https://www.youtube.com/watch?v=VQcuiECd4tk&list=PLXMvRz65T8SE"
+      },
+      "blocks": {
+        "e1": {
+          "type": "episode",
+          "settings": {
+            "thumb": "shopify://shop_images/ep-chapman-full.jpg",
+            "title": "Full Interview | John Chapman | Rob Harrison",
+            "meta": "1 day ago",
+            "dur": "2:27:54",
+            "url": "https://www.youtube.com/watch?v=i48bqABVSyU"
+          }
+        },
+        "e2": {
+          "type": "episode",
+          "settings": {
+            "thumb": "shopify://shop_images/ep-chapman-wrap.jpg",
+            "title": "Wrapping Up The John Chapman Story With Rob Harrison",
+            "meta": "Streamed 6 days ago",
+            "dur": "1:44:46",
+            "url": "https://www.youtube.com/watch?v=GShhUWYLlvY"
+          }
+        },
+        "e3": {
+          "type": "episode",
+          "settings": {
+            "thumb": "shopify://shop_images/ep-shock-glove.jpg",
+            "title": "Shock Glove Updates Plus From Russia With Love",
+            "meta": "Streamed 13 days ago",
+            "dur": "1:02:23",
+            "url": "https://www.youtube.com/watch?v=VQcuiECd4tk"
+          }
+        },
+        "e4": {
+          "type": "episode",
+          "settings": {
+            "thumb": "shopify://shop_images/ep-media-corruption.jpg",
+            "title": "Corruption Of Media And Social Media Outlets",
+            "meta": "Streamed 2 weeks ago",
+            "dur": "1:01:14",
+            "url": "https://www.youtube.com/watch?v=wp9U-SQp0Gc"
+          }
+        },
+        "e5": {
+          "type": "episode",
+          "settings": {
+            "thumb": "shopify://shop_images/ep-war-fighter.jpg",
+            "title": "Interview With An American War Fighter In Ukraine",
+            "meta": "3 weeks ago",
+            "dur": "26:42",
+            "url": "https://www.youtube.com/watch?v=8iZ0LljoAJQ"
+          }
+        },
+        "e6": {
+          "type": "episode",
+          "settings": {
+            "thumb": "shopify://shop_images/ep-russia-nato.jpg",
+            "title": "Russia Tests NATO, Cuba in Crisis & America's New Venezuela Oil Deal",
+            "meta": "Streamed 3 weeks ago",
+            "dur": "1:03:15",
+            "url": "https://www.youtube.com/watch?v=PgSj_4KjOkk"
+          }
+        },
+        "e7": {
+          "type": "episode",
+          "settings": {
+            "thumb": "shopify://shop_images/ep-anti-american.jpg",
+            "title": "Uncovering the Anti-American Lies",
+            "meta": "Streamed 1 month ago",
+            "dur": "1:13:36",
+            "url": "https://www.youtube.com/watch?v=_ff-D_woJ4g"
+          }
+        }
+      },
+      "block_order": [
+        "e1",
+        "e2",
+        "e3",
+        "e4",
+        "e5",
+        "e6",
+        "e7"
+      ]
+    },
+    "shorts": {
+      "type": "episodes",
+      "settings": {
+        "eyebrow": "Under three minutes",
+        "heading": "Shorts",
+        "shorts": true,
+        "cta": "More Shorts",
+        "url": "https://www.youtube.com/@CounterCultureInc/shorts"
+      },
+      "blocks": {
+        "s1": {
+          "type": "episode",
+          "settings": {
+            "thumb": "shopify://shop_images/sh-ukraine.jpg",
+            "title": "Americans fighting for Ukraine",
+            "meta": "3 weeks ago",
+            "dur": "1:25",
+            "url": "https://www.youtube.com/watch?v=5ZAaZMhPXaA"
+          }
+        },
+        "s2": {
+          "type": "episode",
+          "settings": {
+            "thumb": "shopify://shop_images/sh-doxxing.jpg",
+            "title": "Stop doxxing yourselves!!",
+            "meta": "3 weeks ago",
+            "dur": "1:01",
+            "url": "https://www.youtube.com/watch?v=bLles8SY_aQ"
+          }
+        },
+        "s3": {
+          "type": "episode",
+          "settings": {
+            "thumb": "shopify://shop_images/sh-premiere.jpg",
+            "title": "Counter Culture Conflict premieres August 26th",
+            "meta": "1 month ago",
+            "dur": "1:57",
+            "url": "https://www.youtube.com/watch?v=Evg5apS56Nk"
+          }
+        }
+      },
+      "block_order": [
+        "s1",
+        "s2",
+        "s3"
+      ]
+    },
+    "apparel": {
+      "type": "apparel-hero",
+      "settings": {
+        "eyebrow": "Tees, caps and button ups, made to order",
+        "heading": "Conflict apparel",
+        "cta": "Shop apparel",
+        "url": "/collections/apparel",
+        "image": "shopify://shop_images/apparel-hero.jpg",
+        "text": "Tees, caps and button ups from the show, printed to order."
+      }
+    },
+    "network_latest": {
+      "type": "episodes",
+      "settings": {
+        "eyebrow": "On the network channel",
+        "heading": "Latest from Counter Culture Inc",
+        "shorts": false,
+        "cta": "All streams",
+        "url": "https://www.youtube.com/@CounterCultureInc/streams"
+      },
+      "blocks": {
+        "n1": {
+          "type": "episode",
+          "settings": {
+            "thumb": "shopify://shop_images/net-gaming.jpg",
+            "title": "Counter Culture Gaming: post Clearwater meet-up",
+            "meta": "Streamed 12 hours ago",
+            "dur": "1:53:00",
+            "url": "https://www.youtube.com/watch?v=9-agEjY2Iw4"
+          }
+        },
+        "n2": {
+          "type": "episode",
+          "settings": {
+            "thumb": "shopify://shop_images/net-wendys.jpg",
+            "title": "Wendy's released an emo album?? (And it's good\u2026)",
+            "meta": "Streamed 1 day ago",
+            "dur": "56:32",
+            "url": "https://www.youtube.com/watch?v=9QSsdpHyBJk"
+          }
+        },
+        "n3": {
+          "type": "episode",
+          "settings": {
+            "thumb": "shopify://shop_images/net-sot.jpg",
+            "title": "SOT: when Christianity becomes a brand",
+            "meta": "Streamed 2 days ago",
+            "dur": "1:10:19",
+            "url": "https://www.youtube.com/watch?v=lGP-r2ZFdPg"
+          }
+        },
+        "n4": {
+          "type": "episode",
+          "settings": {
+            "thumb": "shopify://shop_images/net-liferaft.jpg",
+            "title": "Loyalty! | The Life Raft",
+            "meta": "Streamed 2 days ago",
+            "dur": "1:11:49",
+            "url": "https://www.youtube.com/watch?v=SDuaHrNj-_8"
+          }
+        }
+      },
+      "block_order": [
+        "n1",
+        "n2",
+        "n3",
+        "n4"
+      ]
     }
   },
-  "order": ["player", "about", "network"]
+  "order": [
+    "player",
+    "about",
+    "episodes",
+    "shorts",
+    "network",
+    "network_latest",
+    "apparel"
+  ]
 }

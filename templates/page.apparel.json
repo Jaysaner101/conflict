@@ -1,0 +1,30 @@
+{
+  "sections": {
+    "hero": {
+      "type": "apparel-hero",
+      "settings": {
+        "eyebrow": "Tees, caps and button ups, made to order",
+        "heading": "Conflict apparel",
+        "cta": "Shop apparel",
+        "url": "/collections/apparel",
+        "image": "shopify://shop_images/apparel-hero.jpg",
+        "text": "The first run. Printed to order on heavyweight blanks, with the spade on the chest and the Conflict globe across the back.",
+        "fact1": "Made to order",
+        "fact2": "Ships in about a week"
+      }
+    },
+    "grid": {
+      "type": "featured-collection",
+      "settings": {
+        "eyebrow": "The first run",
+        "heading": "Shop the apparel",
+        "collection": "apparel",
+        "count": 8
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "grid"
+  ]
+}
