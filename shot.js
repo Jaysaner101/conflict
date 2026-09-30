@@ -4,7 +4,7 @@ const serve = require('./serve.js');
 (async () => {
   const srv = await serve('preview');
   const b = await chromium.launch();
-  const pages = ['index','collection','product','page.custom-and-bulk','page.work','page.show','page.murphy','page.allies','cart'];
+  const pages = ['index','collection','product','page.custom-and-bulk','page.work','page.show','page.murphy','page.allies','cart','page.contact','gift_card'];
   const errs = [];
   for (const w of [[1288,725,'d'],[390,844,'m']]) {
     const ctx = await b.newContext({ viewport:{width:w[0],height:w[1]}, isMobile:w[0]<800, hasTouch:w[0]<800 });

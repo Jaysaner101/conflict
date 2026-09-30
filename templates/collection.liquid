@@ -7,7 +7,7 @@
     <div>
       {%- if collection.description != blank -%}<div class="copy">{{ collection.description }}</div>{%- endif -%}
       <div class="sfacts" style="margin-top:14px">
-        <span>Ships in about {{ settings.fact_ship_time | default: '3 days' }}</span>
+        <span>Ships in {{ settings.fact_ship_time | default: 'about 3 days' | downcase }}</span>
         <span>Add a name, $5</span>
         <span>{{ settings.fact_ship_us }}</span>
       </div>

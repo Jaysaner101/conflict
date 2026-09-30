@@ -21,7 +21,7 @@
   </style>
   
 </head>
-<body class="tpl-product" data-page="product">
+<body class="tpl-page.contact" data-page="page.contact">
   <a class="skip" href="#main">Skip to content</a>
   <header class="head" id="head"><div class="wrap head-in">
   <a class="logo" href="/" aria-label="Counter Culture Conflict, home"><img src="/assets/logo-spade.png" alt="" width="60" height="60"><img src="/assets/logo-word.png" alt="Counter Culture Conflict"></a>
@@ -37,46 +37,50 @@
 
 
   <main id="main">
-    <div style="padding-top:clamp(112px,9.5vw,144px)" id="pdp">
-  <div class="wrap">
-    <div class="pdp">
-      <div>
-        <div class="stage" id="pStage"><img class="ph" id="pImg" src="/assets/lid-copville.jpg" alt=""></div><dl class="spec">
-          <div><dt class="lab">Material</dt><dd>Anodized aluminum</dd></div>
-          <div><dt class="lab">Engraving</dt><dd>Industrial fiber laser. Deep and permanent</dd></div>
-          <div><dt class="lab">Made in</dt><dd>Omaha, Nebraska</dd></div>
-          <div><dt class="lab">Shipping time</dt><dd>About 3 days. About a week with a name</dd></div>
-        </dl>
-      </div>
-
-      <div class="buy stack">
-        <nav class="lab"><a class="ul" href="/collections/all">Shop</a> / Engraved</nav>
-        <h1 class="bl sm">Copville script can lid</h1>
-        <div class="lab">Anodized aluminum</div>
-        <div class="price" id="pPrice">$28</div>
-        <div class="copy"><p>Placeholder description.</p></div><form id="buyForm" method="post"><label class="visually-hidden" for="variantSelect">Choose an option</label>
-          <select name="id" id="variantSelect" hidden><option value="1"  >Default — $28</option></select><div class="acc">
-              <label class="acc-h">
-                <input type="checkbox" id="addName" data-base="28" data-add="5">
-                <span>Add a name <b>+ $5</b></span>
-              </label>
-              <div id="nameWrap" hidden>
-                <label class="visually-hidden" for="nameIn">Name to engrave</label>
-                <input class="inp" id="nameIn" name="properties[Name to engrave]" maxlength="18" placeholder="Name, call sign or number">
-                <span class="note">Engraved to match the piece. Named items take about a week.</span>
-              </div>
-            </div><button class="btn solid full" type="submit" >
-            Add to cart
-          </button></form><p class="note">Ships in about 3 days. US $8 flat, free over $60. Canada $15 flat.</p>
-
-        <a class="ul" href="/pages/custom-and-bulk">Need twelve or more with your logo? Custom orders</a>
+    <header class="pghd">
+  <div class="wrap pghd-in" style="position:relative;z-index:2">
+    <div class="stack-s">
+      <span class="lab"><i></i>Omaha, Nebraska</span>
+      <h1 class="bl md">Shipping and returns</h1>
+    </div>
+    <div><div class="rte copy"><p>Orders ship in about three days.</p><h2>Returns</h2><p>Engraved pieces are made to order.</p></div><div class="sfacts" style="margin-top:14px">
+        <span>Ships in about 3 days</span>
+        <span>$8 flat, free over $60</span>
       </div>
     </div>
   </div>
+</header>
 
-  <div class="wrap sec">
-    <div class="sh"><h2 class="h2">More in stock</h2><a class="ul" href="/collections/all">View all</a></div>
-    <div class="grid"></div>
+<div class="wrap sec">
+  <div class="intro">
+    <div class="stack" style="max-width:560px">
+      <h2 class="bl xs">Send a message</h2><form id="contactForm" class="stack-s" method="post"><div class="field">
+          <label class="lab" for="cName">Your name</label>
+          <input class="inp" type="text" id="cName" name="contact[name]" autocomplete="name" value="" required>
+        </div>
+        <div class="field">
+          <label class="lab" for="cEmail">Email</label>
+          <input class="inp" type="email" id="cEmail" name="contact[email]" autocomplete="email" value="" required>
+        </div>
+        <div class="field">
+          <label class="lab" for="cPhone">Phone (optional)</label>
+          <input class="inp" type="tel" id="cPhone" name="contact[phone]" autocomplete="tel" value="">
+        </div>
+        <div class="field">
+          <label class="lab" for="cBody">Message</label>
+          <textarea class="inp" id="cBody" name="contact[body]" required></textarea>
+        </div>
+        <div class="btns"><button class="btn solid" type="submit">Send</button></div></form></div>
+
+    <div class="glass">
+      <div class="lab" style="margin-bottom:14px">Before you write</div>
+      <dl class="spec">
+        <div><dt class="lab">Custom orders</dt><dd>Twelve pieces or more. <a class="tl" href="/pages/custom-and-bulk">Build one here</a>.</dd></div>
+        <div><dt class="lab">Add a name</dt><dd>$5, about a week</dd></div>
+        <div><dt class="lab">Shipping time</dt><dd>About 3 days</dd></div>
+        <div><dt class="lab">Local pick up</dt><dd>Large local custom orders only. No single pieces at the shop.</dd></div>
+      </dl>
+    </div>
   </div>
 </div>
 

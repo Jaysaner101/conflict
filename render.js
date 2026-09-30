@@ -109,7 +109,7 @@ const article = (title, i) => ({
 const articles = [article('Inside a fiber laser run', 0), article('Why the engraving does not wear off', 1), article('Custom orders, start to finish', 2)];
 
 const base = {
-  shop: { name: 'Counter Culture Conflict' },
+  shop: { name: 'Counter Culture Conflict', url: 'https://k0uw8n-4v.myshopify.com', email: 'hello@counterculturecc.com' },
   settings,
   routes: { root_url: '/', cart_url: '/cart', all_products_collection_url: '/collections/all',
     search_url: '/search', account_url: '/account', account_login_url: '/account/login',
@@ -125,6 +125,8 @@ const base = {
   }, canonical_url: '/', page_title: 'Counter Culture Conflict', page_description: '',
   content_for_header: '', collections: [], paginate: { pages: 1 }, form: { posted_successfully: false },
   customer: mockCustomer, order: mockOrder,
+  gift_card: { balance: 5000, initial_value: 5000, code: 'abcd1234efgh5678', enabled: true,
+               expired: false, expires_on: null, qr_identifier: 'qr', currency: 'USD' },
   blog: { title: 'From the bench', url: '/blogs/news', articles, all_tags: ['process', 'gear'], comments_enabled: false },
   article: articles[0],
   page: { title: 'Shipping and returns', content: '<p>Orders ship in about three days.</p><h2>Returns</h2><p>Engraved pieces are made to order.</p>' },
@@ -187,7 +189,10 @@ async function renderTemplate(name) {
       inner += await eng.renderFile(path.join('sections', cfg.type), Object.assign({}, base, { section: sectionCtx(cfg.type, cfg) }));
     }
   } else if (fs.existsSync(liquidPath)) {
+    const raw = fs.readFileSync(liquidPath, 'utf8');
     inner = await eng.renderFile(liquidPath, base);
+    // {% layout none %} means the template is the whole document.
+    if (/\{%-?\s*layout\s+none\s*-?%\}/.test(raw)) return inner;
   } else { throw new Error('no template ' + name); }
   return eng.renderFile('layout/theme', Object.assign({}, base, { content_for_layout: inner, template: { name } }));
 }
@@ -198,7 +203,8 @@ async function renderTemplate(name) {
     : ['index', 'product', 'collection', 'cart', 'page.custom-and-bulk', 'page.work', 'page.show', 'page.murphy', 'page.allies',
        '404', 'search', 'page', 'blog', 'article', 'password', 'list-collections',
        'customers/account', 'customers/addresses', 'customers/login', 'customers/register',
-       'customers/order', 'customers/reset_password', 'customers/activate_account'];
+       'customers/order', 'customers/reset_password', 'customers/activate_account',
+       'page.contact', 'gift_card'];
   for (const t of targets) {
     try {
       const html = await renderTemplate(t);

@@ -1,0 +1,59 @@
+<header class="pghd">
+  <div class="wrap pghd-in" style="position:relative;z-index:2">
+    <div class="stack-s">
+      <span class="lab"><i></i>Omaha, Nebraska</span>
+      <h1 class="bl md">{{ page.title }}</h1>
+    </div>
+    <div>
+      {%- if page.content != blank -%}<div class="rte copy">{{ page.content }}</div>
+      {%- else -%}<p class="copy">Questions about an order, a finish or a deadline. Murphy reads these himself and replies within 2 business days.</p>{%- endif -%}
+      <div class="sfacts" style="margin-top:14px">
+        <span>Ships in {{ settings.fact_ship_time | default: 'about 3 days' | downcase }}</span>
+        <span>{{ settings.fact_ship_us }}</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="wrap sec">
+  <div class="intro">
+    <div class="stack" style="max-width:560px">
+      <h2 class="bl xs">Send a message</h2>
+      {%- form 'contact', id: 'contactForm', class: 'stack-s' -%}
+        {%- if form.posted_successfully? -%}
+          <p class="note" role="status">Thanks. Murphy replies within 2 business days.</p>
+        {%- endif -%}
+        {%- if form.errors -%}
+          <p class="note" role="alert">{{ form.errors | default_errors }}</p>
+        {%- endif -%}
+        <div class="field">
+          <label class="lab" for="cName">Your name</label>
+          <input class="inp" type="text" id="cName" name="contact[name]" autocomplete="name" value="{{ form.name }}" required>
+        </div>
+        <div class="field">
+          <label class="lab" for="cEmail">Email</label>
+          <input class="inp" type="email" id="cEmail" name="contact[email]" autocomplete="email" value="{{ form.email }}" required>
+        </div>
+        <div class="field">
+          <label class="lab" for="cPhone">Phone (optional)</label>
+          <input class="inp" type="tel" id="cPhone" name="contact[phone]" autocomplete="tel" value="{{ form.phone }}">
+        </div>
+        <div class="field">
+          <label class="lab" for="cBody">Message</label>
+          <textarea class="inp" id="cBody" name="contact[body]" required>{{ form.body }}</textarea>
+        </div>
+        <div class="btns"><button class="btn solid" type="submit">Send</button></div>
+      {%- endform -%}
+    </div>
+
+    <div class="glass">
+      <div class="lab" style="margin-bottom:14px">Before you write</div>
+      <dl class="spec">
+        <div><dt class="lab">Custom orders</dt><dd>Twelve pieces or more. <a class="tl" href="/pages/custom-and-bulk">Build one here</a>.</dd></div>
+        <div><dt class="lab">Add a name</dt><dd>{{ settings.fact_name | default: '$5, about a week' }}</dd></div>
+        <div><dt class="lab">Shipping time</dt><dd>{{ settings.fact_ship_time | default: 'About 3 days' }}</dd></div>
+        <div><dt class="lab">Local pick up</dt><dd>Large local custom orders only. No single pieces at the shop.</dd></div>
+      </dl>
+    </div>
+  </div>
+</div>

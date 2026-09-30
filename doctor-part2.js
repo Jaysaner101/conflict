@@ -3,7 +3,9 @@ const fs = require('fs'), path = require('path');
 const D = require('./doctor.js');
 const { problems, fail, warn, liquidFiles, read, glob } = D;
 
-const css = fs.existsSync('assets/base.css') ? read('assets/base.css') : '';
+// Inline <style> blocks count as CSS; some templates carry their own.
+const inlineCss = liquidFiles.map(f => (read(f).match(/<style[\s\S]*?<\/style>/g) || []).join('\n')).join('\n');
+const css = (fs.existsSync('assets/base.css') ? read('assets/base.css') : '') + '\n' + inlineCss;
 const js  = fs.existsSync('assets/theme.js') ? read('assets/theme.js') : '';
 
 /* 10 A class used in markup with no CSS rule anywhere. This shipped four times

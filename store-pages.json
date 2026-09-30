@@ -1,0 +1,8 @@
+{"nodes":[
+ {"handle":"contact","templateSuffix":"contact"},
+ {"handle":"custom-and-bulk","templateSuffix":"custom-and-bulk"},
+ {"handle":"the-work","templateSuffix":"work"},
+ {"handle":"the-show","templateSuffix":"show"},
+ {"handle":"murphy","templateSuffix":"murphy"},
+ {"handle":"allies","templateSuffix":"allies"}
+]}

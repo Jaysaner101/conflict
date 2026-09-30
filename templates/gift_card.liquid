@@ -1,0 +1,50 @@
+{%- layout none -%}<!doctype html>
+<html lang="{{ request.locale.iso_code }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ shop.name }} gift card</title>
+  <link rel="icon" href="{{ 'favicon.png' | asset_url }}">
+  <link rel="stylesheet" href="{{ 'base.css' | asset_url }}">
+  <style>
+    :root{ --bg:{{ settings.col_bg }}; --ink:{{ settings.col_ink }}; --body:{{ settings.col_body }};
+           --hi:{{ settings.col_hi }}; --s1:{{ settings.col_s1 }}; }
+    .gcw{max-width:520px;margin:0 auto;padding:clamp(40px,8vw,90px) 20px;text-align:center}
+    .gcode{font-family:var(--hd);font-size:clamp(22px,4vw,34px);letter-spacing:.12em;color:var(--hi);
+           border:1px solid var(--line);padding:18px;margin:22px 0;word-break:break-all}
+    .gcqr{margin:22px auto;width:180px;height:180px}
+  </style>
+</head>
+<body>
+  <div class="gcw">
+    <img src="{{ 'logo-lockup.webp' | asset_url }}" alt="{{ shop.name }}" style="width:140px;height:auto">
+    <h1 class="bl sm" style="margin:18px 0 8px">A gift card for {{ shop.name }}</h1>
+    <p class="copy">Engraved gear, cut on an industrial fiber laser in Omaha.</p>
+
+    {%- if gift_card.expired -%}
+      <p class="note" role="status">This gift card expired on {{ gift_card.expires_on | date: '%b %d, %Y' }}.</p>
+    {%- elsif gift_card.enabled == false -%}
+      <p class="note" role="status">This gift card is no longer active.</p>
+    {%- else -%}
+      <p class="lab" style="margin-top:26px">Balance</p>
+      <p class="bl md" style="margin:6px 0">{{ gift_card.balance | money }}</p>
+      {%- if gift_card.balance != gift_card.initial_value -%}
+        <p class="lab">Originally {{ gift_card.initial_value | money }}</p>
+      {%- endif -%}
+
+      <p class="lab" style="margin-top:26px">Your code</p>
+      <div class="gcode">{{ gift_card.code | format_code }}</div>
+      <img class="gcqr" src="{{ gift_card.qr_identifier | img_url: 'medium' }}" alt="QR code for this gift card" width="180" height="180">
+
+      {%- if gift_card.expires_on -%}
+        <p class="lab">Expires {{ gift_card.expires_on | date: '%b %d, %Y' }}</p>
+      {%- endif -%}
+
+      <div class="btns" style="justify-content:center;margin-top:26px">
+        <a class="btn solid" href="{{ shop.url }}">Shop the store</a>
+      </div>
+      <p class="copy" style="margin-top:18px;font-size:13px">Enter the code at checkout.</p>
+    {%- endif -%}
+  </div>
+</body>
+</html>

@@ -189,5 +189,31 @@ for (const f of glob('templates').filter(x => x.endsWith('.json'))) {
     }
 }
 
+
+/* 9c Templates the platform expects. A missing one is not a broken reference
+ *  inside the repo, so nothing else here would see it — which is how the
+ *  contact page and gift_card were missed. store-pages.json (optional) is a
+ *  list of the templateSuffix values the store's pages actually use. */
+{
+  const has = n => fs.existsSync(`templates/${n}.liquid`) || fs.existsSync(`templates/${n}.json`);
+  for (const t of ['index','product','collection','list-collections','page','blog','article','cart','search','404','password','gift_card'])
+    if (!has(t)) fail('missing-template', 'templates/', `no ${t} template — Shopify renders this route on every store`);
+  for (const t of ['account','activate_account','addresses','login','order','register','reset_password'])
+    if (!has('customers/' + t)) fail('missing-template', 'templates/customers/', `no customers/${t} template`);
+  if (fs.existsSync('store-pages.json')) {
+    let suffixes = [];
+    try {
+      const raw = JSON.parse(read('store-pages.json'));
+      const nodes = raw?.data?.pages?.nodes || raw?.pages?.nodes || raw?.nodes || raw;
+      suffixes = (Array.isArray(nodes) ? nodes : []).map(p => p.templateSuffix).filter(Boolean);
+    } catch (e) { warn('store-pages', 'store-pages.json', 'could not read: ' + e.message); }
+    for (const sfx of [...new Set(suffixes)])
+      if (!has('page.' + sfx))
+        fail('missing-template', 'templates/', `a page on the store uses templateSuffix "${sfx}" but templates/page.${sfx} does not exist`);
+  } else {
+    warn('store-pages', 'store-pages.json', 'absent — export the store\'s pages { handle templateSuffix } to check suffix coverage');
+  }
+}
+
 module.exports = { problems, fail, warn, liquidFiles, read, glob, schemaOf };
 if (require.main === module) require('./doctor-part2.js');

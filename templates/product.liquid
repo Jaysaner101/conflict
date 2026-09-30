@@ -78,7 +78,7 @@
           </button>
         {%- endform -%}
 
-        <p class="note">{% if is_apparel %}Made to order, allow 5 to 8 days.{% else %}Ships in about 3 days.{% endif %} $8 flat in the US, free over $60. Canada $15.</p>
+        <p class="note">{% if is_apparel %}Made to order, allow 5 to 8 days.{% else %}Ships in {{ settings.fact_ship_time | default: 'about 3 days' | downcase }}.{% endif %} US {{ settings.fact_ship_us | default: '$8 flat, free over $60' | downcase }}. Canada {{ settings.fact_ca | default: '$15 flat' | downcase }}.</p>
 
         <a class="ul" href="/pages/custom-and-bulk">Need twelve or more with your logo? Custom orders</a>
       </div>
