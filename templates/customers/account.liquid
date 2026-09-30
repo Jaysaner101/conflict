@@ -1,4 +1,4 @@
-<div class="wrap sec">
+<div class="wrap sec pgtop">
   <div class="pghd-in" style="align-items:end">
     <div class="stack-s">
       <span class="lab"><i></i>{{ customer.email }}</span>
@@ -11,7 +11,7 @@
   </div>
 
   <div class="sec-s">
-    <h2 class="bl sm">Order history</h2>
+    <h2 class="bl xs">Order history</h2>
     {%- paginate customer.orders by 20 -%}
       {%- if customer.orders.size == 0 -%}
         <p class="copy">No orders yet.</p>
@@ -24,7 +24,7 @@
           <tbody>
             {%- for order in customer.orders -%}
               <tr>
-                <td><a class="ul" href="{{ order.customer_url }}">{{ order.name }}</a></td>
+                <td><a class="tl" href="{{ order.customer_url }}">{{ order.name }}</a></td>
                 <td>{{ order.created_at | date: '%b %d, %Y' }}</td>
                 <td>{{ order.financial_status_label }}</td>
                 <td>{{ order.fulfillment_status_label }}</td>
@@ -39,11 +39,11 @@
   </div>
 
   <div class="sec-s">
-    <h2 class="bl sm">Default address</h2>
+    <h2 class="bl xs">Default address</h2>
     {%- if customer.default_address -%}
       <p class="copy">{{ customer.default_address | format_address }}</p>
     {%- else -%}
-      <p class="copy">No address saved. <a class="ul" href="{{ routes.account_addresses_url }}">Add one</a>.</p>
+      <p class="copy">No address saved. <a class="tl" href="{{ routes.account_addresses_url }}">Add one</a>.</p>
     {%- endif -%}
   </div>
 </div>

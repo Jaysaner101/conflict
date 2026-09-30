@@ -7,7 +7,8 @@
   {% if page_description %}<meta name="description" content="{{ page_description | escape }}">{% endif %}
   <link rel="canonical" href="{{ canonical_url }}">
   <meta name="theme-color" content="{{ settings.col_bg }}">
-  {% if settings.favicon %}<link rel="icon" href="{{ settings.favicon | image_url: width: 64 }}">{% endif %}
+  <link rel="icon" href="{% if settings.favicon != blank %}{{ settings.favicon | image_url: width: 64 }}{% else %}{{ 'favicon.png' | asset_url }}{% endif %}">
+  <link rel="apple-touch-icon" href="{{ 'apple-touch-icon.png' | asset_url }}">
   <link rel="preload" href="{{ 'mona-sans.woff2' | asset_url }}" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="{{ 'base.css' | asset_url }}">
   <style>

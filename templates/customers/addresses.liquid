@@ -1,11 +1,11 @@
-<div class="wrap sec">
+<div class="wrap sec pgtop">
   <div class="stack-s">
     <span class="lab"><i></i>Account</span>
     <h1 class="bl md">Your addresses</h1>
   </div>
 
   <div class="sec-s">
-    <h2 class="bl sm">Add a new address</h2>
+    <h2 class="bl xs">Add a new address</h2>
     {%- form 'customer_address', customer.new_address -%}
       {%- if form.errors -%}<p class="note">{{ form.errors | default_errors }}</p>{%- endif -%}
       <div class="field"><label class="lab" for="naFirst">First name</label>
@@ -37,7 +37,7 @@
 
   {%- paginate customer.addresses by 10 -%}
     <div class="sec-s">
-      <h2 class="bl sm">Saved addresses</h2>
+      <h2 class="bl xs">Saved addresses</h2>
       {%- if customer.addresses.size == 0 -%}
         <p class="copy">No addresses saved yet.</p>
       {%- else -%}

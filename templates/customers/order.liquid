@@ -1,4 +1,4 @@
-<div class="wrap sec">
+<div class="wrap sec pgtop">
   <div class="stack-s">
     <span class="lab"><i></i>{{ order.created_at | date: '%b %d, %Y' }}</span>
     <h1 class="bl md">Order {{ order.name }}</h1>
@@ -16,7 +16,7 @@
         {%- for line in order.line_items -%}
           <tr>
             <td>
-              <a class="ul" href="{{ line.product.url }}">{{ line.title }}</a>
+              <a class="tl" href="{{ line.product.url }}">{{ line.title }}</a>
               {%- if line.properties.size > 0 -%}
                 {%- for p in line.properties -%}
                   {%- unless p.last == blank -%}<br><span class="lab">{{ p.first }}: {{ p.last }}</span>{%- endunless -%}
@@ -43,8 +43,8 @@
   </div>
 
   <div class="sec-s" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:24px">
-    <div><h2 class="bl sm">Billing address</h2><p class="copy">{{ order.billing_address | format_address }}</p></div>
-    <div><h2 class="bl sm">Shipping address</h2><p class="copy">{{ order.shipping_address | format_address }}</p></div>
+    <div><h2 class="bl xs">Billing address</h2><p class="copy">{{ order.billing_address | format_address }}</p></div>
+    <div><h2 class="bl xs">Shipping address</h2><p class="copy">{{ order.shipping_address | format_address }}</p></div>
   </div>
 
   <div class="btns"><a class="btn" href="{{ routes.account_url }}">Back to account</a></div>

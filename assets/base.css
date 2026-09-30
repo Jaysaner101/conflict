@@ -810,3 +810,17 @@ header.pl>.wrap[style*="padding-top:clamp(108px"]{padding-top:clamp(100px,8vw,11
   .otab tr{border-bottom:1px solid var(--line);padding:10px 0}
   .otab td{border-bottom:0;padding:4px 0}
 }
+
+/* Pages that open with plain content instead of a .pghd page header still have
+   to clear the fixed header, which .pghd does with this same top padding. */
+.pgtop{padding-top:clamp(150px,14vw,210px)}
+/* Separate consecutive form fields; .field's own gap only spaces label from input. */
+.field+.field{margin-top:16px}
+
+/* Small heading for form sub-sections; .bl.sm is a page-title size. */
+.bl.xs{font-size:clamp(22px,2vw,30px);margin-bottom:18px}
+/* Inline text link. .ul is a bordered standalone CTA and reads as a button. */
+.tl{color:var(--ink);text-decoration:underline;text-underline-offset:3px;transition:color .2s}
+.tl:hover{color:var(--hi)}
+/* Space a submit row from the last field above it. */
+.field+.btns{margin-top:20px}

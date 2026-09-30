@@ -20,7 +20,7 @@
   {%- if search.performed -%}
     {%- if search.results_count == 0 -%}
       <p class="copy">No matches for &ldquo;{{ search.terms | escape }}&rdquo;. Try a broader word, or
-        <a class="ul" href="{{ routes.all_products_collection_url }}">browse everything</a>.</p>
+        <a class="tl" href="{{ routes.all_products_collection_url }}">browse everything</a>.</p>
     {%- else -%}
       <div class="grid">
         {%- for item in search.results -%}

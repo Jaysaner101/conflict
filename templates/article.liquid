@@ -19,7 +19,7 @@
 
   {%- if blog.comments_enabled? -%}
     <div class="sec-s" id="comments">
-      <h2 class="bl sm">{{ article.comments_count }} comment{% unless article.comments_count == 1 %}s{% endunless %}</h2>
+      <h2 class="bl xs">{{ article.comments_count }} comment{% unless article.comments_count == 1 %}s{% endunless %}</h2>
       {%- for comment in article.comments -%}
         <div class="glass" style="margin-top:14px">
           <span class="lab">{{ comment.author }} &middot; {{ comment.created_at | date: '%b %d, %Y' }}</span>

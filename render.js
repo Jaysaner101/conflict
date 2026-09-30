@@ -18,6 +18,8 @@ eng.registerFilter('handle', s => String(s).toLowerCase().replace(/[^a-z0-9]+/g,
 eng.registerFilter('at_most', (a, b) => Math.min(a, b));
 eng.registerFilter('default_pagination', () => '');
 eng.registerFilter('newline_to_br', s => String(s || '').replace(/\n/g, '<br />'));
+eng.registerFilter('format_address', a => a ? [a.first_name + ' ' + a.last_name, a.company, a.address1, a.address2, a.city, a.province + ' ' + a.zip, a.country].filter(Boolean).join('<br>') : '');
+eng.registerFilter('default_errors', e => e ? '<span>' + e + '</span>' : '');
 eng.registerFilter('divided_by', (a, b) => a / b);
 eng.registerFilter('prepend', (a, b) => String(b) + String(a));
 
@@ -34,7 +36,10 @@ eng.registerTag('form', {
     const id = (this.args.match(/id:\s*'([^']+)'/) || [])[1];
     const cls = (this.args.match(/class:\s*'([^']+)'/) || [])[1];
     em.write(`<form${id ? ` id="${id}"` : ''}${cls ? ` class="${cls}"` : ''} method="post">`);
+    ctx.push({ form: { posted_successfully: false, errors: null, country: 'United States', province: 'Nebraska',
+      set_as_default_checkbox: '<input type="checkbox" name="address[default]">', address: null } });
     yield this.liquid.renderer.renderTemplates(this.tpls, ctx, em);
+    ctx.pop();
     em.write('</form>');
   }
 });
@@ -63,14 +68,69 @@ const products = [
 const menu = items => ({ links: items.map(([title, url]) => ({ title, url, active: false })) });
 const settings = JSON.parse(fs.readFileSync('config/settings_data.json')).current;
 
+
+// --- mocks for the account, search, blog and article templates ---------------
+const addr = (id, def) => ({
+  id, first_name: 'Murphy', last_name: 'Doe', company: '', address1: '114 S 13th St',
+  address2: 'Unit 4', city: 'Omaha', province: 'Nebraska', country: 'United States',
+  zip: '68102', phone: '402 555 0117', url: '/account/addresses/' + id,
+  street: '114 S 13th St'
+});
+const addresses = [addr(1), addr(2)];
+const orderLine = (title, price, qty, props) => ({
+  title, price, quantity: qty, line_price: price * qty,
+  product: { url: '/products/copville-script-can-lid' },
+  properties: props || []
+});
+const mockOrder = {
+  name: '#1042', created_at: '2026-09-14', financial_status_label: 'Paid',
+  fulfillment_status_label: 'Fulfilled', customer_url: '/account/orders/1042',
+  subtotal_price: 7400, total_price: 8200,
+  line_items: [
+    orderLine('Copville script can lid', 2200, 2, [{ first: 'Name to engrave', last: 'M. DOE' }]),
+    orderLine('Conflict tee', 3000, 1, [])
+  ],
+  shipping_methods: [{ title: 'Standard', price: 800 }],
+  tax_lines: [{ title: 'NE', rate_percentage: 5.5, price: 0 }],
+  billing_address: addresses[0], shipping_address: addresses[0]
+};
+const mockCustomer = {
+  email: 'murphy@example.com', first_name: 'Murphy',
+  orders: [mockOrder], addresses, default_address: addresses[0],
+  new_address: { id: null, country: 'United States', province: 'Nebraska' }
+};
+const article = (title, i) => ({
+  title, url: '/blogs/news/' + i, published_at: '2026-09-0' + (i + 1),
+  excerpt: 'A short standfirst for ' + title + '.',
+  excerpt_or_content: 'A short standfirst for ' + title + '.',
+  content: '<p>Body copy for ' + title + '.</p><h2>A heading</h2><p>More body copy, long enough to show the measure.</p><ul><li>One</li><li>Two</li></ul>',
+  image: null, comments_count: 0, comments: []
+});
+const articles = [article('Inside a fiber laser run', 0), article('Why the engraving does not wear off', 1), article('Custom orders, start to finish', 2)];
+
 const base = {
   shop: { name: 'Counter Culture Conflict' },
   settings,
-  routes: { root_url: '/', cart_url: '/cart', all_products_collection_url: '/collections/all' },
+  routes: { root_url: '/', cart_url: '/cart', all_products_collection_url: '/collections/all',
+    search_url: '/search', account_url: '/account', account_login_url: '/account/login',
+    account_logout_url: '/account/logout', account_register_url: '/account/register',
+    account_addresses_url: '/account/addresses' },
   request: { locale: { iso_code: 'en' } },
   cart: { item_count: 0, items: [], total_price: 0 },
-  linklists: {}, canonical_url: '/', page_title: 'Counter Culture Conflict', page_description: '',
+  linklists: {
+    'main-menu': menu([['Home','/'],['Shop','/collections/all'],['Apparel','/collections/apparel'],['Custom and bulk','/pages/custom-and-bulk'],['The work','/pages/the-work'],['The show','/pages/the-show'],['Murphy','/pages/murphy']]),
+    'footer': menu([['Custom and bulk','/pages/custom-and-bulk'],['Search','/search']]),
+    'footer-shop': menu([['Can lids','/collections/can-lids'],['Knives','/collections/knives'],['Tumblers','/collections/tumblers'],['Duty gear','/collections/duty-gear'],['Apparel','/collections/apparel']]),
+    'footer-about': menu([['Murphy','/pages/murphy'],['The show','/pages/the-show'],['The work','/pages/the-work'],['Allies','/pages/allies']]),
+  }, canonical_url: '/', page_title: 'Counter Culture Conflict', page_description: '',
   content_for_header: '', collections: [], paginate: { pages: 1 }, form: { posted_successfully: false },
+  customer: mockCustomer, order: mockOrder,
+  blog: { title: 'From the bench', url: '/blogs/news', articles, all_tags: ['process', 'gear'], comments_enabled: false },
+  article: articles[0],
+  page: { title: 'Shipping and returns', content: '<p>Orders ship in about three days.</p><h2>Returns</h2><p>Engraved pieces are made to order.</p>' },
+  search: { performed: true, terms: 'can lid', results_count: 2, results: products.slice(0, 2) },
+  country_option_tags: '<option value="United States">United States</option><option value="Canada">Canada</option>',
+  current_tags: null,
   product: products[0], collection: { title: 'The shop', handle: 'all', products, products_count: products.length, description: '', metafields: { custom: {} } },
 };
 
@@ -129,11 +189,16 @@ async function renderTemplate(name) {
 (async () => {
   const out = 'preview'; fs.mkdirSync(out, { recursive: true });
   const targets = process.argv.slice(2).length ? process.argv.slice(2)
-    : ['index', 'product', 'collection', 'cart', 'page.custom-and-bulk', 'page.work', 'page.show', 'page.murphy', 'page.allies'];
+    : ['index', 'product', 'collection', 'cart', 'page.custom-and-bulk', 'page.work', 'page.show', 'page.murphy', 'page.allies',
+       '404', 'search', 'page', 'blog', 'article', 'password', 'list-collections',
+       'customers/account', 'customers/addresses', 'customers/login', 'customers/register',
+       'customers/order', 'customers/reset_password', 'customers/activate_account'];
   for (const t of targets) {
     try {
       const html = await renderTemplate(t);
-      fs.writeFileSync(path.join(out, t + '.html'), html);
+      const dest = path.join(out, t + '.html');
+      fs.mkdirSync(path.dirname(dest), { recursive: true });
+      fs.writeFileSync(dest, html);
       console.log('ok   ', t, html.length, 'bytes');
     } catch (e) { console.log('FAIL ', t, '->', String(e.message).slice(0, 200)); }
   }
