@@ -1,1 +1,32 @@
-{ "current": { "col_bg": "#000000", "col_ink": "#eceeef", "col_body": "#9aa0a5", "col_hi": "#39FF14", "col_s1": "#0a0b0c" } }
+{
+  "current": {
+    "col_bg": "#000000",
+    "col_ink": "#eceeef",
+    "col_body": "#9aa0a5",
+    "col_hi": "#39FF14",
+    "col_s1": "#0a0b0c",
+    "fact_ship_time": "About 3 days",
+    "fact_ship_us": "$8 flat, free over $60",
+    "fact_name": "$5, about a week",
+    "fact_ca": "$15 flat",
+    "sections": {
+      "header": { "type": "header", "settings": { "menu": "main-menu" } },
+      "footer": {
+        "type": "footer",
+        "blocks": {
+          "s1": { "type": "social", "settings": { "name": "Instagram" } },
+          "s2": { "type": "social", "settings": { "name": "Facebook" } },
+          "s3": { "type": "social", "settings": { "name": "YouTube" } }
+        },
+        "block_order": ["s1", "s2", "s3"],
+        "settings": {
+          "blurb": "New designs, restocks and the apparel release. Occasional, and nothing else.",
+          "place": "Omaha, Nebraska.",
+          "title_1": "Shop", "menu_1": "footer-shop",
+          "title_2": "Orders", "menu_2": "footer",
+          "title_3": "About", "menu_3": "footer-about"
+        }
+      }
+    }
+  }
+}
