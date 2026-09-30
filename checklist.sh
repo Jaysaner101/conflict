@@ -46,5 +46,32 @@ else
   echo "  FAIL  liquid parse errors:"; sed 's/^/        /' /tmp/lint.out; FAILED=1
 fi
 
+# Shopify silently replaces settings_schema.json with [] if it fails validation
+# on import, so check the limits it enforces before shipping.
+SCHEMA_ERR=$(python3 - <<'PYEOF'
+import json
+d = json.load(open('config/settings_schema.json'))
+errs = []
+if not isinstance(d, list) or not d: errs.append('settings_schema.json is empty')
+info = d[0] if d else {}
+if info.get('name') != 'theme_info': errs.append('first group must be theme_info')
+for k, lim in (('theme_name', 25), ('theme_author', 25), ('theme_version', 25)):
+    v = info.get(k, '')
+    if len(v) > lim: errs.append(f'{k} is {len(v)} chars, max {lim}: "{v}"')
+seen = set()
+for g in d:
+    for st in g.get('settings', []):
+        i = st.get('id')
+        if i in seen: errs.append(f'duplicate setting id: {i}')
+        seen.add(i)
+print('; '.join(errs))
+PYEOF
+)
+if [ -z "$SCHEMA_ERR" ]; then
+  echo "  ok    settings_schema passes Shopify import limits"
+else
+  echo "  FAIL  settings_schema: $SCHEMA_ERR"; FAILED=1
+fi
+
 [ "$fail" = "0" ] && echo "RESULT: complete" || echo "RESULT: INCOMPLETE"
 exit $fail
