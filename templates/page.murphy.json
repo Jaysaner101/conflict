@@ -1,0 +1,47 @@
+{
+  "sections": {
+    "hero": {
+      "type": "person-hero",
+      "blocks": {
+        "s1": { "type": "social", "settings": { "name": "Instagram" } },
+        "s2": { "type": "social", "settings": { "name": "Facebook" } },
+        "s3": { "type": "social", "settings": { "name": "YouTube" } }
+      },
+      "block_order": ["s1", "s2", "s3"],
+      "settings": { "place": "Omaha, Nebraska", "heading": "Murphy", "lede": "Laser engraver, Omaha, Nebraska. Host of Counter Culture Conflict.", "text": "Every engraved item in this store was set up, run and checked by Murphy himself on an industrial fiber laser, and when the machine is off he is on the mic.", "clip": "v-murph.mp4", "caption": "Murphy, off shift", "cta": "Shop his work", "cta2": "Watch the show", "url2": "https://www.youtube.com/watch?v=VQcuiECd4tk&list=PLXMvRz65T8SE" }
+    },
+    "chapters": {
+      "type": "story-chapters",
+      "blocks": {
+        "c1": { "type": "chapter", "settings": { "heading": "The machine", "text": "An industrial fiber laser. It does not print on the surface, it cuts a deep engraving into the metal and it is permanent.", "clip": "v-lid.mp4" } },
+        "c2": { "type": "chapter", "settings": { "heading": "The shop", "text": "One machine, one workshop in Omaha. It began with engraving for the people around him and became a store." } },
+        "c3": { "type": "chapter", "settings": { "heading": "On the mic", "text": "Counter Culture Conflict, on the Counter Culture Inc network." } }
+      },
+      "block_order": ["c1", "c2", "c3"],
+      "settings": {}
+    },
+    "bio": {
+      "type": "about-split",
+      "blocks": {
+        "f1": { "type": "fact", "settings": { "label": "Based", "value": "Omaha, Nebraska" } },
+        "f2": { "type": "fact", "settings": { "label": "Machine", "value": "Industrial fiber laser" } },
+        "f3": { "type": "fact", "settings": { "label": "Works in", "value": "Aluminum, steel, titanium finishes, powder coat" } },
+        "f4": { "type": "fact", "settings": { "label": "On air", "value": "Counter Culture Conflict" } },
+        "f5": { "type": "fact", "settings": { "label": "Contact", "value": "[email placeholder]" } }
+      },
+      "block_order": ["f1", "f2", "f3", "f4", "f5"],
+      "settings": { "eyebrow": "About Murphy", "lede": "The short version", "text": "<p>[Placeholder bio] Murphy has spent his spare hours in a workshop for years. What started as engraving his own gear turned into requests from the people around him: a name on a gift, a crest on a retirement piece, a logo for a local team.</p><p>[Placeholder] Today he runs an industrial fiber laser out of his own shop in Omaha. He takes on the jobs he can stand behind, does every one of them himself, and will tell you straight if your idea will not engrave well.</p><p>[Placeholder] When the machine is off he hosts Counter Culture Conflict on the Counter Culture Inc network.</p>" }
+    },
+    "strip": {
+      "type": "media-strip",
+      "blocks": {
+        "m1": { "type": "item", "settings": { "clip": "v-murph-range.mp4" } },
+        "m2": { "type": "item", "settings": { "clip": "v-plaque.mp4" } },
+        "m3": { "type": "item", "settings": { "clip": "v-murph2.mp4" } }
+      },
+      "block_order": ["m1", "m2", "m3"],
+      "settings": {}
+    }
+  },
+  "order": ["hero", "chapters", "bio", "strip"]
+}

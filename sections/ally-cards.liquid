@@ -1,0 +1,29 @@
+<div class="ally-cards" style="margin-top:2px">
+  {%- for block in section.blocks -%}
+    <a class="acard" href="{{ block.settings.url | default: '#' }}" {% if block.settings.url != blank %}target="_blank" rel="noopener"{% endif %} {{ block.shopify_attributes }}>
+      {%- if block.settings.logo -%}<img src="{{ block.settings.logo | image_url: width: 500 }}" alt="{{ block.settings.name | escape }}">{%- endif -%}
+      <div class="stack-s">
+        <span class="lab"><i></i>{{ block.settings.eyebrow }}</span>
+        <h2 class="h2">{{ block.settings.name }}</h2>
+        <p class="copy">{{ block.settings.text }}</p>
+        <span class="ul" style="justify-self:start">{{ block.settings.cta }}</span>
+      </div>
+    </a>
+  {%- endfor -%}
+</div>
+{% schema %}
+{
+  "name": "Ally cards",
+  "blocks": [
+    { "type": "ally", "name": "Ally", "settings": [
+      { "type": "image_picker", "id": "logo", "label": "Logo" },
+      { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "The network" },
+      { "type": "text", "id": "name", "label": "Name", "default": "Counter Culture Inc" },
+      { "type": "textarea", "id": "text", "label": "Text" },
+      { "type": "text", "id": "cta", "label": "Link label", "default": "Visit" },
+      { "type": "url", "id": "url", "label": "Link" }
+    ]}
+  ],
+  "presets": [{ "name": "Ally cards", "blocks": [{"type":"ally"},{"type":"ally"}] }]
+}
+{% endschema %}

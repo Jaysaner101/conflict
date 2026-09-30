@@ -1,0 +1,17 @@
+{
+  "sections": {
+    "head": { "type": "page-header", "settings": { "eyebrow": "Who this shop runs with", "heading": "Allies", "text": "<p>The shows, the brand and the studio around Murphy. If you like what he does, start here.</p>" } },
+    "cards": {
+      "type": "ally-cards",
+      "blocks": {
+        "a1": { "type": "ally", "settings": { "eyebrow": "Live Mon to Fri, 1PM EST", "name": "The Antihero Broadcast", "text": "Aggressive. Raw. Hilarious. In-your-face news and entertainment.", "cta": "Watch live on YouTube", "url": "https://www.youtube.com/@theantiherobroadcast/streams" } },
+        "a2": { "type": "ally", "settings": { "eyebrow": "The network", "name": "Counter Culture Inc", "text": "A direct dose of truth and entertainment, counter to the narrative you have been fed.", "cta": "Watch on YouTube", "url": "https://www.youtube.com/@CounterCultureInc/streams" } },
+        "a3": { "type": "ally", "settings": { "eyebrow": "On the bench every week", "name": "Copville", "text": "The script on half the lids and blades in this shop.", "cta": "Visit" } },
+        "a4": { "type": "ally", "settings": { "eyebrow": "Built this site", "name": "Counter Culture Inc Studios", "text": "Websites, apps, stores and title sequences, including the one for Conflict.", "cta": "ccincstudios.com", "url": "https://ccincstudios.com" } }
+      },
+      "block_order": ["a1", "a2", "a3", "a4"],
+      "settings": {}
+    }
+  },
+  "order": ["head", "cards"]
+}

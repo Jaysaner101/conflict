@@ -1,1 +1,38 @@
-<div class="wrap sec"><h1 class="bl sm">cart</h1></div>
+<div class="wrap" style="padding-top:clamp(112px,9.5vw,144px);padding-bottom:var(--gap)">
+  <h1 class="bl md">Cart</h1>
+  {%- if cart.item_count == 0 -%}
+    <p class="copy" style="margin-top:20px">Your cart is empty.</p>
+    <div class="btns"><a class="btn solid" href="{{ routes.all_products_collection_url }}">Shop the store</a></div>
+  {%- else -%}
+    {%- form 'cart', cart -%}
+      <div class="lines" style="margin-top:24px">
+        {%- for item in cart.items -%}
+          <div class="line">
+            {%- if item.image -%}<img src="{{ item.image | image_url: width: 200 }}" alt="{{ item.title | escape }}">{%- endif -%}
+            <div>
+              <a class="n" href="{{ item.url }}">{{ item.product.title }}</a>
+              {%- unless item.product.has_only_default_variant -%}<div class="note">{{ item.variant.title }}</div>{%- endunless -%}
+              {%- for p in item.properties -%}
+                {%- unless p.last == blank -%}<div class="note">{{ p.first }}: {{ p.last }}</div>{%- endunless -%}
+              {%- endfor -%}
+              <div class="note">
+                <label class="visually-hidden" for="q{{ forloop.index }}">Quantity</label>
+                <input class="inp" id="q{{ forloop.index }}" type="number" min="0" name="updates[]" value="{{ item.quantity }}" style="width:70px">
+                <a class="ul" href="{{ item.url_to_remove }}">Remove</a>
+              </div>
+            </div>
+            <div class="p">{{ item.final_line_price | money }}</div>
+          </div>
+        {%- endfor -%}
+      </div>
+      <div class="dr-f" style="margin-top:26px">
+        <div class="sub"><span>Subtotal</span><b>{{ cart.total_price | money }}</b></div>
+        <p class="note">Shipping and tax calculated at checkout. $8 flat in the US, free over $60. Canada $15.</p>
+        <div class="btns">
+          <button class="btn" type="submit" name="update">Update cart</button>
+          <button class="btn solid" type="submit" name="checkout">Checkout</button>
+        </div>
+      </div>
+    {%- endform -%}
+  {%- endif -%}
+</div>

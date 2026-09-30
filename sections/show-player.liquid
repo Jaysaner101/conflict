@@ -1,0 +1,45 @@
+{%- liquid
+  assign clip = section.settings.clip
+  if clip != blank
+    unless clip contains 'http'
+      assign clip = clip | file_url
+    endunless
+  endif
+-%}
+<header class="pl ovf" {% if section.settings.bg %}style="background-image:url({{ section.settings.bg | image_url: width: 2200 }})"{% endif %}>
+  <div class="wrap" style="padding-top:clamp(108px,9vw,136px);padding-bottom:clamp(40px,5vw,80px)">
+    <div class="sh showhd">
+      <div class="stack-s"><span class="lab"><i></i>{{ section.settings.eyebrow }}</span><h1 class="bl md">{{ section.settings.heading }}</h1></div>
+      {%- if section.settings.url != blank -%}
+        <a class="btn solid" href="{{ section.settings.url }}" target="_blank" rel="noopener">
+          <svg class="ic yt" viewBox="0 0 28 20" aria-hidden="true"><rect width="28" height="20" rx="5"/><path d="M11 5.5v9l8-4.5z" fill="#fff"/></svg>{{ section.settings.cta }}</a>
+      {%- endif -%}
+    </div>
+    <div class="player" id="showPlayer">
+      <video class="manual" {% if clip != blank %}src="{{ clip }}"{% endif %} {% if section.settings.poster %}poster="{{ section.settings.poster | image_url: width: 1600 }}"{% endif %} preload="metadata" playsinline></video>
+      <button class="pl-big" type="button" aria-label="Play"><svg viewBox="0 0 24 24"><path d="M6 4l14 8-14 8z"/></svg></button>
+      <div class="pl-bar">
+        <button class="xb" data-pp type="button">Play</button>
+        <div class="pl-seek" role="slider" aria-label="Seek"><i></i></div>
+        <span class="pl-time">0:00 / 0:00</span>
+        <button class="xb" data-mute type="button">Sound on</button>
+        <button class="xb" data-fs type="button">Fullscreen</button>
+      </div>
+    </div>
+  </div>
+</header>
+{% schema %}
+{
+  "name": "Show player",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Murphy's show, on the Counter Culture Inc network" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Counter Culture Conflict" },
+    { "type": "text", "id": "clip", "label": "Video file", "default": "conflict-intro.mp4" },
+    { "type": "image_picker", "id": "poster", "label": "Poster image" },
+    { "type": "image_picker", "id": "bg", "label": "Background image" },
+    { "type": "text", "id": "cta", "label": "Button label", "default": "Watch every episode" },
+    { "type": "url", "id": "url", "label": "Button link" }
+  ],
+  "presets": [{ "name": "Show player" }]
+}
+{% endschema %}

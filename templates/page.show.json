@@ -1,0 +1,26 @@
+{
+  "sections": {
+    "player": { "type": "show-player", "settings": { "eyebrow": "Murphy's show, on the Counter Culture Inc network", "heading": "Counter Culture Conflict", "clip": "conflict-intro.mp4", "cta": "Watch every episode", "url": "https://www.youtube.com/watch?v=VQcuiECd4tk&list=PLXMvRz65T8SE" } },
+    "about": {
+      "type": "about-split",
+      "blocks": {
+        "f1": { "type": "fact", "settings": { "label": "Host", "value": "Murphy" } },
+        "f2": { "type": "fact", "settings": { "label": "Covers", "value": "World conflict, unrest, policing, politics" } },
+        "f3": { "type": "fact", "settings": { "label": "Streams", "value": "Live on the Counter Culture Inc channel" } },
+        "f4": { "type": "fact", "settings": { "label": "Replays", "value": "Every episode in the Conflict playlist" } }
+      },
+      "block_order": ["f1", "f2", "f3", "f4"],
+      "settings": { "eyebrow": "About the show", "lede": "Counter Culture Conflict is Murphy's take on the fights shaping the world: wars, unrest, policing and the politics behind them.", "text": "<p>Each episode takes the stories the big outlets smooth over, plays the footage, and says plainly what he thinks is going on. Global perspectives, unfiltered analysis.</p>", "cta": "Watch the playlist", "url": "https://www.youtube.com/watch?v=VQcuiECd4tk&list=PLXMvRz65T8SE", "cta2": "Catch it live", "url2": "https://www.youtube.com/@CounterCultureInc/streams" }
+    },
+    "network": {
+      "type": "rich-banner",
+      "blocks": {
+        "b1": { "type": "show", "settings": { "tint": "#dc281e", "name": "Counter Culture Inc", "tagline": "A direct dose of truth and entertainment, counter to the narrative you have been fed.", "text": "The independent network that produces Counter Culture Conflict and The Antihero Broadcast. No corporate owner and no script. Every show streams live on the network channel, and the replays stay up.", "fact1": "Live streams and replays", "fact2": "Home of Conflict and Antihero", "cta": "Watch the network", "url": "https://www.youtube.com/@CounterCultureInc/streams", "cta2": "Subscribe", "url2": "https://www.youtube.com/@CounterCultureInc?sub_confirmation=1" } },
+        "b2": { "type": "show", "settings": { "tint": "#96ff1e", "name": "The Antihero Broadcast", "tagline": "Aggressive. Raw. Hilarious. In-your-face news and entertainment.", "text": "The flagship show of the network: a live weekday broadcast that takes the day's news and argues it out on air, with the chat joining in.", "fact1": "Live Mon to Fri, 1PM EST", "fact2": "Orlando, Florida", "cta": "Watch live on YouTube", "url": "https://www.youtube.com/@theantiherobroadcast/streams", "cta2": "Subscribe", "url2": "https://www.youtube.com/@theantiherobroadcast?sub_confirmation=1" } }
+      },
+      "block_order": ["b1", "b2"],
+      "settings": { "eyebrow": "Where Conflict lives", "heading": "The network", "text": "Conflict is one show on an independent network. Here is who is behind it and where to watch." }
+    }
+  },
+  "order": ["player", "about", "network"]
+}

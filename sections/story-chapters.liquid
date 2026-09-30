@@ -1,0 +1,39 @@
+<div class="chap">
+  {%- for block in section.blocks -%}
+    {%- liquid
+      assign clip = block.settings.clip
+      if clip != blank
+        unless clip contains 'http'
+          assign clip = clip | file_url
+        endunless
+      endif
+    -%}
+    <div class="tile" {{ block.shopify_attributes }}>
+      {%- if clip != blank -%}
+        <video src="{{ clip }}" {% if block.settings.image %}poster="{{ block.settings.image | image_url: width: 1000 }}"{% endif %} muted loop playsinline></video>
+      {%- elsif block.settings.image -%}
+        <img src="{{ block.settings.image | image_url: width: 1200 }}" alt="" loading="lazy">
+      {%- endif -%}
+      <div class="stack-s">
+        <span class="num">{{ forloop.index | prepend: '0' | slice: -2, 2 }}</span>
+        <h2 class="h2">{{ block.settings.heading }}</h2>
+        <p class="copy">{{ block.settings.text }}</p>
+      </div>
+    </div>
+  {%- endfor -%}
+</div>
+{% schema %}
+{
+  "name": "Story chapters",
+  "max_blocks": 4,
+  "blocks": [
+    { "type": "chapter", "name": "Chapter", "settings": [
+      { "type": "image_picker", "id": "image", "label": "Image" },
+      { "type": "text", "id": "clip", "label": "Video file" },
+      { "type": "text", "id": "heading", "label": "Heading", "default": "The machine" },
+      { "type": "textarea", "id": "text", "label": "Text", "default": "An industrial fiber laser. It does not print on the surface, it cuts a deep engraving into the metal and it is permanent." }
+    ]}
+  ],
+  "presets": [{ "name": "Story chapters", "blocks": [{"type":"chapter"},{"type":"chapter"},{"type":"chapter"}] }]
+}
+{% endschema %}

@@ -1,0 +1,37 @@
+<div class="wrap sec-s about-show">
+  <div class="stack">
+    <span class="lab"><i></i>{{ section.settings.eyebrow }}</span>
+    {%- if section.settings.lede != blank -%}<p class="big" style="max-width:34ch">{{ section.settings.lede }}</p>{%- endif -%}
+    <div class="copy" style="max-width:62ch">{{ section.settings.text }}</div>
+    <div class="btns">
+      {%- if section.settings.url != blank -%}<a class="btn solid" href="{{ section.settings.url }}" target="_blank" rel="noopener">{{ section.settings.cta }}</a>{%- endif -%}
+      {%- if section.settings.url2 != blank -%}<a class="btn" href="{{ section.settings.url2 }}" target="_blank" rel="noopener">{{ section.settings.cta2 }}</a>{%- endif -%}
+    </div>
+  </div>
+  <dl class="dl">
+    {%- for block in section.blocks -%}
+      <div {{ block.shopify_attributes }}><dt class="lab">{{ block.settings.label }}</dt><dd>{{ block.settings.value }}</dd></div>
+    {%- endfor -%}
+  </dl>
+</div>
+{% schema %}
+{
+  "name": "About with facts",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "About the show" },
+    { "type": "text", "id": "lede", "label": "Lede" },
+    { "type": "richtext", "id": "text", "label": "Text" },
+    { "type": "text", "id": "cta", "label": "Button label" },
+    { "type": "url", "id": "url", "label": "Button link" },
+    { "type": "text", "id": "cta2", "label": "Second button label" },
+    { "type": "url", "id": "url2", "label": "Second button link" }
+  ],
+  "blocks": [
+    { "type": "fact", "name": "Fact", "settings": [
+      { "type": "text", "id": "label", "label": "Label", "default": "Host" },
+      { "type": "text", "id": "value", "label": "Value", "default": "Murphy" }
+    ]}
+  ],
+  "presets": [{ "name": "About with facts", "blocks": [{"type":"fact"},{"type":"fact"},{"type":"fact"}] }]
+}
+{% endschema %}

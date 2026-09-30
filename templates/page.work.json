@@ -1,0 +1,18 @@
+{
+  "sections": {
+    "head": { "type": "page-header", "settings": { "eyebrow": "What has crossed the machine", "heading": "The work", "text": "<p>A record of what has crossed the machine: engraving for businesses, teams, departments, schools and individuals. Pick a category below, or read how a piece gets made.</p>" } },
+    "gallery": { "type": "work-gallery", "settings": { "categories": "Firearms, Lids and knives, Gifts and awards, One offs" } },
+    "process": {
+      "type": "steps",
+      "blocks": {
+        "s1": { "type": "step", "settings": { "title": "The artwork", "text": "Your logo or one of his designs is cleaned up and sized to the item." } },
+        "s2": { "type": "step", "settings": { "title": "The setup", "text": "The item is squared on the bed and the red dot traces the outline before the laser fires." } },
+        "s3": { "type": "step", "settings": { "title": "The pass", "text": "The industrial fiber laser cuts a deep, permanent engraving into the metal." } },
+        "s4": { "type": "step", "settings": { "title": "The check", "text": "Cleaned, inspected and packed by the same hands." } }
+      },
+      "block_order": ["s1", "s2", "s3", "s4"],
+      "settings": { "heading": "How a piece gets made", "note": "One pair of hands, start to finish" }
+    }
+  },
+  "order": ["head", "gallery", "process"]
+}

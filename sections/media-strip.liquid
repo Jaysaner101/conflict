@@ -1,0 +1,30 @@
+<div class="work" style="grid-template-columns:repeat({{ section.blocks.size | at_most: 4 }},1fr)">
+  {%- for block in section.blocks -%}
+    {%- liquid
+      assign clip = block.settings.clip
+      if clip != blank
+        unless clip contains 'http'
+          assign clip = clip | file_url
+        endunless
+      endif
+    -%}
+    <div class="wk" style="cursor:default" {{ block.shopify_attributes }}>
+      {%- if clip != blank -%}<video src="{{ clip }}" {% if block.settings.image %}poster="{{ block.settings.image | image_url: width: 800 }}"{% endif %} muted loop playsinline></video>
+      {%- elsif block.settings.image -%}<img src="{{ block.settings.image | image_url: width: 900 }}" alt="{{ block.settings.alt | escape }}" loading="lazy">{%- endif -%}
+    </div>
+  {%- endfor -%}
+</div>
+{% schema %}
+{
+  "name": "Media strip",
+  "max_blocks": 4,
+  "blocks": [
+    { "type": "item", "name": "Item", "settings": [
+      { "type": "image_picker", "id": "image", "label": "Image" },
+      { "type": "text", "id": "clip", "label": "Video file" },
+      { "type": "text", "id": "alt", "label": "Alt text" }
+    ]}
+  ],
+  "presets": [{ "name": "Media strip", "blocks": [{"type":"item"},{"type":"item"},{"type":"item"}] }]
+}
+{% endschema %}
