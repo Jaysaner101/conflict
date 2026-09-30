@@ -1,0 +1,901 @@
+[
+ {
+  "handle": "lid-folder-set",
+  "title": "Lid and folder set",
+  "descriptionHtml": "<p>The Copville script lid and the oil slick folder, sold together. The set clears the free shipping threshold on its own.</p>",
+  "productType": "Can lid",
+  "vendor": "Counter Culture Conflict",
+  "status": "ACTIVE",
+  "tags": [
+   "lids",
+   "ships-free"
+  ],
+  "files": [
+   {
+    "id": "gid://shopify/MediaImage/73595366211924",
+    "alt": "Lid and folder set"
+   },
+   {
+    "id": "gid://shopify/MediaImage/73595360870740",
+    "alt": "Lid and folder set"
+   },
+   {
+    "id": "gid://shopify/MediaImage/73595360706900",
+    "alt": "Lid and folder set"
+   }
+  ],
+  "metafields": [
+   {
+    "namespace": "custom",
+    "key": "material",
+    "type": "single_line_text_field",
+    "value": "Anodized aluminum, titanium finish"
+   }
+  ],
+  "seo": {
+   "title": "Lid and folder set | Counter Culture Conflict",
+   "description": "The Copville script lid and the oil slick folder, sold together. The set clears the free shipping threshold on its own."
+  },
+  "productOptions": [
+   {
+    "name": "Title",
+    "values": [
+     {
+      "name": "Default Title"
+     }
+    ]
+   }
+  ],
+  "variants": [
+   {
+    "optionValues": [
+     {
+      "optionName": "Title",
+      "name": "Default Title"
+     }
+    ],
+    "price": "62",
+    "sku": "lid-folder-set",
+    "inventoryItem": {
+     "tracked": false
+    },
+    "inventoryPolicy": "CONTINUE",
+    "taxable": true
+   }
+  ]
+ },
+ {
+  "handle": "copville-script-lid",
+  "title": "Copville script can lid",
+  "descriptionHtml": "<p>Black anodized aluminum lid. The Copville script is engraved deep through the anodizing into bare metal, so it will not wear off. Fits standard cans.</p>",
+  "productType": "Can lid",
+  "vendor": "Counter Culture Conflict",
+  "status": "ACTIVE",
+  "tags": [
+   "lids"
+  ],
+  "files": [
+   {
+    "id": "gid://shopify/MediaImage/73595360870740",
+    "alt": "Copville script can lid"
+   },
+   {
+    "id": "gid://shopify/MediaImage/73595366211924",
+    "alt": "Copville script can lid"
+   }
+  ],
+  "metafields": [
+   {
+    "namespace": "custom",
+    "key": "material",
+    "type": "single_line_text_field",
+    "value": "Anodized aluminum"
+   }
+  ],
+  "seo": {
+   "title": "Copville script can lid | Counter Culture Conflict",
+   "description": "Black anodized aluminum lid. The Copville script is engraved deep through the anodizing into bare metal, so it will not wear off. Fits standard cans."
+  },
+  "productOptions": [
+   {
+    "name": "Title",
+    "values": [
+     {
+      "name": "Default Title"
+     }
+    ]
+   }
+  ],
+  "variants": [
+   {
+    "optionValues": [
+     {
+      "optionName": "Title",
+      "name": "Default Title"
+     }
+    ],
+    "price": "28",
+    "sku": "copville-script-lid",
+    "inventoryItem": {
+     "tracked": false
+    },
+    "inventoryPolicy": "CONTINUE",
+    "taxable": true
+   }
+  ]
+ },
+ {
+  "handle": "tumbler-30",
+  "title": "30 oz tumbler",
+  "descriptionHtml": "<p>Powder coated 30 oz tumbler, engraved deep through the coating into the stainless underneath. Choose a genuine YETI or a quality aftermarket blank.</p>",
+  "productType": "Tumbler",
+  "vendor": "Counter Culture Conflict",
+  "status": "ACTIVE",
+  "tags": [
+   "drinkware"
+  ],
+  "files": [
+   {
+    "id": "gid://shopify/MediaImage/73595366441300",
+    "alt": "30 oz tumbler"
+   }
+  ],
+  "metafields": [
+   {
+    "namespace": "custom",
+    "key": "material",
+    "type": "single_line_text_field",
+    "value": "Powder coat on stainless"
+   }
+  ],
+  "seo": {
+   "title": "30 oz tumbler | Counter Culture Conflict",
+   "description": "Powder coated 30 oz tumbler, engraved deep through the coating into the stainless underneath. Choose a genuine YETI or a quality aftermarket blank."
+  },
+  "productOptions": [
+   {
+    "name": "Blank",
+    "values": [
+     {
+      "name": "Aftermarket"
+     },
+     {
+      "name": "Genuine YETI"
+     }
+    ]
+   }
+  ],
+  "variants": [
+   {
+    "optionValues": [
+     {
+      "optionName": "Blank",
+      "name": "Aftermarket"
+     }
+    ],
+    "price": "34",
+    "position": 1,
+    "sku": "tumbler-30-aftermarket",
+    "inventoryItem": {
+     "tracked": false
+    },
+    "inventoryPolicy": "CONTINUE",
+    "taxable": true
+   },
+   {
+    "optionValues": [
+     {
+      "optionName": "Blank",
+      "name": "Genuine YETI"
+     }
+    ],
+    "price": "62",
+    "position": 2,
+    "sku": "tumbler-30-genuine-yeti",
+    "inventoryItem": {
+     "tracked": false
+    },
+    "inventoryPolicy": "CONTINUE",
+    "taxable": true
+   }
+  ]
+ },
+ {
+  "handle": "ammo-can",
+  "title": "Engraved ammo can",
+  "descriptionHtml": "<p>Steel .50 cal can engraved with a crest and a name. Made for retirements, graduations and awards.</p>",
+  "productType": "Duty gear",
+  "vendor": "Counter Culture Conflict",
+  "status": "ACTIVE",
+  "tags": [
+   "duty"
+  ],
+  "files": [
+   {
+    "id": "gid://shopify/MediaImage/73595360411988",
+    "alt": "Engraved ammo can"
+   },
+   {
+    "id": "gid://shopify/MediaImage/73595360444756",
+    "alt": "Engraved ammo can"
+   }
+  ],
+  "metafields": [
+   {
+    "namespace": "custom",
+    "key": "material",
+    "type": "single_line_text_field",
+    "value": "Painted steel"
+   }
+  ],
+  "seo": {
+   "title": "Engraved ammo can | Counter Culture Conflict",
+   "description": "Steel .50 cal can engraved with a crest and a name. Made for retirements, graduations and awards."
+  },
+  "productOptions": [
+   {
+    "name": "Title",
+    "values": [
+     {
+      "name": "Default Title"
+     }
+    ]
+   }
+  ],
+  "variants": [
+   {
+    "optionValues": [
+     {
+      "optionName": "Title",
+      "name": "Default Title"
+     }
+    ],
+    "price": "68",
+    "sku": "ammo-can",
+    "inventoryItem": {
+     "tracked": false
+    },
+    "inventoryPolicy": "CONTINUE",
+    "taxable": true
+   }
+  ]
+ },
+ {
+  "handle": "oil-slick-folder",
+  "title": "Oil slick folder",
+  "descriptionHtml": "<p>Folding knife in a rainbow titanium finish. The laser cuts through the coating into the steel, leaving a bright silver engraving against the colour.</p>",
+  "productType": "Knife",
+  "vendor": "Counter Culture Conflict",
+  "status": "ACTIVE",
+  "tags": [
+   "knives"
+  ],
+  "files": [
+   {
+    "id": "gid://shopify/MediaImage/73595360674132",
+    "alt": "Oil slick folder"
+   },
+   {
+    "id": "gid://shopify/MediaImage/73595360706900",
+    "alt": "Oil slick folder"
+   }
+  ],
+  "metafields": [
+   {
+    "namespace": "custom",
+    "key": "material",
+    "type": "single_line_text_field",
+    "value": "Titanium finish steel"
+   }
+  ],
+  "seo": {
+   "title": "Oil slick folder | Counter Culture Conflict",
+   "description": "Folding knife in a rainbow titanium finish. The laser cuts through the coating into the steel, leaving a bright silver engraving against the colour."
+  },
+  "productOptions": [
+   {
+    "name": "Title",
+    "values": [
+     {
+      "name": "Default Title"
+     }
+    ]
+   }
+  ],
+  "variants": [
+   {
+    "optionValues": [
+     {
+      "optionName": "Title",
+      "name": "Default Title"
+     }
+    ],
+    "price": "38",
+    "sku": "oil-slick-folder",
+    "inventoryItem": {
+     "tracked": false
+    },
+    "inventoryPolicy": "CONTINUE",
+    "taxable": true
+   }
+  ]
+ },
+ {
+  "handle": "color-lids",
+  "title": "Copville lid, anodized colours",
+  "descriptionHtml": "<p>The Copville script lid in four anodized colours.</p>",
+  "productType": "Can lid",
+  "vendor": "Counter Culture Conflict",
+  "status": "ACTIVE",
+  "tags": [
+   "lids"
+  ],
+  "files": [
+   {
+    "id": "gid://shopify/MediaImage/73595360837972",
+    "alt": "Copville lid, anodized colours"
+   }
+  ],
+  "metafields": [
+   {
+    "namespace": "custom",
+    "key": "material",
+    "type": "single_line_text_field",
+    "value": "Anodized aluminum"
+   }
+  ],
+  "seo": {
+   "title": "Copville lid, anodized colours | Counter Culture Conflict",
+   "description": "The Copville script lid in four anodized colours."
+  },
+  "productOptions": [
+   {
+    "name": "Colour",
+    "values": [
+     {
+      "name": "Black"
+     },
+     {
+      "name": "Red"
+     },
+     {
+      "name": "Blue"
+     },
+     {
+      "name": "Pink"
+     }
+    ]
+   }
+  ],
+  "variants": [
+   {
+    "optionValues": [
+     {
+      "optionName": "Colour",
+      "name": "Black"
+     }
+    ],
+    "price": "30",
+    "position": 1,
+    "sku": "color-lids-black",
+    "inventoryItem": {
+     "tracked": false
+    },
+    "inventoryPolicy": "CONTINUE",
+    "taxable": true
+   },
+   {
+    "optionValues": [
+     {
+      "optionName": "Colour",
+      "name": "Red"
+     }
+    ],
+    "price": "30",
+    "position": 2,
+    "sku": "color-lids-red",
+    "inventoryItem": {
+     "tracked": false
+    },
+    "inventoryPolicy": "CONTINUE",
+    "taxable": true
+   },
+   {
+    "optionValues": [
+     {
+      "optionName": "Colour",
+      "name": "Blue"
+     }
+    ],
+    "price": "30",
+    "position": 3,
+    "sku": "color-lids-blue",
+    "inventoryItem": {
+     "tracked": false
+    },
+    "inventoryPolicy": "CONTINUE",
+    "taxable": true
+   },
+   {
+    "optionValues": [
+     {
+      "optionName": "Colour",
+      "name": "Pink"
+     }
+    ],
+    "price": "30",
+    "position": 4,
+    "sku": "color-lids-pink",
+    "inventoryItem": {
+     "tracked": false
+    },
+    "inventoryPolicy": "CONTINUE",
+    "taxable": true
+   }
+  ]
+ },
+ {
+  "handle": "bear-lid",
+  "title": "Bear in area can lid",
+  "descriptionHtml": "<p>Caution sign artwork engraved into black anodized aluminum.</p>",
+  "productType": "Can lid",
+  "vendor": "Counter Culture Conflict",
+  "status": "ACTIVE",
+  "tags": [
+   "lids"
+  ],
+  "files": [
+   {
+    "id": "gid://shopify/MediaImage/73595360805204",
+    "alt": "Bear in area can lid"
+   }
+  ],
+  "metafields": [
+   {
+    "namespace": "custom",
+    "key": "material",
+    "type": "single_line_text_field",
+    "value": "Anodized aluminum"
+   }
+  ],
+  "seo": {
+   "title": "Bear in area can lid | Counter Culture Conflict",
+   "description": "Caution sign artwork engraved into black anodized aluminum."
+  },
+  "productOptions": [
+   {
+    "name": "Title",
+    "values": [
+     {
+      "name": "Default Title"
+     }
+    ]
+   }
+  ],
+  "variants": [
+   {
+    "optionValues": [
+     {
+      "optionName": "Title",
+      "name": "Default Title"
+     }
+    ],
+    "price": "28",
+    "sku": "bear-lid",
+    "inventoryItem": {
+     "tracked": false
+    },
+    "inventoryPolicy": "CONTINUE",
+    "taxable": true
+   }
+  ]
+ },
+ {
+  "handle": "truck-lid",
+  "title": "A.I.G. truck can lid",
+  "descriptionHtml": "<p>Square body truck in the pines. Fine line work, engraved deep into bare metal.</p>",
+  "productType": "Can lid",
+  "vendor": "Counter Culture Conflict",
+  "status": "ACTIVE",
+  "tags": [
+   "lids"
+  ],
+  "files": [
+   {
+    "id": "gid://shopify/MediaImage/73595360739668",
+    "alt": "A.I.G. truck can lid"
+   }
+  ],
+  "metafields": [
+   {
+    "namespace": "custom",
+    "key": "material",
+    "type": "single_line_text_field",
+    "value": "Anodized aluminum"
+   }
+  ],
+  "seo": {
+   "title": "A.I.G. truck can lid | Counter Culture Conflict",
+   "description": "Square body truck in the pines. Fine line work, engraved deep into bare metal."
+  },
+  "productOptions": [
+   {
+    "name": "Title",
+    "values": [
+     {
+      "name": "Default Title"
+     }
+    ]
+   }
+  ],
+  "variants": [
+   {
+    "optionValues": [
+     {
+      "optionName": "Title",
+      "name": "Default Title"
+     }
+    ],
+    "price": "28",
+    "sku": "truck-lid",
+    "inventoryItem": {
+     "tracked": false
+    },
+    "inventoryPolicy": "CONTINUE",
+    "taxable": true
+   }
+  ]
+ },
+ {
+  "handle": "antihero-squadron-lid",
+  "title": "Antihero Squadron can lid",
+  "descriptionHtml": "<p>The Antihero Squadron pilot, engraved into black anodized aluminum.</p>",
+  "productType": "Can lid",
+  "vendor": "Counter Culture Conflict",
+  "status": "ACTIVE",
+  "tags": [
+   "lids"
+  ],
+  "files": [
+   {
+    "id": "gid://shopify/MediaImage/73595360772436",
+    "alt": "Antihero Squadron can lid"
+   }
+  ],
+  "metafields": [
+   {
+    "namespace": "custom",
+    "key": "material",
+    "type": "single_line_text_field",
+    "value": "Anodized aluminum"
+   }
+  ],
+  "seo": {
+   "title": "Antihero Squadron can lid | Counter Culture Conflict",
+   "description": "The Antihero Squadron pilot, engraved into black anodized aluminum."
+  },
+  "productOptions": [
+   {
+    "name": "Title",
+    "values": [
+     {
+      "name": "Default Title"
+     }
+    ]
+   }
+  ],
+  "variants": [
+   {
+    "optionValues": [
+     {
+      "optionName": "Title",
+      "name": "Default Title"
+     }
+    ],
+    "price": "28",
+    "sku": "antihero-squadron-lid",
+    "inventoryItem": {
+     "tracked": false
+    },
+    "inventoryPolicy": "CONTINUE",
+    "taxable": true
+   }
+  ]
+ },
+ {
+  "handle": "field-knife",
+  "title": "Field knife, fixed blade",
+  "descriptionHtml": "<p>Black fixed blade with a polymer handle. Script engraved on the flat of the blade.</p>",
+  "productType": "Knife",
+  "vendor": "Counter Culture Conflict",
+  "status": "ACTIVE",
+  "tags": [
+   "knives"
+  ],
+  "files": [
+   {
+    "id": "gid://shopify/MediaImage/73595360641364",
+    "alt": "Field knife, fixed blade"
+   }
+  ],
+  "metafields": [
+   {
+    "namespace": "custom",
+    "key": "material",
+    "type": "single_line_text_field",
+    "value": "Coated carbon steel"
+   }
+  ],
+  "seo": {
+   "title": "Field knife, fixed blade | Counter Culture Conflict",
+   "description": "Black fixed blade with a polymer handle. Script engraved on the flat of the blade."
+  },
+  "productOptions": [
+   {
+    "name": "Title",
+    "values": [
+     {
+      "name": "Default Title"
+     }
+    ]
+   }
+  ],
+  "variants": [
+   {
+    "optionValues": [
+     {
+      "optionName": "Title",
+      "name": "Default Title"
+     }
+    ],
+    "price": "54",
+    "sku": "field-knife",
+    "inventoryItem": {
+     "tracked": false
+    },
+    "inventoryPolicy": "CONTINUE",
+    "taxable": true
+   }
+  ]
+ },
+ {
+  "handle": "name-cuffs",
+  "title": "Name engraved cuffs",
+  "descriptionHtml": "<p>Chain handcuffs engraved with your name and number on both bows.</p>",
+  "productType": "Duty gear",
+  "vendor": "Counter Culture Conflict",
+  "status": "ACTIVE",
+  "tags": [
+   "duty"
+  ],
+  "files": [
+   {
+    "id": "gid://shopify/MediaImage/73595360575828",
+    "alt": "Name engraved cuffs"
+   }
+  ],
+  "metafields": [
+   {
+    "namespace": "custom",
+    "key": "material",
+    "type": "single_line_text_field",
+    "value": "Nickel plated steel"
+   }
+  ],
+  "seo": {
+   "title": "Name engraved cuffs | Counter Culture Conflict",
+   "description": "Chain handcuffs engraved with your name and number on both bows."
+  },
+  "productOptions": [
+   {
+    "name": "Title",
+    "values": [
+     {
+      "name": "Default Title"
+     }
+    ]
+   }
+  ],
+  "variants": [
+   {
+    "optionValues": [
+     {
+      "optionName": "Title",
+      "name": "Default Title"
+     }
+    ],
+    "price": "58",
+    "sku": "name-cuffs",
+    "inventoryItem": {
+     "tracked": false
+    },
+    "inventoryPolicy": "CONTINUE",
+    "taxable": true
+   }
+  ]
+ },
+ {
+  "handle": "conflict-tee",
+  "title": "Conflict tee",
+  "descriptionHtml": "<p>The 99% spade on the chest, the Conflict globe across the back, flag on the sleeve. Printed to order on a heavyweight black tee.</p>",
+  "productType": "Apparel",
+  "vendor": "Counter Culture Conflict",
+  "status": "ACTIVE",
+  "tags": [
+   "apparel"
+  ],
+  "files": [
+   {
+    "id": "gid://shopify/MediaImage/73595366408532",
+    "alt": "Conflict tee"
+   },
+   {
+    "id": "gid://shopify/MediaImage/73595366375764",
+    "alt": "Conflict tee"
+   },
+   {
+    "id": "gid://shopify/MediaImage/73596843655508",
+    "alt": "Conflict tee"
+   }
+  ],
+  "metafields": [
+   {
+    "namespace": "custom",
+    "key": "material",
+    "type": "single_line_text_field",
+    "value": "Heavyweight black cotton"
+   }
+  ],
+  "seo": {
+   "title": "Conflict tee | Counter Culture Conflict",
+   "description": "The 99% spade on the chest, the Conflict globe across the back, flag on the sleeve. Printed to order on a heavyweight black tee."
+  },
+  "productOptions": [
+   {
+    "name": "Title",
+    "values": [
+     {
+      "name": "Default Title"
+     }
+    ]
+   }
+  ],
+  "variants": [
+   {
+    "optionValues": [
+     {
+      "optionName": "Title",
+      "name": "Default Title"
+     }
+    ],
+    "price": "32",
+    "sku": "conflict-tee",
+    "inventoryItem": {
+     "tracked": false
+    },
+    "inventoryPolicy": "CONTINUE",
+    "taxable": true
+   }
+  ]
+ },
+ {
+  "handle": "conflict-cap",
+  "title": "Conflict cap",
+  "descriptionHtml": "<p>The 99% spade lockup, front and centre on a black structured cap. Made to order.</p>",
+  "productType": "Apparel",
+  "vendor": "Counter Culture Conflict",
+  "status": "ACTIVE",
+  "tags": [
+   "apparel"
+  ],
+  "files": [
+   {
+    "id": "gid://shopify/MediaImage/73595360543060",
+    "alt": "Conflict cap"
+   },
+   {
+    "id": "gid://shopify/MediaImage/73596843688276",
+    "alt": "Conflict cap"
+   }
+  ],
+  "metafields": [
+   {
+    "namespace": "custom",
+    "key": "material",
+    "type": "single_line_text_field",
+    "value": "Black structured cap"
+   }
+  ],
+  "seo": {
+   "title": "Conflict cap | Counter Culture Conflict",
+   "description": "The 99% spade lockup, front and centre on a black structured cap. Made to order."
+  },
+  "productOptions": [
+   {
+    "name": "Title",
+    "values": [
+     {
+      "name": "Default Title"
+     }
+    ]
+   }
+  ],
+  "variants": [
+   {
+    "optionValues": [
+     {
+      "optionName": "Title",
+      "name": "Default Title"
+     }
+    ],
+    "price": "30",
+    "sku": "conflict-cap",
+    "inventoryItem": {
+     "tracked": false
+    },
+    "inventoryPolicy": "CONTINUE",
+    "taxable": true
+   }
+  ]
+ },
+ {
+  "handle": "conflict-work-shirt",
+  "title": "Conflict button up",
+  "descriptionHtml": "<p>Black button up work shirt. Spade on the chest, the Conflict globe across the back. Made to order.</p>",
+  "productType": "Apparel",
+  "vendor": "Counter Culture Conflict",
+  "status": "ACTIVE",
+  "tags": [
+   "apparel"
+  ],
+  "files": [
+   {
+    "id": "gid://shopify/MediaImage/73595366244692",
+    "alt": "Conflict button up"
+   },
+   {
+    "id": "gid://shopify/MediaImage/73596843655508",
+    "alt": "Conflict button up"
+   }
+  ],
+  "metafields": [
+   {
+    "namespace": "custom",
+    "key": "material",
+    "type": "single_line_text_field",
+    "value": "Black button up work shirt"
+   }
+  ],
+  "seo": {
+   "title": "Conflict button up | Counter Culture Conflict",
+   "description": "Black button up work shirt. Spade on the chest, the Conflict globe across the back. Made to order."
+  },
+  "productOptions": [
+   {
+    "name": "Title",
+    "values": [
+     {
+      "name": "Default Title"
+     }
+    ]
+   }
+  ],
+  "variants": [
+   {
+    "optionValues": [
+     {
+      "optionName": "Title",
+      "name": "Default Title"
+     }
+    ],
+    "price": "48",
+    "sku": "conflict-work-shirt",
+    "inventoryItem": {
+     "tracked": false
+    },
+    "inventoryPolicy": "CONTINUE",
+    "taxable": true
+   }
+  ]
+ }
+]

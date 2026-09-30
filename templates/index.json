@@ -3,48 +3,219 @@
     "hero": {
       "type": "hero-slider",
       "blocks": {
-        "s1": { "type": "slide", "settings": { "material": "Anodized aluminum", "heading": "Engraved into the metal", "text": "An industrial fiber laser does not just take the coating off. It cuts a deep, permanent engraving into the metal item itself. It will not rub off, wash off or fade.", "cta": "Shop can lids", "clip": "v-lid.mp4" } },
-        "s2": { "type": "slide", "settings": { "material": "Titanium finish", "heading": "Your name on the blade", "text": "Any item in the online store can be engraved with a name, a call sign or a number. Five dollars each, about a week.", "cta": "Shop knives", "clip": "v-knife-oilslick.mp4" } },
-        "s3": { "type": "slide", "settings": { "material": "Powder coat on stainless", "heading": "Down into the steel", "text": "Genuine YETI or aftermarket. Industrial grade, deep permanent engraving that outlasts the cup.", "cta": "Shop tumblers", "clip": "v-tumbler.mp4" } },
-        "s4": { "type": "slide", "settings": { "material": "Painted steel", "heading": "For the ones on the job", "text": "Retirements, graduations and awards, engraved to order. Police, fire, EMS, military and veterans take 10% off.", "cta": "Shop duty gear", "clip": "v-ammo-can.mp4" } },
-        "s5": { "type": "slide", "settings": { "material": "Twelve pieces or twelve hundred", "heading": "Your logo on every piece", "text": "Custom designs and logos are for larger orders: businesses, nonprofits, teams and departments. Preview it, price it, approve a proof.", "cta": "Build an order", "clip": "v-knife-fixed.mp4" } }
+        "s1": {
+          "type": "slide",
+          "settings": {
+            "material": "Anodized aluminum",
+            "heading": "Engraved into the metal",
+            "text": "An industrial fiber laser does not just take the coating off. It cuts a deep, permanent engraving into the metal item itself. It will not rub off, wash off or fade.",
+            "cta": "Shop can lids",
+            "clip": "v-lid.mp4"
+          }
+        },
+        "s2": {
+          "type": "slide",
+          "settings": {
+            "material": "Titanium finish",
+            "heading": "Your name on the blade",
+            "text": "Any item in the online store can be engraved with a name, a call sign or a number. Five dollars each, about a week.",
+            "cta": "Shop knives",
+            "clip": "v-knife-oilslick.mp4"
+          }
+        },
+        "s3": {
+          "type": "slide",
+          "settings": {
+            "material": "Powder coat on stainless",
+            "heading": "Down into the steel",
+            "text": "Genuine YETI or aftermarket. Industrial grade, deep permanent engraving that outlasts the cup.",
+            "cta": "Shop tumblers",
+            "clip": "v-tumbler.mp4"
+          }
+        },
+        "s4": {
+          "type": "slide",
+          "settings": {
+            "material": "Painted steel",
+            "heading": "For the ones on the job",
+            "text": "Retirements, graduations and awards, engraved to order. Police, fire, EMS, military and veterans take 10% off.",
+            "cta": "Shop duty gear",
+            "clip": "v-ammo-can.mp4"
+          }
+        },
+        "s5": {
+          "type": "slide",
+          "settings": {
+            "material": "Twelve pieces or twelve hundred",
+            "heading": "Your logo on every piece",
+            "text": "Custom designs and logos are for larger orders: businesses, nonprofits, teams and departments. Preview it, price it, approve a proof.",
+            "cta": "Build an order",
+            "clip": "v-knife-fixed.mp4"
+          }
+        }
       },
-      "block_order": ["s1", "s2", "s3", "s4", "s5"],
-      "settings": { "label": "Laser engraving  /  Omaha, Nebraska", "bar": "Murphy's bench" }
+      "block_order": [
+        "s1",
+        "s2",
+        "s3",
+        "s4",
+        "s5"
+      ],
+      "settings": {
+        "label": "Laser engraving  /  Omaha, Nebraska",
+        "bar": "Murphy's bench"
+      }
     },
     "craft": {
       "type": "craft",
       "blocks": {
-        "f1": { "type": "finish", "settings": { "name": "Anodized aluminum", "text": "Engraved through the anodizing and down into bright, bare aluminum." } },
-        "f2": { "type": "finish", "settings": { "name": "Powder coat", "text": "Cuts through the coating and deep into the stainless underneath." } },
-        "f3": { "type": "finish", "settings": { "name": "Titanium finish", "text": "Engraved through the colour layer into the steel beneath." } },
-        "f4": { "type": "finish", "settings": { "name": "Painted steel", "text": "Engraved through the paint and into the bare steel." } }
+        "f1": {
+          "type": "finish",
+          "settings": {
+            "name": "Anodized aluminum",
+            "text": "Engraved through the anodizing and down into bright, bare aluminum."
+          }
+        },
+        "f2": {
+          "type": "finish",
+          "settings": {
+            "name": "Powder coat",
+            "text": "Cuts through the coating and deep into the stainless underneath."
+          }
+        },
+        "f3": {
+          "type": "finish",
+          "settings": {
+            "name": "Titanium finish",
+            "text": "Engraved through the colour layer into the steel beneath."
+          }
+        },
+        "f4": {
+          "type": "finish",
+          "settings": {
+            "name": "Painted steel",
+            "text": "Engraved through the paint and into the bare steel."
+          }
+        }
       },
-      "block_order": ["f1", "f2", "f3", "f4"],
+      "block_order": [
+        "f1",
+        "f2",
+        "f3",
+        "f4"
+      ],
       "settings": {}
     },
-    "featured": { "type": "featured-collection", "settings": { "eyebrow": "Engraved, ready to ship", "heading": "Off the machine", "count": 8 } },
+    "featured": {
+      "type": "featured-collection",
+      "settings": {
+        "eyebrow": "Engraved, ready to ship",
+        "heading": "Off the machine",
+        "count": 8,
+        "collection": "can-lids"
+      }
+    },
     "ways": {
       "type": "two-ways",
       "blocks": {
-        "w1": { "type": "way", "settings": { "accent": false, "eyebrow": "For everyone", "heading": "The online store", "text": "Items Murphy has already engraved, in stock and ready to ship anywhere in the US and Canada.", "yes": "Ready made items. Engraved, in stock, shipped in about 3 days.\nAdd a name for $5 each. A name, a call sign or a number on any item in the store.\nShipped to you. $8 flat in the US, free over $60. Canada $15.", "no": "No custom designs or logos. Store items are engraved with the designs shown.\nNo single custom items. One-off custom work is not taken, at any price.", "cta": "Shop the store" } },
-        "w2": { "type": "way", "settings": { "accent": true, "eyebrow": "For businesses and organisations", "heading": "Custom and bulk orders", "text": "Custom designs and logos are available for larger orders: businesses, nonprofits, teams, departments and schools.", "yes": "Your logo or your own design. Uploaded, placed and proofed before anything is engraved.\nTwelve pieces or more. Volume pricing, and the price drops as the quantity rises.\nLocal pickup on large custom orders. Arranged once the order is approved.", "no": "No one-off custom orders. Single items are not engraved at the shop, and no meetings are taken for one item.", "cta": "Build a custom order" } }
+        "w1": {
+          "type": "way",
+          "settings": {
+            "accent": false,
+            "eyebrow": "For everyone",
+            "heading": "The online store",
+            "text": "Items Murphy has already engraved, in stock and ready to ship anywhere in the US and Canada.",
+            "yes": "Ready made items. Engraved, in stock, shipped in about 3 days.\nAdd a name for $5 each. A name, a call sign or a number on any item in the store.\nShipped to you. $8 flat in the US, free over $60. Canada $15.",
+            "no": "No custom designs or logos. Store items are engraved with the designs shown.\nNo single custom items. One-off custom work is not taken, at any price.",
+            "cta": "Shop the store"
+          }
+        },
+        "w2": {
+          "type": "way",
+          "settings": {
+            "accent": true,
+            "eyebrow": "For businesses and organisations",
+            "heading": "Custom and bulk orders",
+            "text": "Custom designs and logos are available for larger orders: businesses, nonprofits, teams, departments and schools.",
+            "yes": "Your logo or your own design. Uploaded, placed and proofed before anything is engraved.\nTwelve pieces or more. Volume pricing, and the price drops as the quantity rises.\nLocal pickup on large custom orders. Arranged once the order is approved.",
+            "no": "No one-off custom orders. Single items are not engraved at the shop, and no meetings are taken for one item.",
+            "cta": "Build a custom order"
+          }
+        }
       },
-      "block_order": ["w1", "w2"],
+      "block_order": [
+        "w1",
+        "w2"
+      ],
       "settings": {}
     },
-    "seen": { "type": "as-seen-on", "settings": { "clip": "conflict-intro.mp4", "eyebrow": "As seen on", "heading": "The show behind the shop", "text": "Murphy hosts Counter Culture Conflict on the Counter Culture Inc network. Global perspectives, unfiltered analysis.", "play_label": "Play the title sequence", "cta": "The show" } },
+    "seen": {
+      "type": "as-seen-on",
+      "settings": {
+        "clip": "conflict-intro.mp4",
+        "eyebrow": "As seen on",
+        "heading": "The show behind the shop",
+        "text": "Murphy hosts Counter Culture Conflict on the Counter Culture Inc network. Global perspectives, unfiltered analysis.",
+        "play_label": "Play the title sequence",
+        "cta": "The show"
+      }
+    },
     "quad": {
       "type": "four-panel",
       "blocks": {
-        "p1": { "type": "panel", "settings": { "eyebrow": "Twelve pieces or more", "heading": "Custom and bulk", "text": "Logos and custom designs for businesses, nonprofits, teams and departments.", "cta": "Build an order" } },
-        "p2": { "type": "panel", "settings": { "eyebrow": "The archive", "heading": "The work", "text": "Firearms, lids, knives, gifts and one offs, and how each piece gets made.", "cta": "See it" } },
-        "p3": { "type": "panel", "settings": { "eyebrow": "The engraver", "heading": "Murphy", "text": "Laser engraver, Omaha. Host of Counter Culture Conflict.", "cta": "His story", "clip": "v-murph.mp4" } },
-        "p4": { "type": "panel", "settings": { "eyebrow": "Police, fire, EMS, military", "heading": "Badge rate, 10% off", "text": "On every order. Not on the job? Same laser, same turnaround, same care.", "cta": "Shop duty gear" } }
+        "p1": {
+          "type": "panel",
+          "settings": {
+            "eyebrow": "Twelve pieces or more",
+            "heading": "Custom and bulk",
+            "text": "Logos and custom designs for businesses, nonprofits, teams and departments.",
+            "cta": "Build an order"
+          }
+        },
+        "p2": {
+          "type": "panel",
+          "settings": {
+            "eyebrow": "The archive",
+            "heading": "The work",
+            "text": "Firearms, lids, knives, gifts and one offs, and how each piece gets made.",
+            "cta": "See it"
+          }
+        },
+        "p3": {
+          "type": "panel",
+          "settings": {
+            "eyebrow": "The engraver",
+            "heading": "Murphy",
+            "text": "Laser engraver, Omaha. Host of Counter Culture Conflict.",
+            "cta": "His story",
+            "clip": "v-murph.mp4"
+          }
+        },
+        "p4": {
+          "type": "panel",
+          "settings": {
+            "eyebrow": "Police, fire, EMS, military",
+            "heading": "Badge rate, 10% off",
+            "text": "On every order. Not on the job? Same laser, same turnaround, same care.",
+            "cta": "Shop duty gear"
+          }
+        }
       },
-      "block_order": ["p1", "p2", "p3", "p4"],
+      "block_order": [
+        "p1",
+        "p2",
+        "p3",
+        "p4"
+      ],
       "settings": {}
     }
   },
-  "order": ["hero", "craft", "featured", "ways", "seen", "quad"]
+  "order": [
+    "hero",
+    "craft",
+    "featured",
+    "ways",
+    "seen",
+    "quad"
+  ]
 }

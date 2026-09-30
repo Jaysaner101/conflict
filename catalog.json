@@ -1,0 +1,243 @@
+[
+ {
+  "h": "lid-folder-set",
+  "n": "Lid and folder set",
+  "p": 62,
+  "c": "lids",
+  "mat": "Anodized aluminum, titanium finish",
+  "cut": [
+   "c-set.webp",
+   "wide"
+  ],
+  "ph": [
+   "lid-knife-set.jpg",
+   "lid-copville.jpg",
+   "knife-oilslick-copville.jpg"
+  ],
+  "v": "v-knife-oilslick",
+  "tag": "Ships free",
+  "d": "The Copville script lid and the oil slick folder, sold together. The set clears the free shipping threshold on its own."
+ },
+ {
+  "h": "copville-script-lid",
+  "n": "Copville script can lid",
+  "p": 28,
+  "c": "lids",
+  "mat": "Anodized aluminum",
+  "cut": [
+   "c-lid-copville.webp",
+   ""
+  ],
+  "ph": [
+   "lid-copville.jpg",
+   "lid-knife-set.jpg"
+  ],
+  "v": "v-lid",
+  "d": "Black anodized aluminum lid. The Copville script is engraved deep through the anodizing into bare metal, so it will not wear off. Fits standard cans."
+ },
+ {
+  "h": "tumbler-30",
+  "n": "30 oz tumbler",
+  "p": 34,
+  "c": "drinkware",
+  "mat": "Powder coat on stainless",
+  "cut": [
+   "c-tumbler.webp",
+   ""
+  ],
+  "ph": [
+   "tumbler-yeti.jpg"
+  ],
+  "v": "v-tumbler",
+  "opt": {
+   "label": "Blank",
+   "vals": [
+    [
+     "Aftermarket",
+     34
+    ],
+    [
+     "Genuine YETI",
+     62
+    ]
+   ]
+  },
+  "d": "Powder coated 30 oz tumbler, engraved deep through the coating into the stainless underneath. Choose a genuine YETI or a quality aftermarket blank."
+ },
+ {
+  "h": "ammo-can",
+  "n": "Engraved ammo can",
+  "p": 68,
+  "c": "duty",
+  "mat": "Painted steel",
+  "cut": [
+   "c-ammo-can.webp",
+   "wide"
+  ],
+  "ph": [
+   "ammo-can-fire.jpg",
+   "ammo-can-police.jpg"
+  ],
+  "v": "v-ammo-can",
+  "d": "Steel .50 cal can engraved with a crest and a name. Made for retirements, graduations and awards."
+ },
+ {
+  "h": "oil-slick-folder",
+  "n": "Oil slick folder",
+  "p": 38,
+  "c": "knives",
+  "mat": "Titanium finish steel",
+  "cut": [
+   "c-folder.webp",
+   "wide"
+  ],
+  "ph": [
+   "knife-name.jpg",
+   "knife-oilslick-copville.jpg"
+  ],
+  "v": "v-knife-oilslick",
+  "d": "Folding knife in a rainbow titanium finish. The laser cuts through the coating into the steel, leaving a bright silver engraving against the colour."
+ },
+ {
+  "h": "color-lids",
+  "n": "Copville lid, anodized colours",
+  "p": 30,
+  "c": "lids",
+  "mat": "Anodized aluminum",
+  "cut": [
+   "c-lid-colors.webp",
+   ""
+  ],
+  "ph": [
+   "lid-colors.jpg"
+  ],
+  "opt": {
+   "label": "Colour",
+   "vals": [
+    [
+     "Black",
+     30
+    ],
+    [
+     "Red",
+     30
+    ],
+    [
+     "Blue",
+     30
+    ],
+    [
+     "Pink",
+     30
+    ]
+   ]
+  },
+  "d": "The Copville script lid in four anodized colours."
+ },
+ {
+  "h": "bear-lid",
+  "n": "Bear in area can lid",
+  "p": 28,
+  "c": "lids",
+  "mat": "Anodized aluminum",
+  "cut": [
+   "c-lid-bear.webp",
+   ""
+  ],
+  "ph": [
+   "lid-bear.jpg"
+  ],
+  "d": "Caution sign artwork engraved into black anodized aluminum."
+ },
+ {
+  "h": "truck-lid",
+  "n": "A.I.G. truck can lid",
+  "p": 28,
+  "c": "lids",
+  "mat": "Anodized aluminum",
+  "cut": [
+   "c-lid-aig.webp",
+   ""
+  ],
+  "ph": [
+   "lid-aig.jpg"
+  ],
+  "d": "Square body truck in the pines. Fine line work, engraved deep into bare metal."
+ },
+ {
+  "h": "antihero-squadron-lid",
+  "n": "Antihero Squadron can lid",
+  "p": 28,
+  "c": "lids",
+  "mat": "Anodized aluminum",
+  "cut": [
+   "c-lid-antihero.webp",
+   "bleed"
+  ],
+  "ph": [
+   "lid-antihero.jpg"
+  ],
+  "v": "v-lid",
+  "d": "The Antihero Squadron pilot, engraved into black anodized aluminum."
+ },
+ {
+  "h": "field-knife",
+  "n": "Field knife, fixed blade",
+  "p": 54,
+  "c": "knives",
+  "mat": "Coated carbon steel",
+  "ph": [
+   "knife-fixed.jpg"
+  ],
+  "v": "v-knife-fixed",
+  "d": "Black fixed blade with a polymer handle. Script engraved on the flat of the blade."
+ },
+ {
+  "h": "name-cuffs",
+  "n": "Name engraved cuffs",
+  "p": 58,
+  "c": "duty",
+  "mat": "Nickel plated steel",
+  "ph": [
+   "cuffs.jpg"
+  ],
+  "d": "Chain handcuffs engraved with your name and number on both bows."
+ },
+ {
+  "h": "conflict-tee",
+  "n": "Conflict tee",
+  "p": 32,
+  "c": "apparel",
+  "mat": "Heavyweight black cotton",
+  "ph": [
+   "tee-front.jpg",
+   "tee-back.jpg",
+   "art-globe.jpg"
+  ],
+  "d": "The 99% spade on the chest, the Conflict globe across the back, flag on the sleeve. Printed to order on a heavyweight black tee."
+ },
+ {
+  "h": "conflict-cap",
+  "n": "Conflict cap",
+  "p": 30,
+  "c": "apparel",
+  "mat": "Black structured cap",
+  "ph": [
+   "cap-mock.jpg",
+   "art-spade.jpg"
+  ],
+  "d": "The 99% spade lockup, front and centre on a black structured cap. Made to order."
+ },
+ {
+  "h": "conflict-work-shirt",
+  "n": "Conflict button up",
+  "p": 48,
+  "c": "apparel",
+  "mat": "Black button up work shirt",
+  "ph": [
+   "shirt-buttonup.jpg",
+   "art-globe.jpg"
+  ],
+  "d": "Black button up work shirt. Spade on the chest, the Conflict globe across the back. Made to order."
+ }
+]
