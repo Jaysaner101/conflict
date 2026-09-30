@@ -19,6 +19,7 @@ function bizDays(n) {
   while (i < n) { d.setDate(d.getDate() + 1); if (d.getDay() !== 0 && d.getDay() !== 6) i++; }
   return d.toLocaleDateString('en-US', { month: 'long', day: 'numeric' });
 }
+const setText = (sel, v) => { const e = $(sel); if (e) e.textContent = v; };
 function toast(t) {
   let el = $('#toast');
   if (!el) { el = document.createElement('div'); el.id = 'toast'; el.className = 'toast'; el.setAttribute('role', 'status'); document.body.appendChild(el); }
@@ -61,6 +62,13 @@ function initPlayer(root){if(!root||root.dataset.on)return;root.dataset.on=1;con
   mu.onclick=()=>{v.muted=!v.muted;mu.textContent=v.muted?'Sound off':'Sound on'};
   $('[data-fs]',root).onclick=()=>{const el=root;(el.requestFullscreen||el.webkitRequestFullscreen||(()=>{})).call(el)}}
 
+function cvs(w,h){const c=document.createElement('canvas');c.width=w;c.height=h;return c}
+function makePlate(w,h,tone='black'){
+  const c=cvs(w,h),g=c.getContext('2d'),T={black:['#17191b','#0c0d0e','#050505'],white:['#f3f3f1','#e3e3e0','#c8c8c4'],olive:['#3c3f33','#2b2d24','#1b1c16'],ti:['#31204f','#123f57','#4a2a16']}[tone],lite=tone==='white';
+  const b=g.createLinearGradient(0,0,tone==='ti'?w:0,h);b.addColorStop(0,T[0]);b.addColorStop(.5,T[1]);b.addColorStop(1,T[2]);g.fillStyle=b;g.fillRect(0,0,w,h);
+  for(let y=0;y<h;y++){g.fillStyle=`rgba(${lite?'0,0,0':'255,255,255'},${Math.random()*(lite?.03:.05)})`;g.fillRect(0,y,w,1)}
+  const s=g.createLinearGradient(0,0,w,h*.9);s.addColorStop(.18,'rgba(255,255,255,0)');s.addColorStop(.34,`rgba(255,255,255,${lite?.45:.07})`);s.addColorStop(.5,'rgba(255,255,255,0)');g.fillStyle=s;g.fillRect(0,0,w,h);return c}
+
 /* ---------- work gallery lightbox: reads items straight from the DOM ---------- */
 let wi = 0;
 function lbItems() { return $$('.wk'); }
@@ -93,19 +101,19 @@ function drawTool(){const cv=$('#cv');if(!cv)return;const g=cv.getContext('2d'),
 function wipeLogo(){if(still){LT.k=1;return drawTool()}const t0=performance.now(),f=n=>{const k=Math.min(1,(n-t0)/900);LT.k=1-Math.pow(1-k,3);drawTool();if(k<1)requestAnimationFrame(f)};requestAnimationFrame(f)}
 const CFG=[{l:'Can lid',p:28,b:'lid'},{l:'Folder',p:38,b:'knife'},{l:'Tumbler',p:34,b:'tumbler'},{l:'Genuine YETI',p:62,b:'tumbler'},{l:'Ammo can',p:68,b:'can'}];
 function initCfg(q={}){if(!$('#cv'))return;let it=+q.item||0,n=+q.qty||48;const R=$('#cfgQty');
-  const up=()=>{const base=CFG[it].p,d=tier(n),each=base*(1-d),setup=n>=50?0:35;R.style.setProperty('--f',((n-12)/488*100)+'%');$('#cfgN').textContent=n;$('#cfgEach').textContent=money(+each.toFixed(2));$('#cfgSave').textContent=Math.round(d*100)+'% off';$('#cfgTotal').textContent=money(Math.round(each*n+setup));
-    $('#cfgNote').textContent=`${setup?'Includes $35 artwork setup. ':'Artwork setup waived. '}Approve your proof this week and it ships around ${bizDays(12)}.`;$('#cfgSum').textContent=`${n} x ${CFG[it].l}, ${money(Math.round(each*n+setup))} estimated`};
+  const up=()=>{const base=CFG[it].p,d=tier(n),each=base*(1-d),setup=n>=50?0:35;R.style.setProperty('--f',((n-12)/488*100)+'%');setText('#cfgN',n);setText('#cfgEach',money(+each.toFixed(2)));setText('#cfgSave',Math.round(d*100)+'% off');setText('#cfgTotal',money(Math.round(each*n+setup)));
+    setText('#cfgNote',`${setup?'Includes $35 artwork setup. ':'Artwork setup waived. '}Approve your proof this week and it ships around ${bizDays(12)}.`);setText('#cfgSum',`${n} x ${CFG[it].l}, ${money(Math.round(each*n+setup))} estimated`)};
   $('#cfgPiece').innerHTML=CFG.map((c,i)=>`<button class="opt" aria-pressed="${i===it}" data-i="${i}" type="button">${c.l}</button>`).join('');
   $$('#cfgPiece .opt').forEach(b=>b.onclick=()=>{it=+b.dataset.i;$$('#cfgPiece .opt').forEach(o=>o.setAttribute('aria-pressed',o===b));const nb=CFG[it].b;if(nb!==LT.blank){LT.blank=nb;LT.x=450;LT.y=nb==='knife'?455:450;wipeLogo()}up()});
   R.value=n;R.oninput=()=>{n=+R.value;up()};LT.blank=CFG[it].b;
   if(!LT.bound){LT.bound=1;const cv=$('#cv');let drag=false,ox=0,oy=0;const pt=e=>{const r=cv.getBoundingClientRect();return[(e.clientX-r.left)/r.width*900,(e.clientY-r.top)/r.height*900]};
    cv.onpointerdown=e=>{drag=true;cv.setPointerCapture(e.pointerId);const[x,y]=pt(e);ox=LT.x-x;oy=LT.y-y};cv.onpointermove=e=>{if(!drag)return;const[x,y]=pt(e);LT.x=x+ox;LT.y=y+oy;drawTool()};cv.onpointerup=()=>drag=false;
    ['logoSize','logoRot'].forEach(id=>{const r=$('#'+id),f=()=>{r.style.setProperty('--f',((r.value-r.min)/(r.max-r.min)*100)+'%');drawTool()};r.oninput=f;r.style.setProperty('--f',((r.value-r.min)/(r.max-r.min)*100)+'%')});
-   $('#logoInv').onclick=e=>{LT.inv=!LT.inv;e.target.setAttribute('aria-pressed',LT.inv);drawTool()};
-   $('#logoDl').onclick=()=>cv.toBlob(b=>{const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='conflict-mockup.png';a.click()});
-   $('#logoFile').onchange=e=>{const f=e.target.files[0];if(!f)return;$('#uplName').textContent=f.name;const im=new Image();im.onload=()=>{LT.logo=im;wipeLogo()};im.src=URL.createObjectURL(f)};
-   $('#cfgGo').onclick=()=>{$('#cfgForm').hidden=false;$('#cfgGo').hidden=true;$('#q1').focus()};
-   $('#cfgForm').onsubmit=async e=>{e.preventDefault();const f=e.target,msg=$('#quoteMsg');msg.textContent='Sending...';const fd=new FormData(f);fd.set('summary',$('#cfgSum').textContent);
+   if($('#logoInv'))$('#logoInv').onclick=e=>{LT.inv=!LT.inv;e.target.setAttribute('aria-pressed',LT.inv);drawTool()};
+   if($('#logoDl'))$('#logoDl').onclick=()=>cv.toBlob(b=>{const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='conflict-mockup.png';a.click()});
+   if($('#logoFile'))$('#logoFile').onchange=e=>{const f=e.target.files[0];if(!f)return;setText('#uplName',f.name);const im=new Image();im.onload=()=>{LT.logo=im;wipeLogo()};im.src=URL.createObjectURL(f)};
+   if($('#cfgGo'))$('#cfgGo').onclick=()=>{$('#cfgForm').hidden=false;$('#cfgGo').hidden=true;$('#q1').focus()};
+   if($('#cfgForm'))$('#cfgForm').onsubmit=async e=>{e.preventDefault();const f=e.target,msg=$('#quoteMsg');msg.textContent='Sending...';const fd=new FormData(f);fd.set('summary',$('#cfgSum').textContent);
      const lf=$('#logoFile').files[0];if(lf)fd.set('logo',lf,lf.name);const blob=await new Promise(r=>cv.toBlob(r,'image/png'));if(blob)fd.set('mockup',blob,'mockup.png');
      const ok=await sendForm(fd,true);msg.textContent=ok?'Request sent with your mockup. Murphy replies within 2 business days.':'That did not send. Please try again, or email the shop directly.'}}
   up();drawTool()}
@@ -130,9 +138,30 @@ function initHead() {
 
 /* ---------- reveal on scroll ---------- */
 function initReveal() {
-  const els = $$('.rv'); if (!els.length || still) { els.forEach(e => e.classList.add('in')); return; }
-  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { rootMargin: '0px 0px -8%' });
+  const els = $$('.rv'); if (!els.length) return;
+  const show = e => e.classList.add('in');
+  if (still || !('IntersectionObserver' in window)) { els.forEach(show); return; }
+  const io = new IntersectionObserver(es => es.forEach(e => {
+    if (e.isIntersecting) { show(e.target); io.unobserve(e.target); }
+  }), { rootMargin: '0px 0px -8%' });
   els.forEach(e => io.observe(e));
+  // Failsafe. .rv starts at opacity 0, so anything the observer misses stays
+  // invisible for good. Sweep on scroll, and once on load for a restored
+  // scroll position, so content is never hidden by a missed callback.
+  const sweep = () => els.forEach(e => {
+    if (!e.classList.contains('in') && e.getBoundingClientRect().top < innerHeight) { show(e); io.unobserve(e); }
+  });
+  addEventListener('scroll', sweep, { passive: true });
+  addEventListener('resize', sweep, { passive: true });
+  sweep();
+}
+
+/* ---------- collection sort ---------- */
+function initSort() {
+  const f = $('#sortForm'), sel = $('#sort');
+  if (!f || !sel) return;
+  // Submitting reloads with ?sort_by=, which is how Shopify sorts a collection.
+  sel.addEventListener('change', () => f.submit());
 }
 
 /* ---------- lazy video ---------- */
@@ -197,7 +226,7 @@ function initGallery() {
 
 /* ---------- boot ---------- */
 function boot() {
-  initNav(); initHead(); initReveal(); initVideo(); initNameOption(); initWorkFilter(); initVariants(); initGallery();
+  initNav(); initHead(); initReveal(); initVideo(); initNameOption(); initWorkFilter(); initVariants(); initGallery(); initSort();
   if ($('#hs')) initSlider();
   if ($('#seen')) initSeen();
   if ($('#showPlayer')) initPlayer($('#showPlayer'));

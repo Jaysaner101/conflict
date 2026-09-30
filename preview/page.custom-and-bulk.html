@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Counter Culture Conflict</title>
+  
+  <link rel="canonical" href="/">
+  <meta name="theme-color" content="#000000">
+  
+  <link rel="preload" href="/assets/mona-sans.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/assets/base.css">
+  <style>
+    :root{
+      --bg:#000000; --ink:#eceeef; --body:#9aa0a5;
+      --hi:#39FF14; --s1:#0a0b0c;
+    }
+  </style>
+  
+</head>
+<body class="tpl-page.custom-and-bulk" data-page="page.custom-and-bulk">
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="head" id="head"><div class="wrap head-in">
+  <a class="logo" href="/" aria-label="Counter Culture Conflict, home"><img src="/assets/logo-spade.png" alt="" width="60" height="60"><img src="/assets/logo-word.png" alt="Counter Culture Conflict"></a>
+  <nav class="nav" id="nav" aria-label="Main"><a href="/">Home</a><a href="/collections/all">Shop</a><a href="/collections/apparel">Apparel</a><a href="/pages/custom-and-bulk">Custom and bulk</a><a href="/pages/the-work">The work</a><a href="/pages/the-show">The show</a><a href="/pages/murphy">Murphy</a></nav>
+  <div class="head-r">
+    <a class="cartb" href="/cart" aria-label="Cart">
+      <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14l-1 12H6zM9 8V7a3 3 0 0 1 6 0v1"/></svg>Cart<b id="cartCount">0</b>
+    </a>
+    <button class="menub" id="menuBtn" aria-label="Menu" aria-expanded="false"><span></span><span></span></button>
+  </div>
+</div></header>
+
+
+
+  <main id="main">
+    <div class="pl ovf" id="tool" >
+  <div class="wrap" style="padding-top:clamp(112px,9.5vw,144px);padding-bottom:var(--gap)">
+    <div class="sh" style="margin-bottom:clamp(22px,2.6vw,40px)">
+      <div class="stack-s"><span class="lab"><i></i>Custom orders, twelve pieces or more</span><h1 class="bl md">Put your logo on it</h1></div>
+      <p class="copy" style="max-width:44ch">Custom designs and logos are for larger orders only: businesses, nonprofits, teams, departments and schools. Upload your logo, place it on the piece and pick a quantity. The price updates as you go, and Murphy sends a real proof before anything is made.</p>
+    </div>
+    <div class="cfg">
+      <div class="cfg-stage">
+        <div class="cv-w"><canvas id="cv" width="900" height="900" aria-label="Logo preview. Drag to move the logo."></canvas></div>
+        <div class="cfg-hint">
+          <span class="note">Drag the logo to place it</span>
+          <span class="note">Preview only, a real proof follows</span>
+        </div>
+      </div>
+      <div class="cfg-p">
+        <div class="cfg-s"><span class="lab"><b>1</b>Choose the piece</span><div class="opts" id="cfgPiece"></div></div>
+        <div class="cfg-s"><span class="lab"><b>2</b>Add your logo</span>
+          <label class="upl"><input id="logoFile" type="file" accept="image/*">
+            <span class="btn" style="min-height:40px;padding:0 18px">Upload</span>
+            <span class="note" id="uplName">Black on white or a transparent PNG works best</span></label>
+        </div>
+        <div class="cfg-s"><span class="lab"><b>3</b>Place it, then fine tune</span>
+          <div class="cfg-row">
+            <label class="field"><span class="note">Size</span><input class="range" id="logoSize" type="range" min="12" max="90" value="46"></label>
+            <label class="field"><span class="note">Rotation</span><input class="range" id="logoRot" type="range" min="-180" max="180" value="0"></label>
+          </div>
+          <div class="opts"><button class="opt" id="logoInv" aria-pressed="false" type="button">Invert logo</button><button class="opt" id="logoDl" type="button">Download mockup</button></div>
+        </div>
+        <div class="cfg-s"><span class="lab"><b>4</b>How many</span>
+          <div class="cfg-q"><b id="cfgN">48</b><input class="range" id="cfgQty" type="range" min="12" max="500" value="48" aria-label="Quantity"></div>
+        </div>
+        <div class="cfg-tot">
+          <div class="go"><span class="lab">Per piece</span><b id="cfgEach"></b></div>
+          <div><span class="lab">Volume price</span><b id="cfgSave"></b></div>
+          <div><span class="lab">Total</span><b id="cfgTotal"></b></div>
+        </div>
+        <div class="cfg-s" style="border-bottom:0">
+          <p class="note" id="cfgNote"></p>
+          <button class="btn solid full" id="cfgGo" type="button">Request this quote</button><form id="cfgForm" class="stack-s" method="post"><div class="note ink" id="cfgSum"></div>
+            <input type="hidden" name="contact[order]" id="cfgOrderField">
+            <input class="inp" name="contact[name]" placeholder="Your name" required>
+            <input class="inp" name="contact[email]" type="email" placeholder="Email" required>
+            <input class="inp" name="contact[organisation]" placeholder="Business, team or department">
+            <textarea class="inp" name="contact[body]" placeholder="Deadline, placement notes, anything else" style="min-height:84px"></textarea>
+            <button class="btn solid full" type="submit">Send to Murphy</button><span class="note" id="quoteMsg" role="status"></span></form></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="wrap" style="padding-bottom:0"><div class="notice">
+  <svg class="ic no" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19"/></svg>
+  <div><b>No one-off custom orders.</b> <p>Murphy does not engrave single custom items at the shop, and does not take meetings for one item. Custom designs and logos are for larger orders of twelve pieces or more. Local pickup is available on large custom orders only, arranged after the order is approved. For a single item, order from the online store and add a name for $5.</p></div>
+</div></div>
+
+<div class="wrap sec">
+  <div class="sh"><h2 class="h2">What happens next</h2><span class="lab">Proof included on every order</span></div>
+  <ol class="steps"><li ><b>Murphy checks the artwork</b>Vector is best: SVG, AI, EPS or PDF. A clean PNG also works.</li><li ><b>You get a proof</b>An exact mockup and a firm price within 2 business days.</li><li ><b>You approve it</b>Nothing is engraved until you sign off.</li><li ><b>It ships</b>Most runs leave 7 to 10 business days after approval.</li></ol>
+</div>
+
+
+  </main>
+  <footer class="foot">
+  <div class="wrap foot-top">
+    <div class="stack"><img src="/assets/logo-lockup.webp" alt="Counter Culture Conflict" style="width:120px"><p class="copy">New designs, restocks and the apparel release. Occasional, and nothing else.</p>
+      <form method="post">
+        <input type="hidden" name="contact[tags]" value="newsletter">
+        <div class="signup">
+          <input type="email" name="contact[email]" placeholder="Email address" aria-label="Email address" required>
+          <button type="submit">Subscribe</button>
+        </div></form>
+      <div class="social"><a class="ib2" href="" aria-label="Instagram" target="_blank" rel="noopener">In</a><a class="ib2" href="" aria-label="Facebook" target="_blank" rel="noopener">Fa</a><a class="ib2" href="" aria-label="YouTube" target="_blank" rel="noopener">Yo</a></div>
+    </div>
+    <div class="fcols"><div>
+          <span class="lab">Shop</span>
+          <ul><li><a href="#">Can lids</a></li><li><a href="#">Knives</a></li><li><a href="#">Tumblers</a></li></ul>
+        </div><div>
+          <span class="lab">Orders</span>
+          <ul><li><a href="#">Can lids</a></li><li><a href="#">Knives</a></li><li><a href="#">Tumblers</a></li></ul>
+        </div><div>
+          <span class="lab">About</span>
+          <ul><li><a href="#">Can lids</a></li><li><a href="#">Knives</a></li><li><a href="#">Tumblers</a></li></ul>
+        </div></div>
+  </div>
+  <div class="wrap foot-bot">
+    <span class="note">&copy; 2026 Counter Culture Conflict. Omaha, Nebraska.</span>
+    <a class="built" href="https://ccincstudios.com" target="_blank" rel="noopener"><span>Site by</span><b>Counter Culture Inc Studios</b></a>
+  </div>
+</footer>
+
+
+
+  <script src="/assets/theme.js" defer></script>
+</body>
+</html>

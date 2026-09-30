@@ -27,6 +27,19 @@
   </div>
   <div class="shopbar">
     <span class="lab">{{ collection.products_count }} {% if collection.products_count == 1 %}piece{% else %}pieces{% endif %}</span>
+    {%- assign sort_by = collection.sort_by | default: collection.default_sort_by -%}
+    <form method="get" action="{{ collection.url }}" id="sortForm">
+      {%- if collection.current_type != blank -%}<input type="hidden" name="q" value="{{ collection.current_type }}">{%- endif -%}
+      <label class="sortw">
+        <span class="lab">Sort</span>
+        <select id="sort" name="sort_by" aria-label="Sort products">
+          {%- for option in collection.sort_options -%}
+            <option value="{{ option.value }}"{% if option.value == sort_by %} selected{% endif %}>{{ option.name }}</option>
+          {%- endfor -%}
+        </select>
+      </label>
+      <noscript><button class="btn" type="submit">Sort</button></noscript>
+    </form>
   </div>
   <div class="grid">
     {%- for product in collection.products -%}

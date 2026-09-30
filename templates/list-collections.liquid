@@ -1,1 +1,24 @@
-<div class="wrap sec"><h1 class="bl sm">list-collections</h1></div>
+<header class="pghd">
+  <div class="wrap pghd-in" style="position:relative;z-index:2">
+    <div class="stack-s">
+      <span class="lab"><i></i>Everything Murphy engraves</span>
+      <h1 class="bl md">The shop</h1>
+    </div>
+    <div><p class="copy">Every piece is cut on an industrial fiber laser in Omaha, Nebraska.</p></div>
+  </div>
+</header>
+<div class="wrap sec-s" style="padding-bottom:var(--gap)">
+  <div class="grid">
+    {%- for collection in collections -%}
+      {%- unless collection.handle == 'frontpage' -%}
+        <a class="lcard" href="{{ collection.url }}">
+          {%- if collection.image -%}
+            <img src="{{ collection.image | image_url: width: 800 }}" alt="" loading="lazy" width="800" height="800">
+          {%- endif -%}
+          <span class="h2">{{ collection.title }}</span>
+          <span class="lab">{{ collection.products_count }} piece{% unless collection.products_count == 1 %}s{% endunless %}</span>
+        </a>
+      {%- endunless -%}
+    {%- endfor -%}
+  </div>
+</div>

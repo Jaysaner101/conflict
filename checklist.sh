@@ -1,0 +1,50 @@
+#!/usr/bin/env bash
+# Completion check. Run before reporting anything as done.
+cd "$(dirname "$0")"; fail=0
+chk(){ if [ "$2" = "0" ]; then printf "  FAIL  %s\n" "$1"; fail=1; else printf "  ok    %s\n" "$1"; fi }
+
+echo "TEMPLATES"
+for t in 404 article blog cart collection index list-collections page password product search; do
+  f=$(ls templates/$t.liquid templates/$t.json 2>/dev/null | head -1)
+  if [ -z "$f" ]; then chk "$t present" 0; else n=$(wc -l < "$f"); [ "$n" -ge 3 ] && chk "$t ($n lines)" 1 || chk "$t is a stub ($n lines)" 0; fi
+done
+
+echo "CUSTOMER TEMPLATES"
+for t in account activate_account addresses login order register reset_password; do
+  [ -f "templates/customers/$t.liquid" ] && n=$(wc -l < templates/customers/$t.liquid) || n=0
+  [ "$n" -ge 3 ] && chk "customers/$t" 1 || chk "customers/$t" 0
+done
+
+echo "PAGE TEMPLATES"
+for t in custom-and-bulk work show murphy allies; do
+  [ -f "templates/page.$t.json" ] && chk "page.$t" 1 || chk "page.$t" 0; done
+
+echo "SECTIONS FROM THE PROTOTYPE"
+for s in hero-slider craft two-ways featured-collection four-panel as-seen-on rich-banner work-gallery custom-order steps show-player about-split story-chapters person-hero ally-cards media-strip page-header notice header footer episodes apparel-hero; do
+  [ -f "sections/$s.liquid" ] && chk "$s" 1 || chk "$s" 0; done
+
+echo "VALIDITY"
+python3 - <<'PY' 2>/dev/null && echo "  ok    all JSON parses" || { echo "  FAIL  JSON"; exit 1; }
+import json,glob
+for f in glob.glob('templates/*.json')+glob.glob('config/*.json')+glob.glob('locales/*.json'): json.load(open(f))
+PY
+node --check assets/theme.js >/dev/null 2>&1 && chk "theme.js parses" 1 || chk "theme.js parses" 0
+for f in sections/*.liquid; do
+  if grep -q '{% schema %}' "$f"; then
+    python3 -c "
+import sys,json,re
+s=open('$f').read()
+m=re.search(r'\{%\s*schema\s*%\}(.*?)\{%\s*endschema\s*%\}',s,re.S)
+json.loads(m.group(1))" 2>/dev/null || { echo "  FAIL  schema invalid: $f"; fail=1; }
+  fi
+done
+echo "  ok    all section schemas parse"
+echo
+if node lint.js >/tmp/lint.out 2>&1; then
+  echo "  ok    all liquid files parse"
+else
+  echo "  FAIL  liquid parse errors:"; sed 's/^/        /' /tmp/lint.out; FAILED=1
+fi
+
+[ "$fail" = "0" ] && echo "RESULT: complete" || echo "RESULT: INCOMPLETE"
+exit $fail

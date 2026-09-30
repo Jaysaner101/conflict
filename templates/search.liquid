@@ -1,1 +1,42 @@
-<div class="wrap sec"><h1 class="bl sm">search</h1></div>
+<header class="pghd">
+  <div class="wrap pghd-in" style="position:relative;z-index:2">
+    <div class="stack-s">
+      <span class="lab"><i></i>Search</span>
+      <h1 class="bl md">{% if search.performed %}{{ search.results_count }} result{% unless search.results_count == 1 %}s{% endunless %}{% else %}Find a piece{% endif %}</h1>
+    </div>
+    <div>
+      <form action="{{ routes.search_url }}" method="get" role="search">
+        <input type="hidden" name="type" value="product,page,article">
+        <input class="inp" type="search" name="q" value="{{ search.terms | escape }}"
+               placeholder="Can lids, knives, tumblers..." aria-label="Search">
+        <div class="btns" style="margin-top:12px"><button class="btn solid" type="submit">Search</button></div>
+      </form>
+    </div>
+  </div>
+</header>
+
+{%- paginate search.results by 24 -%}
+<div class="wrap sec-s" style="padding-bottom:var(--gap)">
+  {%- if search.performed -%}
+    {%- if search.results_count == 0 -%}
+      <p class="copy">No matches for &ldquo;{{ search.terms | escape }}&rdquo;. Try a broader word, or
+        <a class="ul" href="{{ routes.all_products_collection_url }}">browse everything</a>.</p>
+    {%- else -%}
+      <div class="grid">
+        {%- for item in search.results -%}
+          {%- if item.object_type == 'product' -%}
+            {%- render 'product-card', card_product: item -%}
+          {%- else -%}
+            <a class="lcard" href="{{ item.url }}">
+              <span class="lab">{{ item.object_type }}</span>
+              <span class="h2">{{ item.title }}</span>
+              <p class="copy">{{ item.content | strip_html | truncate: 140 }}</p>
+            </a>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+      {%- if paginate.pages > 1 -%}<div class="btns">{{ paginate | default_pagination }}</div>{%- endif -%}
+    {%- endif -%}
+  {%- endif -%}
+</div>
+{%- endpaginate -%}

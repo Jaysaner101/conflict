@@ -1,0 +1,49 @@
+<div class="wrap sec">
+  <div class="pghd-in" style="align-items:end">
+    <div class="stack-s">
+      <span class="lab"><i></i>{{ customer.email }}</span>
+      <h1 class="bl md">Your account</h1>
+    </div>
+    <div class="btns" style="justify-self:end">
+      <a class="btn" href="{{ routes.account_addresses_url }}">Addresses</a>
+      <a class="btn" href="{{ routes.account_logout_url }}">Sign out</a>
+    </div>
+  </div>
+
+  <div class="sec-s">
+    <h2 class="bl sm">Order history</h2>
+    {%- paginate customer.orders by 20 -%}
+      {%- if customer.orders.size == 0 -%}
+        <p class="copy">No orders yet.</p>
+        <div class="btns"><a class="btn solid" href="{{ routes.all_products_collection_url }}">Shop the store</a></div>
+      {%- else -%}
+        <table class="otab">
+          <thead>
+            <tr><th>Order</th><th>Date</th><th>Payment</th><th>Fulfilment</th><th>Total</th></tr>
+          </thead>
+          <tbody>
+            {%- for order in customer.orders -%}
+              <tr>
+                <td><a class="ul" href="{{ order.customer_url }}">{{ order.name }}</a></td>
+                <td>{{ order.created_at | date: '%b %d, %Y' }}</td>
+                <td>{{ order.financial_status_label }}</td>
+                <td>{{ order.fulfillment_status_label }}</td>
+                <td>{{ order.total_price | money }}</td>
+              </tr>
+            {%- endfor -%}
+          </tbody>
+        </table>
+        {%- if paginate.pages > 1 -%}<div class="btns">{{ paginate | default_pagination }}</div>{%- endif -%}
+      {%- endif -%}
+    {%- endpaginate -%}
+  </div>
+
+  <div class="sec-s">
+    <h2 class="bl sm">Default address</h2>
+    {%- if customer.default_address -%}
+      <p class="copy">{{ customer.default_address | format_address }}</p>
+    {%- else -%}
+      <p class="copy">No address saved. <a class="ul" href="{{ routes.account_addresses_url }}">Add one</a>.</p>
+    {%- endif -%}
+  </div>
+</div>

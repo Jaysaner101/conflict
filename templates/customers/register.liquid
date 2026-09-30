@@ -1,0 +1,27 @@
+<div class="wrap sec" style="max-width:520px">
+  <span class="lab"><i></i>Account</span>
+  <h1 class="bl sm" style="margin:12px 0 22px">Create an account</h1>
+  {%- form 'create_customer' -%}
+    {%- if form.errors -%}<p class="note">{{ form.errors | default_errors }}</p>{%- endif -%}
+    <div class="field">
+      <label class="lab" for="rgFirst">First name</label>
+      <input class="inp" type="text" id="rgFirst" name="customer[first_name]" autocomplete="given-name">
+    </div>
+    <div class="field">
+      <label class="lab" for="rgLast">Last name</label>
+      <input class="inp" type="text" id="rgLast" name="customer[last_name]" autocomplete="family-name">
+    </div>
+    <div class="field">
+      <label class="lab" for="rgEmail">Email</label>
+      <input class="inp" type="email" id="rgEmail" name="customer[email]" autocomplete="email" required>
+    </div>
+    <div class="field">
+      <label class="lab" for="rgPass">Password</label>
+      <input class="inp" type="password" id="rgPass" name="customer[password]" autocomplete="new-password" required>
+    </div>
+    <div class="btns"><button class="btn solid" type="submit">Create account</button></div>
+    <p class="copy" style="margin-top:16px">
+      Already have one? <a class="ul" href="{{ routes.account_login_url }}">Sign in</a>
+    </p>
+  {%- endform -%}
+</div>

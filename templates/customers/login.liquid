@@ -1,1 +1,37 @@
-<div class="wrap sec">{% form 'customer_login' %}<input type="email" name="customer[email]"><button>Sign in</button>{% endform %}</div>
+<div class="wrap sec" style="max-width:520px">
+  <span class="lab"><i></i>Account</span>
+  <h1 class="bl sm" style="margin:12px 0 22px">Sign in</h1>
+
+  <div id="loginForm">
+    {%- form 'customer_login' -%}
+      {%- if form.errors -%}<p class="note">{{ form.errors | default_errors }}</p>{%- endif -%}
+      <div class="field">
+        <label class="lab" for="liEmail">Email</label>
+        <input class="inp" type="email" id="liEmail" name="customer[email]" autocomplete="email" required>
+      </div>
+      <div class="field">
+        <label class="lab" for="liPass">Password</label>
+        <input class="inp" type="password" id="liPass" name="customer[password]" autocomplete="current-password">
+      </div>
+      <div class="btns"><button class="btn solid" type="submit">Sign in</button></div>
+      <p class="copy" style="margin-top:16px">
+        <a class="ul" href="#recover">Forgotten your password?</a><br>
+        New here? <a class="ul" href="{{ routes.account_register_url }}">Create an account</a>
+      </p>
+    {%- endform -%}
+  </div>
+
+  <div id="recover" style="margin-top:34px">
+    <h2 class="bl sm">Reset your password</h2>
+    {%- form 'recover_customer_password' -%}
+      {%- if form.posted_successfully? -%}
+        <p class="note">If that email is on file, a reset link is on its way.</p>
+      {%- endif -%}
+      <div class="field">
+        <label class="lab" for="rcEmail">Email</label>
+        <input class="inp" type="email" id="rcEmail" name="email" autocomplete="email" required>
+      </div>
+      <div class="btns"><button class="btn" type="submit">Send reset link</button></div>
+    {%- endform -%}
+  </div>
+</div>

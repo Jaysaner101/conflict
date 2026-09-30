@@ -1,0 +1,23 @@
+{
+  "name": "conflict",
+  "version": "1.0.0",
+  "description": "Custom Shopify theme for Murphy's laser engraving store (Omaha, Nebraska), built by Counter Culture Inc Studios.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jaysaner101/conflict.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Jaysaner101/conflict/issues"
+  },
+  "homepage": "https://github.com/Jaysaner101/conflict#readme",
+  "dependencies": {
+    "liquidjs": "^10.29.0"
+  }
+}

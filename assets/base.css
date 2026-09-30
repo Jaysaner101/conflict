@@ -781,3 +781,32 @@ header.pl>.wrap[style*="padding-top:clamp(108px"]{padding-top:clamp(100px,8vw,11
 .notice b{color:var(--ink);font-weight:600}
 @media (max-width:1020px){.ways{grid-template-columns:1fr}}
 @media (max-width:760px){.notice{grid-template-columns:1fr;gap:10px;font-size:14px}.way{padding:22px 18px}.way li{font-size:14px}}
+
+/* Skip link: off-screen until keyboard focus. */
+.skip{position:absolute;left:-9999px;top:0;z-index:999;padding:10px 16px;background:var(--hi);color:#000;font-weight:700;font-size:12px;letter-spacing:.14em;text-transform:uppercase;text-decoration:none}
+.skip:focus{left:8px;top:8px}
+
+/* Rich text from the admin editor (page and article bodies). */
+.rte>*+*{margin-top:1em}
+.rte h2,.rte h3{font-family:var(--hd);color:var(--ink);letter-spacing:.01em;margin-top:1.6em}
+.rte h2{font-size:clamp(20px,2vw,28px)}
+.rte h3{font-size:clamp(17px,1.5vw,21px)}
+.rte a{color:var(--ink);text-decoration:underline;text-underline-offset:3px}
+.rte a:hover{color:var(--hi)}
+.rte img{max-width:100%;height:auto}
+.rte ul,.rte ol{padding-left:1.2em}
+.rte li+li{margin-top:.4em}
+.rte blockquote{border-left:2px solid var(--hi);padding-left:16px;color:var(--ink)}
+
+/* Order and account tables. */
+.otab{width:100%;border-collapse:collapse;font-size:14px}
+.otab th,.otab td{text-align:left;padding:12px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+.otab th{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--body);font-weight:600}
+.otab td{color:var(--ink)}
+.otab tfoot td{border-bottom:0;padding-top:14px}
+@media (max-width:640px){
+  .otab,.otab tbody,.otab tr,.otab td{display:block;width:100%}
+  .otab thead{display:none}
+  .otab tr{border-bottom:1px solid var(--line);padding:10px 0}
+  .otab td{border-bottom:0;padding:4px 0}
+}

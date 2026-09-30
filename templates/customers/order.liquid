@@ -1,0 +1,51 @@
+<div class="wrap sec">
+  <div class="stack-s">
+    <span class="lab"><i></i>{{ order.created_at | date: '%b %d, %Y' }}</span>
+    <h1 class="bl md">Order {{ order.name }}</h1>
+  </div>
+
+  <div class="sfacts" style="margin-top:14px">
+    <span>Payment: {{ order.financial_status_label }}</span>
+    <span>Fulfilment: {{ order.fulfillment_status_label }}</span>
+  </div>
+
+  <div class="sec-s">
+    <table class="otab">
+      <thead><tr><th>Item</th><th>Price</th><th>Qty</th><th>Total</th></tr></thead>
+      <tbody>
+        {%- for line in order.line_items -%}
+          <tr>
+            <td>
+              <a class="ul" href="{{ line.product.url }}">{{ line.title }}</a>
+              {%- if line.properties.size > 0 -%}
+                {%- for p in line.properties -%}
+                  {%- unless p.last == blank -%}<br><span class="lab">{{ p.first }}: {{ p.last }}</span>{%- endunless -%}
+                {%- endfor -%}
+              {%- endif -%}
+            </td>
+            <td>{{ line.price | money }}</td>
+            <td>{{ line.quantity }}</td>
+            <td>{{ line.line_price | money }}</td>
+          </tr>
+        {%- endfor -%}
+      </tbody>
+      <tfoot>
+        <tr><td colspan="3">Subtotal</td><td>{{ order.subtotal_price | money }}</td></tr>
+        {%- for s in order.shipping_methods -%}
+          <tr><td colspan="3">Shipping ({{ s.title }})</td><td>{{ s.price | money }}</td></tr>
+        {%- endfor -%}
+        {%- for t in order.tax_lines -%}
+          <tr><td colspan="3">Tax ({{ t.title }} {{ t.rate_percentage }}%)</td><td>{{ t.price | money }}</td></tr>
+        {%- endfor -%}
+        <tr><td colspan="3"><b>Total</b></td><td><b>{{ order.total_price | money }}</b></td></tr>
+      </tfoot>
+    </table>
+  </div>
+
+  <div class="sec-s" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:24px">
+    <div><h2 class="bl sm">Billing address</h2><p class="copy">{{ order.billing_address | format_address }}</p></div>
+    <div><h2 class="bl sm">Shipping address</h2><p class="copy">{{ order.shipping_address | format_address }}</p></div>
+  </div>
+
+  <div class="btns"><a class="btn" href="{{ routes.account_url }}">Back to account</a></div>
+</div>

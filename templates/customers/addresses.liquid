@@ -1,0 +1,113 @@
+<div class="wrap sec">
+  <div class="stack-s">
+    <span class="lab"><i></i>Account</span>
+    <h1 class="bl md">Your addresses</h1>
+  </div>
+
+  <div class="sec-s">
+    <h2 class="bl sm">Add a new address</h2>
+    {%- form 'customer_address', customer.new_address -%}
+      {%- if form.errors -%}<p class="note">{{ form.errors | default_errors }}</p>{%- endif -%}
+      <div class="field"><label class="lab" for="naFirst">First name</label>
+        <input class="inp" type="text" id="naFirst" name="address[first_name]" autocomplete="given-name"></div>
+      <div class="field"><label class="lab" for="naLast">Last name</label>
+        <input class="inp" type="text" id="naLast" name="address[last_name]" autocomplete="family-name"></div>
+      <div class="field"><label class="lab" for="naCo">Company</label>
+        <input class="inp" type="text" id="naCo" name="address[company]" autocomplete="organization"></div>
+      <div class="field"><label class="lab" for="naA1">Address</label>
+        <input class="inp" type="text" id="naA1" name="address[address1]" autocomplete="address-line1"></div>
+      <div class="field"><label class="lab" for="naA2">Apartment, suite etc.</label>
+        <input class="inp" type="text" id="naA2" name="address[address2]" autocomplete="address-line2"></div>
+      <div class="field"><label class="lab" for="naCity">City</label>
+        <input class="inp" type="text" id="naCity" name="address[city]" autocomplete="address-level2"></div>
+      <div class="field"><label class="lab" for="naCountry">Country</label>
+        <select class="inp" id="naCountry" name="address[country]" data-default="{{ form.country }}">{{ country_option_tags }}</select></div>
+      <div class="field" id="naProvWrap"><label class="lab" for="naProv">State / Province</label>
+        <select class="inp" id="naProv" name="address[province]" data-default="{{ form.province }}"></select></div>
+      <div class="field"><label class="lab" for="naZip">ZIP / Postcode</label>
+        <input class="inp" type="text" id="naZip" name="address[zip]" autocomplete="postal-code"></div>
+      <div class="field"><label class="lab" for="naPh">Phone</label>
+        <input class="inp" type="tel" id="naPh" name="address[phone]" autocomplete="tel"></div>
+      <label class="lab" style="display:flex;align-items:center;gap:10px;margin:10px 0">
+        {{ form.set_as_default_checkbox }} Set as default address
+      </label>
+      <div class="btns"><button class="btn solid" type="submit">Save address</button></div>
+    {%- endform -%}
+  </div>
+
+  {%- paginate customer.addresses by 10 -%}
+    <div class="sec-s">
+      <h2 class="bl sm">Saved addresses</h2>
+      {%- if customer.addresses.size == 0 -%}
+        <p class="copy">No addresses saved yet.</p>
+      {%- else -%}
+        <div class="grid">
+          {%- for address in customer.addresses -%}
+            <div class="glass">
+              {%- if address == customer.default_address -%}<span class="lab"><i></i>Default</span>{%- endif -%}
+              <p class="copy">{{ address | format_address }}</p>
+              <details style="margin-top:10px">
+                <summary class="lab" style="cursor:pointer">Edit this address</summary>
+                {%- form 'customer_address', address -%}
+                  <div class="field"><label class="lab" for="ef{{ address.id }}">First name</label>
+                    <input class="inp" type="text" id="ef{{ address.id }}" name="address[first_name]" value="{{ address.first_name }}"></div>
+                  <div class="field"><label class="lab" for="el{{ address.id }}">Last name</label>
+                    <input class="inp" type="text" id="el{{ address.id }}" name="address[last_name]" value="{{ address.last_name }}"></div>
+                  <div class="field"><label class="lab" for="e1{{ address.id }}">Address</label>
+                    <input class="inp" type="text" id="e1{{ address.id }}" name="address[address1]" value="{{ address.address1 }}"></div>
+                  <div class="field"><label class="lab" for="e2{{ address.id }}">Apartment, suite etc.</label>
+                    <input class="inp" type="text" id="e2{{ address.id }}" name="address[address2]" value="{{ address.address2 }}"></div>
+                  <div class="field"><label class="lab" for="ec{{ address.id }}">City</label>
+                    <input class="inp" type="text" id="ec{{ address.id }}" name="address[city]" value="{{ address.city }}"></div>
+                  <div class="field" id="ecw{{ address.id }}"><label class="lab" for="eco{{ address.id }}">Country</label>
+                    <select class="inp" id="eco{{ address.id }}" name="address[country]" data-default="{{ address.country }}">{{ country_option_tags }}</select></div>
+                  <div class="field" id="epw{{ address.id }}"><label class="lab" for="ep{{ address.id }}">State / Province</label>
+                    <select class="inp" id="ep{{ address.id }}" name="address[province]" data-default="{{ address.province }}"></select></div>
+                  <div class="field"><label class="lab" for="ez{{ address.id }}">ZIP / Postcode</label>
+                    <input class="inp" type="text" id="ez{{ address.id }}" name="address[zip]" value="{{ address.zip }}"></div>
+                  <div class="field"><label class="lab" for="eph{{ address.id }}">Phone</label>
+                    <input class="inp" type="tel" id="eph{{ address.id }}" name="address[phone]" value="{{ address.phone }}"></div>
+                  <label class="lab" style="display:flex;align-items:center;gap:10px;margin:10px 0">
+                    {{ form.set_as_default_checkbox }} Set as default address
+                  </label>
+                  <div class="btns"><button class="btn solid" type="submit">Save changes</button></div>
+                {%- endform -%}
+              </details>
+              {%- form 'customer_address', address -%}
+                <input type="hidden" name="_method" value="delete">
+                <div class="btns" style="margin-top:10px">
+                  <button class="btn" type="submit" data-confirm="Delete this address?">Delete</button>
+                </div>
+              {%- endform -%}
+            </div>
+          {%- endfor -%}
+        </div>
+        {%- if paginate.pages > 1 -%}<div class="btns">{{ paginate | default_pagination }}</div>{%- endif -%}
+      {%- endif -%}
+    </div>
+  {%- endpaginate -%}
+</div>
+
+<script src="{{ 'shopify_common.js' | shopify_asset_url }}" defer></script>
+<script>
+  // Populate the province select from the chosen country, and hide it for
+  // countries that have none. Runs once shopify_common.js has loaded.
+  document.addEventListener('DOMContentLoaded', function () {
+    var ready = function () {
+      if (!window.Shopify || !Shopify.CountryProvinceSelector) { return setTimeout(ready, 60); }
+      if (document.getElementById('naCountry')) {
+        new Shopify.CountryProvinceSelector('naCountry', 'naProv', { hideElement: 'naProvWrap' });
+      }
+      document.querySelectorAll('select[id^="eco"]').forEach(function (sel) {
+        var id = sel.id.slice(3);
+        new Shopify.CountryProvinceSelector('eco' + id, 'ep' + id, { hideElement: 'epw' + id });
+      });
+    };
+    ready();
+    document.querySelectorAll('[data-confirm]').forEach(function (b) {
+      b.addEventListener('click', function (e) {
+        if (!window.confirm(b.getAttribute('data-confirm'))) { e.preventDefault(); }
+      });
+    });
+  });
+</script>

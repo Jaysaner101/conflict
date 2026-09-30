@@ -1,1 +1,36 @@
-<div class="wrap sec"><h1 class="bl sm">blog</h1></div>
+<header class="pghd">
+  <div class="wrap pghd-in" style="position:relative;z-index:2">
+    <div class="stack-s">
+      <span class="lab"><i></i>From the bench</span>
+      <h1 class="bl md">{{ blog.title }}</h1>
+    </div>
+  </div>
+</header>
+
+{%- paginate blog.articles by 12 -%}
+<div class="wrap sec-s" style="padding-bottom:var(--gap)">
+  {%- if blog.all_tags.size > 0 -%}
+    <div class="chips" role="group" aria-label="Topics">
+      <a class="chip{% unless current_tags %} on{% endunless %}" href="{{ blog.url }}">All</a>
+      {%- for tag in blog.all_tags -%}
+        <a class="chip{% if current_tags contains tag %} on{% endif %}" href="{{ blog.url }}/tagged/{{ tag | handleize }}">{{ tag }}</a>
+      {%- endfor -%}
+    </div>
+  {%- endif -%}
+  <div class="grid">
+    {%- for article in blog.articles -%}
+      <a class="lcard" href="{{ article.url }}">
+        {%- if article.image -%}
+          <img src="{{ article.image | image_url: width: 900 }}" alt="" loading="lazy" width="900" height="600">
+        {%- endif -%}
+        <span class="lab">{{ article.published_at | date: '%b %d, %Y' }}</span>
+        <span class="h2">{{ article.title }}</span>
+        <p class="copy">{{ article.excerpt_or_content | strip_html | truncate: 150 }}</p>
+      </a>
+    {%- else -%}
+      <p class="copy">No posts yet.</p>
+    {%- endfor -%}
+  </div>
+  {%- if paginate.pages > 1 -%}<div class="btns">{{ paginate | default_pagination }}</div>{%- endif -%}
+</div>
+{%- endpaginate -%}

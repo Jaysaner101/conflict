@@ -1,0 +1,20 @@
+<div class="wrap sec" style="max-width:520px">
+  <span class="lab"><i></i>Account</span>
+  <h1 class="bl sm" style="margin:12px 0 10px">Activate your account</h1>
+  <p class="copy" style="margin-bottom:22px">Set a password to finish setting up your account.</p>
+  {%- form 'activate_customer_password' -%}
+    {%- if form.errors -%}<p class="note">{{ form.errors | default_errors }}</p>{%- endif -%}
+    <div class="field">
+      <label class="lab" for="acPass">Password</label>
+      <input class="inp" type="password" id="acPass" name="customer[password]" autocomplete="new-password" required>
+    </div>
+    <div class="field">
+      <label class="lab" for="acConf">Confirm password</label>
+      <input class="inp" type="password" id="acConf" name="customer[password_confirmation]" autocomplete="new-password" required>
+    </div>
+    <div class="btns">
+      <button class="btn solid" type="submit">Activate account</button>
+      <button class="btn" type="submit" name="decline">Decline invitation</button>
+    </div>
+  {%- endform -%}
+</div>
