@@ -168,9 +168,36 @@ function initWorkFilter() {
   });
 }
 
+/* ---------- product: option buttons drive the real variant select ---------- */
+function initVariants() {
+  const sel = $('#variantSelect'); if (!sel) return;
+  const groups = $$('[data-opt]');
+  if (!groups.length) return;
+  const pick = () => {
+    const chosen = [];
+    $$('.field .opts').forEach(g => {
+      const on = $('[aria-pressed="true"]', g);
+      if (on) chosen.push(on.dataset.val);
+    });
+    const want = chosen.join(' / ');
+    [...sel.options].forEach(o => { if (o.textContent.split(' — ')[0].trim() === want) sel.value = o.value; });
+    sel.dispatchEvent(new Event('change', { bubbles: true }));
+  };
+  groups.forEach(b => b.onclick = () => {
+    $$(`[data-opt="${b.dataset.opt}"]`).forEach(o => o.setAttribute('aria-pressed', o === b));
+    pick();
+  });
+}
+
+/* ---------- product gallery ---------- */
+function initGallery() {
+  const img = $('#pImg'); if (!img) return;
+  $$('.thumbs button').forEach(b => b.onclick = () => { img.src = b.dataset.src; });
+}
+
 /* ---------- boot ---------- */
 function boot() {
-  initNav(); initHead(); initReveal(); initVideo(); initNameOption(); initWorkFilter();
+  initNav(); initHead(); initReveal(); initVideo(); initNameOption(); initWorkFilter(); initVariants(); initGallery();
   if ($('#hs')) initSlider();
   if ($('#seen')) initSeen();
   if ($('#showPlayer')) initPlayer($('#showPlayer'));

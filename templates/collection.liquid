@@ -1,1 +1,40 @@
-<div class="wrap sec"><h1 class="bl sm">{{ collection.title }}</h1></div>
+<header class="pghd">
+  <div class="wrap pghd-in" style="position:relative;z-index:2">
+    <div class="stack-s">
+      <span class="lab"><i></i>{{ collection.metafields.custom.eyebrow | default: 'Engraved gear and apparel' }}</span>
+      <h1 class="bl md">{{ collection.title }}</h1>
+    </div>
+    <div>
+      {%- if collection.description != blank -%}<div class="copy">{{ collection.description }}</div>{%- endif -%}
+      <div class="sfacts" style="margin-top:14px">
+        <span>Ships in about {{ settings.fact_ship_time | default: '3 days' }}</span>
+        <span>Add a name, $5</span>
+        <span>{{ settings.fact_ship_us }}</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+{%- paginate collection.products by 24 -%}
+<div class="wrap sec-s" style="padding-bottom:var(--gap)">
+  <div class="chips" role="group" aria-label="Collections">
+    <a class="chip{% if collection.handle == 'all' %} on{% endif %}" href="{{ routes.all_products_collection_url }}">All</a>
+    {%- for c in collections -%}
+      {%- unless c.handle == 'all' or c.products_count == 0 -%}
+        <a class="chip{% if c.handle == collection.handle %} on{% endif %}" href="{{ c.url }}">{{ c.title }}</a>
+      {%- endunless -%}
+    {%- endfor -%}
+  </div>
+  <div class="shopbar">
+    <span class="lab">{{ collection.products_count }} {% if collection.products_count == 1 %}piece{% else %}pieces{% endif %}</span>
+  </div>
+  <div class="grid">
+    {%- for product in collection.products -%}
+      {%- render 'product-card', card_product: product -%}
+    {%- else -%}
+      <p class="copy">No products in this collection yet.</p>
+    {%- endfor -%}
+  </div>
+  {%- if paginate.pages > 1 -%}<div class="btns">{{ paginate | default_pagination }}</div>{%- endif -%}
+</div>
+{%- endpaginate -%}

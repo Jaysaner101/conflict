@@ -17,13 +17,21 @@
         <div class="ghead"><h2 class="h2">{{ c }}</h2><span class="lab">{{ items.size }} pieces</span></div>
         <div class="wgroup">
           {%- for block in items -%}
+            {%- liquid
+              assign clip = block.settings.clip
+              if clip != blank
+                unless clip contains 'http'
+                  assign clip = clip | file_url
+                endunless
+              endif
+            -%}
             <button class="wk" type="button" {{ block.shopify_attributes }}
-              data-type="{% if block.settings.clip != blank %}video{% else %}image{% endif %}"
-              data-src="{% if block.settings.clip != blank %}{{ block.settings.clip }}{% else %}{{ block.settings.image | image_url: width: 1600 }}{% endif %}"
+              data-type="{% if clip != blank %}video{% else %}image{% endif %}"
+              data-src="{% if clip != blank %}{{ clip }}{% else %}{{ block.settings.image | image_url: width: 1600 }}{% endif %}"
               {% if block.settings.image %}data-poster="{{ block.settings.image | image_url: width: 900 }}"{% endif %}
               data-label="{{ block.settings.title | escape }}" aria-label="Open {{ block.settings.title | escape }}">
-              {%- if block.settings.clip != blank -%}
-                <video src="{{ block.settings.clip }}" {% if block.settings.image %}poster="{{ block.settings.image | image_url: width: 600 }}"{% endif %} muted loop playsinline></video>
+              {%- if clip != blank -%}
+                <video src="{{ clip }}" {% if block.settings.image %}poster="{{ block.settings.image | image_url: width: 600 }}"{% endif %} muted loop playsinline></video>
               {%- elsif block.settings.image -%}
                 <img loading="lazy" src="{{ block.settings.image | image_url: width: 700 }}" alt="{{ block.settings.title | escape }}">
               {%- endif -%}

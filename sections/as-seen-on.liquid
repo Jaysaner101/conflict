@@ -1,13 +1,21 @@
+{%- liquid
+  assign clip = section.settings.clip
+  if clip != blank
+    unless clip contains 'http'
+      assign clip = clip | file_url
+    endunless
+  endif
+-%}
 <div class="seen" id="seen">
   {%- if section.settings.image -%}<img src="{{ section.settings.image | image_url: width: 2000 }}" alt="{{ section.settings.heading | escape }}">
   {%- else -%}<img src="{{ 'hero-poster.jpg' | asset_url }}" alt="{{ section.settings.heading | escape }}">{%- endif -%}
-  {%- if section.settings.clip != blank -%}<video class="manual" src="{{ section.settings.clip }}" playsinline preload="none"></video>{%- endif -%}
+  {%- if clip != blank -%}<video class="manual" src="{{ clip }}" playsinline preload="none"></video>{%- endif -%}
   <div class="wrap seen-in"><div class="stack rv">
     <span class="lab"><i></i>{{ section.settings.eyebrow }}</span>
     <h2 class="bl sm">{{ section.settings.heading }}</h2>
     <p class="copy">{{ section.settings.text }}</p>
     <div class="btns">
-      {%- if section.settings.clip != blank -%}
+      {%- if clip != blank -%}
         <button class="btn solid" data-play-inline type="button"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4l13 8-13 8z"/></svg>{{ section.settings.play_label }}</button>
       {%- endif -%}
       {%- if section.settings.url != blank -%}<a class="btn" href="{{ section.settings.url }}">{{ section.settings.cta }}</a>{%- endif -%}

@@ -26,7 +26,15 @@
       <div class="hs-bar"><span class="lab"><i></i>{{ section.settings.bar }}</span><span class="lab"><span id="hsMat"></span> &nbsp;&nbsp; <span id="hsCount" style="color:#fff"></span></span></div>
       <div class="hs-screen">
         {%- for block in section.blocks -%}
-          <video class="manual" {% if block.settings.clip %}src="{{ block.settings.clip }}"{% endif %}
+          {%- liquid
+            assign clip = block.settings.clip
+            if clip != blank
+              unless clip contains 'http'
+                assign clip = clip | file_url
+              endunless
+            endif
+          -%}
+          <video class="manual" {% if clip != blank %}src="{{ clip }}"{% endif %}
             {% if block.settings.poster %}poster="{{ block.settings.poster | image_url: width: 900 }}" data-p="{{ block.settings.poster | image_url: width: 900 }}"{% endif %}
             data-mat="{{ block.settings.material | escape }}" muted loop playsinline></video>
         {%- endfor -%}

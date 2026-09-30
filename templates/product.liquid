@@ -1,1 +1,96 @@
-<div class="wrap sec"><h1 class="bl sm">{{ product.title }}</h1>{{ product.description }}</div>
+{%- liquid
+  assign is_apparel = false
+  if product.tags contains 'apparel'
+    assign is_apparel = true
+  endif
+-%}
+<div style="padding-top:clamp(112px,9.5vw,144px)" id="pdp">
+  <div class="wrap">
+    <div class="pdp">
+      <div>
+        <div class="stage" id="pStage">
+          {%- if product.featured_media -%}
+            <img class="ph" id="pImg" src="{{ product.featured_media | image_url: width: 1400 }}" alt="{{ product.featured_media.alt | escape }}">
+          {%- endif -%}
+        </div>
+        {%- if product.media.size > 1 -%}
+          <div class="thumbs">
+            {%- for m in product.media -%}
+              <button type="button" data-src="{{ m | image_url: width: 1400 }}" aria-label="View image {{ forloop.index }}">
+                <img src="{{ m | image_url: width: 200 }}" alt="">
+              </button>
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+        <dl class="spec">
+          <div><dt class="lab">Material</dt><dd>{{ product.metafields.custom.material | default: product.type | default: 'To be confirmed' }}</dd></div>
+          <div><dt class="lab">Engraving</dt><dd>{% if is_apparel %}Printed to order{% else %}Industrial fiber laser. Deep and permanent{% endif %}</dd></div>
+          <div><dt class="lab">Made in</dt><dd>Omaha, Nebraska</dd></div>
+          <div><dt class="lab">Shipping time</dt><dd>{% if is_apparel %}Made to order. Allow 5 to 8 days{% else %}About 3 days. About a week with a name{% endif %}</dd></div>
+        </dl>
+      </div>
+
+      <div class="buy stack">
+        <nav class="lab"><a class="ul" href="{{ routes.all_products_collection_url }}">Shop</a> / {{ product.type | default: 'Engraved' }}</nav>
+        <h1 class="bl sm">{{ product.title }}</h1>
+        <div class="lab">{{ product.metafields.custom.material | default: product.type }}</div>
+        <div class="price" id="pPrice">{{ product.price | money_without_trailing_zeros }}</div>
+        <div class="copy">{{ product.description }}</div>
+
+        {%- form 'product', product, id: 'buyForm' -%}
+          {%- unless product.has_only_default_variant -%}
+            {%- for opt in product.options_with_values -%}
+              <div class="field">
+                <span class="note">{{ opt.name }}</span>
+                <div class="opts">
+                  {%- for v in opt.values -%}
+                    <button class="opt" type="button" data-opt="{{ opt.position }}" data-val="{{ v | escape }}"
+                      aria-pressed="{% if opt.selected_value == v %}true{% else %}false{% endif %}">{{ v }}</button>
+                  {%- endfor -%}
+                </div>
+              </div>
+            {%- endfor -%}
+          {%- endunless -%}
+
+          <select name="id" id="variantSelect" hidden>
+            {%- for v in product.variants -%}
+              <option value="{{ v.id }}" {% if v == product.selected_or_first_available_variant %}selected{% endif %} {% unless v.available %}disabled{% endunless %}>{{ v.title }} — {{ v.price | money }}</option>
+            {%- endfor -%}
+          </select>
+
+          {%- unless is_apparel -%}
+            <div class="acc">
+              <label class="acc-h">
+                <input type="checkbox" id="addName" data-base="{{ product.price | divided_by: 100.0 }}" data-add="5">
+                <span>Add a name <b>+ $5</b></span>
+              </label>
+              <div id="nameWrap" hidden>
+                <input class="inp" id="nameIn" name="properties[Name to engrave]" maxlength="18" placeholder="Name, call sign or number">
+                <span class="note">Engraved to match the piece. Named items take about a week.</span>
+              </div>
+            </div>
+          {%- endunless -%}
+
+          <button class="btn solid full" type="submit" {% unless product.available %}disabled{% endunless %}>
+            {% if product.available %}Add to cart{% else %}Sold out{% endif %}
+          </button>
+        {%- endform -%}
+
+        <p class="note">{% if is_apparel %}Made to order, allow 5 to 8 days.{% else %}Ships in about 3 days.{% endif %} $8 flat in the US, free over $60. Canada $15.</p>
+
+        <a class="ul" href="/pages/custom-and-bulk">Need twelve or more with your logo? Custom orders</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap sec">
+    <div class="sh"><h2 class="h2">More in stock</h2><a class="ul" href="{{ routes.all_products_collection_url }}">View all</a></div>
+    <div class="grid">
+      {%- assign rel = collections[product.collections.first.handle].products | default: collections.all.products -%}
+      {%- assign n = 0 -%}
+      {%- for p in rel -%}
+        {%- if p.id != product.id and n < 4 -%}{%- render 'product-card', card_product: p -%}{%- assign n = n | plus: 1 -%}{%- endif -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</div>

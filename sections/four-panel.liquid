@@ -1,8 +1,16 @@
 <div class="quad">
   {%- for block in section.blocks -%}
+    {%- liquid
+      assign clip = block.settings.clip
+      if clip != blank
+        unless clip contains 'http'
+          assign clip = clip | file_url
+        endunless
+      endif
+    -%}
     <a class="qp" href="{{ block.settings.url | default: '#' }}" {{ block.shopify_attributes }}>
-      {%- if block.settings.clip != blank -%}
-        <video src="{{ block.settings.clip }}" {% if block.settings.image %}poster="{{ block.settings.image | image_url: width: 1200 }}"{% endif %} muted loop playsinline></video>
+      {%- if clip != blank -%}
+        <video src="{{ clip }}" {% if block.settings.image %}poster="{{ block.settings.image | image_url: width: 1200 }}"{% endif %} muted loop playsinline></video>
       {%- elsif block.settings.image -%}
         <img src="{{ block.settings.image | image_url: width: 1200 }}" alt="" loading="lazy">
       {%- endif -%}
