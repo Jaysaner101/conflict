@@ -450,7 +450,7 @@ body::before{content:"";position:fixed;inset:0;z-index:90;pointer-events:none;op
 .onair i{width:7px;height:7px;border-radius:50%;background:var(--hi);box-shadow:0 0 10px var(--hi);animation:pulse 1.8s ease-in-out infinite}
 @keyframes pulse{50%{opacity:.35}}
 .two-cards{display:grid;grid-template-columns:1fr 1fr;gap:2px}
-.lcard{position:relative;overflow:hidden;min-height:260px;display:flex;flex-direction:column;justify-content:flex-end;padding:clamp(24px,3vw,48px);background-size:cover;background-position:center}
+.lcard{position:relative;overflow:hidden;min-height:260px;display:flex;flex-direction:column;justify-content:flex-end;padding:clamp(24px,3vw,48px);background-size:cover;background-position:center;background-color:#050505;background-image:url(pl-plain.jpg)}
 .lcard::before{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.92),rgba(0,0,0,.35));transition:background .4s}
 .lcard>*{position:relative;z-index:2}
 .lcard:hover .h2{color:var(--hi)}
