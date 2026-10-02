@@ -79,5 +79,11 @@ else
   echo "  FAIL  doctor found faults:"; sed 's/^/        /' /tmp/doctor.out; fail=1
 fi
 
+if node linkcheck.js >/tmp/links.out 2>&1; then
+  echo "  ok    every internal link resolves on this store"
+else
+  echo "  FAIL  broken links:"; sed -n '1,12p' /tmp/links.out | sed 's/^/        /'; fail=1
+fi
+
 [ "$fail" = "0" ] && echo "RESULT: complete" || echo "RESULT: INCOMPLETE"
 exit $fail

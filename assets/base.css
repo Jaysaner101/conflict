@@ -3,7 +3,7 @@
 :root{
   --bg:#000; --s1:#08090a; --s2:#101113; --line:#1c1e20; --line2:#2a2d30;
   --ink:#eceeef; --body:#b3b8bc; --mut:#7f858b; --hi:#39FF14;
-  --hd:'Sofia Sans Extra Condensed','Sofia L','Arial Narrow',sans-serif;
+  --hd:'Mona Sans','Mona L','Helvetica Neue',Arial,sans-serif;
   --tx:'Mona Sans','Mona L','Helvetica Neue',Arial,sans-serif;
   --pad:clamp(20px,4.4vw,72px); --max:1560px; --gap:clamp(88px,11vw,176px);
 }
@@ -380,7 +380,7 @@ body::before{content:"";position:fixed;inset:0;z-index:90;pointer-events:none;op
 @media (max-width:1020px){.promo{grid-column:1/-1!important}.pghd-in,.qsplit,.net,.trio{grid-template-columns:1fr}.mat{grid-template-columns:56px 1fr}.mat .stage{width:56px}.mat>span:last-child{grid-column:2}.ticks::before,.ticks::after{display:none}.spec div{grid-template-columns:110px 1fr}}
 
 /* ===================== v6: brand type, rendered plates, merch, story pages ===================== */
-:root{--bl:'UnifrakturCook','Unifraktur L','Old English Text MT',serif;--hd:'Mona Sans','Mona L','Helvetica Neue',Arial,sans-serif}
+:root{--bl:'Mona Sans','Mona L','Helvetica Neue',Arial,sans-serif;--hd:'Mona Sans','Mona L','Helvetica Neue',Arial,sans-serif}
 .h1,.h2,.h3{font-family:var(--hd);font-stretch:125%;font-weight:800;text-transform:uppercase;letter-spacing:-.005em;line-height:1}
 .h1{font-size:clamp(32px,4vw,64px)}.h2{font-size:clamp(24px,2.5vw,40px)}.h3{font-size:clamp(15px,1.25vw,19px);letter-spacing:.02em;line-height:1.2}
 .bl{font-family:var(--bl);font-weight:700;text-transform:none;letter-spacing:0;line-height:.92;color:var(--ink);font-size:clamp(56px,7.2vw,122px);margin:0;text-shadow:0 2px 0 rgba(0,0,0,.9),0 0 60px rgba(0,0,0,.5)}

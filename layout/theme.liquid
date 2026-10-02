@@ -3,15 +3,12 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{{ page_title }}{% unless page_title contains shop.name %} | {{ shop.name }}{% endunless %}</title>
+  <title>{% if page_title != blank %}{{ page_title }}{% unless page_title contains shop.name %} | {{ shop.name }}{% endunless %}{% else %}{{ shop.name }}{% endif %}</title>
   {% if page_description %}<meta name="description" content="{{ page_description | escape }}">{% endif %}
   <link rel="canonical" href="{{ canonical_url }}">
   <meta name="theme-color" content="{{ settings.col_bg }}">
   <link rel="icon" href="{% if settings.favicon != blank %}{{ settings.favicon | image_url: width: 64 }}{% else %}{{ 'favicon.png' | asset_url }}{% endif %}">
   <link rel="apple-touch-icon" href="{{ 'apple-touch-icon.png' | asset_url }}">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sofia+Sans+Extra+Condensed:wght@400;700;800;900&display=swap">
   <link rel="stylesheet" href="{{ 'base.css' | asset_url }}">
   <style>
     :root{

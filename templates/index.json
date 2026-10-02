@@ -125,7 +125,7 @@
       ],
       "settings": {
         "url": "/pages/custom-and-bulk",
-        "bg": "shopify://shop_images/pl-plain.jpg"
+        "bg": "shopify://shop_images/photo-1738162837451-2041c1418f54.jpg"
       }
     },
     "featured": {
@@ -311,7 +311,7 @@
         "url": "/collections/apparel",
         "image": "shopify://shop_images/apparel-hero.jpg",
         "text": "Tees, caps and button ups, printed to order.",
-        "bg": "shopify://shop_images/pl-spade-c.jpg"
+        "bg": "shopify://shop_images/pl-red.jpg"
       }
     }
   },

@@ -94,7 +94,7 @@ const addr = (id, def) => ({
 const addresses = [addr(1), addr(2)];
 const orderLine = (title, price, qty, props) => ({
   title, price, quantity: qty, line_price: price * qty,
-  product: { url: '/products/copville-script-can-lid' },
+  product: { url: '/products/copville-script-lid' },
   properties: props || []
 });
 const mockOrder = {
