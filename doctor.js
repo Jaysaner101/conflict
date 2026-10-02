@@ -272,5 +272,33 @@ for (const f of glob('templates').filter(x => x.endsWith('.json'))) {
   }
 }
 
+
+/* 9g A plate class with nothing to plate. The design layers a background
+ *  photograph behind every page header and full-bleed band (.pghd, .pl,
+ *  .hs-plate). The prototype set these from a data-bg attribute read by its
+ *  own script; that reader was never ported, so each element needs the image
+ *  on the tag. Seven hand-written templates — every collection page, search,
+ *  contact, the generic page, the blog, the article and the 404 — shipped with
+ *  the class and no image, and rendered as flat black bands. Nothing local
+ *  caught it: the markup and the CSS were both perfectly valid. */
+{
+  const isPlate = cls => { const t = cls.split(/\s+/).filter(Boolean);
+    return t.includes('pghd') || t.includes('hs-plate') || (t.includes('pl') && t.some(x => /^ov[lrf]$/.test(x))); };
+  for (const f of [...glob('templates'), ...glob('sections')].filter(x => x.endsWith('.liquid'))) {
+    const body = read(f);
+    for (const m of body.matchAll(/<(?:div|header|section|a)\b[^>]*>/g)) {
+      const tag = m[0];
+      const clsAttr = tag.match(/class="([^"]*)"/);
+      if (!clsAttr || !isPlate(clsAttr[1])) continue;
+      // Either a literal background-image on the tag, or a conditional one
+      // driven by a section setting, counts as plated.
+      if (/background-image\s*:/.test(tag)) continue;
+      const cls = clsAttr[1];
+      fail('unplated-background', f,
+        `<${tag.match(/<(\w+)/)[1]} class="${cls}"> has a plate class but no background-image — it renders as a flat black band`);
+    }
+  }
+}
+
 module.exports = { problems, fail, warn, liquidFiles, read, glob, schemaOf };
 if (require.main === module) require('./doctor-part2.js');

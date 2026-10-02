@@ -1,9 +1,17 @@
-<div class="wrap sec pgtop" style="text-align:center">
-  <span class="lab"><i></i>Page not found</span>
-  <h1 class="bl md" style="margin:14px 0">Nothing engraved here</h1>
-  <p class="copy" style="max-width:46ch;margin:0 auto 26px">That page has moved or never existed. The store is still open.</p>
-  <div class="btns" style="justify-content:center">
-    <a class="btn solid" href="{{ routes.all_products_collection_url }}">Shop the store</a>
-    <a class="btn" href="{{ routes.root_url }}">Back home</a>
+<div class="pl ovl nf" style="background-image:url({{ 'pl-plain.jpg' | asset_url }});border-top:0">
+  <div class="wrap" style="padding-top:150px;padding-bottom:80px">
+    <div class="stack" style="max-width:620px">
+      <span class="lab"><i></i>Error 404</span>
+      <h1 class="bl">Nothing engraved here</h1>
+      <p class="copy" style="font-size:17px">That page does not exist, or it has moved. The shop, the work and the show are all still where you left them.</p>
+      <div class="btns">
+        <a class="btn solid" href="{{ routes.root_url }}">
+          <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l9 5-9 5-9-5zM3 13l9 5 9-5"/></svg>Home</a>
+        <a class="btn" href="{{ routes.all_products_collection_url }}">
+          <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14l-1 12H6zM9 8V7a3 3 0 0 1 6 0v1"/></svg>Shop</a>
+        <a class="btn" href="/pages/the-show">
+          <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg>The show</a>
+      </div>
+    </div>
   </div>
 </div>

@@ -8,7 +8,7 @@
         endunless
       endif
     -%}
-    <div class="tile" {{ block.shopify_attributes }}>
+    <div class="tile"{% if clip == blank and block.settings.image == blank %} style="background-image:url({{ 'pl-plain.jpg' | asset_url }});background-size:cover;background-position:center"{% endif %} {{ block.shopify_attributes }}>
       {%- if clip != blank -%}
         <video src="{{ clip }}" {% if block.settings.image %}poster="{{ block.settings.image | image_url: width: 1000 }}"{% endif %} muted loop playsinline></video>
       {%- elsif block.settings.image -%}
