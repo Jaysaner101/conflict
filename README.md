@@ -46,12 +46,9 @@ accepted them.** Deploy is not finished until `verify-store.js` is clean.
 | `shot.js` | Playwright screenshots, desktop and mobile; reports JS errors and horizontal overflow |
 | `audit.js` | layout audit of the rendered pages: empty bands, content stuck at opacity 0 |
 | `verify-store.js` | diffs what Shopify stored against this repo |
+| `linkcheck.js` | resolves every internal link, image and video on every rendered page against `store-inventory.json` |
+| `serve.js` | static server, started by whichever tool needs it |
 
-`shot.js` and `audit.js` need a static server on port 8799:
-
-```bash
-cd preview && python3 -m http.server 8799 &
-```
 
 ## What doctor.js checks, and the bug behind each check
 
@@ -73,6 +70,14 @@ cd preview && python3 -m http.server 8799 &
   the merchant cannot set it. The favicon was unreachable this way.
 - **dead links** (`href=""` or `href="#"`) — every primary CTA on the home page
   went nowhere, because labels were configured without URLs.
+- **plate class with no background image** — the design layers a photograph
+  behind every page header and full-bleed band (`.pghd`, `.pl`, `.hs-plate`).
+  The prototype set these from a `data-bg` attribute read by its own script;
+  that reader was never ported, so the image has to be on the tag. Seven
+  hand-written templates — every collection page, search, contact, the generic
+  page, the blog, the article and the 404 — shipped with the class and no
+  image and rendered as flat black bands. The markup and the CSS were both
+  perfectly valid, so nothing else could have caught it.
 - **orphan `data-` attribute** — markup emitting a hook nothing reads. Background
   plates rendered flat black because the prototype's reader was never ported.
 - Plus: section/template/schema cross-checks, duplicate `id`s, labels pointing at
