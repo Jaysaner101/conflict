@@ -858,3 +858,8 @@ body.nav-open{overflow:hidden}
 @media (max-width:760px){
   .grid > .lcard{grid-column:1 / -1}
 }
+
+/* Paired panels: pin the call to action to the bottom so the two buttons line
+   up even when one column carries an extra bullet. */
+.ways .way{display:flex;flex-direction:column}
+.ways .way .btns{margin-top:auto;padding-top:clamp(14px,2vw,24px)}

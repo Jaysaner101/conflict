@@ -234,7 +234,10 @@ for (const f of glob('templates').filter(x => x.endsWith('.json'))) {
 }
 
 
-/* 9e An image slot a template leaves empty. The design expects a picture and
+const CONTENT_SETTINGS = new Set(['image_picker','link_list','url','video','video_url',
+  'collection','product','blog','page','collection_list','product_list']);
+
+/* 9e A content slot a template leaves empty. The design expects a picture and
  *  gets nothing: the craft finish swatches rendered as black circles, the
  *  network banners lost the logos James supplied, and two page heroes were
  *  blank after he said never to leave a hero blank. 28 of these shipped. */
@@ -245,13 +248,13 @@ for (const f of glob('templates').filter(x => x.endsWith('.json'))) {
     if (!fs.existsSync(file)) continue;
     const sch = schemaOf(file); if (!sch) continue;
     for (const st of (sch.settings || []))
-      if (st.type === 'image_picker' && !(sec.settings || {})[st.id])
-        warn('empty-image-slot', f, `'${key}' (${sec.type}) leaves image setting '${st.id}' empty`);
+      if (CONTENT_SETTINGS.has(st.type) && !(sec.settings || {})[st.id])
+        warn('empty-content-slot', f, `'${key}' (${sec.type}) leaves ${st.type} setting '${st.id}' empty — it renders nothing`);
     for (const [bk, b] of Object.entries(sec.blocks || {})) {
       const bs = (sch.blocks || []).find(x => x.type === b.type); if (!bs) continue;
       for (const st of (bs.settings || []))
-        if (st.type === 'image_picker' && !(b.settings || {})[st.id])
-          warn('empty-image-slot', f, `'${key}/${bk}' (${b.type}) leaves image setting '${st.id}' empty`);
+        if (CONTENT_SETTINGS.has(st.type) && !(b.settings || {})[st.id])
+          warn('empty-content-slot', f, `'${key}/${bk}' (${b.type}) leaves ${st.type} setting '${st.id}' empty — it renders nothing`);
     }
   }
 }

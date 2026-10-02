@@ -85,7 +85,8 @@
           "settings": {
             "name": "Anodized aluminum",
             "text": "Engraved through the anodizing and down into bright, bare aluminum.",
-            "image": "shopify://shop_images/c-lid-copville.webp"
+            "image": "shopify://shop_images/c-lid-copville.webp",
+            "url": "/collections/can-lids"
           }
         },
         "f2": {
@@ -93,7 +94,8 @@
           "settings": {
             "name": "Powder coat",
             "text": "Cuts through the coating and deep into the stainless underneath.",
-            "image": "shopify://shop_images/c-tumbler.webp"
+            "image": "shopify://shop_images/c-tumbler.webp",
+            "url": "/collections/tumblers"
           }
         },
         "f3": {
@@ -101,7 +103,8 @@
           "settings": {
             "name": "Titanium finish",
             "text": "Engraved through the colour layer into the steel beneath.",
-            "image": "shopify://shop_images/c-folder.webp"
+            "image": "shopify://shop_images/c-folder.webp",
+            "url": "/collections/knives"
           }
         },
         "f4": {
@@ -109,7 +112,8 @@
           "settings": {
             "name": "Painted steel",
             "text": "Engraved through the paint and into the bare steel.",
-            "image": "shopify://shop_images/c-ammo-can.webp"
+            "image": "shopify://shop_images/c-ammo-can.webp",
+            "url": "/collections/duty-gear"
           }
         }
       },
@@ -130,7 +134,8 @@
         "eyebrow": "Engraved, ready to ship",
         "heading": "Off the machine",
         "count": 8,
-        "collection": "can-lids"
+        "collection": "can-lids",
+        "menu": "footer-shop"
       }
     },
     "ways": {

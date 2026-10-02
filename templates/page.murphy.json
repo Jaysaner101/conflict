@@ -37,7 +37,8 @@
         "cta": "Shop his work",
         "cta2": "Watch the show",
         "url2": "https://www.youtube.com/watch?v=VQcuiECd4tk&list=PLXMvRz65T8SE",
-        "poster": "shopify://shop_images/v-murph.jpg"
+        "poster": "shopify://shop_images/v-murph.jpg",
+        "url": "/pages/the-show"
       }
     },
     "chapters": {
@@ -125,7 +126,9 @@
       "settings": {
         "eyebrow": "About Murphy",
         "lede": "The short version",
-        "text": "<p>[Placeholder bio] Murphy has spent his spare hours in a workshop for years. What started as engraving his own gear turned into requests from the people around him: a name on a gift, a crest on a retirement piece, a logo for a local team.</p><p>[Placeholder] Today he runs an industrial fiber laser out of his own shop in Omaha. He takes on the jobs he can stand behind, does every one of them himself, and will tell you straight if your idea will not engrave well.</p><p>[Placeholder] When the machine is off he hosts Counter Culture Conflict on the Counter Culture Inc network.</p>"
+        "text": "<p>[Placeholder bio] Murphy has spent his spare hours in a workshop for years. What started as engraving his own gear turned into requests from the people around him: a name on a gift, a crest on a retirement piece, a logo for a local team.</p><p>[Placeholder] Today he runs an industrial fiber laser out of his own shop in Omaha. He takes on the jobs he can stand behind, does every one of them himself, and will tell you straight if your idea will not engrave well.</p><p>[Placeholder] When the machine is off he hosts Counter Culture Conflict on the Counter Culture Inc network.</p>",
+        "url": "/pages/the-work",
+        "url2": "/collections/all"
       }
     },
     "strip": {
@@ -158,7 +161,9 @@
         "m2",
         "m3"
       ],
-      "settings": {}
+      "settings": {
+        "url": "/pages/the-work"
+      }
     }
   },
   "order": [

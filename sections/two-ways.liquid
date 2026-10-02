@@ -6,7 +6,7 @@
   <div class="ways rv">
     {%- for block in section.blocks -%}
       <div class="way{% if block.settings.accent %} hi{% endif %}" {{ block.shopify_attributes }}>
-        <span class="lab">{{ block.settings.eyebrow }}</span>
+        <span class="lab">{%- if block.settings.accent -%}<svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l9 5-9 5-9-5zM3 13l9 5 9-5"/></svg>{%- else -%}<svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14l-1 12H6zM9 8V7a3 3 0 0 1 6 0v1"/></svg>{%- endif -%}&nbsp;{{ block.settings.eyebrow }}</span>
         <h3 class="h2">{{ block.settings.heading }}</h3>
         <p class="copy">{{ block.settings.text }}</p>
         <ul>
@@ -20,7 +20,7 @@
           {%- endif -%}{%- endfor -%}
         </ul>
         {%- if block.settings.cta != blank -%}
-          <div class="btns"><a class="btn solid" href="{{ block.settings.url }}">{{ block.settings.cta }}</a></div>
+          <div class="btns"><a class="btn solid" href="{{ block.settings.url }}">{%- if block.settings.accent -%}<svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l9 5-9 5-9-5zM3 13l9 5 9-5"/></svg>{%- else -%}<svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14l-1 12H6zM9 8V7a3 3 0 0 1 6 0v1"/></svg>{%- endif -%}{{ block.settings.cta }}</a></div>
         {%- endif -%}
       </div>
     {%- endfor -%}
