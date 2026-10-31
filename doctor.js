@@ -303,5 +303,25 @@ for (const f of glob('templates').filter(x => x.endsWith('.json'))) {
   }
 }
 
+
+/* 9h Range sliders Shopify will not import. A slider with fewer than three
+ *  positions (min 3, max 6, step 3) is rejected, and Shopify drops the whole
+ *  section file without an error — then every template using that section is
+ *  dropped too. v19 lost the home page, the show page and the apparel page
+ *  this way. Also checks the default sits on the slider. */
+{
+  for (const f of glob('sections').filter(x => x.endsWith('.liquid'))) {
+    const sch = schemaOf(f); if (!sch) continue;
+    const all = [...(sch.settings || []), ...(sch.blocks || []).flatMap(b => b.settings || [])];
+    for (const st of all.filter(x => x.type === 'range')) {
+      const step = st.step || 1, n = Math.round((st.max - st.min) / step) + 1;
+      if (n < 3) fail('range-import', f, `range "${st.id}" has only ${n} positions (${st.min}–${st.max} step ${step}); Shopify rejects the section`);
+      if (n > 101) fail('range-import', f, `range "${st.id}" has ${n} positions; Shopify allows 101`);
+      if (st.default === undefined || (st.default - st.min) % step !== 0 || st.default < st.min || st.default > st.max)
+        fail('range-import', f, `range "${st.id}" default ${st.default} is not a position on the slider`);
+    }
+  }
+}
+
 module.exports = { problems, fail, warn, liquidFiles, read, glob, schemaOf };
 if (require.main === module) require('./doctor-part2.js');
