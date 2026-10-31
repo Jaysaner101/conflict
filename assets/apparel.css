@@ -129,7 +129,7 @@ dialog.sg::backdrop{background:rgba(0,0,0,.82);backdrop-filter:blur(4px)}
 .dd-p:focus-visible{outline:2px solid var(--hi);outline-offset:-2px}
 
 @media (max-width:1020px){
-  .apd-grid{grid-template-columns:1fr}
+  .apd-grid{grid-template-columns:minmax(0,1fr)}
   .dd-p+.dd-p{border-left:0;border-top:1px solid var(--line)}
   .apd-buy{position:static}.apd-gal{position:relative;top:auto}
   /* photos: a swipe row with a counter (apparel.js); the arrows are for desktop */
