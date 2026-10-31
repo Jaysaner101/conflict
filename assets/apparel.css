@@ -99,6 +99,7 @@ dialog.sg::backdrop{background:rgba(0,0,0,.82);backdrop-filter:blur(4px)}
 .drop-art:hover img+img{opacity:1}
 .drop-art .tag{position:absolute;left:16px;top:16px;z-index:2;background:#000}
 .drop-pts{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.stack>.drop-pts{margin-top:30px}
 .drop-pts li{display:grid;grid-template-columns:44px 1fr;gap:12px;padding:16px 0;border-bottom:1px solid var(--line)}
 .drop-pts b{color:var(--hi);font-weight:500;font-size:12px;letter-spacing:.2em;padding-top:2px}
 .drop-pts span{color:var(--ink)}
