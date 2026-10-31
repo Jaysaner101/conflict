@@ -27,7 +27,8 @@ const slides = $$('.apd-slide[data-media]'), thumbs = $$('.apd-th');
 // An image that is some variant's own picture belongs to that variant's colour.
 const ownerColour = {};
 if (cPos) variants.forEach(v => { if (v.m) ownerColour[v.m] = v.o[cPos - 1]; });
-let shownIdx = 0;
+let shownIdx = 0, fromScroll = false;
+const snap = matchMedia('(max-width:1020px)');
 function visibleSlides() {
   return slides.filter(s => {
     const owner = ownerColour[s.dataset.media];
@@ -42,28 +43,37 @@ function show(mediaId) {
   });
   thumbs.forEach(t => t.classList.toggle('on', t.dataset.media === String(mediaId)));
   const vis = visibleSlides(); shownIdx = Math.max(0, vis.findIndex(s => s.dataset.media === String(mediaId)));
+  count();
+  const m = $('#apdMain'), el = vis[shownIdx];
+  if (snap.matches && m && el && !fromScroll) m.scrollTo({ left: el.offsetLeft, behavior: 'smooth' });
   const th = thumbs.find(t => t.dataset.media === String(mediaId));
   if (th && th.parentElement) th.parentElement.scrollLeft = th.offsetLeft - 8;
 }
 function filterThumbs() {
   const vis = new Set(visibleSlides().map(s => s.dataset.media));
   thumbs.forEach(t => { t.hidden = !vis.has(t.dataset.media); });
+  slides.forEach(s => { s.hidden = !vis.has(s.dataset.media); });   // out of the swipe row too
+  count();
 }
+function count() { const n = $('#apdN'); if (n) n.textContent = (shownIdx + 1) + ' / ' + visibleSlides().length; }
 thumbs.forEach(t => t.addEventListener('click', () => show(t.dataset.media)));
 $$('.apd-nav').forEach(b => b.addEventListener('click', () => {
   const vis = visibleSlides(); if (!vis.length) return;
   shownIdx = (shownIdx + (+b.dataset.step) + vis.length) % vis.length;
   show(vis[shownIdx].dataset.media);
 }));
-// Swipe on the main image (phones): thumbnails stay the primary control.
+// Phones and tablets: the photos are a swipe row (CSS scroll-snap); the
+// thumbnails and counter follow the swipe.
 (() => {
-  const m = $('#apdMain'); if (!m) return; let x0 = null;
-  m.addEventListener('touchstart', e => { x0 = e.touches[0].clientX; }, { passive: true });
-  m.addEventListener('touchend', e => {
-    if (x0 === null) return; const dx = e.changedTouches[0].clientX - x0; x0 = null;
-    if (Math.abs(dx) < 40) return;
-    const b = $(dx < 0 ? '.apd-nav.next' : '.apd-nav.prev'); if (b) b.click();
-  });
+  const m = $('#apdMain'); if (!m) return; let raf = 0;
+  m.addEventListener('scroll', () => {
+    if (!snap.matches) return;
+    cancelAnimationFrame(raf);
+    raf = requestAnimationFrame(() => {
+      const vis = visibleSlides(), k = Math.round(m.scrollLeft / m.clientWidth);
+      if (vis[k] && k !== shownIdx) { fromScroll = true; show(vis[k].dataset.media); fromScroll = false; }
+    });
+  }, { passive: true });
 })();
 
 /* ---- delivery estimate: a date, not a speed ---- */
@@ -78,7 +88,7 @@ function fmt(a, b) {
   // In stock: 1–2 to dispatch from Omaha + 3–5 in transit.
   const [lo, hi] = root.dataset.ships === 'stock' ? [4, 7] : [5, 10];
   const now = new Date();
-  eta.textContent = (root.dataset.ships === 'stock' ? 'In stock · arrives ' : 'Made to order · arrives ') + fmt(addWorkDays(now, lo), addWorkDays(now, hi));
+  eta.textContent = 'Arrives ' + fmt(addWorkDays(now, lo), addWorkDays(now, hi));
 })();
 
 /* ---- options ---- */
@@ -101,6 +111,7 @@ function paint() {
   add.textContent = label; if (barBtn) barBtn.textContent = label;
   add.disabled = label.startsWith('Sold out');
   idIn.value = ok ? v.id : '';
+  const xp = $('#xpay'); if (xp) xp.classList.toggle('off', !ok);
   if (v) { price.textContent = v.p; if (barPrice) barPrice.textContent = v.p; }
   if (ok) { const u = new URL(location.href); u.searchParams.set('variant', v.id); history.replaceState(null, '', u); }
   const need = $('#apdNeed'); if (need && !missing.includes(sPos)) need.hidden = true;

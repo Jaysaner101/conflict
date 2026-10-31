@@ -48,7 +48,7 @@
                  srcset="{{ m | image_url: width: 700 }} 700w, {{ m | image_url: width: 1100 }} 1100w, {{ m | image_url: width: 1600 }} 1600w"
                  sizes="(max-width: 900px) 100vw, 55vw"
                  alt="{{ m.alt | default: product.title | escape }}" width="1400" height="1400"
-                 {% unless forloop.first %}loading="lazy"{% endunless %}>
+                 {% if forloop.first %}fetchpriority="high"{% else %}loading="lazy"{% endif %}>
           {%- elsif m.media_type == 'video' -%}
             <video class="apd-slide" data-media="{{ m.id }}" muted loop playsinline preload="none"
                    poster="{{ m.preview_image | image_url: width: 1400 }}">
@@ -63,6 +63,7 @@
           <button class="apd-nav next" type="button" data-step="1" aria-label="Next image"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
         {%- endif -%}
       </div>
+      {%- if product.media.size > 1 -%}<span class="pgal-n" id="apdN" aria-hidden="true">1 / {{ product.media.size }}</span>{%- endif -%}
       {%- if product.media.size > 1 -%}
         <div class="apd-thumbs" id="apdThumbs" role="group" aria-label="Product images">
           {%- for m in product.media -%}
@@ -126,12 +127,14 @@
           {%- elsif size_pos > 0 -%}Choose a size
           {%- else -%}Add to cart{%- endif -%}
         </button>
+        {%- comment -%} Shop Pay / Apple Pay / Google Pay. Shown once a size is picked (apparel.js paint). {%- endcomment -%}
+        {%- if product.available -%}<div class="xpay{% if size_pos > 0 %} off{% endif %}" id="xpay">{{ form | payment_button }}</div>{%- endif -%}
       {%- endform -%}
 
       <ul class="apd-facts">
         <li>
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7"/><circle cx="7" cy="17.5" r="1.6"/><circle cx="17" cy="17.5" r="1.6"/></svg>
-          <span><b id="apdEta">{% if ships == 'In stock' %}Ships from Omaha{% else %}Made to order for you{% endif %}</b>
+          <span><b id="apdEta">{% if ships == 'In stock' %}Ships from Omaha{% else %}Printed for you{% endif %}</b>
           <span class="note" id="apdEtaNote">{% if ships == 'In stock' %}Dispatched in 1 to 2 working days.{% else %}Printed when you order, 2 to 5 working days, then 3 to 4 days in transit.{% endif %}</span></span>
         </li>
         <li>

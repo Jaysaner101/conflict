@@ -10,16 +10,27 @@
   <div class="wrap">
     <div class="pdp">
       <div>
-        <div class="stage" id="pStage">
-          {%- if product.featured_media -%}
-            <img class="ph" id="pImg" src="{{ product.featured_media | image_url: width: 1400 }}" alt="{{ product.featured_media.alt | escape }}">
-          {%- endif -%}
+        {%- comment -%}
+          Every photo is in the page. Desktop shows one at a time (thumbnails
+          switch them); phones and tablets swipe through them. theme.js initGallery.
+        {%- endcomment -%}
+        {%- assign pics = product.media | where: 'media_type', 'image' -%}
+        <div class="pgal">
+          <div class="stage pgal-main" id="pStage">
+            {%- for m in pics -%}
+              <img class="ph pgal-s{% if forloop.first %} on{% endif %}" src="{{ m | image_url: width: 1400 }}"
+                   srcset="{{ m | image_url: width: 700 }} 700w, {{ m | image_url: width: 1100 }} 1100w, {{ m | image_url: width: 1400 }} 1400w"
+                   sizes="(max-width: 1020px) 100vw, 50vw" alt="{{ m.alt | default: product.title | escape }}" width="1400" height="1400"
+                   {% if forloop.first %}fetchpriority="high"{% else %}loading="lazy"{% endif %}>
+            {%- endfor -%}
+          </div>
+          {%- if pics.size > 1 -%}<span class="pgal-n" id="pGalN" aria-hidden="true">1 / {{ pics.size }}</span>{%- endif -%}
         </div>
-        {%- if product.media.size > 1 -%}
+        {%- if pics.size > 1 -%}
           <div class="thumbs">
-            {%- for m in product.media -%}
-              <button type="button" data-src="{{ m | image_url: width: 1400 }}" aria-label="View image {{ forloop.index }}">
-                <img src="{{ m | image_url: width: 200 }}" alt="">
+            {%- for m in pics -%}
+              <button class="thumb" type="button" aria-label="View image {{ forloop.index }}" aria-pressed="{% if forloop.first %}true{% else %}false{% endif %}">
+                <img src="{{ m | image_url: width: 200 }}" alt="" width="84" height="84" loading="lazy">
               </button>
             {%- endfor -%}
           </div>
@@ -79,6 +90,8 @@
           <button class="btn solid full" type="submit" {% unless product.available %}disabled{% endunless %}>
             {% if product.available %}Add to cart{% else %}Sold out{% endif %}
           </button>
+          {%- comment -%} Shop Pay / Apple Pay / Google Pay. Hidden while "Add a name" is ticked: the name is a separate $5 line that express checkout would skip (theme.js initNameOption). {%- endcomment -%}
+          {%- if product.available -%}<div class="xpay" id="xpay">{{ form | payment_button }}</div>{%- endif -%}
         {%- endform -%}
 
         <p class="note">Ships in {{ settings.fact_ship_time | default: 'about 3 days' | downcase }}. US shipping {{ settings.fact_ship_us | default: '$4.99' }}. Canada {{ settings.fact_ca | downcase }}.</p>

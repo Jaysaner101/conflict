@@ -6,7 +6,6 @@
         "eyebrow": "Counter Culture Conflict apparel",
         "heading": "Conflict apparel",
         "text": "The first run from the show: five black tees carrying the 99% spade and the Conflict globe, each one printed when you order and shipped to your door. Zip hoodies, work shirts and trucker caps are on the way.",
-        "fact1": "Made to order",
         "cta": "Shop the range",
         "url": "#range",
         "image": "shopify://shop_images/apparel-hero-v3.jpg",
@@ -52,7 +51,7 @@
       "type": "apparel-grid",
       "settings": {
         "anchor": "range",
-        "eyebrow": "Made to order",
+        "eyebrow": "Drop 01",
         "heading": "The range",
         "collection": "apparel"
       }

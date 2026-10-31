@@ -156,6 +156,11 @@ function initHead() {
 
 /* ---------- reveal on scroll ---------- */
 function initReveal() {
+  // Section headings and the cards in each row ease in as they scroll into
+  // view, a step apart along a row. Nothing is hidden when motion is reduced.
+  if (!still) $$('.sh, .grid>.card, .ahr-rail>.card, .eps>.ep, .ways>.way, .dd-p, .nb, .acard, .steps>li')
+    .filter(e => !e.closest('.rv'))
+    .forEach(e => { e.style.setProperty('--rv-d', ([...e.parentElement.children].indexOf(e) % 4) * 70 + 'ms'); e.classList.add('rv'); });
   const els = $$('.rv'); if (!els.length) return;
   const show = e => e.classList.add('in');
   if (still || !('IntersectionObserver' in window)) { els.forEach(show); return; }
@@ -203,12 +208,63 @@ function submitWithAddon(form, box, input) {
   const main = { id: fd.get('id'), quantity: Number(fd.get('quantity') || 1), properties: {} };
   if (name) main.properties['Name to engrave'] = name;
   const addon = { id: vid, quantity: main.quantity, properties: name ? { 'Engraving for': name } : {} };
-  fetch('/cart/add.js', {
-    method: 'POST', headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ items: [main, addon] })
-  }).then(r => r.ok ? (window.location.href = '/cart')
-                    : form.submit());            // fall back to the native post
+  addToCart([main, addon], form);
   return false;
+}
+
+/* ---------- add to cart without leaving the page ----------
+   Both product forms (#buyForm engraved, #apdForm apparel) add through
+   /cart/add.js and then show a small "Added" sheet with View cart / Checkout,
+   so shoppers stay on the page. Any failure falls back to the normal post.
+   Listeners that run first (size check, name add-on) can still cancel. */
+function formItems(form) {
+  const fd = new FormData(form), props = {};
+  for (const [k, v] of fd) { const m = /^properties\[(.+)\]$/.exec(k); if (m && String(v).trim()) props[m[1]] = v; }
+  return [{ id: fd.get('id'), quantity: Number(fd.get('quantity') || 1), properties: props }];
+}
+function addToCart(items, form) {
+  const btn = form && form.querySelector('[type=submit]');
+  if (btn) btn.setAttribute('aria-busy', 'true');
+  return fetch('/cart/add.js', {
+    method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+    body: JSON.stringify({ items })
+  }).then(r => r.json().then(j => ({ ok: r.ok, j })))
+    .then(({ ok, j }) => {
+      if (!ok) { toast(j.description || j.message || 'That could not be added'); return; }
+      return fetch('/cart.js').then(r => r.json()).then(cart => {
+        const cc = $('#cartCount'); if (cc) cc.textContent = cart.item_count;
+        showAdded(j.items || [j], cart);
+      });
+    })
+    .catch(() => { if (form) form.submit(); })
+    .finally(() => { if (btn) btn.removeAttribute('aria-busy'); });
+}
+function showAdded(items, cart) {
+  let d = $('#atc');
+  if (!d) {
+    d = document.createElement('dialog'); d.id = 'atc'; d.className = 'atc'; d.setAttribute('aria-labelledby', 'atcH');
+    d.innerHTML = '<div class="atc-h"><span class="lab" id="atcH"><i></i>Added to cart</span><button class="xb" type="button" data-close>Close</button></div>' +
+      '<div class="atc-items"></div><div class="atc-sub"><span>Subtotal</span><b></b></div>' +
+      '<div class="atc-btns"><a class="btn" href="/cart">View cart</a><a class="btn solid" href="/checkout">Checkout</a></div>';
+    document.body.appendChild(d);
+    d.addEventListener('click', e => { if (e.target === d || e.target.closest('[data-close]')) d.close(); });
+  }
+  const esc = t => String(t == null ? '' : t).replace(/[&<>"]/g, c => '&#' + c.charCodeAt(0) + ';');
+  $('.atc-items', d).innerHTML = items.map(it => {
+    const v = it.variant_title && it.variant_title !== 'Default Title' ? '<span class="note">' + esc(it.variant_title) + '</span>' : '';
+    const p = it.properties && it.properties['Name to engrave'] ? '<span class="note">Name: ' + esc(it.properties['Name to engrave']) + '</span>' : '';
+    const img = it.image ? '<img src="' + esc(it.image + (it.image.indexOf('?') > -1 ? '&' : '?') + 'width=200') + '" alt="" width="64" height="64">' : '<span></span>';
+    return '<div class="atc-it">' + img + '<div><b>' + esc(it.product_title) + '</b>' + v + p + '</div><span>' + money(it.final_line_price / 100) + '</span></div>';
+  }).join('');
+  $('.atc-sub b', d).textContent = money(cart.total_price / 100);
+  if (!d.open) d.showModal();
+}
+function initCartAdd() {
+  $$('#buyForm, #apdForm').forEach(f => f.addEventListener('submit', e => {
+    if (e.defaultPrevented) return;
+    e.preventDefault();
+    addToCart(formItems(f), f);
+  }));
 }
 
 function initNameOption() {
@@ -221,6 +277,7 @@ function initNameOption() {
     if (out) out.textContent = money(base + (box.checked ? add : 0));
     if (input) input.disabled = !box.checked;
     const w = $('#nameWrap'); if (w) w.hidden = !box.checked;
+    const xp = $('#xpay'); if (xp) xp.classList.toggle('off', box.checked);
   };
   box.onchange = upd; upd();
 }
@@ -258,9 +315,31 @@ function initVariants() {
 }
 
 /* ---------- product gallery ---------- */
+/* Engraved product photos: thumbnails switch them on desktop; on phones and
+   tablets the photos sit in a swipe row (CSS scroll-snap) and the counter and
+   thumbnails follow the swipe. */
 function initGallery() {
-  const img = $('#pImg'); if (!img) return;
-  $$('.thumbs button').forEach(b => b.onclick = () => { img.src = b.dataset.src; });
+  const main = $('#pStage'); if (!main) return;
+  const slides = $$('.pgal-s', main), thumbs = $$('.thumbs .thumb'), n = $('#pGalN');
+  if (slides.length < 2) return;
+  const snap = matchMedia('(max-width:1020px)');
+  let i = 0, raf = 0;
+  const mark = k => {
+    i = k;
+    slides.forEach((s, j) => s.classList.toggle('on', j === k));
+    thumbs.forEach((t, j) => t.setAttribute('aria-pressed', j === k));
+    if (n) n.textContent = (k + 1) + ' / ' + slides.length;
+  };
+  const go = k => {
+    k = (k + slides.length) % slides.length; mark(k);
+    if (snap.matches) main.scrollTo({ left: slides[k].offsetLeft, behavior: still ? 'auto' : 'smooth' });
+  };
+  thumbs.forEach((t, j) => t.onclick = () => go(j));
+  main.addEventListener('scroll', () => {
+    if (!snap.matches) return;
+    cancelAnimationFrame(raf);
+    raf = requestAnimationFrame(() => { const k = Math.round(main.scrollLeft / main.clientWidth); if (k !== i && slides[k]) mark(k); });
+  }, { passive: true });
 }
 
 
@@ -278,6 +357,47 @@ function initTypeFilter() {
   }));
 }
 
+/* ---------- episode player ----------
+   Episode cards link to YouTube. A tap opens the video in a player on the
+   page instead of sending people to the YouTube app. Nothing from YouTube
+   loads until the tap (about 540 KB saved per page). The YouTube link stays
+   in the player as the way out, and a cmd/ctrl/middle click still opens it. */
+function ytId(href) {
+  const m = /(?:youtube\.com\/(?:watch\?(?:.*&)?v=|shorts\/|live\/)|youtu\.be\/)([\w-]{11})/.exec(href || '');
+  return m ? m[1] : null;
+}
+function initEpisodePlayer() {
+  let dlg = null;
+  const open = (id, href, tall, title) => {
+    if (!dlg) {
+      dlg = document.createElement('dialog');
+      dlg.className = 'ytm';
+      dlg.innerHTML = '<div class="ytm-in"><div class="ytm-v"></div><div class="ytm-bar"><a class="ul" target="_blank" rel="noopener">Watch on YouTube</a><button class="xb" type="button" data-close>Close</button></div></div>';
+      document.body.appendChild(dlg);
+      dlg.addEventListener('click', e => { if (e.target === dlg || e.target.closest('[data-close]')) dlg.close(); });
+      dlg.addEventListener('close', () => { $('.ytm-v', dlg).innerHTML = ''; document.documentElement.classList.remove('ytm-open'); });
+    }
+    dlg.classList.toggle('tall', !!tall);
+    $('.ytm-bar a', dlg).href = href;
+    const f = document.createElement('iframe');
+    f.src = 'https://www.youtube-nocookie.com/embed/' + id + '?autoplay=1&playsinline=1&rel=0&modestbranding=1';
+    f.title = title || 'Episode';
+    f.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
+    f.allowFullscreen = true;
+    f.referrerPolicy = 'strict-origin-when-cross-origin';   // YouTube refuses embeds that send no referrer
+    $('.ytm-v', dlg).replaceChildren(f);
+    document.documentElement.classList.add('ytm-open');
+    dlg.showModal();
+  };
+  document.addEventListener('click', e => {
+    const a = e.target.closest('a.ep'); if (!a) return;
+    if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return;
+    const id = ytId(a.href); if (!id) return;
+    e.preventDefault();
+    open(id, a.href, a.classList.contains('short'), (a.querySelector('.t') || {}).textContent);
+  });
+}
+
 /* ---------- boot ---------- */
 function boot() {
   // Each module is isolated: one section throwing must not take down the rest
@@ -286,6 +406,7 @@ function boot() {
   run('nav', initNav); run('head', initHead); run('reveal', initReveal); run('video', initVideo);
   run('nameOption', initNameOption); run('workFilter', initWorkFilter); run('variants', initVariants);
   run('gallery', initGallery); run('sort', initSort); run('typeFilter', initTypeFilter);
+  run('episodePlayer', initEpisodePlayer); run('cartAdd', initCartAdd);
   if ($('#hs')) run('slider', initSlider);
   if ($('#seen')) run('seen', initSeen);
   if ($('#showPlayer')) run('player', () => initPlayer($('#showPlayer')));

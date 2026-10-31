@@ -20,7 +20,6 @@
       {%- if collection.description != blank -%}<div class="copy">{{ collection.description }}</div>{%- endif -%}
       <div class="sfacts" style="margin-top:14px">
         {%- if all_apparel -%}
-          <span>Made to order</span>
           <span>US shipping {{ settings.fact_apparel_us }}</span>
           <span>Size guide on every piece</span>
         {%- else -%}
@@ -38,6 +37,7 @@
   <div class="chips" role="group" aria-label="Collections">
     <a class="chip{% if collection.handle == 'all' %} on{% endif %}" href="{{ routes.all_products_collection_url }}">All</a>
     {%- for c in collections -%}
+      {%- if c.handle == 'frontpage' or c.handle == 'all' -%}{%- continue -%}{%- endif -%}
       {%- unless c.handle == 'all' or c.products_count == 0 -%}
         <a class="chip{% if c.handle == collection.handle %} on{% endif %}" href="{{ c.url }}">{{ c.title }}</a>
       {%- endunless -%}

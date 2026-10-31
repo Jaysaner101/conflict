@@ -16,6 +16,14 @@
       --hi:{{ settings.col_hi }}; --s1:{{ settings.col_s1 }};
     }
   </style>
+  {%- comment -%}
+    Start loading a page as soon as a shopper's finger or pointer settles on its
+    link, so most taps open instantly (Chrome; Safari ignores this). Cart,
+    checkout and account pages are left out.
+  {%- endcomment -%}
+  <script type="speculationrules">
+    {"prefetch":[{"source":"document","where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":["/cart*","/checkout*","/checkouts/*","/account*","/*/cart*","/*?*"]}}]},"eagerness":"moderate"}]}
+  </script>
   {{ content_for_header }}
 </head>
 <body class="tpl-{{ template.name }}" data-page="{{ template.name }}">
