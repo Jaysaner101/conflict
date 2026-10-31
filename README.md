@@ -117,6 +117,19 @@ banner, a ruled "The range" header, then every product in one row.
 The range opens with one wide front-and-back card whenever the last row would
 otherwise have a hole (5, 8, 11 products at three across; any odd count at two).
 
+## Episode rows (YouTube)
+
+`sections/episodes.liquid` + `assets/episodes.js`: when a row has a playlist and Theme
+settings → YouTube has a key (Google Cloud, YouTube Data API v3, restricted to the shop's
+web addresses), the row shows the playlist's newest videos, cached an hour per visitor.
+The hand-picked episode blocks are the fallback. The Conflict playlist is PLXMvRz65T8SE.
+
+## Deploying single files with themeFilesUpsert
+
+Upsert a section before any template that uses a new setting from it, in a separate
+call, and re-read the template afterwards. A template written while the old section is
+still in place loses the new settings with no error.
+
 ## Store-side facts the theme depends on
 
 - Shipping prices shown on the site come from theme settings → Store facts (engraved US
