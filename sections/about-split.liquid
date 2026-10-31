@@ -4,8 +4,9 @@
     {%- if section.settings.lede != blank -%}<p class="big" style="max-width:34ch">{{ section.settings.lede }}</p>{%- endif -%}
     <div class="copy" style="max-width:62ch">{{ section.settings.text }}</div>
     <div class="btns">
-      {%- if section.settings.url != blank -%}<a class="btn solid" href="{{ section.settings.url }}" target="_blank" rel="noopener">{{ section.settings.cta }}</a>{%- endif -%}
-      {%- if section.settings.url2 != blank -%}<a class="btn" href="{{ section.settings.url2 }}" target="_blank" rel="noopener">{{ section.settings.cta2 }}</a>{%- endif -%}
+      {%- comment -%} A button needs both a label and a link; outside links open in a new tab. {%- endcomment -%}
+      {%- if section.settings.url != blank and section.settings.cta != blank -%}<a class="btn solid" href="{{ section.settings.url }}"{% if section.settings.url contains '://' %} target="_blank" rel="noopener"{% endif %}>{{ section.settings.cta }}</a>{%- endif -%}
+      {%- if section.settings.url2 != blank and section.settings.cta2 != blank -%}<a class="btn" href="{{ section.settings.url2 }}"{% if section.settings.url2 contains '://' %} target="_blank" rel="noopener"{% endif %}>{{ section.settings.cta2 }}</a>{%- endif -%}
     </div>
   </div>
   <dl class="dl">

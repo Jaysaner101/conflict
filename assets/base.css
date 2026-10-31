@@ -19,6 +19,11 @@ p{margin:0}
 .wrap{max-width:var(--max);margin:0 auto;padding-left:var(--pad);padding-right:var(--pad)}
 .sec{padding-top:var(--gap);padding-bottom:var(--gap)}
 .sec-s{padding-top:calc(var(--gap)*.55);padding-bottom:calc(var(--gap)*.55)}
+/* Two plain sections in a row share one gap instead of stacking two paddings
+   (the bottom of one plus the top of the next read as a hole). A section on a
+   plate or photo keeps its full padding, since its edge is visible. */
+.shopify-section:has(> :is(.sec,.sec-s,.wfilter)) + .shopify-section > :is(.sec,.sec-s){padding-top:calc(var(--gap)*.4)}
+.sec-s > .ghead:first-child{padding-top:0}
 .top{padding-top:clamp(140px,14vw,210px)}
 .rule{border-top:1px solid var(--line)}
 
@@ -134,7 +139,7 @@ dialog.vm::backdrop{background:rgba(0,0,0,.92)}
 .dl dt{padding-top:3px}.dl dd{margin:0;color:var(--ink)}
 
 /* section header */
-.sh{display:flex;justify-content:space-between;align-items:flex-end;gap:32px;flex-wrap:wrap;margin-bottom:clamp(32px,4vw,64px)}
+.sh{display:flex;justify-content:space-between;align-items:last baseline;gap:32px;flex-wrap:wrap;margin-bottom:clamp(32px,4vw,64px)}
 
 /* video row */
 .vrow{display:grid;grid-template-columns:repeat(4,1fr);gap:2px}
@@ -483,7 +488,7 @@ body::before{content:"";position:fixed;inset:0;z-index:90;pointer-events:none;op
 .wgroup.lead .wk:first-child{grid-column:span 2;grid-row:span 2}
 .wgroup.c3{grid-template-columns:repeat(3,1fr)}
 .wgroup .wk span{opacity:1;transform:none}.wgroup .wk::after{opacity:1}
-.ghead{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;padding:clamp(40px,5vw,80px) 0 clamp(18px,2vw,28px)}
+.ghead{display:flex;justify-content:space-between;align-items:last baseline;gap:24px;padding:clamp(28px,3vw,48px) 0 16px}
 .jump{display:flex;gap:26px;flex-wrap:wrap}
 
 /* murph chapters */
@@ -560,7 +565,6 @@ body::before{content:"";position:fixed;inset:0;z-index:90;pointer-events:none;op
 .nb .facts span{display:inline-flex;align-items:center;gap:8px;font-size:13.5px;color:var(--ink)}.nb .facts .ic{color:var(--hi)}
 /* work */
 .wgroup{gap:10px}.wgroup .wk span{font-size:10px}
-.ghead{padding:clamp(28px,3vw,48px) 0 16px}
 .wfilter{position:sticky;top:84px;z-index:20;background:rgba(0,0,0,.9);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
 .wfilter .chips{margin:0;border:0;padding-top:14px}
 .proc{gap:clamp(12px,1.4vw,22px)}.proc b{font-size:15.5px}.proc>div{font-size:14.5px}

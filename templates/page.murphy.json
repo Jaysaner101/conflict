@@ -128,7 +128,9 @@
         "lede": "The short version",
         "text": "<p>[Placeholder bio] Murphy has spent his spare hours in a workshop for years. What started as engraving his own gear turned into requests from the people around him: a name on a gift, a crest on a retirement piece, a logo for a local team.</p><p>[Placeholder] Today he runs an industrial fiber laser out of his own shop in Omaha. He takes on the jobs he can stand behind, does every one of them himself, and will tell you straight if your idea will not engrave well.</p><p>[Placeholder] When the machine is off he hosts Counter Culture Conflict on the Counter Culture Inc network.</p>",
         "url": "/pages/the-work",
-        "url2": "/collections/all"
+        "url2": "/collections/all",
+        "cta": "See the work",
+        "cta2": "Shop his work"
       }
     },
     "strip": {
@@ -162,7 +164,8 @@
         "m3"
       ],
       "settings": {
-        "url": "/pages/the-work"
+        "url": "/pages/the-work",
+        "cta": "See all the work"
       }
     }
   },

@@ -343,5 +343,27 @@ for (const f of glob('templates').filter(x => x.endsWith('.json'))) {
   for (const b of banned) if (fs.existsSync('assets/' + b)) fail('ruled-out-image', 'assets/' + b, 'ruled-out image is still in the theme');
 }
 
+/* button-without-label — the Murphy bio rendered two empty boxes: its links
+ *  were set but the button labels were not, so each button had no text.
+ *  A url / url2 setting needs its cta / cta2 label (or a schema default). */
+for (const f of glob('templates').filter(x => x.endsWith('.json'))) {
+  let t; try { t = JSON.parse(read(f)); } catch { continue; }
+  const check = (where, set, defs) => {
+    for (const [u, c] of [['url', 'cta'], ['url2', 'cta2']]) {
+      const def = defs.find(d => d.id === c); if (!def) continue;
+      if ((set || {})[u] && !(set || {})[c] && !def.default)
+        fail('button-without-label', f, `${where} links '${u}' but has no '${c}' label, so the button is an empty box`);
+    }
+  };
+  for (const [key, sec] of Object.entries(t.sections || {})) {
+    const file = `sections/${sec.type}.liquid`; if (!fs.existsSync(file)) continue;
+    const sch = schemaOf(file); if (!sch) continue;
+    check(`'${key}' (${sec.type})`, sec.settings, sch.settings || []);
+    for (const [bk, b] of Object.entries(sec.blocks || {})) {
+      const bs = (sch.blocks || []).find(x => x.type === b.type); if (bs) check(`'${key}/${bk}'`, b.settings, bs.settings || []);
+    }
+  }
+}
+
 module.exports = { problems, fail, warn, liquidFiles, read, glob, schemaOf };
 if (require.main === module) require('./doctor-part2.js');
