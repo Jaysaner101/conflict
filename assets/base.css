@@ -571,7 +571,9 @@ body::before{content:"";position:fixed;inset:0;z-index:90;pointer-events:none;op
 /* murph */
 .mhero{padding-top:clamp(112px,9vw,140px);padding-bottom:clamp(40px,5vw,72px)}
 .bio{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,.7fr);gap:clamp(28px,5vw,90px);align-items:start}
-.bio .copy{max-width:62ch}.bio p+p{margin-top:16px}
+.bio .copy{max-width:62ch}
+/* Rich text from the editor (several paragraphs in one setting) needs space between paragraphs. */
+.bio p+p,div.copy p+p{margin-top:16px}
 .medal{position:absolute;inset:0;display:grid;place-items:center;z-index:1}
 .medal img{position:static!important;width:min(56%,260px)!important;height:auto!important;aspect-ratio:1;object-fit:cover;border-radius:50%;opacity:1!important;box-shadow:0 0 0 1px rgba(255,255,255,.2),0 20px 60px rgba(0,0,0,.8);filter:contrast(1.1)!important}
 .chap .tile{min-height:clamp(360px,32vw,460px)}
