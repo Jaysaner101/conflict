@@ -33,7 +33,29 @@
     </div>
   {%- endif -%}
 
-  <div class="grid ag-grid">
+  {%- comment -%}
+    A range that would leave a hole in its last row opens with one wide card
+    instead, showing the first product's front and back side by side.
+    ag-f3: the gap appears at three across. ag-f2: the gap appears at two across.
+  {%- endcomment -%}
+  {%- liquid
+    assign fill = ''
+    if c != blank
+      assign n_all = c.products_count
+      if n_all > 24
+        assign n_all = 24
+      endif
+      assign r3 = n_all | modulo: 3
+      assign r2 = n_all | modulo: 2
+      if n_all > 3 and r3 == 2
+        assign fill = fill | append: ' ag-f3'
+      endif
+      if n_all > 2 and r2 == 1
+        assign fill = fill | append: ' ag-f2'
+      endif
+    endif
+  -%}
+  <div class="grid ag-grid{{ fill }}">
     {%- if c != blank -%}
       {%- for product in c.products limit: 24 -%}
         {%- render 'product-card', card_product: product -%}

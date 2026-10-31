@@ -93,8 +93,15 @@ dialog.sg::backdrop{background:rgba(0,0,0,.82);backdrop-filter:blur(4px)}
 
 /* ---------- apparel page: the range ---------- */
 .ag-chips{border-bottom:1px solid var(--line)}
-.ag-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(30px,3vw,52px) clamp(12px,1.4vw,22px)}
+.ag-grid{--cg:clamp(12px,1.4vw,22px);display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(30px,3vw,52px) var(--cg)}
 .ag-grid .card[hidden],.ag-look[hidden]{display:none}
+/* The wide opening card (see apparel-grid.liquid): front and back side by
+   side. Its photo is exactly one column tall, so its name and price line up
+   with the cards beside it. Three across uses ag-f3, two across uses ag-f2. */
+@media (min-width:1021px){.ag-f3>.card:first-child{grid-column:span 2}
+  .ag-f3>.card:first-child .stage{aspect-ratio:auto;height:0;padding-bottom:calc(50% - var(--cg) / 2)}
+  .ag-f3>.card.has-alt:first-child .stage .ph{width:50%;object-fit:contain}
+  .ag-f3>.card.has-alt:first-child .stage .ph.alt{left:50%;opacity:1}}
 .ag-look{grid-column:1/-1;position:relative;min-height:clamp(320px,34vw,520px);overflow:hidden;display:flex;align-items:flex-end;border:1px solid var(--line)}
 .ag-look img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .ag-look::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,rgba(0,0,0,.86),rgba(0,0,0,.35) 55%,rgba(0,0,0,.1)),linear-gradient(to top,rgba(0,0,0,.7),rgba(0,0,0,0) 50%)}
@@ -137,6 +144,10 @@ dialog.sg::backdrop{background:rgba(0,0,0,.82);backdrop-filter:blur(4px)}
   .dd-p+.dd-p{border-left:0;border-top:1px solid var(--line)}
   .apd-buy,.apd-gal{position:static}
   .ag-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .ag-f2>.card:first-child{grid-column:1/-1}
+  .ag-f2>.card:first-child .stage{aspect-ratio:auto;height:0;padding-bottom:calc(50% - var(--cg) / 2)}
+  .ag-f2>.card.has-alt:first-child .stage .ph{width:50%;object-fit:contain}
+  .ag-f2>.card.has-alt:first-child .stage .ph.alt{left:50%;opacity:1}
 }
 @media (max-width:760px){
   .apd{padding-top:76px}
@@ -147,7 +158,7 @@ dialog.sg::backdrop{background:rgba(0,0,0,.82);backdrop-filter:blur(4px)}
   .apd-thumbs{padding:0 var(--pad)}
   .apd-th{width:64px;height:64px}
   .apd-bar{display:flex}
-  .ag-grid{gap:28px 10px}
+  .ag-grid{--cg:10px;gap:28px var(--cg)}
   .dd-p{min-height:0}
   .dd-art{padding-top:48px}
   .dd-art img{max-height:46vh}
