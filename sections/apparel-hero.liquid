@@ -16,10 +16,23 @@
       {%- if section.settings.image -%}<img src="{{ section.settings.image | image_url: width: 1600 }}" alt="{{ section.settings.image.alt | default: section.settings.heading | escape }}" width="1600" height="1067">{%- endif -%}
     </div>
   </div>
-  {%- if section.settings.collection != blank -%}
+  {%- comment -%}
+    On the home and show pages: the whole range in one row under a ruled
+    header, so the banner and the products read as two parts. Five fit across
+    on desktop; any more, and on smaller screens, the row scrolls sideways.
+  {%- endcomment -%}
+  {%- assign col = section.settings.collection -%}
+  {%- if col != blank -%}
     <div class="wrap ahero-row">
-      <div class="grid three">
-        {%- for product in section.settings.collection.products limit: section.settings.count -%}
+      <div class="sh ahr-head">
+        <div class="stack-s">
+          <span class="lab"><i></i>{{ col.products_count }} {% if col.products_count == 1 %}piece{% else %}pieces{% endif %}</span>
+          <h2 class="h3">{{ section.settings.row_heading }}</h2>
+        </div>
+        <a class="ul" href="{{ section.settings.url | default: col.url }}">{{ section.settings.row_link }}</a>
+      </div>
+      <div class="ahr-rail">
+        {%- for product in col.products limit: 12 -%}
           {%- render 'product-card', card_product: product -%}
         {%- endfor -%}
       </div>
@@ -32,7 +45,7 @@
   "settings": [
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Counter Culture Conflict apparel" },
     { "type": "text", "id": "heading", "label": "Heading", "default": "Conflict apparel" },
-    { "type": "textarea", "id": "text", "label": "Text", "default": "Tees, hoodies, work shirts and caps from the show, printed when you order." },
+    { "type": "textarea", "id": "text", "label": "Text", "default": "Tees from the show, printed when you order." },
     { "type": "text", "id": "fact1", "label": "Fact 1", "default": "Made to order" },
     { "type": "text", "id": "fact2", "label": "Fact 2", "default": "Free shipping" },
     { "type": "text", "id": "cta", "label": "Button label", "default": "Shop the first run" },
@@ -40,7 +53,8 @@
     { "type": "image_picker", "id": "image", "label": "Garment photo" },
     { "type": "image_picker", "id": "bg", "label": "Background" },
     { "type": "collection", "id": "collection", "label": "Show products from", "info": "Leave empty on the apparel page itself" },
-    { "type": "range", "id": "count", "label": "Products shown", "min": 3, "max": 9, "step": 3, "default": 3 }
+    { "type": "text", "id": "row_heading", "label": "Heading above the products", "default": "The range" },
+    { "type": "text", "id": "row_link", "label": "Link label above the products", "default": "Shop all apparel" }
   ],
   "presets": [{ "name": "Apparel hero" }]
 }

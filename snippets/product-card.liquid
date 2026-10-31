@@ -1,7 +1,7 @@
 {%- comment -%}
   Product card, used on every grid. One hover rule for every product: the card
-  shows the product's second photo (for apparel, always the back), and a
-  product with one photo just eases in. Nothing is printed over the photos.
+  shows the product's second photo (for apparel, the other side of the shirt),
+  and a product with one photo just eases in. Nothing is printed over the photos.
 {%- endcomment -%}
 {%- liquid
   assign p = card_product
@@ -53,7 +53,7 @@
     endfor
   endif
 -%}
-<a class="card{% if second %} has-alt{% endif %}" href="{{ p.url }}" data-type="{{ p.type | handleize }}">
+<a class="card{% if second %} has-alt{% endif %}{% if is_apparel %} ap{% endif %}" href="{{ p.url }}" data-type="{{ p.type | handleize }}">
   <div class="stage">
     {%- if p.featured_media -%}
       <img class="ph" src="{{ p.featured_media | image_url: width: 900 }}" alt="{{ p.featured_media.alt | default: p.title | escape }}" loading="lazy" width="450" height="450">

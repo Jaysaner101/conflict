@@ -57,55 +57,11 @@
         "heading": "The range",
         "collection": "apparel"
       }
-    },
-    "arrive": {
-      "type": "apparel-arrival",
-      "settings": {
-        "heading": "How it gets to you",
-        "image": "shopify://shop_images/spade-tee-right.webp"
-      },
-      "blocks": {
-        "s1": {
-          "type": "step",
-          "settings": {
-            "title": "You pick your size",
-            "text": "Every shirt has a size guide with real measurements."
-          }
-        },
-        "s2": {
-          "type": "step",
-          "settings": {
-            "title": "We print it for you",
-            "text": "Usually 2 to 5 working days. Nothing sits in a warehouse."
-          }
-        },
-        "s3": {
-          "type": "step",
-          "settings": {
-            "title": "It ships free",
-            "text": "US and Canada, with a tracking link by email."
-          }
-        },
-        "s4": {
-          "type": "step",
-          "settings": {
-            "title": "It's at your door",
-            "text": "Most orders arrive 1 to 2 weeks after you order. Each product shows the dates."
-          }
-        }
-      },
-      "block_order": [
-        "s1",
-        "s2",
-        "s3",
-        "s4"
-      ]
     }
   },
   "order": [
     "hero",
     "drop",
-    "range",
-    "arrive"
+    "range"
   ]
 }

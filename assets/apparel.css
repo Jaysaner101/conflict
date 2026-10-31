@@ -101,7 +101,8 @@ dialog.sg::backdrop{background:rgba(0,0,0,.82);backdrop-filter:blur(4px)}
 @media (min-width:1021px){.ag-f3>.card:first-child{grid-column:span 2}
   .ag-f3>.card:first-child .stage{aspect-ratio:auto;height:0;padding-bottom:calc(50% - var(--cg) / 2)}
   .ag-f3>.card.has-alt:first-child .stage .ph{width:50%;object-fit:contain}
-  .ag-f3>.card.has-alt:first-child .stage .ph.alt{left:50%;opacity:1}}
+  .ag-f3>.card.has-alt:first-child .stage .ph.alt{left:50%;opacity:1}
+  .ag-f3>.card.ap.has-alt:first-child .stage{background-size:50% 100%,100% 100%}}
 .ag-look{grid-column:1/-1;position:relative;min-height:clamp(320px,34vw,520px);overflow:hidden;display:flex;align-items:flex-end;border:1px solid var(--line)}
 .ag-look img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .ag-look::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,rgba(0,0,0,.86),rgba(0,0,0,.35) 55%,rgba(0,0,0,.1)),linear-gradient(to top,rgba(0,0,0,.7),rgba(0,0,0,0) 50%)}
@@ -127,20 +128,8 @@ dialog.sg::backdrop{background:rgba(0,0,0,.82);backdrop-filter:blur(4px)}
 .dd-p:hover .btn.solid,.dd-p:focus-visible .btn.solid{background:var(--hi);border-color:var(--hi)}
 .dd-p:focus-visible{outline:2px solid var(--hi);outline-offset:-2px}
 
-
-/* ---------- apparel page: how it gets to you ---------- */
-.arr-in{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(32px,6vw,112px);align-items:center;padding-top:clamp(72px,9vw,140px);padding-bottom:clamp(72px,9vw,140px)}
-.arr-shot{aspect-ratio:1;overflow:hidden;border:1px solid rgba(255,255,255,.12);box-shadow:0 40px 120px rgba(0,0,0,.7)}
-.arr-shot img{width:100%;height:100%;object-fit:cover;display:block}
-.arr-copy{display:grid;gap:clamp(24px,3vw,40px)}
-.arr-steps{list-style:none;margin:0;padding:0;counter-reset:a;border-top:1px solid rgba(255,255,255,.14)}
-.arr-steps li{counter-increment:a;display:grid;grid-template-columns:56px 1fr;gap:4px 18px;padding:20px 0;border-bottom:1px solid rgba(255,255,255,.14)}
-.arr-steps li::before{content:counter(a);grid-row:span 2;font-family:var(--hd);font-size:30px;line-height:1;color:var(--hi);font-variant-numeric:tabular-nums}
-.arr-steps b{color:var(--ink);font-weight:500;font-size:17px}
-.arr-steps span{color:var(--body)}
-
 @media (max-width:1020px){
-  .apd-grid,.arr-in{grid-template-columns:1fr}
+  .apd-grid{grid-template-columns:1fr}
   .dd-p+.dd-p{border-left:0;border-top:1px solid var(--line)}
   .apd-buy,.apd-gal{position:static}
   .ag-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
@@ -148,6 +137,7 @@ dialog.sg::backdrop{background:rgba(0,0,0,.82);backdrop-filter:blur(4px)}
   .ag-f2>.card:first-child .stage{aspect-ratio:auto;height:0;padding-bottom:calc(50% - var(--cg) / 2)}
   .ag-f2>.card.has-alt:first-child .stage .ph{width:50%;object-fit:contain}
   .ag-f2>.card.has-alt:first-child .stage .ph.alt{left:50%;opacity:1}
+  .ag-f2>.card.ap.has-alt:first-child .stage{background-size:50% 100%,100% 100%}
 }
 @media (max-width:760px){
   .apd{padding-top:76px}
@@ -162,6 +152,5 @@ dialog.sg::backdrop{background:rgba(0,0,0,.82);backdrop-filter:blur(4px)}
   .dd-p{min-height:0}
   .dd-art{padding-top:48px}
   .dd-art img{max-height:46vh}
-  .arr-shot{max-width:420px}
 }
 @media (prefers-reduced-motion:reduce){.apd-slide,.apd-bar,.sw{transition:none}.apd-opt.shake{animation:none}}

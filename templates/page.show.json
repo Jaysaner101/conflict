@@ -255,9 +255,10 @@
         "text": "Five black tees from the show, carrying the 99% spade and the Conflict globe. Printed when you order, shipped free.",
         "bg": "shopify://shop_images/pl-spade-c.jpg",
         "collection": "apparel",
-        "count": 3,
         "fact1": "Made to order",
-        "fact2": "Free shipping"
+        "fact2": "Free shipping",
+        "row_heading": "The range",
+        "row_link": "Shop all apparel"
       }
     },
     "network_latest": {
@@ -284,7 +285,7 @@
           "type": "episode",
           "settings": {
             "thumb": "shopify://shop_images/net-wendys.jpg",
-            "title": "Wendy's released an emo album?? (And it's good\u2026)",
+            "title": "Wendy's released an emo album?? (And it's good…)",
             "meta": "Streamed 1 day ago",
             "dur": "56:32",
             "url": "https://www.youtube.com/watch?v=9QSsdpHyBJk"
