@@ -331,12 +331,14 @@ for (const f of glob('templates').filter(x => x.endsWith('.json'))) {
  *  These kept resurfacing through image fallbacks and product photos. */
 {
   const banned = ['art-globe.jpg', 'art-globe-cut.png', 'logo-globe.webp', 'tee-front.jpg', 'tee-back.jpg',
-                  'cap-mock.jpg', 'shirt-buttonup.jpg', 'apparel-hero.jpg'];
+                  'cap-mock.jpg', 'shirt-buttonup.jpg', 'apparel-hero.jpg',
+                  // Stand-in mockups from before the real Printful tees existed.
+                  'apparel-hero-v2.jpg', 'tee-front-v2.jpg', 'tee-back-spade.jpg', 'tee-back-globe.jpg'];
   for (const f of [...glob('templates'), ...glob('sections'), ...glob('snippets'), ...glob('config'), ...glob('layout')]
                    .filter(x => /\.(json|liquid)$/.test(x))) {
     const body = read(f);
     for (const b of banned)
-      if (new RegExp(`[/'"]${b.replace(/\./g, '\\.')}`).test(body)) fail('ruled-out-image', f, `uses ${b}, which the client has ruled out (old globe, sleeve prints or wrong cap)`);
+      if (new RegExp(`[/'"]${b.replace(/\./g, '\\.')}`).test(body)) fail('ruled-out-image', f, `uses ${b}, which is ruled out (old globe, sleeve prints, wrong cap, or a stand-in mockup replaced by real product photos)`);
   }
   for (const b of banned) if (fs.existsSync('assets/' + b)) fail('ruled-out-image', 'assets/' + b, 'ruled-out image is still in the theme');
 }
