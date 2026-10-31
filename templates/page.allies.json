@@ -34,16 +34,6 @@
             "logo": "shopify://shop_images/lg-cc-text.webp"
           }
         },
-        "a3": {
-          "type": "ally",
-          "settings": {
-            "eyebrow": "On the bench every week",
-            "name": "Copville",
-            "text": "The script on half the lids and blades in this shop.",
-            "cta": "Visit",
-            "logo": "shopify://shop_images/lg-cxc.webp"
-          }
-        },
         "a4": {
           "type": "ally",
           "settings": {
@@ -59,7 +49,6 @@
       "block_order": [
         "a1",
         "a2",
-        "a3",
         "a4"
       ],
       "settings": {}
