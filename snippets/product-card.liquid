@@ -53,8 +53,9 @@
     endfor
   endif
 -%}
-<a class="card{% if second %} has-alt{% endif %}{% if is_apparel %} ap{% endif %}" href="{{ p.url }}" data-type="{{ p.type | handleize }}">
+<a class="card{% if second %} has-alt{% endif %}{% if is_apparel %} ap{% endif %}{{ card_class }}" href="{{ p.url }}" data-type="{{ p.type | handleize }}">
   <div class="stage">
+    {%- if p.metafields.custom.drop.value == 'New' -%}<span class="flag lab"><i></i>New</span>{%- endif -%}
     {%- if p.featured_media -%}
       <img class="ph" src="{{ p.featured_media | image_url: width: 900 }}" alt="{{ p.featured_media.alt | default: p.title | escape }}" loading="lazy" width="450" height="450">
       {%- if second -%}

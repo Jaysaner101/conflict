@@ -47,14 +47,6 @@
             "category": "Firearms"
           }
         },
-        "w5": {
-          "type": "piece",
-          "settings": {
-            "image": "shopify://shop_images/lid-copville.jpg",
-            "title": "Copville script lid",
-            "category": "Lids and knives"
-          }
-        },
         "w6": {
           "type": "piece",
           "settings": {
@@ -84,14 +76,6 @@
           "settings": {
             "image": "shopify://shop_images/knife-name.jpg",
             "title": "Name on a blade",
-            "category": "Lids and knives"
-          }
-        },
-        "w10": {
-          "type": "piece",
-          "settings": {
-            "image": "shopify://shop_images/knife-oilslick-copville.jpg",
-            "title": "Oil slick folder",
             "category": "Lids and knives"
           }
         },
@@ -181,12 +165,10 @@
         "w2",
         "w3",
         "w4",
-        "w5",
         "w6",
         "w7",
         "w8",
         "w9",
-        "w10",
         "w11",
         "w12",
         "w13",

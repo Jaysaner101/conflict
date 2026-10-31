@@ -5,10 +5,10 @@
       "settings": {
         "eyebrow": "Counter Culture Conflict apparel",
         "heading": "Conflict apparel",
-        "text": "The first run from the show: five black tees carrying the 99% spade and the Conflict globe, each one printed when you order and shipped to your door. Zip hoodies, work shirts and trucker caps are on the way.",
+        "text": "The first run from the show: two heavyweight pullover hoodies and five tees, all black, carrying the 99% spade and the Conflict globe. Each one is printed when you order and shipped to your door. Work shirts and trucker caps are on the way.",
         "cta": "Shop the range",
         "url": "#range",
-        "image": "shopify://shop_images/apparel-hero-v3.jpg",
+        "image": "shopify://shop_images/apparel-hero-v4.jpg",
         "bg": "shopify://shop_images/pl-red.jpg"
       }
     },
@@ -17,7 +17,7 @@
       "settings": {
         "anchor": "drop",
         "heading": "Drop 01",
-        "text": "Two designs across five tees. Wear them on the chest, on the back, or both.",
+        "text": "Two designs across five tees and two hoodies. Wear them on the chest, on the back, or both.",
         "cta": "Choose your size"
       },
       "blocks": {

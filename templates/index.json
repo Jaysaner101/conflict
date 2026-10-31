@@ -85,7 +85,7 @@
           "settings": {
             "name": "Anodized aluminum",
             "text": "Engraved through the anodizing and down into bright, bare aluminum.",
-            "image": "shopify://shop_images/c-lid-copville.webp",
+            "image": "shopify://shop_images/c-lid-antihero.png",
             "url": "/collections/can-lids"
           }
         },
@@ -134,8 +134,9 @@
         "eyebrow": "Engraved, ready to ship",
         "heading": "Off the machine",
         "count": 8,
-        "collection": "can-lids",
-        "menu": "footer-shop"
+        "collection": "all",
+        "menu": "footer-shop",
+        "engraved_only": true
       }
     },
     "ways": {
@@ -311,8 +312,8 @@
         "heading": "Conflict apparel",
         "cta": "Shop apparel",
         "url": "/pages/apparel",
-        "image": "shopify://shop_images/apparel-hero-v3.jpg",
-        "text": "Five black tees from the show, carrying the 99% spade and the Conflict globe. Printed when you order and shipped to your door.",
+        "image": "shopify://shop_images/apparel-hero-v4.jpg",
+        "text": "Black hoodies and tees from the show, carrying the 99% spade and the Conflict globe. Printed when you order and shipped to your door.",
         "bg": "shopify://shop_images/pl-red.jpg",
         "collection": "apparel",
         "row_heading": "The range",

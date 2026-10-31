@@ -27,7 +27,7 @@
       </div>
       <div class="dr-f" style="margin-top:26px">
         <div class="sub"><span>Subtotal</span><b>{{ cart.total_price | money }}</b></div>
-        <p class="note">Shipping and tax calculated at checkout. Engraved pieces: {{ settings.fact_ship_us }} to the US, {{ settings.fact_ca }} to Canada. Apparel is printed and shipped separately: {{ settings.fact_apparel_us }} to the US, {{ settings.fact_apparel_ca }} to Canada.</p>
+        <p class="note">Shipping and tax calculated at checkout. Engraved pieces: {{ settings.fact_ship_us }} to the US, {{ settings.fact_ca }} to Canada. Apparel is printed and shipped separately: from {{ settings.fact_apparel_us }} to the US and {{ settings.fact_apparel_ca }} to Canada.</p>
         <div class="btns">
           <button class="btn" type="submit" name="update">Update cart</button>
           <button class="btn solid" type="submit" name="checkout">Checkout</button>

@@ -343,6 +343,15 @@ function initGallery() {
 }
 
 
+/* ---------- apparel grid: wide cards ----------
+   Same sum as apparel-grid.liquid: enough wide cards to close the last row,
+   at three across (w3) and at two across (w2). Rerun after a filter. */
+function wideCards(cards) {
+  const on = cards.filter(k => !k.hidden), n = on.length;
+  const w3 = n < 2 ? 0 : (3 - n % 3) % 3, w2 = n % 2;
+  on.forEach((k, i) => { k.classList.toggle('w3', i < w3); k.classList.toggle('w2', i < w2); });
+}
+
 /* ---------- collection: filter by garment type (small collections only) ---------- */
 function initTypeFilter() {
   const bar = $('#typeChips'); if (!bar) return;
@@ -353,6 +362,7 @@ function initTypeFilter() {
     let n = 0;
     cards.forEach(k => { const on = t === 'all' || k.dataset.type === t; k.hidden = !on; if (on) n++; });
     $$('.ag-look').forEach(l => { l.hidden = t !== 'all'; });   // photo tiles only make sense in the full range
+    if (bar.closest('.sec')?.querySelector('.ag-grid')) wideCards(cards);
     if (lab) lab.textContent = n + (n === 1 ? ' piece' : ' pieces');
   }));
 }

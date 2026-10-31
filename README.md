@@ -114,8 +114,14 @@ Republishing from Printful brings the white mockups back.
 The home and show pages carry the apparel band (`apparel-hero` with a collection set):
 banner, a ruled "The range" header, then every product in one row.
 
-The range opens with one wide front-and-back card whenever the last row would
-otherwise have a hole (5, 8, 11 products at three across; any odd count at two).
+The range opens with wide cards (two photos side by side) whenever the last row
+would otherwise have a hole: one or two at three across (`w3`), one at two across
+(`w2`). `apparel-grid.liquid` sets them; `wideCards()` in theme.js redoes the sum
+when a type chip filters the grid. Put the products to feature first in the
+collection's manual order.
+
+A product whose `custom.drop` metafield is exactly `New` gets a "New" flag on its
+card. Change it to the drop name (e.g. `Drop 02`) when it stops being new.
 
 ## Episode rows (YouTube)
 

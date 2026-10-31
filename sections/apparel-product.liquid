@@ -9,6 +9,8 @@
     custom.garment_details  one fact per line            (Details)
     custom.design_story     a few lines                  (The design)
     custom.drop             e.g. Drop 01                 (badge)
+    custom.ship_us / ship_ca  e.g. $8.79                 (shipping, when it differs
+                                                          from the Store facts rate)
   Option names are matched loosely: anything containing "colo" is colour,
   anything containing "size" is size. Printful's names work as they come.
 {%- endcomment -%}
@@ -18,6 +20,12 @@
   assign ships = product.metafields.custom.ships_as.value | default: 'Made to order'
   assign guide = product.metafields.custom.size_guide.value
   assign drop = product.metafields.custom.drop.value
+  comment
+    Shipping: the product's own Printful rate (custom.ship_us / custom.ship_ca,
+    e.g. hoodies) or the store-wide apparel rate from Store facts.
+  endcomment
+  assign ship_us = product.metafields.custom.ship_us.value | default: settings.fact_apparel_us
+  assign ship_ca = product.metafields.custom.ship_ca.value | default: settings.fact_apparel_ca
   assign colour_pos = 0
   assign size_pos = 0
   for opt in product.options_with_values
@@ -139,7 +147,7 @@
         </li>
         <li>
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h12M12 6l6 6-6 6"/></svg>
-          <span><b>Shipping {{ settings.fact_apparel_us }} to the US, {{ settings.fact_apparel_ca }} to Canada</b><span class="note">Engraved pieces in the same order ship separately from Omaha, with their own shipping.</span></span>
+          <span><b>Shipping {{ ship_us }} to the US, {{ ship_ca }} to Canada</b><span class="note">Engraved pieces in the same order ship separately from Omaha, with their own shipping.</span></span>
         </li>
         <li>
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z"/></svg>
@@ -174,7 +182,7 @@
         {%- endif -%}
         <details>
           <summary>Shipping</summary>
-          <div class="copy"><p>Shipping is {{ settings.fact_apparel_us }} to the US and {{ settings.fact_apparel_ca }} to Canada.</p><p>{{ section.settings.shipping_text }}</p></div>
+          <div class="copy"><p>Shipping is {{ ship_us }} to the US and {{ ship_ca }} to Canada.</p><p>{{ section.settings.shipping_text }}</p></div>
         </details>
         <details>
           <summary>Care</summary>

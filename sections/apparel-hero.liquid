@@ -7,7 +7,7 @@
       <div class="facts" style="display:flex;flex-wrap:wrap;gap:10px 26px">
         {%- if section.settings.fact1 != blank -%}<span class="note ink">{{ section.settings.fact1 }}</span>{%- endif -%}
         {%- comment -%} Shipping comes from the theme's store facts, so it matches the cart and product pages. {%- endcomment -%}
-        {%- if settings.fact_apparel_us != blank -%}<span class="note ink">US shipping {{ settings.fact_apparel_us }}</span>{%- endif -%}
+        {%- if settings.fact_apparel_us != blank -%}<span class="note ink">US shipping from {{ settings.fact_apparel_us }}</span>{%- endif -%}
       </div>
       {%- if section.settings.cta != blank -%}
         <div class="btns"><a class="btn solid" href="{{ section.settings.url | default: '#appTop' }}">{{ section.settings.cta }}</a></div>
@@ -19,8 +19,8 @@
   </div>
   {%- comment -%}
     On the home and show pages: the whole range in one row under a ruled
-    header, so the banner and the products read as two parts. Five fit across
-    on desktop; any more, and on smaller screens, the row scrolls sideways.
+    header, so the banner and the products read as two parts. Up to seven fit
+    across on desktop (--n); any more, and on smaller screens, the row scrolls sideways.
   {%- endcomment -%}
   {%- assign col = section.settings.collection -%}
   {%- if col != blank -%}
@@ -32,7 +32,8 @@
         </div>
         <a class="ul" href="{{ section.settings.url | default: col.url }}">{{ section.settings.row_link }}</a>
       </div>
-      <div class="ahr-rail">
+      {%- assign fit = col.products.size | at_most: 7 | at_least: 5 -%}
+      <div class="ahr-rail" style="--n:{{ fit }}">
         {%- for product in col.products limit: 12 -%}
           {%- render 'product-card', card_product: product -%}
         {%- endfor -%}

@@ -34,31 +34,40 @@
   {%- endif -%}
 
   {%- comment -%}
-    A range that would leave a hole in its last row opens with one wide card
-    instead, showing the first product's front and back side by side.
-    ag-f3: the gap appears at three across. ag-f2: the gap appears at two across.
+    Wide cards close the gap in the last row. Each wide card shows the
+    product's two photos side by side and takes two cells, so at three across
+    the first w3 cards go wide, and at two across the first w2 cards go full
+    width. theme.js (wideCards) runs the same sum again when a type chip filters
+    the grid.
   {%- endcomment -%}
   {%- liquid
-    assign fill = ''
+    assign n_all = 0
     if c != blank
-      assign n_all = c.products_count
+      assign n_all = c.products.size
       if n_all > 24
         assign n_all = 24
       endif
-      assign r3 = n_all | modulo: 3
-      assign r2 = n_all | modulo: 2
-      if n_all > 3 and r3 == 2
-        assign fill = fill | append: ' ag-f3'
-      endif
-      if n_all > 2 and r2 == 1
-        assign fill = fill | append: ' ag-f2'
-      endif
     endif
+    assign r3 = n_all | modulo: 3
+    assign w3 = 3 | minus: r3 | modulo: 3
+    if n_all < 2
+      assign w3 = 0
+    endif
+    assign w2 = n_all | modulo: 2
   -%}
-  <div class="grid ag-grid{{ fill }}">
+<div class="grid ag-grid">
     {%- if c != blank -%}
       {%- for product in c.products limit: 24 -%}
-        {%- render 'product-card', card_product: product -%}
+        {%- liquid
+          assign wide = ''
+          if forloop.index <= w3
+            assign wide = ' w3'
+          endif
+          if forloop.index <= w2
+            assign wide = wide | append: ' w2'
+          endif
+        -%}
+        {%- render 'product-card', card_product: product, card_class: wide -%}
         {%- assign n = forloop.index -%}
         {%- for block in section.blocks -%}
           {%- if block.settings.after == n and block.settings.image -%}

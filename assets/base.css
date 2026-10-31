@@ -907,7 +907,7 @@ body.nav-open{overflow:hidden}
 /* The ruled header between the banner and the products (apparel-hero.liquid). */
 .ahr-head{border-top:1px solid var(--line2);padding-top:clamp(28px,3.2vw,48px);margin-top:clamp(12px,2vw,28px)}
 /* One row: five across on desktop; more than five, or a smaller screen, scrolls. */
-.ahr-rail{--g:clamp(16px,1.6vw,26px);display:grid;grid-auto-flow:column;grid-auto-columns:minmax(calc((100% - 4 * var(--g)) / 5),1fr);gap:var(--g);overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.ahr-rail{--g:clamp(16px,1.6vw,26px);display:grid;grid-auto-flow:column;grid-auto-columns:minmax(calc((100% - (var(--n,5) - 1) * var(--g)) / var(--n,5)),1fr);gap:var(--g);overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch}
 .ahr-rail::-webkit-scrollbar{display:none}
 .ahr-rail>.card{scroll-snap-align:start}
 @media (max-width:1020px){.ahr-rail{grid-auto-columns:minmax(calc((100% - 2 * var(--g)) / 2.4),1fr);margin-right:calc(var(--pad) * -1);padding-right:var(--pad)}}

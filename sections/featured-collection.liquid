@@ -6,15 +6,30 @@
     </nav>
   </div>
   <div class="grid">
-    {%- comment -%} Whole rows of four only: a collection with 6 shows 4, not 4 and a half-empty row. {%- endcomment -%}
+    {%- comment -%}
+      Whole rows of four only: 6 products show 4, not 4 and a half-empty row.
+      "Engraved only" leaves apparel out, so "All products" can feed this row.
+    {%- endcomment -%}
     {%- liquid
-      assign shown = section.settings.count
-      if section.settings.collection != blank and section.settings.collection.products_count < shown
-        assign shown = section.settings.collection.products_count | divided_by: 4 | times: 4 | at_least: 4
+      assign col = section.settings.collection
+      assign avail = 0
+      for p in col.products limit: 50
+        if section.settings.engraved_only and p.tags contains 'apparel'
+          continue
+        endif
+        assign avail = avail | plus: 1
+      endfor
+      assign shown = section.settings.count | at_most: avail
+      if shown > 4
+        assign shown = shown | divided_by: 4 | times: 4
       endif
+      assign n = 0
     -%}
-    {%- for product in section.settings.collection.products limit: shown -%}
+    {%- for product in col.products limit: 50 -%}
+      {%- if section.settings.engraved_only and product.tags contains 'apparel' -%}{%- continue -%}{%- endif -%}
+      {%- if n >= shown -%}{%- break -%}{%- endif -%}
       {%- render 'product-card', card_product: product -%}
+      {%- assign n = n | plus: 1 -%}
     {%- else -%}
       {%- for i in (1..4) -%}
         <div class="card"><div class="stage"></div><div class="meta"><div><div class="n">Product {{ i }}</div><div class="m">Add products to this collection</div></div><div class="p">$0</div></div></div>
@@ -29,6 +44,7 @@
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Engraved, ready to ship" },
     { "type": "text", "id": "heading", "label": "Heading", "default": "Off the machine" },
     { "type": "collection", "id": "collection", "label": "Collection" },
+    { "type": "checkbox", "id": "engraved_only", "label": "Engraved products only (leave apparel out)", "default": false },
     { "type": "range", "id": "count", "label": "Products shown", "min": 4, "max": 12, "step": 4, "default": 8 },
     { "type": "link_list", "id": "menu", "label": "Category links" }
   ],
