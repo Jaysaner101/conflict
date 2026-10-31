@@ -1,9 +1,11 @@
-{%- liquid
-  assign is_apparel = false
-  if product.tags contains 'apparel'
-    assign is_apparel = true
-  endif
--%}
+{%- comment -%}
+  Engraved products. Apparel has its own template (product.apparel). An apparel
+  product that has not been given that template yet still gets the apparel
+  page, so it can never show engraving copy or the name add-on.
+{%- endcomment -%}
+{%- if product.tags contains 'apparel' -%}
+  {%- section 'apparel-product' -%}
+{%- else -%}
 <div style="padding-top:clamp(112px,9.5vw,144px)" id="pdp">
   <div class="wrap">
     <div class="pdp">
@@ -24,9 +26,9 @@
         {%- endif -%}
         <dl class="spec">
           <div><dt class="lab">Material</dt><dd>{{ product.metafields.custom.material | default: product.type | default: 'To be confirmed' }}</dd></div>
-          <div><dt class="lab">Engraving</dt><dd>{% if is_apparel %}Printed to order{% else %}Industrial fiber laser. Deep and permanent{% endif %}</dd></div>
+          <div><dt class="lab">Engraving</dt><dd>Industrial fiber laser. Deep and permanent</dd></div>
           <div><dt class="lab">Made in</dt><dd>Omaha, Nebraska</dd></div>
-          <div><dt class="lab">Shipping time</dt><dd>{% if is_apparel %}Made to order. Allow 5 to 8 days{% else %}About 3 days. About a week with a name{% endif %}</dd></div>
+          <div><dt class="lab">Shipping time</dt><dd>About 3 days. About a week with a name</dd></div>
         </dl>
       </div>
 
@@ -59,8 +61,7 @@
             {%- endfor -%}
           </select>
 
-          {%- unless is_apparel -%}
-            <div class="acc">
+          <div class="acc">
               <label class="acc-h">
                 {%- assign addon = all_products['name-engraving'] -%}
                 <input type="checkbox" id="addName" data-base="{{ product.price | divided_by: 100.0 }}"
@@ -74,14 +75,13 @@
                 <span class="note">Engraved to match the piece. Named items take about a week.</span>
               </div>
             </div>
-          {%- endunless -%}
 
           <button class="btn solid full" type="submit" {% unless product.available %}disabled{% endunless %}>
             {% if product.available %}Add to cart{% else %}Sold out{% endif %}
           </button>
         {%- endform -%}
 
-        <p class="note">{% if is_apparel %}Made to order, allow 5 to 8 days.{% else %}Ships in {{ settings.fact_ship_time | default: 'about 3 days' | downcase }}.{% endif %} US {{ settings.fact_ship_us | default: '$8 flat, free over $60' | downcase }}. Canada {{ settings.fact_ca | default: '$15 flat' | downcase }}.</p>
+        <p class="note">Ships in {{ settings.fact_ship_time | default: 'about 3 days' | downcase }}. US shipping {{ settings.fact_ship_us | default: '$4.99' }}. Canada {{ settings.fact_ca | default: '$15 flat' | downcase }}. Apparel ships free.</p>
 
         <a class="ul" href="/pages/custom-and-bulk">Need twelve or more with your logo? Custom orders</a>
       </div>
@@ -99,3 +99,5 @@
     </div>
   </div>
 </div>
+
+{%- endif -%}

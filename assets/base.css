@@ -148,6 +148,9 @@ dialog.vm::backdrop{background:rgba(0,0,0,.92)}
 .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(28px,3vw,52px) clamp(12px,1.4vw,22px)}
 .grid.three{grid-template-columns:repeat(3,1fr)}
 .card{display:block}
+.card[hidden]{display:none}
+.tchips{border-bottom:0;gap:10px 22px;margin-top:calc(clamp(32px,4vw,56px)*-.45)}
+.tchips .chip{padding-bottom:8px}
 .stage{position:relative;aspect-ratio:1;overflow:hidden;background:radial-gradient(95% 72% at 50% 34%,#1e2022 0%,#0d0e0f 58%,#070707 100%)}
 .stage .cut{position:absolute;left:15%;top:13%;width:70%;height:70%;object-fit:contain;filter:drop-shadow(0 26px 22px rgba(0,0,0,.8));transition:transform .9s cubic-bezier(.2,.7,.1,1)}
 .stage .cut.bleed{left:-7%;top:auto;bottom:-7%;width:96%;height:96%;object-position:left bottom}
@@ -161,6 +164,11 @@ dialog.vm::backdrop{background:rgba(0,0,0,.92)}
 .meta .n{color:var(--ink);font-weight:500;font-size:14.5px;line-height:1.35}
 .meta .m{font-size:13px;color:var(--mut);margin-top:3px}
 .meta .p{color:var(--ink);font-size:14.5px;white-space:nowrap}
+.stage .ph.alt{opacity:0;transition:opacity .45s,transform .9s cubic-bezier(.2,.7,.1,1)}
+@media (hover:hover){.card:hover .ph.alt{opacity:1}}
+.dots{display:flex;align-items:center;gap:5px;margin-top:9px}
+.dots i{width:12px;height:12px;border-radius:50%;border:1px solid rgba(255,255,255,.25);background:linear-gradient(135deg,var(--c1,#666) 0 50%,var(--c2,#666) 50% 100%)}
+.dots em{font-style:normal;font-size:11px;color:var(--mut);margin-left:3px}
 .chips{display:flex;flex-wrap:wrap;gap:28px;margin-bottom:clamp(32px,4vw,56px);border-bottom:1px solid var(--line)}
 .chip{background:none;border:0;padding:0 0 16px;margin-bottom:-1px;border-bottom:1px solid transparent;cursor:pointer;font-size:10.5px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:var(--mut);min-height:40px}
 .chip:hover{color:var(--ink)}
@@ -863,3 +871,6 @@ body.nav-open{overflow:hidden}
    up even when one column carries an extra bullet. */
 .ways .way{display:flex;flex-direction:column}
 .ways .way .btns{margin-top:auto;padding-top:clamp(14px,2vw,24px)}
+
+.ahero-row{position:relative;z-index:2;padding-bottom:clamp(48px,6vw,96px)}
+.ahero-row .meta .m,.ahero-row .meta .n{text-shadow:0 1px 3px rgba(0,0,0,.8)}

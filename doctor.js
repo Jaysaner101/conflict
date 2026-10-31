@@ -176,8 +176,11 @@ for (const f of glob('templates').filter(x => x.endsWith('.json'))) {
 {
   // Include inline <script> blocks: some templates carry their own JS.
   const inline = liquidFiles.map(f => (read(f).match(/<script[\s\S]*?<\/script>/g) || []).join('\n')).join('\n');
-  const jsSrc = (fs.existsSync('assets/theme.js') ? read('assets/theme.js') : '') + '\n' + inline
-              + '\n' + (fs.existsSync('assets/base.css') ? read('assets/base.css') : '');
+  // Every script and stylesheet in assets/, not just the main pair: apparel.js
+  // and apparel.css load only on apparel pages and must be checked all the same.
+  const assetsOf = ext => (fs.existsSync('assets') ? fs.readdirSync('assets') : [])
+    .filter(f => f.endsWith(ext)).map(f => read('assets/' + f)).join('\n');
+  const jsSrc = assetsOf('.js') + '\n' + inline + '\n' + assetsOf('.css');
   const camel = a => a.replace(/^data-/, '').replace(/-([a-z])/g, (_, c) => c.toUpperCase());
   const seen = new Set();
   for (const f of liquidFiles)

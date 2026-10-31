@@ -1,0 +1,232 @@
+{%- comment -%}
+  Apparel product page. Kept apart from the engraving template on purpose: the
+  two sell different things (made-to-order garments vs. engraved stock) and
+  every shared switch between them was a place for wrong copy to leak through.
+
+  Reads, all optional and edited in the product admin:
+    custom.ships_as         Made to order | In stock     (badge, delivery date)
+    custom.size_guide       size guide metaobject        (size guide dialog)
+    custom.garment_details  one fact per line            (Details)
+    custom.design_story     a few lines                  (The design)
+    custom.drop             e.g. Drop 01                 (badge)
+  Option names are matched loosely: anything containing "colo" is colour,
+  anything containing "size" is size. Printful's names work as they come.
+{%- endcomment -%}
+{{ 'apparel.css' | asset_url | stylesheet_tag }}
+{%- liquid
+  assign current = product.selected_variant
+  assign ships = product.metafields.custom.ships_as.value | default: 'Made to order'
+  assign guide = product.metafields.custom.size_guide.value
+  assign drop = product.metafields.custom.drop.value
+  assign colour_pos = 0
+  assign size_pos = 0
+  for opt in product.options_with_values
+    assign n = opt.name | downcase
+    if n contains 'colo'
+      assign colour_pos = opt.position
+    elsif n contains 'size'
+      assign size_pos = opt.position
+    endif
+  endfor
+  assign t = product.type | downcase
+  assign is_cap = false
+  if t contains 'cap' or t contains 'hat'
+    assign is_cap = true
+  endif
+-%}
+<div class="apd" id="apd" data-ships="{% if ships == 'In stock' %}stock{% else %}made{% endif %}"
+     data-colour-pos="{{ colour_pos }}" data-size-pos="{{ size_pos }}">
+  <div class="wrap apd-grid">
+
+    {%- comment -%} Gallery: every image, with the ones belonging to another colour hidden. {%- endcomment -%}
+    <div class="apd-gal">
+      <div class="apd-main" id="apdMain">
+        {%- for m in product.media -%}
+          {%- if m.media_type == 'image' -%}
+            <img class="apd-slide{% if forloop.first %} on{% endif %}" data-media="{{ m.id }}"
+                 src="{{ m | image_url: width: 1400 }}"
+                 srcset="{{ m | image_url: width: 700 }} 700w, {{ m | image_url: width: 1100 }} 1100w, {{ m | image_url: width: 1600 }} 1600w"
+                 sizes="(max-width: 900px) 100vw, 55vw"
+                 alt="{{ m.alt | default: product.title | escape }}" width="1400" height="1400"
+                 {% unless forloop.first %}loading="lazy"{% endunless %}>
+          {%- elsif m.media_type == 'video' -%}
+            <video class="apd-slide" data-media="{{ m.id }}" muted loop playsinline preload="none"
+                   poster="{{ m.preview_image | image_url: width: 1400 }}">
+              {%- for s in m.sources -%}{%- if s.format == 'mp4' -%}<source src="{{ s.url }}" type="video/mp4">{%- break -%}{%- endif -%}{%- endfor -%}
+            </video>
+          {%- endif -%}
+        {%- else -%}
+          <div class="apd-slide on apd-empty"><span class="lab">Photos coming</span></div>
+        {%- endfor -%}
+        {%- if product.media.size > 1 -%}
+          <button class="apd-nav prev" type="button" data-step="-1" aria-label="Previous image"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+          <button class="apd-nav next" type="button" data-step="1" aria-label="Next image"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
+        {%- endif -%}
+      </div>
+      {%- if product.media.size > 1 -%}
+        <div class="apd-thumbs" id="apdThumbs" role="group" aria-label="Product images">
+          {%- for m in product.media -%}
+            <button type="button" class="apd-th{% if forloop.first %} on{% endif %}" data-media="{{ m.id }}" aria-label="Image {{ forloop.index }}">
+              <img src="{{ m.preview_image | image_url: width: 180 }}" alt="" width="90" height="90" loading="lazy">
+            </button>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+    </div>
+
+    {%- comment -%} Buy panel {%- endcomment -%}
+    <div class="apd-buy">
+      <nav class="lab apd-crumb" aria-label="Breadcrumb">
+        <a class="ul" href="/pages/apparel">Apparel</a>{% if product.type != blank %} / {{ product.type }}{% endif %}
+      </nav>
+      <div class="apd-badges">
+        {%- if drop != blank -%}<span class="tag hi">{{ drop }}</span>{%- endif -%}
+        <span class="tag">{{ ships }}</span>
+        <span class="tag">Free shipping</span>
+      </div>
+      <h1 class="apd-title">{{ product.title }}</h1>
+      <div class="apd-price" id="apdPrice">{{ current.price | default: product.price | money_without_trailing_zeros }}</div>
+
+      {%- form 'product', product, id: 'apdForm', class: 'apd-form', novalidate: 'novalidate' -%}
+        <input type="hidden" name="id" id="apdId" value="{% if size_pos == 0 %}{{ product.selected_or_first_available_variant.id }}{% endif %}">
+
+        {%- for opt in product.options_with_values -%}
+          {%- unless product.has_only_default_variant -%}
+            {%- if opt.position == colour_pos -%}
+              <fieldset class="apd-opt" data-pos="{{ opt.position }}">
+                <legend><span class="lab">{{ opt.name }}</span> <b class="apd-val" data-val-for="{{ opt.position }}"></b></legend>
+                <div class="sw-row">
+                  {%- for v in opt.values -%}
+                    <button type="button" class="sw" data-pos="{{ opt.position }}" data-val="{{ v | escape }}"
+                            aria-pressed="false" aria-label="{{ v | escape }}" title="{{ v | escape }}"
+                            style="{% render 'colour-swatch', name: v %}"></button>
+                  {%- endfor -%}
+                </div>
+              </fieldset>
+            {%- else -%}
+              <fieldset class="apd-opt{% if opt.position == size_pos %} is-size{% endif %}" data-pos="{{ opt.position }}" {% if opt.position == size_pos %}id="apdSizes"{% endif %}>
+                <legend class="apd-leg">
+                  <span class="lab">{{ opt.name }}</span>
+                  {%- if opt.position == size_pos and guide != blank -%}
+                    <button type="button" class="ul apd-sg" data-sg-open>Size guide</button>
+                  {%- endif -%}
+                </legend>
+                <div class="opts">
+                  {%- for v in opt.values -%}
+                    <button type="button" class="opt" data-pos="{{ opt.position }}" data-val="{{ v | escape }}" aria-pressed="false">{{ v }}</button>
+                  {%- endfor -%}
+                </div>
+                {%- if opt.position == size_pos -%}
+                  <p class="apd-fit note">{{ guide.fit_note.value | default: 'Regular fit. Between sizes? Size up.' }}</p>
+                  <p class="apd-need" id="apdNeed" hidden>Choose a size first.</p>
+                {%- endif -%}
+              </fieldset>
+            {%- endif -%}
+          {%- endunless -%}
+        {%- endfor -%}
+
+        <button class="btn solid full apd-add" id="apdAdd" type="submit" {% unless product.available %}disabled{% endunless %}>
+          {%- if product.available == false -%}Sold out
+          {%- elsif size_pos > 0 -%}Choose a size
+          {%- else -%}Add to cart{%- endif -%}
+        </button>
+      {%- endform -%}
+
+      <ul class="apd-facts">
+        <li>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7"/><circle cx="7" cy="17.5" r="1.6"/><circle cx="17" cy="17.5" r="1.6"/></svg>
+          <span><b id="apdEta">{% if ships == 'In stock' %}Ships from Omaha{% else %}Made to order for you{% endif %}</b>
+          <span class="note" id="apdEtaNote">{% if ships == 'In stock' %}Dispatched in 1 to 2 working days.{% else %}Printed when you order, 2 to 5 working days, then 3 to 4 days in transit.{% endif %}</span></span>
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h12M12 6l6 6-6 6"/></svg>
+          <span><b>Free shipping on apparel</b><span class="note">US and Canada. Engraved pieces in the same order ship separately from Omaha.</span></span>
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z"/></svg>
+          <span><b>Misprint or damage?</b><span class="note">Send a photo within 30 days and we put it right. <a class="ul" href="{% if shop.refund_policy %}{{ shop.refund_policy.url }}{% else %}/pages/contact{% endif %}">Returns</a></span></span>
+        </li>
+      </ul>
+
+      <div class="apd-fold">
+        {%- if product.metafields.custom.design_story != blank or product.description != blank -%}
+          <details open>
+            <summary>The design</summary>
+            <div class="copy">
+              {%- if product.metafields.custom.design_story != blank -%}{{ product.metafields.custom.design_story.value | newline_to_br }}
+              {%- else -%}{{ product.description }}{%- endif -%}
+            </div>
+          </details>
+        {%- endif -%}
+        {%- if product.metafields.custom.garment_details != blank -%}
+          <details>
+            <summary>Details</summary>
+            <ul class="apd-list">
+              {%- assign facts = product.metafields.custom.garment_details.value | newline_to_br | split: '<br />' -%}
+              {%- for f in facts -%}{%- assign ff = f | strip -%}{%- if ff != blank -%}<li>{{ ff }}</li>{%- endif -%}{%- endfor -%}
+            </ul>
+          </details>
+        {%- endif -%}
+        {%- if guide != blank -%}
+          <details>
+            <summary>Size and fit</summary>
+            <div class="copy"><p>{{ guide.fit_note.value | default: 'Regular fit.' }}</p><button type="button" class="ul" data-sg-open>Open the size guide with every measurement</button></div>
+          </details>
+        {%- endif -%}
+        <details>
+          <summary>Shipping</summary>
+          <div class="copy"><p>{{ section.settings.shipping_text }}</p></div>
+        </details>
+        <details>
+          <summary>Care</summary>
+          <div class="copy"><p>{% if is_cap %}{{ section.settings.care_cap }}{% else %}{{ section.settings.care }}{% endif %}</p></div>
+        </details>
+      </div>
+    </div>
+  </div>
+
+  {%- liquid
+    assign pool = collections[section.settings.pairs_from].products
+    assign shown = 0
+  -%}
+  {%- if pool.size > 1 -%}
+    <div class="wrap sec-s apd-pairs">
+      <div class="sh"><div class="stack-s"><span class="lab"><i></i>{{ section.settings.pairs_eyebrow }}</span><h2 class="h2">{{ section.settings.pairs_heading }}</h2></div>
+        <a class="ul" href="{{ collections[section.settings.pairs_from].url }}">All apparel</a></div>
+      <div class="grid three">
+        {%- for p in pool -%}
+          {%- if p.id != product.id and shown < 3 -%}
+            {%- render 'product-card', card_product: p -%}{%- assign shown = shown | plus: 1 -%}
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  {%- endif -%}
+
+  {%- comment -%} Phone: a buy bar appears once the main button has scrolled away. {%- endcomment -%}
+  <div class="apd-bar" id="apdBar" aria-hidden="true">
+    <div class="apd-bar-t"><span class="n">{{ product.title }}</span><span class="p" id="apdBarPrice">{{ current.price | default: product.price | money_without_trailing_zeros }}</span></div>
+    <button class="btn solid" type="button" id="apdBarBtn" tabindex="-1">{% if size_pos > 0 %}Choose a size{% else %}Add to cart{% endif %}</button>
+  </div>
+
+  {%- render 'size-guide', guide: guide -%}
+
+  <script type="application/json" id="apdVariants">
+    [{%- for v in product.variants -%}{"id":{{ v.id }},"o":{{ v.options | json }},"a":{{ v.available }},"p":{{ v.price | money_without_trailing_zeros | json }},"m":{% if v.featured_media %}{{ v.featured_media.id }}{% else %}null{% endif %}}{% unless forloop.last %},{% endunless %}{%- endfor -%}]
+  </script>
+</div>
+<script src="{{ 'apparel.js' | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "Apparel product",
+  "settings": [
+    { "type": "textarea", "id": "shipping_text", "label": "Shipping text", "default": "Apparel ships free to the US and Canada. Each piece is printed when you order, which takes 2 to 5 working days, then 3 to 4 days in transit. You get a tracking link by email as soon as it ships." },
+    { "type": "textarea", "id": "care", "label": "Care (garments)", "default": "Machine wash cold, inside out. Tumble dry low or hang dry. Do not iron over the print." },
+    { "type": "textarea", "id": "care_cap", "label": "Care (caps)", "default": "Spot clean with a damp cloth. Do not machine wash." },
+    { "type": "collection", "id": "pairs_from", "label": "Pairs with, from collection" },
+    { "type": "text", "id": "pairs_eyebrow", "label": "Pairs with eyebrow", "default": "Complete the kit" },
+    { "type": "text", "id": "pairs_heading", "label": "Pairs with heading", "default": "Pairs with" }
+  ]
+}
+{% endschema %}

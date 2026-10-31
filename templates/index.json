@@ -148,7 +148,7 @@
             "eyebrow": "For everyone",
             "heading": "The online store",
             "text": "Items Murphy has already engraved, in stock and ready to ship anywhere in the US and Canada.",
-            "yes": "Ready made items. Engraved, in stock, shipped in about 3 days.\nAdd a name for $5 each. A name, a call sign or a number on any item in the store.\nShipped to you. $8 flat in the US, free over $60. Canada $15.",
+            "yes": "Ready made items. Engraved, in stock, shipped in about 3 days.\nAdd a name for $5 each. A name, a call sign or a number on any item in the store.\nShipped to you. $4.99 flat in the US. Canada $15.",
             "no": "No custom designs or logos. Store items are engraved with the designs shown.\nNo single custom items. One-off custom work is not taken, at any price.",
             "cta": "Shop the store",
             "url": "/collections/all"
@@ -305,13 +305,17 @@
     "apparel": {
       "type": "apparel-hero",
       "settings": {
-        "eyebrow": "Tees, caps and button ups, made to order",
+        "eyebrow": "Counter Culture Conflict apparel",
         "heading": "Conflict apparel",
         "cta": "Shop apparel",
-        "url": "/collections/apparel",
+        "url": "/pages/apparel",
         "image": "shopify://shop_images/apparel-hero.jpg",
-        "text": "Tees, caps and button ups, printed to order.",
-        "bg": "shopify://shop_images/pl-red.jpg"
+        "text": "Tees, zip hoodies, work shirts and trucker caps. Printed when you order, shipped free.",
+        "bg": "shopify://shop_images/pl-red.jpg",
+        "collection": "apparel",
+        "count": 3,
+        "fact1": "Made to order",
+        "fact2": "Free shipping"
       }
     }
   },

@@ -5,8 +5,10 @@ const { problems, fail, warn, liquidFiles, read, glob } = D;
 
 // Inline <style> blocks count as CSS; some templates carry their own.
 const inlineCss = liquidFiles.map(f => (read(f).match(/<style[\s\S]*?<\/style>/g) || []).join('\n')).join('\n');
-const css = (fs.existsSync('assets/base.css') ? read('assets/base.css') : '') + '\n' + inlineCss;
-const js  = fs.existsSync('assets/theme.js') ? read('assets/theme.js') : '';
+const assetsOf = ext => (fs.existsSync('assets') ? fs.readdirSync('assets') : [])
+  .filter(f => f.endsWith(ext)).map(f => read('assets/' + f)).join('\n');
+const css = assetsOf('.css') + '\n' + inlineCss;   // base.css + apparel.css + any later sheet
+const js  = assetsOf('.js');
 
 /* 10 A class used in markup with no CSS rule anywhere. This shipped four times
  *  (.skip visible on every page, .btn2 unstyled buttons, .visually-hidden
@@ -46,7 +48,7 @@ const js  = fs.existsSync('assets/theme.js') ? read('assets/theme.js') : '';
     if (builtins.has(n) || defined.has(n)) continue;
     // Skip locals: only flag names that never appear as a binding at all.
     if (new RegExp(`(?:const|let|var|function)\\s+${n}\\b|\\b${n}\\s*=\\s*(?:\\(|function|async)|\\(\\s*${n}\\s*[,)=]|,\\s*${n}\\s*[,)=]|\\b${n}\\s*=>`).test(code)) continue;
-    fail('undefined-function', 'assets/theme.js', `calls ${n}(), which is never defined in the theme`);
+    fail('undefined-function', 'assets/*.js', `calls ${n}(), which is never defined in the theme`);
   }
 }
 
@@ -101,7 +103,7 @@ if (!pages.length) {
 /* 13 Assets nothing references. Reported, not failed — they bloat the upload. */
 {
   const all = fs.existsSync('assets') ? fs.readdirSync('assets') : [];
-  const hay = [...liquidFiles, 'assets/base.css', 'assets/theme.js'].filter(fs.existsSync).map(read).join('\n');
+  const hay = [...liquidFiles].filter(fs.existsSync).map(read).join('\n') + '\n' + assetsOf('.css') + '\n' + assetsOf('.js');
   const dead = all.filter(a => !hay.includes(a));
   if (dead.length) {
     const bytes = dead.reduce((n, a) => n + fs.statSync(path.join('assets', a)).size, 0);

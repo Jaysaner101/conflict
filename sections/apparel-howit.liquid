@@ -1,0 +1,39 @@
+{{ 'apparel.css' | asset_url | stylesheet_tag }}
+<section class="wrap sec-s">
+  <div class="sh"><div class="stack-s"><span class="lab"><i></i>{{ section.settings.eyebrow }}</span><h2 class="h2">{{ section.settings.heading }}</h2></div></div>
+  <ul class="howit">
+    {%- for block in section.blocks -%}
+      <li {{ block.shopify_attributes }}>
+        {%- case block.settings.icon -%}
+          {%- when 'print' -%}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 8V3h10v5M6 17H4v-7h16v7h-2M7 14h10v7H7z"/></svg>
+          {%- when 'truck' -%}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 6h11v10H2zM13 9h5l3 3v4h-8z"/><circle cx="6.5" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/></svg>
+          {%- when 'clock' -%}<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+          {%- when 'ruler' -%}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 16L16 3l5 5L8 21zM7 12l2 2M10 9l2 2M13 6l2 2"/></svg>
+          {%- else -%}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z"/></svg>
+        {%- endcase -%}
+        <b>{{ block.settings.title }}</b>
+        <span class="note">{{ block.settings.text }}</span>
+      </li>
+    {%- endfor -%}
+  </ul>
+</section>
+{% schema %}
+{
+  "name": "How apparel works",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "How it works" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Printed for you" }
+  ],
+  "blocks": [
+    { "type": "point", "name": "Point", "settings": [
+      { "type": "select", "id": "icon", "label": "Icon", "options": [
+        { "value": "print", "label": "Printer" }, { "value": "truck", "label": "Truck" },
+        { "value": "clock", "label": "Clock" }, { "value": "ruler", "label": "Ruler" }, { "value": "shield", "label": "Shield" } ], "default": "print" },
+      { "type": "text", "id": "title", "label": "Title" },
+      { "type": "textarea", "id": "text", "label": "Text" }
+    ]}
+  ],
+  "max_blocks": 4,
+  "presets": [{ "name": "How apparel works", "blocks": [{"type":"point"},{"type":"point"},{"type":"point"},{"type":"point"}] }]
+}
+{% endschema %}

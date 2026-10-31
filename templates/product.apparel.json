@@ -1,0 +1,13 @@
+{
+  "sections": {
+    "main": {
+      "type": "apparel-product",
+      "settings": {
+        "pairs_from": "apparel",
+        "pairs_eyebrow": "Complete the kit",
+        "pairs_heading": "Pairs with"
+      }
+    }
+  },
+  "order": ["main"]
+}

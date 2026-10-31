@@ -1,0 +1,60 @@
+{%- comment -%}
+  Turns a colour name into swatch colours. Two-tone names ("Black/ White",
+  the way Printful names trucker caps) give a split swatch.
+  Usage: {% render 'colour-swatch', name: 'Heather Grey' %}  → outputs a style attribute value.
+  A name not in the list falls back to a neutral grey with the name shown on hover,
+  so a new Printful colour never breaks the page, it just shows plain.
+{%- endcomment -%}
+{%- liquid
+  assign parts = name | downcase | split: '/'
+  assign out = ''
+  for raw in parts limit: 2
+    assign c = raw | strip | remove: 'heather ' | remove: ' heather' | strip
+    case c
+      when 'black', 'vintage black', 'solid black blend', 'black blend'
+        assign hex = '#111111'
+      when 'white', 'vintage white', 'solid white blend'
+        assign hex = '#f2f2ee'
+      when 'navy', 'dark navy', 'navy blazer', 'true navy'
+        assign hex = '#1b2236'
+      when 'grey', 'gray', 'athletic', 'athletic heather', 'sport grey', 'light grey', 'silver', 'ash'
+        assign hex = '#a3a6a8'
+      when 'dark grey', 'dark gray', 'dark grey heather', 'charcoal', 'charcoal heather', 'asphalt', 'graphite', 'carbon grey'
+        assign hex = '#45484b'
+      when 'red', 'true red', 'cardinal', 'canvas red', 'fire red'
+        assign hex = '#a51c1c'
+      when 'maroon', 'burgundy', 'cardinal red'
+        assign hex = '#5a1a22'
+      when 'royal', 'true royal', 'royal blue'
+        assign hex = '#1f3f94'
+      when 'military green', 'olive', 'army', 'army green', 'dark olive', 'loden', 'moss'
+        assign hex = '#4a4e33'
+      when 'forest', 'forest green', 'dark green', 'green'
+        assign hex = '#21402b'
+      when 'khaki', 'tan', 'sand', 'desert', 'coyote', 'coyote brown', 'natural', 'cream', 'oatmeal'
+        assign hex = '#c2ad86'
+      when 'brown', 'chocolate', 'dark chocolate'
+        assign hex = '#4a3326'
+      when 'orange', 'blaze orange', 'safety orange'
+        assign hex = '#e0661b'
+      when 'yellow', 'safety yellow', 'gold'
+        assign hex = '#e2c331'
+      when 'pink', 'light pink'
+        assign hex = '#e7a7b8'
+      when 'purple'
+        assign hex = '#4b2d6b'
+      when 'steel blue', 'slate', 'heather slate', 'denim', 'light blue', 'columbia blue'
+        assign hex = '#5d7286'
+      when 'camo', 'green camo', 'woodland camo', 'multicam'
+        assign hex = '#5a5a3c'
+      else
+        assign hex = '#6b6e70'
+    endcase
+    if forloop.first
+      assign out = '--c1:' | append: hex | append: ';--c2:' | append: hex
+    else
+      assign out = out | split: ';--c2:' | first | append: ';--c2:' | append: hex
+    endif
+  endfor
+-%}
+{{- out -}}

@@ -17,6 +17,15 @@
       {%- else -%}<img src="{{ 'apparel-hero.jpg' | asset_url }}" alt="{{ section.settings.heading | escape }}" width="1536" height="1024">{%- endif -%}
     </div>
   </div>
+  {%- if section.settings.collection != blank -%}
+    <div class="wrap ahero-row">
+      <div class="grid three">
+        {%- for product in section.settings.collection.products limit: section.settings.count -%}
+          {%- render 'product-card', card_product: product -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  {%- endif -%}
 </header>
 {% schema %}
 {
@@ -24,13 +33,15 @@
   "settings": [
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Counter Culture Conflict apparel" },
     { "type": "text", "id": "heading", "label": "Heading", "default": "Conflict apparel" },
-    { "type": "textarea", "id": "text", "label": "Text", "default": "Tees, caps and button ups from the show. This is the first run, and new designs land as the show grows. Every piece is made to order and shipped straight to your door." },
-    { "type": "text", "id": "fact1", "label": "Fact 1", "default": "Made to order, 5 to 8 days" },
-    { "type": "text", "id": "fact2", "label": "Fact 2", "default": "$8 flat, free over $60" },
+    { "type": "textarea", "id": "text", "label": "Text", "default": "Tees, hoodies, work shirts and caps from the show, printed when you order." },
+    { "type": "text", "id": "fact1", "label": "Fact 1", "default": "Made to order" },
+    { "type": "text", "id": "fact2", "label": "Fact 2", "default": "Free shipping" },
     { "type": "text", "id": "cta", "label": "Button label", "default": "Shop the first run" },
     { "type": "url", "id": "url", "label": "Button link" },
     { "type": "image_picker", "id": "image", "label": "Garment photo" },
-    { "type": "image_picker", "id": "bg", "label": "Background" }
+    { "type": "image_picker", "id": "bg", "label": "Background" },
+    { "type": "collection", "id": "collection", "label": "Show products from", "info": "Leave empty on the apparel page itself" },
+    { "type": "range", "id": "count", "label": "Products shown", "min": 3, "max": 6, "step": 3, "default": 3 }
   ],
   "presets": [{ "name": "Apparel hero" }]
 }

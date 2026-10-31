@@ -3,29 +3,125 @@
     "hero": {
       "type": "apparel-hero",
       "settings": {
-        "eyebrow": "Tees, caps and button ups, made to order",
+        "eyebrow": "Counter Culture Conflict apparel",
         "heading": "Conflict apparel",
-        "cta": "Shop apparel",
-        "url": "/collections/apparel",
-        "image": "shopify://shop_images/apparel-hero.jpg",
-        "text": "The first run. Tees, caps and button ups, printed to order on heavyweight blanks. Each design is its own piece of the Conflict range.",
+        "text": "The first run from the show. Tees, zip hoodies, work shirts and trucker caps, each one printed or embroidered when you order and shipped to your door.",
         "fact1": "Made to order",
-        "fact2": "Ships in about a week",
+        "fact2": "Free shipping, US and Canada",
+        "cta": "Shop the range",
+        "url": "#range",
+        "image": "shopify://shop_images/apparel-hero.jpg",
         "bg": "shopify://shop_images/pl-red.jpg"
       }
     },
-    "grid": {
-      "type": "featured-collection",
+    "drop": {
+      "type": "drop-story",
       "settings": {
-        "eyebrow": "The first run",
-        "heading": "Shop the apparel",
-        "collection": "apparel",
-        "count": 8
+        "anchor": "drop",
+        "tag": "Drop 01",
+        "eyebrow": "The designs",
+        "heading": "The first run",
+        "text": "Two designs carry the first run: the 99% spade, the mark of Counter Culture Conflict, and the Conflict globe from the show's title card.",
+        "art_1": "shopify://shop_images/art-spade-white.png",
+        "art_2": "shopify://shop_images/art-globe-cut.png"
+      },
+      "blocks": {
+        "p1": {
+          "type": "point",
+          "settings": {
+            "text": "Spade tee. The spade on the left chest, and bigger across the back."
+          }
+        },
+        "p2": {
+          "type": "point",
+          "settings": {
+            "text": "Conflict tee. The spade on the chest, the globe and the Conflict title across the back."
+          }
+        },
+        "p3": {
+          "type": "point",
+          "settings": {
+            "text": "Trucker caps in every colour, zip hoodies and work shirts, all carrying the spade."
+          }
+        }
+      },
+      "block_order": [
+        "p1",
+        "p2",
+        "p3"
+      ]
+    },
+    "range": {
+      "type": "apparel-grid",
+      "settings": {
+        "anchor": "range",
+        "eyebrow": "Made to order",
+        "heading": "The range",
+        "collection": "apparel"
+      }
+    },
+    "howit": {
+      "type": "apparel-howit",
+      "settings": {
+        "eyebrow": "How it works",
+        "heading": "Printed for you"
+      },
+      "blocks": {
+        "h1": {
+          "type": "point",
+          "settings": {
+            "icon": "print",
+            "title": "Printed when you order",
+            "text": "Nothing sits in a warehouse. Your piece is printed or embroidered for you, usually within 2 to 5 working days."
+          }
+        },
+        "h2": {
+          "type": "point",
+          "settings": {
+            "icon": "truck",
+            "title": "Free shipping",
+            "text": "Every apparel order ships free to the US and Canada, with tracking."
+          }
+        },
+        "h3": {
+          "type": "point",
+          "settings": {
+            "icon": "clock",
+            "title": "Arrives in 1 to 2 weeks",
+            "text": "Each product page shows a delivery date before you buy."
+          }
+        },
+        "h4": {
+          "type": "point",
+          "settings": {
+            "icon": "ruler",
+            "title": "Sized right",
+            "text": "Every shirt has a size guide with real measurements. Still unsure? Ask us which size to pick."
+          }
+        }
+      },
+      "block_order": [
+        "h1",
+        "h2",
+        "h3",
+        "h4"
+      ]
+    },
+    "signup": {
+      "type": "drop-signup",
+      "settings": {
+        "eyebrow": "Next drop",
+        "heading": "First to know",
+        "text": "New designs land as the show grows. Leave your email and you hear about the next drop first. Nothing else.",
+        "button": "Sign up"
       }
     }
   },
   "order": [
     "hero",
-    "grid"
+    "drop",
+    "range",
+    "howit",
+    "signup"
   ]
 }

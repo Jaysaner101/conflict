@@ -263,6 +263,21 @@ function initGallery() {
   $$('.thumbs button').forEach(b => b.onclick = () => { img.src = b.dataset.src; });
 }
 
+
+/* ---------- collection: filter by garment type (small collections only) ---------- */
+function initTypeFilter() {
+  const bar = $('#typeChips'); if (!bar) return;
+  const cards = $$('.grid .card[data-type]'), lab = $('#countLab');
+  $$('.chip', bar).forEach(c => c.addEventListener('click', () => {
+    const t = c.dataset.type;
+    $$('.chip', bar).forEach(o => o.setAttribute('aria-pressed', o === c));
+    let n = 0;
+    cards.forEach(k => { const on = t === 'all' || k.dataset.type === t; k.hidden = !on; if (on) n++; });
+    $$('.ag-look').forEach(l => { l.hidden = t !== 'all'; });   // photo tiles only make sense in the full range
+    if (lab) lab.textContent = n + (n === 1 ? ' piece' : ' pieces');
+  }));
+}
+
 /* ---------- boot ---------- */
 function boot() {
   // Each module is isolated: one section throwing must not take down the rest
@@ -270,7 +285,7 @@ function boot() {
   const run = (name, fn) => { try { fn(); } catch (err) { console.error('[theme] ' + name + ' failed:', err); } };
   run('nav', initNav); run('head', initHead); run('reveal', initReveal); run('video', initVideo);
   run('nameOption', initNameOption); run('workFilter', initWorkFilter); run('variants', initVariants);
-  run('gallery', initGallery); run('sort', initSort);
+  run('gallery', initGallery); run('sort', initSort); run('typeFilter', initTypeFilter);
   if ($('#hs')) run('slider', initSlider);
   if ($('#seen')) run('seen', initSeen);
   if ($('#showPlayer')) run('player', () => initPlayer($('#showPlayer')));

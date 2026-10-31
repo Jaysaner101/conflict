@@ -247,13 +247,17 @@
     "apparel": {
       "type": "apparel-hero",
       "settings": {
-        "eyebrow": "Tees, caps and button ups, made to order",
+        "eyebrow": "Counter Culture Conflict apparel",
         "heading": "Conflict apparel",
         "cta": "Shop apparel",
-        "url": "/collections/apparel",
+        "url": "/pages/apparel",
         "image": "shopify://shop_images/apparel-hero.jpg",
-        "text": "Tees, caps and button ups from the show, printed to order.",
-        "bg": "shopify://shop_images/pl-spade-c.jpg"
+        "text": "Tees, zip hoodies, work shirts and trucker caps from the show. Printed when you order, shipped free.",
+        "bg": "shopify://shop_images/pl-spade-c.jpg",
+        "collection": "apparel",
+        "count": 3,
+        "fact1": "Made to order",
+        "fact2": "Free shipping"
       }
     },
     "network_latest": {

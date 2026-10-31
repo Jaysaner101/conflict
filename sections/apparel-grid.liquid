@@ -1,0 +1,66 @@
+{%- comment -%}
+  The apparel range. Three across so a short range fills its rows, type chips
+  once there is more than one kind of garment, and optional full-width photo
+  tiles ("look" blocks) dropped in after a chosen card, so a handful of
+  products reads as a collection rather than a sparse grid.
+{%- endcomment -%}
+{{ 'apparel.css' | asset_url | stylesheet_tag }}
+{%- assign c = section.settings.collection -%}
+<section class="wrap sec" id="{{ section.settings.anchor | default: 'range' }}">
+  <div class="sh">
+    <div class="stack-s"><span class="lab"><i></i>{{ section.settings.eyebrow }}</span><h2 class="h2">{{ section.settings.heading }}</h2></div>
+    {%- if c != blank -%}<span class="lab" id="countLab">{{ c.products_count }} {% if c.products_count == 1 %}piece{% else %}pieces{% endif %}</span>{%- endif -%}
+  </div>
+
+  {%- if c != blank and c.all_types.size > 1 -%}
+    <div class="chips ag-chips" id="typeChips" role="group" aria-label="Filter by type">
+      <button type="button" class="chip" data-type="all" aria-pressed="true">All</button>
+      {%- for t in c.all_types -%}
+        <button type="button" class="chip" data-type="{{ t | handleize }}" aria-pressed="false">{{ t }}</button>
+      {%- endfor -%}
+    </div>
+  {%- endif -%}
+
+  <div class="grid ag-grid">
+    {%- if c != blank -%}
+      {%- for product in c.products limit: 24 -%}
+        {%- render 'product-card', card_product: product -%}
+        {%- assign n = forloop.index -%}
+        {%- for block in section.blocks -%}
+          {%- if block.settings.after == n and block.settings.image -%}
+            <a class="ag-look" href="{{ block.settings.url | default: '#' }}" {{ block.shopify_attributes }}>
+              <img src="{{ block.settings.image | image_url: width: 2000 }}" alt="{{ block.settings.image.alt | escape }}" loading="lazy" width="2000" height="1000">
+              <div class="stack-s">
+                {%- if block.settings.eyebrow != blank -%}<span class="lab"><i></i>{{ block.settings.eyebrow }}</span>{%- endif -%}
+                <h3 class="h3">{{ block.settings.heading }}</h3>
+                {%- if block.settings.cta != blank -%}<span class="ul">{{ block.settings.cta }}</span>{%- endif -%}
+              </div>
+            </a>
+          {%- endif -%}
+        {%- endfor -%}
+      {%- endfor -%}
+    {%- endif -%}
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Apparel range",
+  "settings": [
+    { "type": "text", "id": "anchor", "label": "Anchor", "default": "range" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Made to order" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "The range" },
+    { "type": "collection", "id": "collection", "label": "Collection" }
+  ],
+  "blocks": [
+    { "type": "look", "name": "Photo tile", "settings": [
+      { "type": "image_picker", "id": "image", "label": "Photo" },
+      { "type": "range", "id": "after", "label": "Show after card number", "min": 1, "max": 12, "step": 1, "default": 3 },
+      { "type": "text", "id": "eyebrow", "label": "Eyebrow" },
+      { "type": "text", "id": "heading", "label": "Heading" },
+      { "type": "text", "id": "cta", "label": "Link label" },
+      { "type": "url", "id": "url", "label": "Link" }
+    ]}
+  ],
+  "presets": [{ "name": "Apparel range" }]
+}
+{% endschema %}

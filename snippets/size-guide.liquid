@@ -1,0 +1,60 @@
+{%- comment -%}
+  Size guide dialog, driven by the product's custom.size_guide metaobject.
+  Murph edits the measurements in the admin (Content → Size guide). Inches are
+  entered; centimetres are worked out here, so the two can never disagree.
+  Usage: {% render 'size-guide', guide: product.metafields.custom.size_guide.value %}
+{%- endcomment -%}
+{%- if guide != blank -%}
+  {%- assign heads = guide.columns.value | split: ',' -%}
+  {%- assign lines = guide.rows.value | newline_to_br | split: '<br />' -%}
+  <dialog class="sg" id="sizeGuide" aria-labelledby="sgTitle">
+    <div class="sg-in">
+      <div class="sg-h">
+        <div class="stack-s">
+          <span class="lab"><i></i>Size guide</span>
+          <h2 class="h3" id="sgTitle">{{ guide.name.value }}</h2>
+        </div>
+        <button class="xb" type="button" data-sg-close aria-label="Close size guide">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+        </button>
+      </div>
+      {%- if guide.fit_note != blank -%}<p class="sg-fit">{{ guide.fit_note.value }}</p>{%- endif -%}
+      <div class="sg-units" role="group" aria-label="Units">
+        <button type="button" class="chip" data-unit="in" aria-pressed="true">Inches</button>
+        <button type="button" class="chip" data-unit="cm" aria-pressed="false">Centimetres</button>
+      </div>
+      <div class="sg-tw">
+        <table class="sg-t">
+          <thead><tr>{%- for h in heads -%}<th scope="col">{{ h | strip }}</th>{%- endfor -%}</tr></thead>
+          <tbody>
+            {%- for line in lines -%}
+              {%- assign row = line | strip -%}
+              {%- if row == blank -%}{%- continue -%}{%- endif -%}
+              {%- assign cells = row | split: ',' -%}
+              <tr>
+                {%- for cell in cells -%}
+                  {%- assign v = cell | strip -%}
+                  {%- if forloop.first -%}
+                    <th scope="row">{{ v }}</th>
+                  {%- else -%}
+                    {%- assign num = v | plus: 0 -%}
+                    {%- if num > 0 -%}
+                      <td data-in="{{ v }}" data-cm="{{ num | times: 2.54 | round: 1 }}">{{ v }}</td>
+                    {%- else -%}
+                      <td>{{ v }}</td>
+                    {%- endif -%}
+                  {%- endif -%}
+                {%- endfor -%}
+              </tr>
+            {%- endfor -%}
+          </tbody>
+        </table>
+      </div>
+      <div class="sg-how">
+        <span class="lab">How to measure</span>
+        <p class="copy">{{ guide.how_to_measure.value | default: 'Lay a shirt that fits you flat. Width is straight across the chest, one inch below the armpits. Length is from the highest point of the shoulder to the bottom hem. Compare it with the table and pick the closest size.' | newline_to_br }}</p>
+        <p class="note">These are garment measurements, not body measurements. Still unsure? <a class="ul" href="/pages/contact">Ask us</a> and we will tell you which size to pick.</p>
+      </div>
+    </div>
+  </dialog>
+{%- endif -%}

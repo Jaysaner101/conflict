@@ -1,3 +1,15 @@
+{%- liquid
+  assign apparel_count = 0
+  for p in collection.products
+    if p.tags contains 'apparel'
+      assign apparel_count = apparel_count | plus: 1
+    endif
+  endfor
+  assign all_apparel = false
+  if apparel_count > 0 and apparel_count == collection.products.size
+    assign all_apparel = true
+  endif
+-%}
 <header class="pghd shophd" style="background-image:url({{ 'pl-plain.jpg' | asset_url }})">
   <div class="wrap pghd-in" style="position:relative;z-index:2">
     <div class="stack-s">
@@ -7,9 +19,15 @@
     <div>
       {%- if collection.description != blank -%}<div class="copy">{{ collection.description }}</div>{%- endif -%}
       <div class="sfacts" style="margin-top:14px">
-        <span>Ships in {{ settings.fact_ship_time | default: 'about 3 days' | downcase }}</span>
-        <span>Add a name, $5</span>
-        <span>{{ settings.fact_ship_us }}</span>
+        {%- if all_apparel -%}
+          <span>Made to order</span>
+          <span>Free shipping</span>
+          <span>Size guide on every piece</span>
+        {%- else -%}
+          <span>Ships in {{ settings.fact_ship_time | default: 'about 3 days' | downcase }}</span>
+          <span>Add a name, $5</span>
+          <span>US shipping {{ settings.fact_ship_us }}</span>
+        {%- endif -%}
       </div>
     </div>
   </div>
@@ -25,8 +43,16 @@
       {%- endunless -%}
     {%- endfor -%}
   </div>
+  {%- if collection.handle != 'all' and collection.all_types.size > 1 -%}
+    <div class="chips tchips" id="typeChips" role="group" aria-label="Filter by type">
+      <button type="button" class="chip" data-type="all" aria-pressed="true">All</button>
+      {%- for t in collection.all_types -%}
+        <button type="button" class="chip" data-type="{{ t | handleize }}" aria-pressed="false">{{ t }}</button>
+      {%- endfor -%}
+    </div>
+  {%- endif -%}
   <div class="shopbar">
-    <span class="lab">{{ collection.products_count }} {% if collection.products_count == 1 %}piece{% else %}pieces{% endif %}</span>
+    <span class="lab" id="countLab">{{ collection.products_count }} {% if collection.products_count == 1 %}piece{% else %}pieces{% endif %}</span>
     {%- assign sort_by = collection.sort_by | default: collection.default_sort_by -%}
     <form method="get" action="{{ collection.url }}" id="sortForm">
       {%- if collection.current_type != blank -%}<input type="hidden" name="q" value="{{ collection.current_type }}">{%- endif -%}
