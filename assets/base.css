@@ -667,7 +667,7 @@ body::before{content:"";position:fixed;inset:0;z-index:90;pointer-events:none;op
 .about-show{padding-top:clamp(36px,4vw,60px)}
 /* shorts */
 .eps.shorts{grid-template-columns:repeat(6,1fr)}
-.ep.sh .th{aspect-ratio:9/16}.ep.sh .t{font-size:13.5px}
+.ep.short .th{aspect-ratio:9/16}.ep.short .t{font-size:13.5px}
 /* murph hero */
 .mh{position:relative;overflow:hidden;background:#000;border-bottom:1px solid var(--line)}
 .mh-bg{position:absolute;inset:0}
@@ -865,6 +865,7 @@ header.pl>.wrap[style*="padding-top:clamp(108px"]{padding-top:clamp(100px,8vw,11
 
 /* Work gallery: spacing between category groups. */
 .wgroup-wrap{margin-bottom:clamp(30px,4vw,56px)}
+.wgroup-wrap:last-child{margin-bottom:0}
 
 /* Lock the page behind the open mobile menu. */
 body.nav-open{overflow:hidden}

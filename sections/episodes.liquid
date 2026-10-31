@@ -8,7 +8,7 @@
   </div>
   <div class="eps{% if section.settings.shorts %} shorts{% endif %}">
     {%- for block in section.blocks -%}
-      <a class="ep{% if section.settings.shorts %} sh{% endif %}" href="{{ block.settings.url }}" target="_blank" rel="noopener" {{ block.shopify_attributes }}>
+      <a class="ep{% if section.settings.shorts %} short{% endif %}" href="{{ block.settings.url }}" target="_blank" rel="noopener" {{ block.shopify_attributes }}>
         <div class="th">
           {%- if block.settings.thumb -%}<img src="{{ block.settings.thumb | image_url: width: 800 }}" alt="" loading="lazy">{%- endif -%}
           <span class="pb"><svg class="ic" viewBox="0 0 24 24"><path d="M7 4l13 8-13 8z"/></svg></span>
