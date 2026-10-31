@@ -7,8 +7,9 @@
     <div>
       <span class="lab"><i></i>{{ section.settings.label }}</span>
       <div class="hs-texts">
+        {%- comment -%} The first slide is visible from the first paint (no script needed); the slider takes over from there. {%- endcomment -%}
         {%- for block in section.blocks -%}
-          <article class="hs-t" aria-hidden="true" {{ block.shopify_attributes }}>
+          <article class="hs-t{% if forloop.first %} on{% endif %}" aria-hidden="{% if forloop.first %}false{% else %}true{% endif %}" {{ block.shopify_attributes }}>
             {%- if forloop.first -%}<h1 class="bl">{{ block.settings.heading }}</h1>{%- else -%}<h2 class="bl">{{ block.settings.heading }}</h2>{%- endif -%}
             <p class="copy">{{ block.settings.text }}</p>
             {%- if block.settings.cta != blank -%}<div class="btns"><a class="btn solid" href="{{ block.settings.url }}">{{ block.settings.cta }}</a></div>{%- endif -%}
