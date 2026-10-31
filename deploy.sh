@@ -9,7 +9,7 @@ zip -qr "dist/theme-$N.zip" assets config layout locales sections snippets templ
 git add -A
 git commit -q -m "${1:-Theme build $N}
 
-Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 Claude-Session: https://claude.ai/code/session_01VC3JmHcmi5iLeSayeHxMcY" || true
 git push -q origin main
 echo "https://raw.githubusercontent.com/Jaysaner101/conflict/main/dist/theme-$N.zip"
