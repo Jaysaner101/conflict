@@ -93,5 +93,16 @@
         "default": "$8.59"
       }
     ]
+  },
+  {
+    "name": "YouTube",
+    "settings": [
+      {
+        "type": "text",
+        "id": "yt_api_key",
+        "label": "YouTube API key",
+        "info": "From Google Cloud (YouTube Data API v3), restricted to this site. Lets episode rows fill themselves from a playlist."
+      }
+    ]
   }
 ]

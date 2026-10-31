@@ -6,7 +6,22 @@
         <svg class="ic yt" viewBox="0 0 28 20" aria-hidden="true"><rect width="28" height="20" rx="5"/><path d="M11 5.5v9l8-4.5z" fill="#fff"/></svg>{{ section.settings.cta }}</a>
     {%- endif -%}
   </div>
-  <div class="eps{% if section.settings.shorts %} shorts{% endif %}">
+  {%- comment -%}
+    With a playlist set and a YouTube key in Theme settings, episodes.js swaps
+    these cards for the playlist's newest videos, so a new episode appears on
+    its own. The blocks below stay as the fallback (no key, or YouTube down).
+  {%- endcomment -%}
+  {%- liquid
+    assign pl = section.settings.playlist | strip
+    if pl contains 'list='
+      assign pl = pl | split: 'list=' | last | split: '&' | first
+    endif
+    assign live_feed = false
+    if pl != blank and settings.yt_api_key != blank
+      assign live_feed = true
+    endif
+  -%}
+  <div class="eps{% if section.settings.shorts %} shorts{% endif %}"{% if live_feed %} data-playlist="{{ pl | escape }}" data-key="{{ settings.yt_api_key | escape }}" data-count="{{ section.settings.count }}" data-short="{{ section.settings.shorts }}"{% endif %}>
     {%- for block in section.blocks -%}
       <a class="ep{% if section.settings.shorts %} short{% endif %}" href="{{ block.settings.url }}" target="_blank" rel="noopener" {{ block.shopify_attributes }}>
         <div class="th">
@@ -22,6 +37,7 @@
     {%- endfor -%}
   </div>
 </div>
+{%- if section.settings.playlist != blank and settings.yt_api_key != blank -%}<script src="{{ 'episodes.js' | asset_url }}" defer></script>{%- endif -%}
 {% schema %}
 {
   "name": "Episodes",
@@ -30,7 +46,9 @@
     { "type": "text", "id": "heading", "label": "Heading", "default": "Latest episodes" },
     { "type": "checkbox", "id": "shorts", "label": "Show as Shorts (tall thumbnails)", "default": false },
     { "type": "text", "id": "cta", "label": "Button label", "default": "Full playlist" },
-    { "type": "url", "id": "url", "label": "Button link" }
+    { "type": "url", "id": "url", "label": "Button link" },
+    { "type": "text", "id": "playlist", "label": "YouTube playlist (link or ID)", "info": "Fills this row with the playlist's newest videos automatically. Needs the YouTube key in Theme settings. The episodes below are used if YouTube can't be reached." },
+    { "type": "range", "id": "count", "label": "Videos shown from the playlist", "min": 4, "max": 12, "step": 4, "default": 8 }
   ],
   "blocks": [
     { "type": "episode", "name": "Episode", "settings": [

@@ -251,7 +251,9 @@
         "heading": "Latest episodes",
         "shorts": false,
         "cta": "The show",
-        "url": "/pages/the-show"
+        "url": "/pages/the-show",
+        "playlist": "PLXMvRz65T8SE",
+        "count": 4
       },
       "blocks": {
         "e1": {

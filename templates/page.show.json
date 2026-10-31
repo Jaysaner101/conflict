@@ -113,7 +113,9 @@
         "heading": "Latest episodes",
         "shorts": false,
         "cta": "Full playlist",
-        "url": "https://www.youtube.com/watch?v=VQcuiECd4tk&list=PLXMvRz65T8SE"
+        "url": "https://www.youtube.com/playlist?list=PLXMvRz65T8SE",
+        "playlist": "PLXMvRz65T8SE",
+        "count": 8
       },
       "blocks": {
         "e1": {
