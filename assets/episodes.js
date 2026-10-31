@@ -53,7 +53,8 @@
       var vids = [];
       pages.forEach(function (p) { vids = vids.concat(p.items || []); });
       return vids
-        .filter(function (v) { return v.status && v.status.privacyStatus === 'public' && v.snippet.liveBroadcastContent !== 'upcoming'; })
+        // Skip private and upcoming videos, and the phone (vertical) re-streams, whose titles start with 📱.
+        .filter(function (v) { return v.status && v.status.privacyStatus === 'public' && v.snippet.liveBroadcastContent !== 'upcoming' && v.snippet.title.trim().indexOf('\uD83D\uDCF1') !== 0; })
         .map(function (v) {
           var live = v.liveStreamingDetails || {}, t = v.snippet.thumbnails || {};
           var when = live.actualStartTime || v.snippet.publishedAt;
@@ -80,7 +81,7 @@
 
   document.querySelectorAll('.eps[data-playlist]').forEach(function (row) {
     var id = row.dataset.playlist, key = row.dataset.key, n = +row.dataset.count || 8, short = row.dataset.short === 'true';
-    var cacheKey = 'eps:' + id + ':' + n, cached = null;
+    var cacheKey = 'eps2:' + id + ':' + n, cached = null;
     try { cached = JSON.parse(localStorage.getItem(cacheKey) || 'null'); } catch (e) {}
     var show = function (list) { if (list && list.length) row.innerHTML = list.map(function (v) { return card(v, short); }).join(''); };
     if (cached && Date.now() - cached.t < HOUR) return show(cached.list);
