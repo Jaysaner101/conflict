@@ -149,7 +149,7 @@ dialog.vm::backdrop{background:rgba(0,0,0,.92)}
 .intro{display:grid;grid-template-columns:1.2fr 1fr;gap:clamp(40px,8vw,160px);align-items:center}
 .dl{margin:0;border-top:1px solid var(--line)}
 .dl div{display:grid;grid-template-columns:150px 1fr;gap:20px;padding:20px 0;border-bottom:1px solid var(--line)}
-.dl dt{padding-top:3px}.dl dd{margin:0;color:var(--ink)}
+.dl dt{padding-top:3px}.dl dd{margin:0;color:var(--ink);min-width:0;overflow-wrap:anywhere}
 
 /* section header */
 .sh{display:flex;justify-content:space-between;align-items:last baseline;gap:32px;flex-wrap:wrap;margin-bottom:clamp(32px,4vw,64px)}
