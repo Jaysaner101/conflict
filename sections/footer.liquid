@@ -34,9 +34,9 @@
       {%- endfor -%}
     </div>
   </div>
-  <div class="wrap foot-bot">
-    <span class="note">&copy; {{ 'now' | date: '%Y' }} {{ shop.name }}. {{ section.settings.place }}</span>
-    <a class="built" href="https://ccincstudios.com" target="_blank" rel="noopener"><span>Site by</span><b>Counter Culture Inc Studios</b></a>
+  <div class="wrap credit">
+    <span>&copy; {{ 'now' | date: '%Y' }} {{ shop.name }}. {{ section.settings.place }}</span>
+    <a class="built" href="https://ccincstudios.com" target="_blank" rel="noopener"><img src="{{ 'lg-studios.jpg' | asset_url }}" alt="" width="34" height="34"><span>Site by</span><b>Counter Culture Inc Studios</b></a>
   </div>
 </footer>
 

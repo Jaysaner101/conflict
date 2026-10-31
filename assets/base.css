@@ -283,6 +283,11 @@ dialog.lb::backdrop{background:rgba(0,0,0,.96)}
 /* footer */
 .foot{border-top:1px solid var(--line);background:var(--s1)}
 .foot-top{display:grid;grid-template-columns:1.2fr 2fr;gap:clamp(40px,7vw,140px);padding-top:clamp(64px,7vw,120px);padding-bottom:clamp(64px,7vw,120px)}
+/* link columns: three across the right-hand side (the prototype's .cols, renamed in the port without its desktop rules) */
+.fcols{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;align-content:start}
+.fcols ul{list-style:none;margin:20px 0 0;padding:0;display:grid;gap:12px}
+.fcols a{color:var(--body);transition:color .2s}
+.fcols a:hover{color:var(--hi)}
 .cols{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
 .cols ul{list-style:none;margin:20px 0 0;padding:0;display:grid;gap:12px}
 .cols a{transition:color .2s}.cols a:hover{color:var(--hi)}
@@ -741,7 +746,7 @@ body::before{content:"";position:fixed;inset:0;z-index:90;pointer-events:none;op
   .ally-cards{grid-template-columns:1fr}.acard{grid-template-columns:84px 1fr;gap:16px;padding:20px 18px;min-height:0}
   /* footer */
   .foot-top{grid-template-columns:1fr;gap:30px;padding:40px 18px 30px}.fcols{grid-template-columns:1fr 1fr 1fr;gap:16px}.fcols a{font-size:14px;padding:4px 0;display:inline-block}
-  .foot-bot{flex-direction:column;align-items:flex-start;gap:14px;padding:18px}
+  .credit{flex-direction:column;align-items:flex-start;gap:14px;padding:18px}
   .social a.ib2{width:48px;height:48px}
   .dr-h,.lines,.dr-f{padding-left:18px;padding-right:18px}
   .nf .btns .btn{flex:1 1 100%}

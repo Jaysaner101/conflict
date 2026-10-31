@@ -29,6 +29,38 @@ const js  = assetsOf('.js');
       fail('class-no-css', f, `class "${c}" is used in markup but has no CSS rule`);
 }
 
+/* 10b A class styled only inside a max-width (phone) media query. It looks
+ *  right on a phone and falls back to browser defaults on desktop. Shipped:
+ *  the footer link columns (.fcols) were a bulleted list stacked in one column
+ *  with half the footer empty, because the port renamed the prototype's .cols
+ *  and only carried the phone rule across. */
+{
+  // Strip every @media (max-width…) block, brace-matched, to get desktop CSS.
+  let desk = '', i = 0;
+  while (i < css.length) {
+    const at = css.indexOf('@media', i);
+    if (at < 0) { desk += css.slice(i); break; }
+    desk += css.slice(i, at);
+    const open = css.indexOf('{', at);
+    const query = css.slice(at, open);
+    let depth = 1, j = open + 1;
+    while (j < css.length && depth) { if (css[j] === '{') depth++; else if (css[j] === '}') depth--; j++; }
+    if (!/max-width/.test(query)) desk += css.slice(open + 1, j - 1);   // min-width / hover / motion rules still count
+    i = j;
+  }
+  const deskClasses = new Set([...desk.matchAll(/\.(-?[_a-zA-Z][\w-]*)/g)].map(m => m[1]));
+  const allClasses = new Set([...css.matchAll(/\.(-?[_a-zA-Z][\w-]*)/g)].map(m => m[1]));
+  const jsHook = c => new RegExp(`[.'"\`]${c}\\b`).test(js);
+  const seen = new Set();
+  for (const f of liquidFiles)
+    for (const m of read(f).matchAll(/class="([^"{}]+)"/g))
+      for (const c of m[1].split(/\s+/).filter(Boolean)) {
+        if (seen.has(c)) continue; seen.add(c);
+        if (allClasses.has(c) && !deskClasses.has(c) && !jsHook(c))
+          fail('phone-only-css', f, `class "${c}" is only styled inside a phone-width media query, so desktop gets browser defaults`);
+      }
+}
+
 /* 11 A function called but never defined. This shipped: sendForm() was the
  *  only path for quote requests and threw on every submit. */
 {
