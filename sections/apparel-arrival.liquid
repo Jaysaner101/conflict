@@ -1,0 +1,42 @@
+{%- comment -%}
+  What happens after you order, in order. It is a real sequence, so it is
+  numbered; the photo is the print up close, so the page shows the product
+  rather than talking about it.
+{%- endcomment -%}
+{{ 'apparel.css' | asset_url | stylesheet_tag }}
+<section class="pl ovl" style="background-image:url({{ 'pl-plain.jpg' | asset_url }})">
+  <div class="wrap arr-in">
+    <div class="arr-shot">
+      {%- if section.settings.image -%}
+        <img src="{{ section.settings.image | image_url: width: 1200 }}" alt="{{ section.settings.image.alt | escape }}" width="1200" height="1200" loading="lazy">
+      {%- endif -%}
+    </div>
+    <div class="arr-copy">
+      <h2 class="h2">{{ section.settings.heading }}</h2>
+      <ol class="arr-steps">
+        {%- for block in section.blocks -%}
+          <li {{ block.shopify_attributes }}><b>{{ block.settings.title }}</b><span>{{ block.settings.text }}</span></li>
+        {%- endfor -%}
+      </ol>
+      {%- if section.settings.note != blank -%}<p class="note">{{ section.settings.note }}</p>{%- endif -%}
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "How apparel arrives",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "How it gets to you" },
+    { "type": "image_picker", "id": "image", "label": "Photo" },
+    { "type": "text", "id": "note", "label": "Note under the steps" }
+  ],
+  "blocks": [
+    { "type": "step", "name": "Step", "settings": [
+      { "type": "text", "id": "title", "label": "Title" },
+      { "type": "text", "id": "text", "label": "Text" }
+    ]}
+  ],
+  "max_blocks": 5,
+  "presets": [{ "name": "How apparel arrives", "blocks": [{"type":"step"},{"type":"step"},{"type":"step"},{"type":"step"}] }]
+}
+{% endschema %}

@@ -1,0 +1,56 @@
+{%- comment -%}
+  The drop, shown as its designs: one full-height panel per design, edge to
+  edge, the artwork big on a plate, and the product it is printed on. Each
+  panel is one link to that product, so there is a single thing to click.
+{%- endcomment -%}
+{{ 'apparel.css' | asset_url | stylesheet_tag }}
+<section class="dd" id="{{ section.settings.anchor | default: 'drop' }}">
+  <div class="wrap dd-head">
+    <h2 class="h2">{{ section.settings.heading }}</h2>
+    <p class="copy">{{ section.settings.text }}</p>
+  </div>
+  <div class="dd-row">
+    {%- for block in section.blocks -%}
+      {%- assign p = block.settings.product -%}
+      <a class="dd-p" href="{{ p.url | default: '#range' }}" {{ block.shopify_attributes }}
+         style="background-image:url({{ block.settings.plate | default: 'pl-plain.jpg' | asset_url }})">
+        <div class="dd-art">
+          {%- if block.settings.art -%}
+            <img src="{{ block.settings.art | image_url: width: 1200 }}" alt="{{ block.settings.art.alt | escape }}" width="1200" height="1200" loading="lazy">
+          {%- endif -%}
+        </div>
+        <div class="dd-info">
+          <h3 class="dd-n">{{ p.title | default: block.settings.name }}</h3>
+          <p class="dd-where">{{ block.settings.placement }}</p>
+          <div class="dd-buy">
+            {%- if p -%}<span class="dd-price">{% if p.price_varies %}From {% endif %}{{ p.price | money_without_trailing_zeros }}</span>{%- endif -%}
+            <span class="btn solid">{{ section.settings.cta }}</span>
+          </div>
+        </div>
+      </a>
+    {%- endfor -%}
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Drop designs",
+  "settings": [
+    { "type": "text", "id": "anchor", "label": "Anchor", "default": "drop" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Drop 01" },
+    { "type": "textarea", "id": "text", "label": "Text" },
+    { "type": "text", "id": "cta", "label": "Button label", "default": "Choose your size" }
+  ],
+  "blocks": [
+    { "type": "design", "name": "Design", "settings": [
+      { "type": "product", "id": "product", "label": "Product" },
+      { "type": "text", "id": "name", "label": "Name, if no product is picked" },
+      { "type": "image_picker", "id": "art", "label": "Artwork (transparent PNG)" },
+      { "type": "text", "id": "placement", "label": "Where it is printed" },
+      { "type": "select", "id": "plate", "label": "Background", "options": [
+        { "value": "pl-plain.jpg", "label": "Steel" }, { "value": "pl-red.jpg", "label": "Red" }, { "value": "pl-hero.jpg", "label": "Dark" } ], "default": "pl-plain.jpg" }
+    ]}
+  ],
+  "max_blocks": 4,
+  "presets": [{ "name": "Drop designs", "blocks": [{"type":"design"},{"type":"design"}] }]
+}
+{% endschema %}

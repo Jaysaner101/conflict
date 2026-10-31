@@ -323,5 +323,23 @@ for (const f of glob('templates').filter(x => x.endsWith('.json'))) {
   }
 }
 
+
+/* 9i Images the client has ruled out. The old round "Counter Culture /
+ *  Unfiltered Analysis" globe is not the show's logo; the approved one is the
+ *  title-card globe (art-globe-v2.png). The early tee mockups carry sleeve
+ *  prints the client does not want, and the cap mockup is not a trucker cap.
+ *  These kept resurfacing through image fallbacks and product photos. */
+{
+  const banned = ['art-globe.jpg', 'art-globe-cut.png', 'logo-globe.webp', 'tee-front.jpg', 'tee-back.jpg',
+                  'cap-mock.jpg', 'shirt-buttonup.jpg', 'apparel-hero.jpg'];
+  for (const f of [...glob('templates'), ...glob('sections'), ...glob('snippets'), ...glob('config'), ...glob('layout')]
+                   .filter(x => /\.(json|liquid)$/.test(x))) {
+    const body = read(f);
+    for (const b of banned)
+      if (new RegExp(`[/'"]${b.replace(/\./g, '\\.')}`).test(body)) fail('ruled-out-image', f, `uses ${b}, which the client has ruled out (old globe, sleeve prints or wrong cap)`);
+  }
+  for (const b of banned) if (fs.existsSync('assets/' + b)) fail('ruled-out-image', 'assets/' + b, 'ruled-out image is still in the theme');
+}
+
 module.exports = { problems, fail, warn, liquidFiles, read, glob, schemaOf };
 if (require.main === module) require('./doctor-part2.js');

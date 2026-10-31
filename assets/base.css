@@ -164,8 +164,12 @@ dialog.vm::backdrop{background:rgba(0,0,0,.92)}
 .meta .n{color:var(--ink);font-weight:500;font-size:14.5px;line-height:1.35}
 .meta .m{font-size:13px;color:var(--mut);margin-top:3px}
 .meta .p{color:var(--ink);font-size:14.5px;white-space:nowrap}
-.stage .ph.alt{opacity:0;transition:opacity .45s,transform .9s cubic-bezier(.2,.7,.1,1)}
-@media (hover:hover){.card:hover .ph.alt{opacity:1}}
+/* One hover rule for every product card: second photo if there is one, otherwise a slow ease-in. */
+.stage .ph.alt{opacity:0;transition:opacity .5s ease}
+@media (hover:hover){
+  .card.has-alt:hover .ph.alt,.card.has-alt:focus-visible .ph.alt{opacity:1}
+  .card.has-alt:hover .ph,.card.has-alt:focus-visible .ph{transform:none}
+}
 .dots{display:flex;align-items:center;gap:5px;margin-top:9px}
 .dots i{width:12px;height:12px;border-radius:50%;border:1px solid rgba(255,255,255,.25);background:linear-gradient(135deg,var(--c1,#666) 0 50%,var(--c2,#666) 50% 100%)}
 .dots em{font-style:normal;font-size:11px;color:var(--mut);margin-left:3px}

@@ -91,19 +91,6 @@ dialog.sg::backdrop{background:rgba(0,0,0,.82);backdrop-filter:blur(4px)}
 .sg-how{display:grid;gap:10px}
 .sg-how p{margin:0}
 
-/* ---------- apparel page: drop story ---------- */
-.drop{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(28px,5vw,96px);align-items:center}
-.drop-art{position:relative;aspect-ratio:1;overflow:hidden;border:1px solid var(--line);background:#050505}
-.drop-art img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;padding:8%;transition:opacity .5s}
-.drop-art img+img{opacity:0}
-.drop-art:hover img+img{opacity:1}
-.drop-art .tag{position:absolute;left:16px;top:16px;z-index:2;background:#000}
-.drop-pts{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
-.stack>.drop-pts{margin-top:30px}
-.drop-pts li{display:grid;grid-template-columns:44px 1fr;gap:12px;padding:16px 0;border-bottom:1px solid var(--line)}
-.drop-pts b{color:var(--hi);font-weight:500;font-size:12px;letter-spacing:.2em;padding-top:2px}
-.drop-pts span{color:var(--ink)}
-
 /* ---------- apparel page: the range ---------- */
 .ag-chips{border-bottom:1px solid var(--line)}
 .ag-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(30px,3vw,52px) clamp(12px,1.4vw,22px)}
@@ -113,27 +100,41 @@ dialog.sg::backdrop{background:rgba(0,0,0,.82);backdrop-filter:blur(4px)}
 .ag-look::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,rgba(0,0,0,.86),rgba(0,0,0,.35) 55%,rgba(0,0,0,.1)),linear-gradient(to top,rgba(0,0,0,.7),rgba(0,0,0,0) 50%)}
 .ag-look .stack-s{position:relative;z-index:2;padding:clamp(24px,3.4vw,56px);max-width:620px}
 
-/* ---------- apparel page: how it works ---------- */
-.howit{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:1px solid var(--line2)}
-.howit li{list-style:none;padding:26px 26px 26px 0;border-right:1px solid var(--line);display:grid;gap:10px;align-content:start}
-.howit li+li{padding-left:26px}
-.howit li:last-child{border-right:0}
-.howit svg{width:26px;height:26px;stroke:var(--hi);fill:none;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round}
-.howit b{color:var(--ink);font-weight:500;font-size:15px}
-.howit{padding:0;margin:0}
+/* ---------- apparel page: the drop, as its designs ---------- */
+.dd{padding-top:clamp(64px,8vw,128px)}
+.dd-head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px 48px;flex-wrap:wrap;margin-bottom:clamp(24px,3vw,44px)}
+.dd-head .copy{margin:0;max-width:44ch}
+.dd-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,520px),1fr));border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.dd-p{position:relative;display:grid;grid-template-rows:1fr auto;min-height:clamp(560px,76vh,860px);overflow:hidden;background-color:#050505;background-size:cover;background-position:center;isolation:isolate}
+.dd-p+.dd-p{border-left:1px solid var(--line)}
+.dd-p::before{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(60% 50% at 50% 42%,rgba(0,0,0,.15),rgba(0,0,0,.72) 75%),linear-gradient(to top,rgba(0,0,0,.92),rgba(0,0,0,0) 46%)}
+.dd-art{display:grid;place-items:center;padding:clamp(40px,6vw,96px) clamp(28px,5vw,88px) 0}
+.dd-art img{max-width:min(78%,520px);max-height:56vh;width:auto;height:auto;object-fit:contain;filter:drop-shadow(0 30px 60px rgba(0,0,0,.65))}
+.dd-info{padding:0 clamp(24px,3.4vw,56px) clamp(28px,3.4vw,52px);display:grid;gap:10px}
+.dd-n{margin:0;font-family:var(--hd);font-weight:600;text-transform:uppercase;letter-spacing:.03em;line-height:.95;color:var(--ink);font-size:clamp(38px,4.6vw,76px)}
+.dd-where{margin:0;color:var(--body);max-width:40ch}
+.dd-buy{display:flex;align-items:center;gap:22px;margin-top:10px}
+.dd-price{font-size:22px;color:var(--ink);font-variant-numeric:tabular-nums}
+.dd-p:hover .btn.solid,.dd-p:focus-visible .btn.solid{background:var(--hi);border-color:var(--hi)}
+.dd-p:focus-visible{outline:2px solid var(--hi);outline-offset:-2px}
 
-/* ---------- next drop sign-up ---------- */
-.nd{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(24px,4vw,72px);align-items:end;border-top:1px solid var(--line);padding-top:clamp(40px,5vw,72px)}
-.nd .signup{max-width:none}
+
+/* ---------- apparel page: how it gets to you ---------- */
+.arr-in{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(32px,6vw,112px);align-items:center;padding-top:clamp(72px,9vw,140px);padding-bottom:clamp(72px,9vw,140px)}
+.arr-shot{aspect-ratio:1;overflow:hidden;border:1px solid rgba(255,255,255,.12);box-shadow:0 40px 120px rgba(0,0,0,.7)}
+.arr-shot img{width:100%;height:100%;object-fit:cover;display:block}
+.arr-copy{display:grid;gap:clamp(24px,3vw,40px)}
+.arr-steps{list-style:none;margin:0;padding:0;counter-reset:a;border-top:1px solid rgba(255,255,255,.14)}
+.arr-steps li{counter-increment:a;display:grid;grid-template-columns:56px 1fr;gap:4px 18px;padding:20px 0;border-bottom:1px solid rgba(255,255,255,.14)}
+.arr-steps li::before{content:counter(a);grid-row:span 2;font-family:var(--hd);font-size:30px;line-height:1;color:var(--hi);font-variant-numeric:tabular-nums}
+.arr-steps b{color:var(--ink);font-weight:500;font-size:17px}
+.arr-steps span{color:var(--body)}
 
 @media (max-width:1020px){
-  .apd-grid,.drop,.nd{grid-template-columns:1fr}
+  .apd-grid,.arr-in{grid-template-columns:1fr}
+  .dd-p+.dd-p{border-left:0;border-top:1px solid var(--line)}
   .apd-buy,.apd-gal{position:static}
   .ag-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .howit{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .howit li:nth-child(2){border-right:0}
-  .howit li:nth-child(n+3){border-top:1px solid var(--line)}
-  .howit li:nth-child(3){padding-left:0}
 }
 @media (max-width:760px){
   .apd{padding-top:76px}
@@ -145,8 +146,9 @@ dialog.sg::backdrop{background:rgba(0,0,0,.82);backdrop-filter:blur(4px)}
   .apd-th{width:64px;height:64px}
   .apd-bar{display:flex}
   .ag-grid{gap:28px 10px}
-  .howit{grid-template-columns:1fr}
-  .howit li{border-right:0!important;padding-left:0!important;border-top:1px solid var(--line)}
-  .howit li:first-child{border-top:0}
+  .dd-p{min-height:0}
+  .dd-art{padding-top:48px}
+  .dd-art img{max-height:46vh}
+  .arr-shot{max-width:420px}
 }
 @media (prefers-reduced-motion:reduce){.apd-slide,.apd-bar,.sw{transition:none}.apd-opt.shake{animation:none}}

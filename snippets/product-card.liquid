@@ -1,22 +1,13 @@
 {%- comment -%}
-  Product card, used on every grid. Apparel cards add what a shopper needs to
-  decide from the grid: the back print on hover, the colours, the size range.
+  Product card, used on every grid. One hover rule for every product: the card
+  shows the product's second photo (for apparel, always the back), and a
+  product with one photo just eases in. Nothing is printed over the photos.
 {%- endcomment -%}
 {%- liquid
   assign p = card_product
   assign is_apparel = false
   if p.tags contains 'apparel'
     assign is_apparel = true
-  endif
-  assign flag = ''
-  if p.metafields.custom.drop != blank
-    assign flag = p.metafields.custom.drop.value
-  elsif is_apparel
-    assign flag = p.metafields.custom.ships_as.value | default: 'Made to order'
-  elsif p.tags contains 'made-to-order'
-    assign flag = 'Made to order'
-  elsif p.tags contains 'ships-free'
-    assign flag = 'Ships free'
   endif
   assign colours = nil
   assign sizes = nil
@@ -28,39 +19,38 @@
       assign sizes = o.values
     endif
   endfor
-  assign alt_media = nil
-  if p.media.size > 1
-    assign alt_media = p.media[1]
+  assign second = nil
+  if p.media.size > 1 and p.media[1].media_type == 'image'
+    assign second = p.media[1]
   endif
 -%}
-<a class="card" href="{{ p.url }}" data-type="{{ p.type | handleize }}">
+<a class="card{% if second %} has-alt{% endif %}" href="{{ p.url }}" data-type="{{ p.type | handleize }}">
   <div class="stage">
-    {%- if flag != blank -%}<span class="lab flag"><i></i>{{ flag }}</span>{%- endif -%}
     {%- if p.featured_media -%}
       <img class="ph" src="{{ p.featured_media | image_url: width: 900 }}" alt="{{ p.featured_media.alt | default: p.title | escape }}" loading="lazy" width="450" height="450">
-      {%- if is_apparel and alt_media -%}
-        <img class="ph alt" src="{{ alt_media | image_url: width: 900 }}" alt="" loading="lazy" width="450" height="450">
+      {%- if second -%}
+        <img class="ph alt" src="{{ second | image_url: width: 900 }}" alt="" loading="lazy" width="450" height="450">
       {%- endif -%}
     {%- endif -%}
   </div>
   <div class="meta">
     <div>
       <div class="n">{{ p.title }}</div>
-      {%- if is_apparel -%}
-        <div class="m">
-          {%- if colours and colours.size > 1 -%}{{ colours.size }} colours{%- endif -%}
-          {%- if colours and colours.size > 1 and sizes -%} · {% endif -%}
-          {%- if sizes -%}{{ sizes.first }}–{{ sizes.last }}{%- endif -%}
-          {%- unless colours.size > 1 or sizes -%}{{ p.type }}{%- endunless -%}
-        </div>
-        {%- if colours and colours.size > 1 -%}
-          <div class="dots" aria-hidden="true">
-            {%- for c in colours limit: 6 -%}<i style="{% render 'colour-swatch', name: c %}"></i>{%- endfor -%}
-            {%- if colours.size > 6 -%}<em>+{{ colours.size | minus: 6 }}</em>{%- endif -%}
-          </div>
+      <div class="m">
+        {%- if is_apparel -%}
+          {%- if colours and colours.size > 1 -%}{{ colours.size }} colours{%- elsif colours -%}{{ colours.first }}{%- endif -%}
+          {%- if colours and sizes %}, {% endif -%}
+          {%- if sizes -%}{{ sizes.first }} to {{ sizes.last }}{%- endif -%}
+          {%- unless colours or sizes -%}{{ p.type }}{%- endunless -%}
+        {%- else -%}
+          {{ p.metafields.custom.material | default: p.type }}{% if p.tags contains 'ships-free' %}, ships free{% endif %}
         {%- endif -%}
-      {%- else -%}
-        <div class="m">{{ p.metafields.custom.material | default: p.type }}</div>
+      </div>
+      {%- if colours and colours.size > 1 -%}
+        <div class="dots" aria-hidden="true">
+          {%- for c in colours limit: 8 -%}<i style="{% render 'colour-swatch', name: c %}"></i>{%- endfor -%}
+          {%- if colours.size > 8 -%}<em>+{{ colours.size | minus: 8 }}</em>{%- endif -%}
+        </div>
       {%- endif -%}
     </div>
     <div class="p">{% if p.price_varies %}From {% endif %}{{ p.price | money_without_trailing_zeros }}</div>

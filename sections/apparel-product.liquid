@@ -79,11 +79,7 @@
       <nav class="lab apd-crumb" aria-label="Breadcrumb">
         <a class="ul" href="/pages/apparel">Apparel</a>{% if product.type != blank %} / {{ product.type }}{% endif %}
       </nav>
-      <div class="apd-badges">
-        {%- if drop != blank -%}<span class="tag hi">{{ drop }}</span>{%- endif -%}
-        <span class="tag">{{ ships }}</span>
-        <span class="tag">Free shipping</span>
-      </div>
+      {%- if drop != blank -%}<div class="apd-badges"><span class="tag hi">{{ drop }}</span></div>{%- endif -%}
       <h1 class="apd-title">{{ product.title }}</h1>
       <div class="apd-price" id="apdPrice">{{ current.price | default: product.price | money_without_trailing_zeros }}</div>
 
