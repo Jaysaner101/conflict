@@ -132,6 +132,12 @@ dialog.sg::backdrop{background:rgba(0,0,0,.82);backdrop-filter:blur(4px)}
   .apd-grid{grid-template-columns:1fr}
   .dd-p+.dd-p{border-left:0;border-top:1px solid var(--line)}
   .apd-buy{position:static}.apd-gal{position:relative;top:auto}
+  /* photos: a swipe row with a counter (apparel.js); the arrows are for desktop */
+  .apd-main{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;overscroll-behavior-x:contain}
+  .apd-main::-webkit-scrollbar{display:none}
+  .apd-main .apd-slide{position:relative;inset:auto;flex:0 0 100%;height:100%;opacity:1;scroll-snap-align:center;scroll-snap-stop:always}
+  .apd-main .apd-slide[hidden]{display:none}
+  .apd-nav{display:none}
   .ag-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
   .ag-f2>.card:first-child{grid-column:1/-1}
   .ag-f2>.card:first-child .stage{aspect-ratio:auto;height:0;padding-bottom:calc(50% - var(--cg) / 2)}

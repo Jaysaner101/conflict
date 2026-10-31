@@ -706,7 +706,7 @@ body::before{content:"";position:fixed;inset:0;z-index:90;pointer-events:none;op
   .hs-in{position:relative;min-height:calc(100svh - 132px);padding:64px 18px 18px!important;gap:0;align-items:end}
   .hs-frame{position:absolute!important;inset:0;width:auto!important;max-width:none!important;z-index:0}
   .hs-frame::before,.hs-bar,.hs-thumbs,.hs-bg img{display:none}
-  .hs-frame::after{display:block;content:"";position:absolute;inset:0;width:auto;height:auto;border:0;z-index:1;background:linear-gradient(to bottom,rgba(0,0,0,.55) 0%,rgba(0,0,0,0) 26%,rgba(0,0,0,.25) 48%,rgba(0,0,0,.9) 78%,#000 100%)}
+  .hs-frame::after{display:block;content:"";position:absolute;inset:0;width:auto;height:auto;border:0;z-index:1;background:linear-gradient(to bottom,rgba(0,0,0,.55) 0%,rgba(0,0,0,0) 22%,rgba(0,0,0,.5) 42%,rgba(0,0,0,.9) 66%,#000 100%)}
   .hs-screen{aspect-ratio:auto;height:100%;box-shadow:none}
   .hs-in>div:first-child{position:relative;z-index:2}
   .hs-texts{margin-top:12px}
@@ -935,11 +935,9 @@ html.ytm-open{overflow:hidden}
 .pgal-main .pgal-s.on{opacity:1}
 .pgal-n{position:absolute;right:12px;top:12px;z-index:4;padding:5px 10px;background:rgba(0,0,0,.62);border:1px solid rgba(255,255,255,.14);font-size:12px;letter-spacing:.06em;color:#fff;font-variant-numeric:tabular-nums;pointer-events:none}
 @media (max-width:1020px){
-  .pgal-main,.apd-main{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;overscroll-behavior-x:contain}
-  .pgal-main::-webkit-scrollbar,.apd-main::-webkit-scrollbar{display:none}
-  .pgal-main .pgal-s,.apd-main .apd-slide{position:relative;inset:auto;flex:0 0 100%;height:100%;opacity:1;scroll-snap-align:center;scroll-snap-stop:always}
-  .apd-main .apd-slide[hidden]{display:none}
-  .apd-nav{display:none}
+  .pgal-main{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;overscroll-behavior-x:contain}
+  .pgal-main::-webkit-scrollbar{display:none}
+  .pgal-main .pgal-s{position:relative;inset:auto;flex:0 0 100%;height:100%;opacity:1;scroll-snap-align:center;scroll-snap-stop:always}
 }
 
 /* ---------- "added to cart" sheet (theme.js showAdded) and express checkout ---------- */
