@@ -7,7 +7,9 @@
     {%- endif -%}
   </div>
   {%- comment -%}
-    With a playlist set and a YouTube key in Theme settings, episodes.js swaps
+    With a playlist set and the shop's YouTube key (Settings > Custom data >
+    Shop: custom.youtube_api_key, kept out of the theme so a rebuilt theme
+    never loses it), episodes.js swaps
     these cards for the playlist's newest videos, so a new episode appears on
     its own. The blocks below stay as the fallback (no key, or YouTube down).
   {%- endcomment -%}
@@ -16,12 +18,13 @@
     if pl contains 'list='
       assign pl = pl | split: 'list=' | last | split: '&' | first
     endif
+    assign yt_key = shop.metafields.custom.youtube_api_key.value
     assign live_feed = false
-    if pl != blank and settings.yt_api_key != blank
+    if pl != blank and yt_key != blank
       assign live_feed = true
     endif
   -%}
-  <div class="eps{% if section.settings.shorts %} shorts{% endif %}"{% if live_feed %} data-playlist="{{ pl | escape }}" data-key="{{ settings.yt_api_key | escape }}" data-count="{{ section.settings.count }}" data-short="{{ section.settings.shorts }}"{% endif %}>
+  <div class="eps{% if section.settings.shorts %} shorts{% endif %}"{% if live_feed %} data-playlist="{{ pl | escape }}" data-key="{{ yt_key | escape }}" data-count="{{ section.settings.count }}" data-short="{{ section.settings.shorts }}"{% endif %}>
     {%- for block in section.blocks -%}
       <a class="ep{% if section.settings.shorts %} short{% endif %}" href="{{ block.settings.url }}" target="_blank" rel="noopener" {{ block.shopify_attributes }}>
         <div class="th">
@@ -37,7 +40,7 @@
     {%- endfor -%}
   </div>
 </div>
-{%- if section.settings.playlist != blank and settings.yt_api_key != blank -%}<script src="{{ 'episodes.js' | asset_url }}" defer></script>{%- endif -%}
+{%- if live_feed -%}<script src="{{ 'episodes.js' | asset_url }}" defer></script>{%- endif -%}
 {% schema %}
 {
   "name": "Episodes",
@@ -47,7 +50,7 @@
     { "type": "checkbox", "id": "shorts", "label": "Show as Shorts (tall thumbnails)", "default": false },
     { "type": "text", "id": "cta", "label": "Button label", "default": "Full playlist" },
     { "type": "url", "id": "url", "label": "Button link" },
-    { "type": "text", "id": "playlist", "label": "YouTube playlist (link or ID)", "info": "Fills this row with the playlist's newest videos automatically. Needs the YouTube key in Theme settings. The episodes below are used if YouTube can't be reached." },
+    { "type": "text", "id": "playlist", "label": "YouTube playlist (link or ID)", "info": "Fills this row with the playlist's newest videos automatically. Needs the YouTube key in Settings > Custom data > Shop. The episodes below are used if YouTube can't be reached." },
     { "type": "range", "id": "count", "label": "Videos shown from the playlist", "min": 4, "max": 12, "step": 4, "default": 8 }
   ],
   "blocks": [

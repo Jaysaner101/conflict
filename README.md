@@ -120,8 +120,9 @@ otherwise have a hole (5, 8, 11 products at three across; any odd count at two).
 ## Episode rows (YouTube)
 
 `sections/episodes.liquid` + `assets/episodes.js`: when a row has a playlist and Theme
-settings → YouTube has a key (Google Cloud, YouTube Data API v3, restricted to the shop's
-web addresses), the row shows the playlist's newest videos, cached an hour per visitor.
+the shop has a YouTube key (Settings → Custom data → Shop → YouTube API key, metafield
+`custom.youtube_api_key`; Google Cloud, YouTube Data API v3, restricted to the shop's web
+addresses), the row shows the playlist's newest videos, cached an hour per visitor.
 The hand-picked episode blocks are the fallback. The Conflict playlist is PLXMvRz65T8SE.
 
 ## Deploying single files with themeFilesUpsert
