@@ -21,7 +21,7 @@
       <div class="sfacts" style="margin-top:14px">
         {%- if all_apparel -%}
           <span>Made to order</span>
-          <span>Free shipping</span>
+          <span>US shipping {{ settings.fact_apparel_us }}</span>
           <span>Size guide on every piece</span>
         {%- else -%}
           <span>Ships in {{ settings.fact_ship_time | default: 'about 3 days' | downcase }}</span>

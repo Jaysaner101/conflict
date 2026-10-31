@@ -136,7 +136,7 @@
         </li>
         <li>
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h12M12 6l6 6-6 6"/></svg>
-          <span><b>Free shipping on apparel</b><span class="note">US and Canada. Engraved pieces in the same order ship separately from Omaha.</span></span>
+          <span><b>Shipping {{ settings.fact_apparel_us }} to the US, {{ settings.fact_apparel_ca }} to Canada</b><span class="note">Engraved pieces in the same order ship separately from Omaha, with their own shipping.</span></span>
         </li>
         <li>
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z"/></svg>
@@ -171,7 +171,7 @@
         {%- endif -%}
         <details>
           <summary>Shipping</summary>
-          <div class="copy"><p>{{ section.settings.shipping_text }}</p></div>
+          <div class="copy"><p>Shipping is {{ settings.fact_apparel_us }} to the US and {{ settings.fact_apparel_ca }} to Canada.</p><p>{{ section.settings.shipping_text }}</p></div>
         </details>
         <details>
           <summary>Care</summary>
@@ -217,7 +217,7 @@
 {
   "name": "Apparel product",
   "settings": [
-    { "type": "textarea", "id": "shipping_text", "label": "Shipping text", "default": "Apparel ships free to the US and Canada. Each piece is printed when you order, which takes 2 to 5 working days, then 3 to 4 days in transit. You get a tracking link by email as soon as it ships." },
+    { "type": "textarea", "id": "shipping_text", "label": "Shipping text", "default": "Each piece is printed when you order, which takes 2 to 5 working days, then 3 to 4 days in transit. You get a tracking link by email as soon as it ships." },
     { "type": "textarea", "id": "care", "label": "Care (garments)", "default": "Machine wash cold, inside out. Tumble dry low or hang dry. Do not iron over the print." },
     { "type": "textarea", "id": "care_cap", "label": "Care (caps)", "default": "Spot clean with a damp cloth. Do not machine wash." },
     { "type": "collection", "id": "pairs_from", "label": "Pairs with, from collection" },

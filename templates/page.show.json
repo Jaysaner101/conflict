@@ -252,11 +252,10 @@
         "cta": "Shop apparel",
         "url": "/pages/apparel",
         "image": "shopify://shop_images/apparel-hero-v3.jpg",
-        "text": "Five black tees from the show, carrying the 99% spade and the Conflict globe. Printed when you order, shipped free.",
+        "text": "Five black tees from the show, carrying the 99% spade and the Conflict globe. Printed when you order and shipped to your door.",
         "bg": "shopify://shop_images/pl-spade-c.jpg",
         "collection": "apparel",
         "fact1": "Made to order",
-        "fact2": "Free shipping",
         "row_heading": "The range",
         "row_link": "Shop all apparel"
       }

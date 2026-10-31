@@ -65,7 +65,7 @@
       {
         "type": "text",
         "id": "fact_ship_us",
-        "label": "US shipping",
+        "label": "US shipping (engraved)",
         "default": "$4.99 flat"
       },
       {
@@ -77,8 +77,20 @@
       {
         "type": "text",
         "id": "fact_ca",
-        "label": "Canada",
-        "default": "$15 flat"
+        "label": "Canada shipping (engraved)",
+        "default": "$4.99 flat"
+      },
+      {
+        "type": "text",
+        "id": "fact_apparel_us",
+        "label": "US shipping (apparel)",
+        "default": "$4.95"
+      },
+      {
+        "type": "text",
+        "id": "fact_apparel_ca",
+        "label": "Canada shipping (apparel)",
+        "default": "$8.59"
       }
     ]
   }

@@ -81,7 +81,7 @@
           </button>
         {%- endform -%}
 
-        <p class="note">Ships in {{ settings.fact_ship_time | default: 'about 3 days' | downcase }}. US shipping {{ settings.fact_ship_us | default: '$4.99' }}. Canada {{ settings.fact_ca | default: '$15 flat' | downcase }}. Apparel ships free.</p>
+        <p class="note">Ships in {{ settings.fact_ship_time | default: 'about 3 days' | downcase }}. US shipping {{ settings.fact_ship_us | default: '$4.99' }}. Canada {{ settings.fact_ca | downcase }}.</p>
 
         <a class="ul" href="/pages/custom-and-bulk">Need twelve or more with your logo? Custom orders</a>
       </div>

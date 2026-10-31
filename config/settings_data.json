@@ -8,7 +8,9 @@
     "fact_ship_time": "About 3 days",
     "fact_ship_us": "$4.99 flat",
     "fact_name": "$5, about a week",
-    "fact_ca": "$15 flat",
+    "fact_ca": "$4.99 flat",
+    "fact_apparel_us": "$4.95",
+    "fact_apparel_ca": "$8.59",
     "sections": {
       "header": {
         "type": "header",

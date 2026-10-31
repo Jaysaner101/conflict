@@ -119,6 +119,10 @@ otherwise have a hole (5, 8, 11 products at three across; any odd count at two).
 
 ## Store-side facts the theme depends on
 
+- Shipping prices shown on the site come from theme settings → Store facts (engraved US
+  and Canada, apparel US and Canada). They must match the shipping rates in Shopify
+  admin; change both together. Apparel rates live in the "Printful: Tshirts" profile.
+
 - Smart collections are **tag-driven**: `lids`, `knives`, `drinkware`, `duty`,
   `apparel`. A product's tag is what puts it in a collection.
 - `custom.material` is a product metafield, pinned and storefront-readable.
