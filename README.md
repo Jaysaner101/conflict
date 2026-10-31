@@ -105,11 +105,14 @@ After Printful publishes a product: tag it `apparel`, set the template to `appar
 the product type (Tee, Hoodie, Work shirt, Cap — the type chips use it), link a size
 guide, then run `check-apparel.js`.
 
-Photos: Printful's mockups come on white. Swap them for transparent cut-outs, ordered
-front first. Put "back" in the alt text only when the back has a print; the cards and
-the wide opening card of the range show that photo. A plain back gets the alt
-"plain rear" and goes last, so hover shows a side view instead. Republishing from
-Printful brings the white mockups back.
+Photos: Printful's mockups come on white. Swap them for transparent cut-outs. A tee
+with a back print leads with the back (and its sizes point at the back photo), then the
+front, so every card in a row looks different and hover shows the other side. A plain
+back gets the alt "plain rear" and goes last, so hover shows a side view instead.
+Republishing from Printful brings the white mockups back.
+
+The home and show pages carry the apparel band (`apparel-hero` with a collection set):
+banner, a ruled "The range" header, then every product in one row.
 
 The range opens with one wide front-and-back card whenever the last row would
 otherwise have a hole (5, 8, 11 products at three across; any odd count at two).
