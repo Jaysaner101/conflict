@@ -48,6 +48,7 @@ accepted them.** Deploy is not finished until `verify-store.js` is clean.
 | `verify-store.js` | diffs what Shopify stored against this repo |
 | `linkcheck.js` | resolves every internal link, image and video on every rendered page against `store-inventory.json` |
 | `serve.js` | static server, started by whichever tool needs it |
+| `check-apparel.js` | store data check: every apparel product has sizes, a size guide, the apparel template and the apparel tag |
 
 
 ## What doctor.js checks, and the bug behind each check
@@ -87,6 +88,23 @@ accepted them.** Deploy is not finished until `verify-store.js` is clean.
 Run `node doctor.js` directly for the full report. Failures block the build;
 warnings are for a human to judge.
 
+## Apparel
+
+Apparel has its own product template (`product.apparel` → `sections/apparel-product.liquid`),
+script (`assets/apparel.js`) and stylesheet (`assets/apparel.css`), loaded only on apparel
+pages. The engraving template hands any `apparel`-tagged product to the apparel section, so
+engraving copy and the $5 name add-on can never appear on a garment.
+
+Product fields (admin → product → Metafields): **Ships as** (Made to order / In stock),
+**Size guide** (pick one), **Garment details** (one fact per line), **The design**, **Drop**.
+Size guides live in admin → Content → Size guide, one per blank, inches only; the site
+works out centimetres. Option names are matched loosely ("colo" = colour, "size" = size),
+so Printful's names work as they arrive.
+
+After Printful publishes a product: tag it `apparel`, set the template to `apparel`, set
+the product type (Tee, Hoodie, Work shirt, Cap — the type chips use it), link a size
+guide, then run `check-apparel.js`.
+
 ## Store-side facts the theme depends on
 
 - Smart collections are **tag-driven**: `lids`, `knives`, `drinkware`, `duty`,
@@ -106,6 +124,11 @@ warnings are for a human to judge.
   correctly the moment the store is switched to USD.
 - `themePublish`, `themeDelete` and `themeFilesDelete` are blocked for this
   connector. Publishing and deleting themes are done in the Shopify admin.
+- The store is at Shopify's **20-theme limit**. New builds can't be created until old
+  themes are deleted in the admin; until then, changed files are pushed into the newest
+  theme with `themeFilesUpsert` (URL bodies pinned to a commit), then `verify-store.js`.
+- A `range` setting with fewer than three positions makes Shopify drop the whole section
+  file, and every template using it, without an error. `doctor.js` fails on it.
 - `render.js` mocks Shopify's Liquid with liquidjs. The two engines differ
   (see the `where` bug above), so a clean render is evidence, not proof. The
   storefront is the only authority.
