@@ -105,6 +105,15 @@ After Printful publishes a product: tag it `apparel`, set the template to `appar
 the product type (Tee, Hoodie, Work shirt, Cap — the type chips use it), link a size
 guide, then run `check-apparel.js`.
 
+Photos: Printful's mockups come on white. Swap them for transparent cut-outs, ordered
+front first. Put "back" in the alt text only when the back has a print; the cards and
+the wide opening card of the range show that photo. A plain back gets the alt
+"plain rear" and goes last, so hover shows a side view instead. Republishing from
+Printful brings the white mockups back.
+
+The range opens with one wide front-and-back card whenever the last row would
+otherwise have a hole (5, 8, 11 products at three across; any odd count at two).
+
 ## Store-side facts the theme depends on
 
 - Smart collections are **tag-driven**: `lids`, `knives`, `drinkware`, `duty`,
