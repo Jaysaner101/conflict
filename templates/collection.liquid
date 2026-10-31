@@ -43,10 +43,19 @@
       {%- endunless -%}
     {%- endfor -%}
   </div>
-  {%- if collection.handle != 'all' and collection.all_types.size > 1 -%}
+  {%- liquid
+    assign types = ''
+    for pr in collection.products
+      if pr.type != blank
+        assign types = types | append: pr.type | append: '|'
+      endif
+    endfor
+    assign types = types | split: '|' | uniq
+  -%}
+  {%- if collection.handle != 'all' and types.size > 1 -%}
     <div class="chips tchips" id="typeChips" role="group" aria-label="Filter by type">
       <button type="button" class="chip" data-type="all" aria-pressed="true">All</button>
-      {%- for t in collection.all_types -%}
+      {%- for t in types -%}
         <button type="button" class="chip" data-type="{{ t | handleize }}" aria-pressed="false">{{ t }}</button>
       {%- endfor -%}
     </div>

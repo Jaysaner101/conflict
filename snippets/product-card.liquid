@@ -19,9 +19,38 @@
       assign sizes = o.values
     endif
   endfor
+  comment
+    The hover photo: a photo described as the back if there is one (apparel),
+    otherwise the first later photo that isn't another colour's main photo,
+    so hovering never just shows a different colour of the same front.
+  endcomment
+  assign colour_fronts = ''
+  for v in p.variants
+    if v.featured_media
+      assign colour_fronts = colour_fronts | append: '|' | append: v.featured_media.id | append: '|'
+    endif
+  endfor
   assign second = nil
-  if p.media.size > 1 and p.media[1].media_type == 'image'
-    assign second = p.media[1]
+  for m in p.media offset: 1
+    if m.media_type == 'image'
+      assign alt_text = m.alt | downcase
+      if alt_text contains 'back'
+        assign second = m
+        break
+      endif
+    endif
+  endfor
+  if second == nil
+    for m in p.media offset: 1
+      assign key = '|' | append: m.id | append: '|'
+      if m.media_type == 'image' and colour_fronts contains key
+        continue
+      endif
+      if m.media_type == 'image'
+        assign second = m
+        break
+      endif
+    endfor
   endif
 -%}
 <a class="card{% if second %} has-alt{% endif %}" href="{{ p.url }}" data-type="{{ p.type | handleize }}">

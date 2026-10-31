@@ -12,10 +12,22 @@
     {%- if c != blank -%}<span class="lab" id="countLab">{{ c.products_count }} {% if c.products_count == 1 %}piece{% else %}pieces{% endif %}</span>{%- endif -%}
   </div>
 
-  {%- if c != blank and c.all_types.size > 1 -%}
+  {%- comment -%} Types from the products a shopper can see; all_types also counts hidden products. {%- endcomment -%}
+  {%- liquid
+    assign types = ''
+    if c != blank
+      for pr in c.products limit: 24
+        if pr.type != blank
+          assign types = types | append: pr.type | append: '|'
+        endif
+      endfor
+    endif
+    assign types = types | split: '|' | uniq
+  -%}
+  {%- if types.size > 1 -%}
     <div class="chips ag-chips" id="typeChips" role="group" aria-label="Filter by type">
       <button type="button" class="chip" data-type="all" aria-pressed="true">All</button>
-      {%- for t in c.all_types -%}
+      {%- for t in types -%}
         <button type="button" class="chip" data-type="{{ t | handleize }}" aria-pressed="false">{{ t }}</button>
       {%- endfor -%}
     </div>
