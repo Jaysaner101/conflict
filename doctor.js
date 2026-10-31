@@ -365,5 +365,23 @@ for (const f of glob('templates').filter(x => x.endsWith('.json'))) {
   }
 }
 
+/* single-column-overflow — on the Murphy page a one-column grid ("1fr") grew
+ *  to its widest content (404px on a 390px phone) and the text was cut off at
+ *  the right. A single column must be minmax(0,1fr) so it can shrink. */
+for (const f of glob('assets').filter(x => x.endsWith('.css'))) {
+  const n = (read(f).match(/grid-template-columns:\s*1fr\s*[;}!]/g) || []).length;
+  if (n) fail('single-column-overflow', f, `${n} single-column grid(s) use 1fr; use minmax(0,1fr) so they cannot overflow a phone screen`);
+}
+
+/* hero-class-scope — the person hero (Murphy) reuses the home hero's hs-* class
+ *  names. A phone rule written for the home hero must be scoped under .hs, or
+ *  it also restyles Murphy's hero (it filled his page with the video). */
+{
+  const css = read('assets/base.css');
+  const phone = css.split('@media (max-width:760px){').slice(1).map(b => b.split('\n}')[0]).join('\n');
+  const bad = (phone.match(/(^|[,}\n])\s*\.hs-(in|frame|screen|bar|thumbs)\b[^{]*\{[^}]*position:absolute/g) || []);
+  if (bad.length) fail('hero-class-scope', 'assets/base.css', 'a phone rule positions an hs-* element without scoping it under .hs; Murphy\'s hero uses the same classes');
+}
+
 module.exports = { problems, fail, warn, liquidFiles, read, glob, schemaOf };
 if (require.main === module) require('./doctor-part2.js');
